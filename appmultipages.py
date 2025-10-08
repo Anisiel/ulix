@@ -88,10 +88,18 @@ else:
     col_img, col_main = st.columns([1, 3], gap="large")
     with col_img:
         render_thumbs(IMMAGINI)  # immagini a sinistra
+        st.markdown(
+            """
+            <div style='position: absolute; bottom: 0; width: 100%;'>
+                <span style='font-size: 0.9em; color: #888;'>
+                    <a href='https://streamlit.io' target='_blank' style='text-decoration: none; color: #888;'>Portfolio minimal & zen — fatto con Python + Streamlit</a>
+                </span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
     with col_main:
         st.header("Ulisse Fabiani — Portfolio")
         st.title("Hello, lettore! 👋")
         st.subheader("Dammi un buon voto! 😄")
         st.caption("Portfolio minimal & zen — layout alternativo")
-
-st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
