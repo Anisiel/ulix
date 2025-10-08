@@ -64,8 +64,8 @@ st.divider()
 # Link esterni (Academia + GitHub)
 st.markdown(
     f"""
-    - 🎓 Academia.edu  
-    - 💻 GitHub
+    - 🎓 Academia.edu   (https://independent.academia.edu/FabianiUlisse)
+    - 💻 GitHub  (https://github.dev/Anisiel/ulix)
     """,
     unsafe_allow_html=True,
 )
