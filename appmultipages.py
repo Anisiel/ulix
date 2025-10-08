@@ -81,8 +81,8 @@ if cv_path.exists():
     )
 
 # ——————————————————————————————————————————————————————————————
-# Layout alternativo (OPZIONALE): lo attivo mettendo True
-ALT_LAYOUT = False
+# Layout alternativo (OPZIONALE): lo attivo mettendo True/False
+ALT_LAYOUT = True
 if ALT_LAYOUT:
     st.divider()
     st.caption("Layout alternativo attivo (sempre minimal)")
