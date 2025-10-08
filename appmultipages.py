@@ -61,9 +61,6 @@ with col3:
 
 st.divider()
 
-# Link esterni (Academia + GitHub)
-Academia_URL = "https://independent.academia.edu/FabianiUlisse" # variabili per i link 
-GITHUB_URL = 
 
 st.markdown(
     f"""
