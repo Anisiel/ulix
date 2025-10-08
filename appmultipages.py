@@ -4,13 +4,13 @@ from pathlib import Path  # servirà per CV e per check immagini
 st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
 
 # [MODIFICA] —— Parametri modificabili facilmente ——————————————————————————
-STAMP_WIDTH = 96          # “francobollo” (px). Prova 80, 96, 120...
+STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
 GRID_COLS   = 3           # quante immagini per riga
 
 # Elenco immagini (aggiungerne/rimuoverne senza rompere nulla).
 # "note" è una riga opzionale: se stringa vuota, NON viene mostrata.
 IMMAGINI = [
-    {"src": "assets/hero.jpg",  "note": "Portrait of the Artist with a Mocking Face"},          # es.: "note": "Foto 2025, estate"
+    {"src": "assets/hero.jpg",  "note": "Mocking Face"},          # es.: "note": "Foto 2025, estate"
     {"src": "assets/hero2.jpg", "note": "Le Discret"},          # lasciare "" per non visualizzare nulla
     {"src": "assets/hero3.jpg", "note": "San Govanni Battista"},
 ]
@@ -18,7 +18,7 @@ IMMAGINI = [
 
 # helper minimal per visualizzare le immagini come francobolli
 def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
-    # mostra solo quelle che ESISTONO nel repo, così non va in errore se mancano
+    # mostra solo quelle che ESISTONO nel repo (assets), così non va in errore se mancano
     safe_items = [it for it in items if Path(it["src"]).exists()]
     if not safe_items:
         return
