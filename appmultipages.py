@@ -57,7 +57,7 @@ with col2:
     st.page_link("pages/3_Titoli_Certificazioni.py", label="🎓 Titoli & Certificazioni")
 
 with col3:
-    st.page_link("pages/3_Titoli_Certificazioni.py", label="💻 Programmini (in)utili")
+    st.page_link("pages/4_Programmini.py", label="💻 Programmini (in)utili")
 
 st.divider()
 
