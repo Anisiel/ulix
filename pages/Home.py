@@ -1,4 +1,3 @@
-This file has been moved to pages/Home.py and is no longer needed.
 import streamlit as st
 from pathlib import Path  # servirà per CV e per check immagini
 
@@ -23,12 +22,6 @@ try:
 except Exception:
 	# fall back: niente CSS esterno se qualcosa va storto
 	pass
-
-# Sidebar alias: mostra "Home" nel frame laterale
-with st.sidebar:
-	st.title("Home")
-	st.write("Ulisse Fabiani — Portfolio")
-	st.markdown("---")
 
 # [MODIFICA] —— Parametri modificabili facilmente ——————————————————————————
 STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
@@ -94,7 +87,7 @@ if cv_path.exists():
 		data=cv_path.read_bytes(),
 		file_name="Ulisse_Fabiani_CV.pdf",
 		mime="application/pdf",
-		key="cv_download_test",
+		key="cv_download_home",
 	)
 
 st.divider()
