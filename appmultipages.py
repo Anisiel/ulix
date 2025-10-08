@@ -4,8 +4,8 @@ from pathlib import Path  # servirà per CV e per check immagini
 st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
 
 # [MODIFICA] —— Parametri modificabili facilmente ——————————————————————————
-STAMP_WIDTH = 115          # “francobollo” (px). Provare anche 80, 96, 120...
-GRID_COLS   = 3           # quante immagini per riga
+STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
+GRID_COLS   = 5           # quante immagini per riga
 
 # Elenco immagini (aggiungerne/rimuoverne senza rompere nulla).
 # "note" è una riga opzionale: se stringa vuota, NON viene mostrata.
