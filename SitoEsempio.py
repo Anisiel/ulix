@@ -36,10 +36,12 @@ def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
 # Titolo/testo SOPRA l’immagine
 st.header("Ulisse Fabiani — Portfolio")     # titolo minimal
 st.title("Hello, lettore! 👋")
-st.subheader("Oh tu che scorri queste pagine, dammi una buona valutazione! 😄")
+st.subheader("Dammi un buon voto! 😄")
 
-# HERO / COPERTINA (francobolli allineati a sinistra, una o più immagini)
+# HERO / COPERTINA (francobolli, allineati a sinistra, anche più immagini)
 render_thumbs(IMMAGINI)                      # rende i “francobolli”
+
+#st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
 
 st.divider()
 
