@@ -78,17 +78,20 @@ if not ALT_LAYOUT:
 	# Separator before external links
 	st.divider()
 
-	# 1) External links (Academia / GitHub)
+	# 1) External links inline (icon + link)
 	st.markdown(
-		f"""
-		- 🎓 [Academia.edu](https://independent.academia.edu/FabianiUlisse)
-		- 💻 [GitHub]("https://github.com/Anisiel/ulix")
+		"""
+		<div style='display:flex;gap:1.2rem;align-items:center;'>
+		  <div style='display:flex;gap:.5rem;align-items:center;'>🎓<a href='https://independent.academia.edu/FabianiUlisse' target='_blank' rel='noreferrer'>Academia.edu</a></div>
+		  <div style='display:flex;gap:.5rem;align-items:center;'>💻<a href='https://github.com/Anisiel/ulix' target='_blank' rel='noreferrer'>GitHub</a></div>
+		</div>
 		""",
 		unsafe_allow_html=True,
 	)
-	# Download CV immediately after external links (user request)
+	# Download CV slightly detached and with a playful icon
 	cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
 	if cv_path.exists():
+		st.markdown("<div style='margin-top:0.6rem'></div>", unsafe_allow_html=True)
 		st.download_button(
 			"📄 Scarica il mio CV",
 			data=cv_path.read_bytes(),
@@ -130,16 +133,19 @@ else:
 	st.divider()
 	# External links
 	st.markdown(
-		f"""
-		- 🎓 [Academia.edu](https://independent.academia.edu/FabianiUlisse)
-		- 💻 [GitHub]("https://github.com/Anisiel/ulix")
+		"""
+		<div style='display:flex;gap:1.2rem;align-items:center;'>
+		  <div style='display:flex;gap:.5rem;align-items:center;'>🎓<a href='https://independent.academia.edu/FabianiUlisse' target='_blank' rel='noreferrer'>Academia.edu</a></div>
+		  <div style='display:flex;gap:.5rem;align-items:center;'>💻<a href='https://github.com/Anisiel/ulix' target='_blank' rel='noreferrer'>GitHub</a></div>
+		</div>
 		""",
 		unsafe_allow_html=True,
 	)
 
-	# Download CV immediately after external links (user request)
+	# Download CV slightly detached and with a playful icon
 	cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
 	if cv_path.exists():
+		st.markdown("<div style='margin-top:0.6rem'></div>", unsafe_allow_html=True)
 		st.download_button(
 			"📄 Scarica il mio CV",
 			data=cv_path.read_bytes(),
