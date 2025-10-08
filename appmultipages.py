@@ -80,30 +80,6 @@ if cv_path.exists():
         mime="application/pdf",
     )
 
-# Footer nella sidebar: più distanziato + link a Streamlit/Python
-with st.sidebar:
-    st.divider()
-
-    # Spazio extra (ripeti/scala a piacere)
-    st.write(""),
-    st.write(""),
-    st.write(""),
-    st.write(""),
-    st.write(""),
-    st.write(""),
-    st.write("")   # aggiungi/togli queste righe per più/meno spazio
-
-    # Testo del footer
-    st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
-
-    # Link esterni (USARE \n per evitare problemi di indentazione in Markdown)
-    #st.markdown(
-    #    "- 🔧 Built with Streamlit\n"
-    #    "- 🐍 Powered by Python"
-    #)
-
-
-
 # ——————————————————————————————————————————————————————————————
 # Layout alternativo (OPZIONALE): lo attivo mettendo True/False
 ALT_LAYOUT = False
