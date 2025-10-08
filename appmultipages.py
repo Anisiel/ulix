@@ -3,10 +3,7 @@ from pathlib import Path  # servirà per CV e per check immagini
 
 st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
 
-# Titolo/testo SOPRA l’immagine
-st.header("Ulisse Fabiani — Portfolio")     # titolo minimal
-st.title("Hello, lettore! 👋")
-st.subheader("Oh tu che scorri queste pagine, dammi una buona valutazione! 😄")
+
 
 
 # —————————————— Parametri modificabili facilmente ——————————————————————————
@@ -38,6 +35,10 @@ def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
                 if it.get("note"):              # se vuoto, non mostra nulla
                     st.caption(it["note"])
 
+# Titolo/testo SOPRA l’immagine
+st.header("Ulisse Fabiani — Portfolio")     # titolo minimal
+st.title("Hello, lettore! 👋")
+st.subheader("Oh tu che scorri queste pagine, dammi una buona valutazione! 😄")
 
 # HERO / COPERTINA (francobolli allineati a sinistra, una o più immagini)
 render_thumbs(IMMAGINI)                      # rende i “francobolli”
