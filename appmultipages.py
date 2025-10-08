@@ -92,10 +92,10 @@ with st.sidebar:
     st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
 
     # Link esterni (USARE \n per evitare problemi di indentazione in Markdown)
-    st.markdown(
-        "- 🔧 Built with Streamlit\n"
-        "- 🐍 Powered by Python"
-    )
+    #st.markdown(
+    #    "- 🔧 Built with Streamlit\n"
+    #    "- 🐍 Powered by Python"
+    #)
 
 
 
