@@ -65,7 +65,7 @@ st.divider()
 st.markdown(
     f"""
     - 🎓 [Academia.edu](https://independent.academia.edu/FabianiUlisse)
-    - 💻 [GitHub]("https://github.dev/Anisiel/ulix")
+    - 💻 [GitHub]("https://github.com/Anisiel/ulix")
     """,
     unsafe_allow_html=True,
 )
@@ -79,6 +79,25 @@ if cv_path.exists():
         file_name="Ulisse_Fabiani_CV.pdf",
         mime="application/pdf",
     )
+
+# Footer nella sidebar: più distanziato + link a Streamlit/Python
+with st.sidebar:
+    st.divider()
+
+    # Spazio extra (ripeti/scala a piacere)
+    st.write("")
+    st.write("")   # aggiungi/togli queste righe per più/meno spazio
+
+    # Testo del footer
+    st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
+
+    # Link esterni (USARE \n per evitare problemi di indentazione in Markdown)
+    st.markdown(
+        "- 🔧 Built with Streamlit\n"
+        "- 🐍 Powered by Python"
+    )
+
+
 
 # ——————————————————————————————————————————————————————————————
 # Layout alternativo (OPZIONALE): lo attivo mettendo True/False
@@ -96,44 +115,4 @@ if ALT_LAYOUT:
         st.subheader("Dammi un buon voto! 😄")
         st.caption("Portfolio minimal & zen — layout alternativo") 
 
-#st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
-
-# [MODIFICA] — Footer in fondo alla sidebar (frame sinistro)
-def _add_sidebar_footer(text: str):
-    # CSS: rende il contenitore della sidebar una colonna flex a tutta altezza
-    st.markdown(
-        """
-        <style>
-        /* Rende la colonna della sidebar alta 100% */
-        section[data-testid="stSidebar"] > div { height: 100%; }
-
-        /* Il contenuto della sidebar diventa un flex container verticale */
-        section[data-testid="stSidebar"] > div > div {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        /* Il footer va in fondo grazie a margin-top:auto */
-        .ulix-sidebar-footer {
-            margin-top: auto;                 /* spinge il footer in basso */
-            padding: .5rem .25rem 1rem .25rem;
-            font-size: .85rem;
-            color: var(--secondary-text-color);
-            border-top: 1px solid rgba(49, 51, 63, 0.2);
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    # Contenuto del footer nella sidebar (ultimo elemento)
-    with st.sidebar:
-        st.markdown(
-            '<div class="ulix-sidebar-footer">'
-            'Portfolio minimal &amp; zen — fatto con Python + Streamlit'
-            '</div>',
-            unsafe_allow_html=True,
-        )
-
-# Chiamata: aggiunge il footer nella sidebar
+st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
