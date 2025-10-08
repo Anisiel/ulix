@@ -63,7 +63,7 @@ st.divider()
 
 # Link esterni (Academia + GitHub)
 
-Academia.edu_URL = "https://independent.academia.edu/FabianiUlisse" # variabili per i link 
+Academia_URL = "https://independent.academia.edu/FabianiUlisse" # variabili per i link 
 GITHUB_URL = "https://github.dev/Anisiel/ulix"
 
 
