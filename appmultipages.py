@@ -80,17 +80,40 @@ if cv_path.exists():
 # ——————————————————————————————————————————————————————————————
 # Layout alternativo (OPZIONALE): lo attivo mettendo True/False
 ALT_LAYOUT = True
-if ALT_LAYOUT:
-    st.divider()
-    st.caption("Layout alternativo attivo (sempre minimal)")
+#if ALT_LAYOUT:
+#    st.divider()
+#    st.caption("Layout alternativo attivo (sempre minimal)")
 
-    col_img, col_main = st.columns([1, 3], gap="large")
-    with col_img:
-        render_thumbs(IMMAGINI)  # immagini a sinistra
-    with col_main:
-        st.header("Ulisse Fabiani — Portfolio")
-        st.title("Hello, lettore! 👋")
-        st.subheader("Dammi un buon voto! 😄")
-        st.caption("Portfolio minimal & zen — layout alternativo") 
+#   col_img, col_main = st.columns([1, 3], gap="large")
+#    with col_img:
+#        render_thumbs(IMMAGINI)  # immagini a sinistra
+#    with col_main:
+#        st.header("Ulisse Fabiani — Portfolio")
+#        st.title("Hello, lettore! 👋")
+#        st.subheader("Dammi un buon voto! 😄")
+#       st.caption("Portfolio minimal & zen — layout alternativo") 
+
+if not ALT_LAYOUT:  # [MODIFICA] Mostra il layout originale solo se ALT_LAYOUT è False
+    st.header("Ulisse Fabiani — Portfolio")  # [MODIFICA]
+    st.title("Hello, lettore! 👋")           # [MODIFICA]
+    st.subheader("Dammi un buon voto! 😄")   # [MODIFICA]
+    render_thumbs(IMMAGINI)                  # [MODIFICA]
+
+    col1, col2, col3 = st.columns(3)         # [MODIFICA]
+    with col1:
+        st.page_link("pages/1_Grafici.py", label="📈 Grafici")
+    with col2:
+        st.page_link("pages/2_Pubblicazioni.py", label="📚 Pubblicazioni")
+        st.page_link("pages/3_Titoli_Certificazioni.py", label="🎓 Titoli & Certificazioni")
+    with col3:
+        st.page_link("pages/4_Programmini.py", label="💻 Programmini (in)utili")
+    st.divider()
+    st.markdown(
+        f"""
+        - 🎓 Academia.edu
+        - 💻 [Gitub
+        """,
+        unsafe_allow_html=True,
+    )
 
 st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
