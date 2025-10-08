@@ -41,9 +41,9 @@ st.subheader("Dammi un buon voto! 😄")
 # HERO / COPERTINA (francobolli, allineati a sinistra, anche più immagini)
 render_thumbs(IMMAGINI)                      # rende i “francobolli”
 
-st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
+#st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
 
-st.divider()
+#st.divider()
 
 # LINK RAPIDI (interni ed esterni)
 col1, col2, col3 = st.columns(3)
@@ -82,7 +82,7 @@ if cv_path.exists():
 
 # ——————————————————————————————————————————————————————————————
 # Layout alternativo (OPZIONALE): lo attivo mettendo True/False
-ALT_LAYOUT = False
+ALT_LAYOUT = True
 if ALT_LAYOUT:
     st.divider()
     st.caption("Layout alternativo attivo (sempre minimal)")
