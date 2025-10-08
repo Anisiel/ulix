@@ -85,12 +85,12 @@ with st.sidebar:
     st.divider()
 
     # Spazio extra (ripeti/scala a piacere)
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
+    st.write(""),
+    st.write(""),
+    st.write(""),
+    st.write(""),
+    st.write(""),
+    st.write(""),
     st.write("")   # aggiungi/togli queste righe per più/meno spazio
 
     # Testo del footer
