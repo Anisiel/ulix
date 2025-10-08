@@ -5,7 +5,7 @@ from pathlib import Path  # servirà per CV e per check immagini
 
 
 pages = [
-    st.Page("home.py", title="🏠 Home • Esempio CV", icon="🏠"),
+    #st.Page("home.py", title="🏠 Home • Esempio CV", icon="🏠"),
     st.Page("pages/1_Grafici.py", title="📈 Grafici"),
     st.Page("pages/2_Pubblicazioni.py", title="📚 Pubblicazioni"),
     st.Page("pages/3_Titoli_Certificazioni.py", title="🎓 Titoli & Certificazioni"),
