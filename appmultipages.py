@@ -67,7 +67,7 @@ GITHUB_URL = "https://github.dev/Anisiel/ulix"
 
 st.markdown(
     f"""
-    - [🎓 Academia.edu] [https://independent.academia.edu/FabianiUlisse]
+    - [🎓 Academia.edu](https://independent.academia.edu/FabianiUlisse)
     - 💻 GitHub
     """,
     unsafe_allow_html=True,
