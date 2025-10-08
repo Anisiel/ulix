@@ -66,7 +66,8 @@ Academia_URL = "https://independent.academia.edu/FabianiUlisse" # variabili per 
 GITHUB_URL = "https://github.dev/Anisiel/ulix"
 
 st.markdown(
-    f"""- [🎓 Academia.edu 
+    f"""
+    - [🎓 Academia.edu] 
     - 💻 GitHub
     """,
     unsafe_allow_html=True,
