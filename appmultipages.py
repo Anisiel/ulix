@@ -96,37 +96,4 @@ if ALT_LAYOUT:
         st.subheader("Dammi un buon voto! 😄")
      #   st.caption("Portfolio minimal & zen — layout alternativo") # in mezzo al testo
 
-     # Footer fisso in basso a sinistra, dentro il frame principale
-DESKTOP_LEFT_OFFSET = "14rem"   # quanto spostare a destra per non coprire la sidebar su desktop
-MOBILE_LEFT_OFFSET  = "0.75rem" # margine sinistro su schermi piccoli
-
-st.markdown(
-    f"""
-    <style>
-    /* Aggiungo un po' di spazio in fondo per evitare che il footer copra elementi cliccabili */
-    .block-container {{ padding-bottom: 3.25rem; }}
-
-    /* Footer fisso */
-    .ulix-footer {{
-        position: fixed;
-        bottom: 0.6rem;
-        left: {MOBILE_LEFT_OFFSET};
-        padding: 6px 10px;
-        font-size: 0.9rem;
-        color: #666;
-        background: transparent;  /* resta minimal */
-        z-index: 9999;
-    }}
-
-    /* Su viewport più larghi sposto il footer a destra per non sovrapporre la sidebar */
-    @media (min-width: 992px) {{
-        .ulix-footer {{
-            left: {DESKTOP_LEFT_OFFSET};
-        }}
-    }}
-    </style>
-
-    <div class="ulix-footer">Portfolio minimal &amp; zen — fatto con Python + Streamlit</div>
-    """,
-    unsafe_allow_html=True,
-)
+     st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
