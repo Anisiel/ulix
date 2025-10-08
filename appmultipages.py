@@ -96,7 +96,7 @@ if ALT_LAYOUT:
         st.subheader("Dammi un buon voto! 😄")
         st.caption("Portfolio minimal & zen — layout alternativo") 
 
-st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
+#st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
 
 # [MODIFICA] — Footer in fondo alla sidebar (frame sinistro)
 def _add_sidebar_footer(text: str):
