@@ -3,9 +3,6 @@ from pathlib import Path  # servirà per CV e per check immagini
 
 st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
 
-
-
-
 # —————————————— Parametri modificabili facilmente ——————————————————————————
 STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
 GRID_COLS   = 5           # quante immagini per riga
@@ -34,6 +31,7 @@ def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
                 st.image(it["src"], width=width)
                 if it.get("note"):              # se vuoto, non mostra nulla
                     st.caption(it["note"])
+
 
 # Titolo/testo SOPRA l’immagine
 st.header("Ulisse Fabiani — Portfolio")     # titolo minimal
