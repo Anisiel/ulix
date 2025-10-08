@@ -43,7 +43,6 @@ render_thumbs(IMMAGINI)                      # rende i “francobolli”
 
 st.divider()
 
-# ──────────────────────────────────────────────────────────────────────────
 # LINK RAPIDI (interni ed esterni)
 col1, col2, col3 = st.columns(3)
 
@@ -59,6 +58,7 @@ with col3:
     st.page_link("pages/4_Programmini.py", label="💻 Programmini (in)utili")
 
 st.divider()
+
 
 st.markdown(
     f"""
