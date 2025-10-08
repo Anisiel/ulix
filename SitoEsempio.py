@@ -41,8 +41,6 @@ st.subheader("Dammi un buon voto! 😄")
 # HERO / COPERTINA (francobolli, allineati a sinistra, anche più immagini)
 render_thumbs(IMMAGINI)                      # rende i “francobolli”
 
-#st.caption("Portfolio minimal & zen — fatto con Python + Streamlit")
-
 st.divider()
 
 # LINK RAPIDI (interni ed esterni)
