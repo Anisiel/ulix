@@ -1,7 +1,19 @@
 import streamlit as st
 from pathlib import Path  # servirà per CV e per check immagini
 
-st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
+#st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
+
+
+pages = [
+    st.Page("home.py", title="🏠 Home • Esempio CV", icon="🏠"),
+    st.Page("pages/1_Grafici.py", title="📈 Grafici"),
+    st.Page("pages/2_Pubblicazioni.py", title="📚 Pubblicazioni"),
+    st.Page("pages/3_Titoli_Certificazioni.py", title="🎓 Titoli & Certificazioni"),
+]
+pg = st.navigation(pages, position="sidebar", expanded=True)
+pg.run()
+
+
 
 # [MODIFICA] —— Parametri modificabili facilmente ——————————————————————————
 STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
