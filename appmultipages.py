@@ -12,8 +12,8 @@ ACADEMIA_URL = "https://independent.academia.edu/FabianiUlisse"
 # "note" è una riga opzionale: se stringa vuota, NON viene mostrata.
 IMMAGINI = [
     {"src": "assets/hero.jpg",  "note": ""},          # es.: "note": "Foto 2025, estate"
-    {"src": "assets/hero2.jpg", "note": ""},          # lasciare "" per non visualizzare nulla
-    {"src": "assets/hero3.jpg", "note": ""},
+    {"src": "assets/hero2.jpg", "note": "Le Discret"},          # lasciare "" per non visualizzare nulla
+    {"src": "assets/hero3.jpg", "note": "Portrait of the Artist with a Mocking Face"},
 ]
 # ————————————————————————————————————————————————————————————————————————
 
