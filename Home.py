@@ -1,4 +1,3 @@
-This file has been moved to pages/Home.py and is no longer needed.
 import streamlit as st
 from pathlib import Path  # servirà per CV e per check immagini
 
@@ -24,13 +23,7 @@ except Exception:
 	# fall back: niente CSS esterno se qualcosa va storto
 	pass
 
-# Sidebar alias: mostra "Home" nel frame laterale
-with st.sidebar:
-	st.title("Home")
-	st.write("Ulisse Fabiani — Portfolio")
-	st.markdown("---")
-
-# [MODIFICA] —— Parametri modificabili facilmente ——————————————————————————
+# —— Parametri modificabili facilmente ——————————————————————————
 STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
 GRID_COLS   = 5           # quante immagini per riga
 
@@ -60,7 +53,7 @@ def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
 
 # Single active layout (keep only this)
 st.divider()
-st.caption("Layout alternativo attivo (sempre minimal)")
+st.caption("Layout uno zen e minimal, come piace a me)")
 
 col_img, col_main = st.columns([1, 3], gap="large")
 with col_img:
@@ -69,8 +62,8 @@ with col_img:
 with col_main:
 	#  st.header("Ulisse Fabiani — Portfolio")
 	st.title("Hello, lettore! 👋")
-	st.subheader("Dammi un buon voto! 😄")
-	st.caption("Portfolio minimal & zen — layout alternativo")
+	st.subheader("Dammi una buona valutazione! 😄")
+	st.caption("Portfolio minimal & zen — layout minimal")
 
 # After the two-column row, render links (full-width): external, internal, then CV
 st.divider()
@@ -94,7 +87,7 @@ if cv_path.exists():
 		data=cv_path.read_bytes(),
 		file_name="Ulisse_Fabiani_CV.pdf",
 		mime="application/pdf",
-		key="cv_download_test",
+		key="cv_download_home",
 	)
 
 st.divider()
