@@ -7,8 +7,8 @@ st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")
 st.markdown(
 	"""
 	<div style='line-height:1.05'>
-		<h1>Ulisse Fabiani — Portfolio</h1>
-		<div class='subtitle'>Hello, lettore! 👋 • Questo è un esempio creato da me nel mese di ottobre 2025 per mostrare le competenze informatiche </div>
+		<h1>Ulisse Fabiani </h1>
+		<div class='subtitle'>Benvenuto nel mio portfolio interattivo versione minimal </div>
 	</div>
 	""",
 	unsafe_allow_html=True,
