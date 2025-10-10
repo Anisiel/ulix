@@ -1,0 +1,27 @@
+# .streamlit/config.toml
+[client]
+toolbarMode = "auto"
+
+[server]
+headless = true
+
+# Impostazioni UI globali
+[ui]
+# (lascia pure di default, qui non serve nulla)
+
+# Quello che ti interessa:
+[theme]
+# se vuoi, puoi definire un tema qui
+
+# Impostazioni di pagina globali
+[browser]
+gatherUsageStats = false
+
+# Imposta layout e sidebar per TUTTA l'app
+[global]
+# (alcune versioni usano la sezione [client] o [ui] per altre opzioni)
+
+# Valgono per tutti gli utenti alla prima visita
+# (wide + sidebar collassata di default)
+layout = "wide"
+initial_sidebar_state = "collapsed"
