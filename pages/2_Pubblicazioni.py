@@ -13,8 +13,8 @@ st.divider()
 # Elenco con link diretti alle pubblicazioni
 st.markdown(
     """
-    - **Spatial research and geomatic resources applied to the archaeology of the Farafra Oasis**
-    - **Titolo pubblicazione 2**
+    - [**Spatial research and geomatic resources applied to the archaeology of the Farafra Oasis**](https://www.academia.edu/5109115/Spatial_relo pubblicazione 3)**
+    - [**Titolo pubblicazione 2**](https://www.academia.edu/link_pubblicazione_2)**
     """,
     unsafe_allow_html=True
 )
