@@ -1,6 +1,7 @@
 
 import streamlit as st
 from pathlib import Path
+import base64
 
 st.set_page_config(page_title="Ulisse Fabiani — Portfolio", page_icon="🌿", layout="wide")
 
@@ -29,10 +30,18 @@ def render_gallery(items):
     st.markdown("### 🎨 Galleria")
     cols = st.columns(3)
     for col, it in zip(cols, safe_items):
+
         with col:
+    # modifica: costruisco un data URI così il browser non chiede /assets
+            p = Path(it["src"])  # modifica
+            ext = p.suffix.lower()  # modifica
+            mime = "image/png" if ext == ".png" else "image/jpeg"  # modifica
+            b64 = base64.b64encode(p.read_bytes()).decode()  # modifica
+            uri = f"data:{mime};base64,{b64}"  # modifica
+
             st.markdown(
-                f"<img src='{it['src']}' class='gallery-thumb'/>",
-                unsafe_allow_html=True
+                f"<div class='thumb-box'><img src=\"{uri}\" class='gallery-thumb' /></div>",  # modifica
+            unsafe_allow_html=True
             )
             if it.get("note"):
                 st.caption(it["note"])
@@ -43,12 +52,34 @@ render_gallery(IMMAGINI)
 # CSS per altezza immagini — posizionato DOPO la galleria
 st.markdown("""
 <style>
-img.gallery-thumb {
-    height: 240px !important;
-    object-fit: cover;
+  /* ---- Configurazione rapida ---- */
+  :root { --thumb-h: 240px; } /* cambia qui l'altezza delle miniature */
+
+  /* Contenitore della miniatura */
+  .thumb-box {
+    height: var(--thumb-h);            /* stessa altezza per tutte */
     width: 100%;
+    overflow: hidden;
     border-radius: 8px;
-}
+    background: #f2f2f2;               /* leggero sfondo "letterbox" */
+    display: flex;                      /* centriamo l'immagine */
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Immagine dentro il contenitore */
+  .thumb-box > img.gallery-thumb {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;                /* mostra tutta l'immagine (NO crop) */
+    object-position: center;            /* centrata */
+    display: block;
+  }
+
+  /* Bordo arrotondato coerente anche sull'immagine */
+  .thumb-box > img.gallery-thumb { border-radius: 8px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -84,3 +115,5 @@ with col2:
     st.markdown("🎓 [Titoli & Certificazioni](pages/3_Titoli_Certificazioni.py)")
 with col3:
     st.markdown("🖥️ [Programmini (in)utili](pages/4_Programmini.py)")
+
+st.divider()

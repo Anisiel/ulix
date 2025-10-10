@@ -52,7 +52,13 @@ def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
 					# solamente le immagini della galleria con il CSS
 					# usare st.image per assicurare la corretta visualizzazione
 					# aggiungiamo anche un attributo alt tramite markdown vicino
-					st.image(it["src"], use_container_width=True)
+					#st.image(it["src"], use_container_width=True)
+
+					st.markdown(
+   						f"<img class='gallery-thumb' src='{it['src']}' alt='{it.get('note', '')}'>",
+    					unsafe_allow_html=True
+					)
+
 					if it.get("note"):              # se vuoto, non mostra nulla
 						st.caption(it["note"])
 
