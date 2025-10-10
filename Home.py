@@ -98,9 +98,9 @@ with col1:
 	st.markdown("📈 [Grafici](pages/1_Grafici.py)", unsafe_allow_html=True)
 
 with col2:
-	st.markdown("📚 [Pubblicazioni](pages/2_Pubblicazioni.py)", unsafe_allow_html=True)
 	st.markdown("🎓 [Titoli & Certificazioni](pages/3_Titoli_Certificazioni.py)", unsafe_allow_html=True)
-
+	st.markdown("📚 [Pubblicazioni](pages/2_Pubblicazioni.py)", unsafe_allow_html=True)
+	
 with col3:
 	st.markdown("💻 [Programmini (in)utili](pages/4_Programmini.py)", unsafe_allow_html=True)
 

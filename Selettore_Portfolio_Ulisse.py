@@ -4,13 +4,21 @@ from pathlib import Path
 import runpy
 import streamlit as _st_mod  # per la patch di set_page_config nelle Home
 
-# 1) Config base del selettore (sidebar visibile)
+# 0) Config base del selettore (sidebar visibile)
 st.set_page_config(
     page_title="Selettore — Portfolio Ulisse",
     page_icon="🔀",
     layout="wide",
     initial_sidebar_state="expanded"   # sidebar aperta per mostrare il selettore
 )
+
+# 1) Forza il "primo run" per evitare che la sidebar sparisca al cambio Home
+import time  # modifica
+if "_first_run" not in st.session_state:                 # modifica
+    st.session_state["_first_run"] = True                # modifica
+    st.experimental_set_query_params(v=str(time.time())) # modifica
+    st.rerun()                                           # modifica
+
 
 # 2) Selettore nella SIDEBAR
 with st.sidebar:
