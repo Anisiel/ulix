@@ -65,9 +65,9 @@ with col_main:
 	st.subheader("Dammi una buona valutazione! 😄")
 	st.caption("Portfolio minimal & zen — layout minimal")
 
-# After the two-column row, render links (full-width): external, internal, then CV
+# Dopo le due colonne  ci sono i link esterni, interni e poi il link al CV
 st.divider()
-# External links
+# Link esterni in colonna e non affiancati
 st.markdown(
 	"""
 	<div style='display:flex;gap:1.2rem;align-items:center;'>
@@ -78,7 +78,7 @@ st.markdown(
 	unsafe_allow_html=True,
 )
 
-# Download CV slightly detached and with a playful icon
+# Download CV
 cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
 if cv_path.exists():
 	st.markdown("<div style='margin-top:0.6rem'></div>", unsafe_allow_html=True)
@@ -91,7 +91,7 @@ if cv_path.exists():
 	)
 
 st.divider()
-# Internal page links (affiancati)
+# Link interni alle pagine affiancati e non in colonna
 col1, col2, col3 = st.columns(3)
 
 with col1:

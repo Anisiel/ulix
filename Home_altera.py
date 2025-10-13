@@ -86,11 +86,13 @@ st.markdown("""
 # Box informativi con link esterni
 st.markdown("---")
 st.markdown("### 🔗 Link utili")
-col1, col2 = st.columns(2)
+st.markdown("Ecco alcuni link utili per saperne di più sulla mia attività all'Università e sullle risorse utilizzate per questo sito.")
+col1, col2 = st.columns(2) 
 with col1:
     st.markdown("📘 [Academia.edu](https://independent.academia.edu/FabianiUlisse)")
 with col2:
-    st.markdown("💻 [GitHub](https://github.com/Anisiel/ulix)")
+    st.markdown("💻 [GitHub](https://github.com/Anisiel/ulix)") 
+    st.markdown("💻 [Streamlit](https://streamlit.io/)") 
 
 # Download CV
 cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
