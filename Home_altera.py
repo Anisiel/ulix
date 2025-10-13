@@ -53,7 +53,7 @@ render_gallery(IMMAGINI)
 st.markdown("""
 <style>
   /* ---- Configurazione rapida ---- */
-  :root { --thumb-h: 240px; } /* cambia qui l'altezza delle miniature */
+  :root { --thumb-h: 120px; } /* cambia qui l'altezza delle miniature */
 
   /* Contenitore della miniatura */
   .thumb-box {

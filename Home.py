@@ -25,7 +25,7 @@ except Exception:
 
 # —— Parametri modificabili facilmente ——————————————————————————
 STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
-GRID_COLS   = 5           # quante immagini per riga
+GRID_COLS   = 3           # quante immagini per riga
 
 # Elenco immagini (aggiungerne/rimuoverne senza rompere nulla).
 # "note" è una riga opzionale: se stringa vuota, NON viene mostrata.
