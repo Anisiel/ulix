@@ -1,12 +1,8 @@
-/* styles.css - stili per l'app Ulisse Fabiani
+/* styles.css - stili per i layout
    ------------------------------------------------------------
    Questo file contiene le regole CSS usate dall'app Streamlit.
-   - Mantieni qui tutte le modifiche di stile (titoli, padding, responsive)
-   - Modifica i valori (font-size, breakpoints) per adattarli al tuo design
-   - Nota: Streamlit usa classi CSS generate dinamicamente; alcune regole
-     basate su nomi specifici di classe (es. .css-1l02zno) possono cambiare
-     tra versioni. Le regole fondamentali (h1, img, media queries) sono
-     comunque robuste e consigliate.
+   - Qui tutte le modifiche di stile (titoli, padding, responsive)
+   - Qui posso modificare i valori (font-size, breakpoints) per adattarli al design
 */
 
 /* ----- Immagini responsive -----
@@ -17,13 +13,10 @@
 img { max-width: 100% !important; height: auto !important; }
 
 /* ----- Galleria: altezza uniforme per le miniature -----
-    Manteniamo tutte le immagini della galleria con la stessa altezza
-    e usiamo object-fit: cover per ritagliare centralmente le immagini
+    Mantengo tutte le immagini della galleria con la stessa altezza
+    e uso object-fit come cover per ritagliare centralmente le immagini
     preservando l'aspetto e mantenendo la griglia armonica.
-    Regole: .gallery-thumb è applicata generically: Streamlit inserisce
-    <img> direttamente, quindi usiamo un selettore che colpisce le immagini
-    all'interno della sezione principale; se necessario possiamo rendere il
-    selettore più specifico ispezionando l'HTML. */
+*/
 
 .stColumns img,
 .stImage img,
@@ -43,11 +36,10 @@ img { max-width: 100% !important; height: auto !important; }
    }
 }
 
-
 /* ----- Titolo principale e sottotitolo -----
-   Qui definiamo la dimensione del titolo (h1) e del sottotitolo
-   (elemento con classe `.subtitle`). Modifica i `font-size` per cambiare
-   l'aspetto. Le media query abbassano le dimensioni su schermi piccoli.
+   Qui definisco la dimensione del titolo (h1) e del sottotitolo
+   (elemento con classe `.subtitle`). Modifico i `font-size` per cambiare
+   l'aspetto.
 */
 h1 { font-size: 36px; margin: 0; }
 /* breakpoint mobile: sotto 600px riduciamo i font */
@@ -56,20 +48,17 @@ h1 { font-size: 36px; margin: 0; }
   .subtitle { font-size: 14px; }
 }
 
-
 /* ----- Padding dell'app -----
    Riduce leggermente i padding globali per dare più spazio ai contenuti.
-   Puoi aumentare o diminuire i valori (es. 12px) secondo le tue preferenze.
+   Posso aumentare o diminuire i valori (es. 12px).
 */
 .stApp { padding: 8px 12px; }
 
-
 /* ----- Colonne su schermi piccoli -----
-   Streamlit gestisce le colonne internamente, ma qui forziamo le colonne a
-   impilarsi verticalmente su dispositivi stretti (es. mobile). La selezione
-   usa una classe generata da Streamlit; se non dovesse funzionare prova a
-   ispezionare l'HTML generato e aggiornare il selettore.
+   Streamlit gestisce le colonne internamente, ma qui forzo le colonne a
+   impilarsi verticalmente su dispositivi stretti (es. mobile).
 */
+
 @media (max-width: 640px) {
   .css-1l02zno .stColumns, .css-1l02zno .stColumns > div { width: 100% !important; display: block !important; }
 }
@@ -84,12 +73,6 @@ h1 { font-size: 36px; margin: 0; }
        più specifico e sicuro.
     - Fallback generico: qualsiasi anchor dentro il container principale
        viene mostrata come blocco e si estende a tutta la larghezza.
-
-    Nota: i nomi di classe usati da Streamlit possono cambiare tra le versioni;
-    per questo abbiamo sia il selettore specifico (href*="pages/") sia
-    il fallback più generico. Se trovi link che non si comportano correttamente,
-    apri gli strumenti di sviluppo del browser e ispeziona l'anchor per adattare
-    il selettore qui sotto.
 ------------------------------------------------------------------ */
 
 /* Target specifico: link che contengono 'pages/' nell'href */
@@ -101,15 +84,16 @@ a[href*="pages/"] {
    color: inherit !important;
 }
 
-/* Fallback generico: rendi i link dei markdown block-level (se necessario) */
+/* Fallback generico: rendo i link dei markdown block-level (se necessario) */
 .stMarkdown a {
    display: block !important;
    width: 100% !important;
 }
 
-/* Riduci lo spazio verticale per i link interni: meno padding e margini
-    e line-height più compatto. Colpisce anchor che contengono 'pages/' e
-    gli elementi di lista intorno ai markdown generati da Streamlit. */
+/* Riduco lo spazio verticale per i link interni: meno padding e margini
+    e line-height più compatto. 
+*/
+
 a[href*="pages/"] {
    padding-top: 4px !important;
    padding-bottom: 4px !important;
