@@ -17,7 +17,6 @@ from pyecharts.charts import Calendar
 from pyecharts import options as opts
 from streamlit_echarts5 import st_pyecharts  # componente Streamlit ↔ ECharts
 
-
 st.markdown("""
 Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con workaround complicati tipo duplicare dati, formattazioni complesse, macro Vba),
 mettendo in evidenza due librerie che permettono di creare grafici dinamici (Altair e ECharts).
@@ -27,9 +26,6 @@ Clicca qui per visualizzare la prima pagina: [Grafici di Plotly](pages/1_Grafici
 Tutti grafici sono realizzati a partire da dati presenti su un file excel caricato in `repo/grafici_speciali.xlsx`. 
             Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
 """)
-
-
-
 
 # ---------- [STEP 1] Config pagina ----------
 st.set_page_config(page_title="Altair + ECharts", page_icon="📊", layout="wide")
