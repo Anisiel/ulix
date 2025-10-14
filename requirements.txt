@@ -4,3 +4,5 @@ pandas
 openpyxl
 numpy
 plotly
+pyecharts
+streamlit-echarts5
