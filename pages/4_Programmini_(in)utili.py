@@ -41,7 +41,7 @@ PROGRAMS = [
     {
         "categoria": "📂 File & Cartelle",
         "titolo": "Struttura ad albero (solo cartelle) → TXT",
-        "file_rel": "bat/struttura_albero.bat",
+        "file_rel": "bat/elenca_cartelle_struttura_albero.bat",
         "descr": "Usa `tree /a` per produrre una struttura ASCII ad albero (solo cartelle) e salvarla su file.",
         "lingua": "bat"
     },
@@ -74,10 +74,17 @@ PROGRAMS = [
         "lingua": "bat"
     },
     {
-        "categoria": "📄 PDF Tools (Python)",
-        "titolo": "Controlla PDF non leggibili (PyMuPDF)",
+        "categoria": "📄 PDF Tools base (Python)",
+        "titolo": "Controlla PDF non leggibili (PyMuPDF), controllo base",
+        "file_rel": "python/controlla_pdfs.py",
+        "descr": "Controlla se i PDF si aprono o meno. Report su file .txt.",
+        "lingua": "python"
+    },
+        {
+        "categoria": "📄 PDF Tools avanzato (Python)",
+        "titolo": "Controlla PDF non leggibili (PyMuPDF), controllo approfondito",
         "file_rel": "python/controlla_pdfs_approfondito.py",
-        "descr": "Scansione ricorsiva: PDF cifrati (password vuota), 0 pagine, caricamento 1ª pagina. Report su file .txt.",
+        "descr": "Controlla: PDF cifrati (password vuota), 0 pagine, caricamento 1ª pagina. Report su file .txt.",
         "lingua": "python"
     },
 ]
@@ -123,6 +130,6 @@ for categoria in by_cat:
 
 st.markdown("---")
 st.caption(
-    "Suggerimenti: i .bat si eseguono con doppio clic o da `cmd`. Per lo script Python installa le dipendenze "
+    "Suggerimenti: i .bat si eseguono con doppio clic o da `cmd`. Per lo script Python devi avere installato Python e le dipendenze (pymupdf) "
     "e modifica il percorso di input nel file (blocco `MODIFICA QUI`)."
 )
