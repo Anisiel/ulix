@@ -47,9 +47,30 @@ PROGRAMS = [
     },
     {
         "categoria": "🔎 Ricerca & Filtri",
-        "titolo": "Elenco PDF & DOCX (ricorsivo) con esclusioni",
-        "file_rel": "bat/elenco_pdf_docx.bat",
-        "descr": "Cerca ricorsivamente PDF e DOCX, filtra file temporanei (es. `~$`) e salva i risultati.",
+        "titolo": "Elenco DOCX (ricorsivo) con esclusioni",
+        "file_rel": "bat/elenco_docx.bat",
+        "descr": "Cerca ricorsivamente i file .DOCX e salva i risultati.",
+        "lingua": "bat"
+    },
+    {
+        "categoria": "🔎 Ricerca & Filtri",
+        "titolo": "Elenco XLSX (ricorsivo) con esclusioni",
+        "file_rel": "bat/elenco_xlsx.bat",
+        "descr": "Cerca ricorsivamente i file .XLSX e salva i risultati.",
+        "lingua": "bat"
+    },
+    {
+        "categoria": "🔎 Ricerca & Filtri",
+        "titolo": "Elenco PDF (ricorsivo) con esclusioni",
+        "file_rel": "bat/elenco_pdf.bat",
+        "descr": "Cerca ricorsivamente i file .PDF e salva i risultati.",
+        "lingua": "bat"
+    },
+    {
+        "categoria": "🔎 Ricerca & Filtri",
+        "titolo": "Elenco tutti i file (ricorsivo) senza esclusioni",
+        "file_rel": "bat/elenco_tutti.bat",
+        "descr": "Cerca ricorsivamente tutti i file e salva i risultati.",
         "lingua": "bat"
     },
     {
