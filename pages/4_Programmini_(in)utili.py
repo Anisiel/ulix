@@ -1,15 +1,20 @@
 import streamlit as st
 
-st.set_page_config(page_title="Titoli & Certificazioni", page_icon="🎓")
-st.title("Titoli & Certificazioni")
+st.set_page_config(page_title="Programmini (in)utili", page_icon="💻")
+st.title("Programmini (in)utili")
+
+
+
+
 
 st.markdown(
     """
-    - ✅ **EIRSAF Full** — Certificazione Internazionale di Alfabetizzazione Digitale
-    - ✅ **EIPASS Progressive** (in valutazione)
-    - 🔜 Unipass Interactive 9 / Coding / Robotica Educativa / STEAM
-    """,
+Una raccolta di programmini (in)utili che ho scritto nel tempo, per esigenze dell'ufficio.
+
+Ci sono alcuni script (.bat) per il **Prompt dei comandi di Windows (cmd.exe)**: ovvero programmini che contengono una sequenza di comandi DOS/Windows eseguiti in ordine.
+Possono essere eseguiti dal prompt dei comandi ("C:\percorso\script.bat) o facendo doppio click sul file (nel qual caso la finestra del prompt si chiude subito).
+ 
+Ci sono due script in Python (.py) che richiedono l'installazione di Python (https://www.python.org/downloads/).   
+       """,
     unsafe_allow_html=True
 )
-
-st.success("Aggiungi date, ID certificato e link ai badge quando li hai.")
