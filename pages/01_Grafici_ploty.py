@@ -117,43 +117,7 @@ st.markdown("""
 """)
 
 # ===========================
-# 2) Calendario grafico (Heatmap): Pioggia giornaliera
-# ===========================
-st.subheader("2) Heatmap calendario della pioggia")
-
-# STEP 1: Creo colonne per Mese e Giorno
-df["Mese"] = df["Data"].dt.month
-df["Giorno"] = df["Data"].dt.day
-
-# STEP 2: Creo una tabella pivot (Mese = righe, Giorno = colonne, valore = Pioggia_mm)
-pivot = df.pivot_table(index="Mese", columns="Giorno", values="Pioggia_mm", aggfunc="sum")
-
-# STEP 3: Creo la heatmap con Plotly
-fig_heat = px.imshow(
-    pivot,
-    color_continuous_scale="Blues",
-    labels=dict(color="Pioggia (mm)"),
-    title="Distribuzione giornaliera della pioggia per mese"
-)
-
-# STEP 4: Aggiorno assi con etichette leggibili
-mesi = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"]
-fig_heat.update_yaxes(title="Mese", tickvals=list(range(0,12)), ticktext=mesi)
-fig_heat.update_xaxes(title="Giorno del mese")
-
-# STEP 5: Mostro il grafico
-st.plotly_chart(fig_heat, use_container_width=True)
-
-# Perché qui è meglio di Excel
-st.markdown("""
-**Perché è meglio di Excel:**  
-- Excel non ha un **grafico calendario interattivo**.  
-- Qui puoi **vedere subito stagionalità e giorni estremi** con una scala colore.  
-- Passa il mouse (hover) dinamico: passa il mouse e leggi il valore preciso.
-""")
-   
-# ===========================
-# 2)bis Scatter plot: Temperatura + Pioggia (punti) nel tempo
+# 2) Scatter plot: Temperatura + Pioggia (punti) nel tempo
 # ===========================
 st.subheader("2) Temperatura (linea) + Pioggia (punti) nel tempo")
 
@@ -176,7 +140,6 @@ fig.add_trace(
     ),
     secondary_y=False
 )
-
 
 # STEP 4: Filtro i soli giorni con Pioggia > 0 e aggiungo i puntini (asse destro)
 # - Applico un filtro cosi si evita di mostrare tanti puntini a zero che “sporcano” il grafico
@@ -210,7 +173,6 @@ fig.update_yaxes(
     zeroline=False,            # niente "linea dello zero" a destra
     secondary_y=True
 )
-
 # Asse sinistro (Temperatura) con una griglia leggera 
 fig.update_yaxes(
     showgrid=True, gridcolor="rgba(0,0,0,0.08)", zeroline=False,  
@@ -229,24 +191,69 @@ st.markdown("""
 """)
 
 # ===========================
-# 3) Polar bar: Pioggia totale per mese
+# 3) Calendario grafico (Heatmap): Pioggia giornaliera
+# ===========================
+st.subheader("2) Heatmap calendario della pioggia")
+
+# STEP 1: Creo colonne per Mese e Giorno
+df["Mese"] = df["Data"].dt.month
+df["Giorno"] = df["Data"].dt.day
+
+# STEP 2: Creo una tabella pivot (Mese = righe, Giorno = colonne, valore = Pioggia_mm)
+pivot = df.pivot_table(index="Mese", columns="Giorno", values="Pioggia_mm", aggfunc="sum")
+
+# STEP 3: Creo la heatmap con Plotly
+fig_heat = px.imshow(
+    pivot,
+    color_continuous_scale="Blues",
+    labels=dict(color="Pioggia (mm)"),
+    title="Distribuzione giornaliera della pioggia per mese"
+)
+
+# STEP 4: Aggiorno assi con etichette leggibili
+mesi = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"]
+fig_heat.update_yaxes(title="Mese", tickvals=list(range(0,12)), ticktext=mesi)
+fig_heat.update_xaxes(title="Giorno del mese")
+
+# STEP 5: Mostro il grafico
+st.plotly_chart(fig_heat, use_container_width=True)
+
+# Perché qui è meglio di Excel
+st.markdown("""
+**Perché qui è meglio di Excel:**  
+- Excel non ha un **grafico calendario interattivo**.  
+- Qui puoi **vedere subito stagionalità e giorni estremi** con una scala colore.  
+- Passa il mouse (hover) dinamico: passa il mouse e leggi il valore preciso.
+""")
+
+# ===========================
+# 4) Polar bar: Pioggia totale per mese
 # ===========================
 st.subheader("3) Rosa polare della pioggia mensile")
+
+# STEP 1: Aggrego i mm per mese e preparo etichette
 df["Mese"] = df["Data"].dt.month
 rain_month = df.groupby("Mese")["Pioggia_mm"].sum().reset_index()
 mesi = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"]
 rain_month["MeseNome"] = rain_month["Mese"].map({i+1: m for i,m in enumerate(mesi)})
 
+# STEP 2: Creo il grafico a barre polari (non nativo in Excel)
+# - r     = raggio (mm totali)
+# - theta = angolo (mese)
+# - color = intensità colore continua
 fig_polar = px.bar_polar(
     rain_month, r="Pioggia_mm", theta="MeseNome",
     color="Pioggia_mm", color_continuous_scale="Blues",
     title="Pioggia totale per mese"
 )
+
+# STEP 3: Visualizzo il grafico
 st.plotly_chart(fig_polar, use_container_width=True)
 
+# Perché qui è meglio di Excel
 st.markdown("""
 **Perché qui è meglio di Excel**  
-- **Tipo di grafico non nativo** in Excel (la vera **bar‑polar**): niente workaround con Radar o formattazioni complesse.  
+- **Tipo di grafico non nativo** in Excel(non ha un grafico predefinito, ma simili, tipo Radar o Grafici a ragnatela): nessun controllo di lunghezza, spessore delle barre, colori continui... ): necessarie formattazioni complesse.  
 - **Coordinate polari reali** con hover, colori continui e interazione.  
 - Comunica bene **stagionalità/direzioni** in modo più immediato rispetto a una barra “lineare”.
 """)
