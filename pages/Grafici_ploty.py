@@ -1,7 +1,3 @@
-# pages/01_Grafici_Plotly.py
-
-
-
 # ======================================================
 # STEP 0: IMPORT – cosa fanno
 # - streamlit as st: UI web reattiva per titoli, tabelle, grafici (API ref: https://docs.streamlit.io/develop/api-reference)  
@@ -27,8 +23,16 @@ from plotly.subplots import make_subplots
 # - set_page_config: imposta titolo, icona e layout (wide = tutta larghezza)
 # - st.title: intestazione principale
 # ======================================================
-st.set_page_config(page_title="Grafici Plotly", page_icon="🔷", layout="wide")
-st.title("🔷 Grafici interattivi con Plotly")
+st.set_page_config(page_title="Grafici Plotly", page_icon="📊", layout="wide")
+st.title("📊 Grafici interattivi con Plotly utilizzando dati meteo inventati")
+
+st.markdown("""
+Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con workaround complicati tipo duplicare dati, formattazioni complesse, macro Vba),
+mettendo in evidenza l'**interattività** di Plotly.
+
+Tutti grafici sono realizzati a partire da dati presenti su un file excel caricato in `repo/grafici_speciali.xlsx`. 
+            Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
+""")
 
 # ======================================================
 # STEP B: Caricamento dati da Excel e preparazione
@@ -40,7 +44,7 @@ file_path = "repo/grafici_speciali.xlsx"
 df = pd.read_excel(file_path)
 df["Data"] = pd.to_datetime(df["Data"])
 
-st.success(f"Dati caricati: {len(df)} righe")
+st.success(f"Dati caricati: {len(df)} giorni (1 anno) dal file `{file_path}`")
 st.dataframe(df.head(), use_container_width=True)
 
 # ===========================
@@ -58,11 +62,11 @@ fig_line.update_xaxes(rangeslider_visible=True)
 
 # STEP 3: Visualizza il grafico
 st.plotly_chart(fig_line, use_container_width=True)
-
+st.divider()
 # ===========================
 # 1bis) Line chart: Temperatura nel tempo colorata per fascia
 # ===========================
-st.subheader("1) Andamento della temperatura con variazione dei colori")
+st.subheader("1bis) Andamento della temperatura con variazione dei colori")
 
 # STEP 1: Verifica che esista la colonna 'FasciaTemp' in Excel
 # - La colorazione per fascia dipende da questa colonna
@@ -115,7 +119,7 @@ st.markdown("""
 - **Hover**:  Quando **passi il mouse** sulla linea o sui puntini, compaiono **tooltip** con data e valore esatto, senza dover formattare etichette a mano.  
 - **Esporta** con un click (icona fotocamera) e possibilità di aggiungere altre serie via codice.
 """)
-
+st.divider()
 # ===========================
 # 2) Scatter plot: Temperatura + Pioggia (punti) nel tempo
 # ===========================
@@ -189,7 +193,7 @@ st.markdown("""
 - **Filtraggio automatico** dei soli giorni con pioggia (>0) per evitare punti inutili.
 - Manteniamo l'interattività: zoom, pan, slider temporale e tooltip.
 """)
-
+st.divider()
 # ===========================
 # 3) Calendario grafico (Heatmap): Pioggia giornaliera
 # ===========================
@@ -225,7 +229,7 @@ st.markdown("""
 - Qui puoi **vedere subito stagionalità e giorni estremi** con una scala colore.  
 - Passa il mouse (hover) dinamico: passa il mouse e leggi il valore preciso.
 """)
-
+st.divider()
 # ===========================
 # 4) Polar bar: Pioggia totale per mese
 # ===========================
