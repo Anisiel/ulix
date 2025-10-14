@@ -27,7 +27,7 @@ fig_line.update_xaxes(rangeslider_visible=True)
 st.plotly_chart(fig_line, use_container_width=True)
 
 # ===========================
-# 1bis) Line chart: Temperatura nel tempo
+# 1bis) Line chart: Temperatura nel tempo colorata per fascia
 # ===========================
 st.subheader("1) Andamento della temperatura con variazione dei colori")
 
@@ -49,8 +49,7 @@ fig_line = px.line(
 fig_line.update_traces(line=dict(color="#7f7f7f", width=2))  # grigio
 fig_line.update_xaxes(rangeslider_visible=True)              #  slider
 
-
-# Modifica: marker colorati per fascia (niente linee)
+#  marker colorati per fascia (niente linee)
 color_map = {
     "Freddo (<5°C)": "#1f77b4",   # blu
     "Mite (5-20°C)": "#ff7f0e",   # arancio
@@ -62,7 +61,7 @@ fig_pts = px.scatter(  # Modifica
     opacity=0.9
 )
 
-# Modifica: aggiungo solo i marker alla figura principale
+#  aggiungo solo i marker alla figura principale
 for tr in fig_pts.data:
     tr.mode = "markers"                   # solo marker (NO linee)
     tr.marker.update(size=5, line=dict(width=0))
@@ -77,123 +76,132 @@ st.markdown("""
 - **Esporta** con un click (icona fotocamera) e possibilità di aggiungere altre serie via codice.
 """)
 
-# 2) Scatter plot: Temperatura vs Pioggia
-st.subheader("2) Relazione Temperatura vs Pioggia")
-fig_scatter = px.scatter(
-    df, x="Temperatura", y="Pioggia_mm",
-    title="Temperatura vs Pioggia",
-    opacity=0.6
-)
-st.plotly_chart(fig_scatter, use_container_width=True)
 
-st.markdown("""
-**Perché qui è meglio di Excel**  
-- **Selezione lasso/box** direttamente sul grafico per isolare gruppi di punti o outlier.  
-- **Hover** con valori precisi e zoom fluido per scoprire pattern che su grafici statici si perdono.  
-- Puoi estendere facilmente con **colorazioni per categoria** o **assi logaritmici** senza formule.
-""")
+# ===========================
+# 2) Istogramma: Pioggia per classe (da Excel)
+# ===========================
+st.subheader("2) Distribuzione della pioggia per classe")
+
+# STEP 1: Controllo che la colonna ClassePioggia esista
+if "ClassePioggia" not in df.columns:
+    st.error("Nel file Excel manca la colonna 'ClassePioggia'. Aggiungila e ricarica la pagina.")
+else:
+    # STEP 2: Raggruppo per classe e conto i giorni
+    rain_class = df.groupby("ClassePioggia").size().reset_index(name="Conteggio")
+
+    # STEP 3: Ordino le classi in modo logico
+    ordine = ["Nessuna pioggia", "Debole (0-2 mm)", "Moderata (2-10 mm)", "Forte (>10 mm)"]
+    rain_class["ClassePioggia"] = pd.Categorical(rain_class["ClassePioggia"], categories=ordine, ordered=True)
+    rain_class = rain_class.sort_values("ClassePioggia")
+
+    # STEP 4: Creo il grafico a barre colorate per intensità
+    fig_hist = px.bar(
+        rain_class,
+        x="ClassePioggia",
+        y="Conteggio",
+        color="ClassePioggia",  # Colore per categoria
+        color_discrete_map={
+            "Nessuna pioggia": "#d9d9d9",   # grigio chiaro
+            "Debole (0-2 mm)": "#90caf9",   # azzurro
+            "Moderata (2-10 mm)": "#42a5f5",# blu medio
+            "Forte (>10 mm)": "#0d47a1"     # blu scuro
+        },
+        title="Distribuzione dei giorni per classe di pioggia",
+        labels={"ClassePioggia": "Classe di pioggia", "Conteggio": "Numero di giorni"}
+    )
+
+    # STEP 5: Layout pulito
+    fig_hist.update_layout(showlegend=False, margin=dict(l=10, r=10, t=60, b=10))
+
+    # STEP 6: Mostro il grafico
+    st.plotly_chart(fig_hist, use_container_width=True)
+
+    # Spiegazione per il portfolio
+    st.markdown("""
+    **Perché è meglio di Excel:**  
+    - Colori coerenti per **classi definite in Excel** (nessuna formula complessa nel grafico).  
+    - Interattivo: hover, zoom, esportazione.  
+    - Facile aggiornare le soglie: basta cambiare la formula in Excel.
+    """)
 
 
+# ===========================
+# 2)bis Scatter plot: Temperatura + Pioggia (punti) nel tempo
+# ===========================
+# 2) Temperatura (linea) + Pioggia (punti) nel tempo
+st.subheader("2) Temperatura (linea) + Pioggia (punti) nel tempo")
 
-# 2) Temperatura (linea) + Pioggia (punti) nel tempo  # Modifica
-st.subheader("2) Temperatura (linea) + Pioggia (punti) nel tempo")  # Modifica
-
+# Import per grafico con doppi assi
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# Modifica: ordine per Data
-df = df.sort_values("Data").reset_index(drop=True)  # Modifica
+# STEP 1: Ordino i dati per Data (evita "zig-zag" della linea)
+df = df.sort_values("Data").reset_index(drop=True)
 
-# Modifica: CATEGORIE ROBUSTE (derivate dal numero, indipendenti dal testo in Excel)
-fasce_bins   = [-1e9, 5, 20, 1e9]  # <5, 5-20, >20
-fasce_labels = ["Freddo (<5°C)", "Mite (5-20°C)", "Caldo (>20°C)"]  # ASCII semplice  # Modifica
-df["FasciaTemp_plot"] = pd.cut(df["Temperatura"], bins=fasce_bins, labels=fasce_labels,
-                               include_lowest=True, right=True)  # Modifica
+# STEP 2: Creo una figura con due assi Y (sinistra = Temperatura, destra = Pioggia)
+fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-# Modifica: mappa colori coerente
-color_map = {
-    "Freddo (<5°C)": "#1f77b4",   # blu
-    "Mite (5-20°C)": "#ff7f0e",   # arancio
-    "Caldo (>20°C)": "#d62728"    # rosso
-}
-
-# Modifica: interruttore scala log per pioggia
-log_rain = st.checkbox("Scala log sulla pioggia (asse destro)", value=True)  # Modifica
-
-# Modifica: figura con doppi assi
-fig_combo = make_subplots(specs=[[{"secondary_y": True}]])
-
-# --- Linea della Temperatura (asse sinistro) ---
-fig_combo.add_trace(
+# STEP 3: Aggiungo la linea della Temperatura (asse sinistro)
+fig.add_trace(
     go.Scatter(
         x=df["Data"], y=df["Temperatura"],
         mode="lines",
-        line=dict(color="#7f7f7f", width=2),
+        line=dict(color="#1f77b4", width=2),   # linea blu
         name="Temperatura [°C]"
     ),
     secondary_y=False
 )
 
-# --- Punti di Pioggia (asse destro), colorati per FasciaTemp_plot ---
+# STEP 4: Filtro i soli giorni con Pioggia > 0 e aggiungo i puntini (asse destro)
+# Modifica: elimino i punti con pioggia zero
+rain = df[df["Pioggia_mm"] > 0]               # Modifica
+fig.add_trace(
+    go.Scatter(
+        x=rain["Data"], y=rain["Pioggia_mm"],  # Modifica
+        mode="markers",
+        marker=dict(size=6, color="#2ca02c"),  # puntini verdi
+        name="Pioggia (mm)"
+    ),
+    secondary_y=True
+)
 
-# 1) Line chart: Temperatura nel tempo
-st.subheader("1) Andamento della temperatura")
+# STEP 5: Titolo, legenda e slider orizzontale per lo zoom
+fig.update_layout(
+    title="Temperatura e Pioggia nel tempo",
+    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
+    margin=dict(l=10, r=10, t=60, b=10),
+    plot_bgcolor="#ffffff"                     # sfondo bianco pulito (opzionale)
+)
+fig.update_xaxes(title_text="Data", rangeslider=dict(visible=True))
 
-# Modifica: ordino per data
-df = df.sort_values("Data").reset_index(drop=True)  # Modifica
+# STEP 6: Assi Y
+fig.update_yaxes(title_text="Temperatura [°C]", secondary_y=False)
 
-# Modifica: verifica presenza colonna 'FasciaTemp' in Excel
-if "FasciaTemp" not in df.columns:
-    st.error("Nel file Excel manca la colonna 'FasciaTemp'. Aggiungila e ricarica la pagina.")
-else:
-    # Modifica: normalizzo le etichette per la mappatura colori (tolleranza trattino lungo, spazi, maiuscole)
-    def _norm(s):
-        return str(s).strip().lower().replace("–", "-").replace("—", "-")
-    df["_fascia_norm"] = df["FasciaTemp"].map(_norm)
+# Modifica: disattivo griglia e zeroline dell'asse destro (pioggia)
+#           così la griglia viene solo dall'asse sinistro ed è sempre "coerente"
+fig.update_yaxes(
+    title_text="Pioggia (mm)",
+    showgrid=False,            # Modifica: niente griglia sull'asse destro
+    zeroline=False,            # Modifica: niente "linea dello zero" a destra
+    secondary_y=True
+)
 
-    # Modifica: colori desiderati per le 3 fasce standard (fallback automatico per categorie extra)
-    import plotly.express as px
-    fixed_map = {
-        _norm("Freddo (<5°C)"): "#1f77b4",
-        _norm("Mite (5-20°C)"): "#ff7f0e",
-        _norm("Caldo (>20°C)"): "#d62728",
-    }
-    uniq = [v for v in df["_fascia_norm"].dropna().unique().tolist()]
-    palette = px.colors.qualitative.Set2 + px.colors.qualitative.Pastel
-    auto_map = {k: palette[i % len(palette)] for i, k in enumerate(uniq) if k not in fixed_map}
-    color_map = {**auto_map, **fixed_map}  # Modifica
+# Modifica: imposto una griglia leggera solo sull'asse sinistro (opzionale ma consigliato)
+fig.update_yaxes(
+    showgrid=True, gridcolor="rgba(0,0,0,0.08)", zeroline=False,  # Modifica
+    secondary_y=False
+)
 
-    # Modifica: linea base grigia
-    fig_line = px.line(df, x="Data", y="Temperatura", title="Temperatura giornaliera")
-    fig_line.update_traces(line=dict(color="#7f7f7f", width=2))
-    fig_line.update_xaxes(rangeslider_visible=True)
+# STEP 7: Mostro il grafico
+st.plotly_chart(fig, use_container_width=True)
 
-    # Modifica: marker colorati per fascia EXCEL (niente linee)
-    # -> una traccia per categoria, così ottieni la legenda pulita
-    import plotly.graph_objects as go
-    # recupero un'etichetta "umana" per ciascuna fascia normalizzata
-    label_by_norm = (df.dropna(subset=["_fascia_norm"])
-                       .groupby("_fascia_norm")["FasciaTemp"].first().to_dict())
-
-    for k in uniq:
-        g = df[df["_fascia_norm"] == k]
-        if g.empty:
-            continue
-        fig_line.add_trace(
-            go.Scatter(
-                x=g["Data"], y=g["Temperatura"],
-                mode="markers",
-                marker=dict(size=5, color=color_map.get(k, "#7f7f7f"), line=dict(width=0)),
-                name=label_by_norm.get(k, k)  # legenda usa il testo Excel
-            )
-        )
-
-    st.plotly_chart(fig_line, use_container_width=True)
-
-
-
-
-
+# Nota per il portfolio
+st.markdown("""
+**Perché qui è meglio di Excel**  
+- Grafico **con due assi Y** (sinistro e destro) non nativo in Excel.  
+- **Filtraggio automatico** dei soli giorni con pioggia (>0) per evitare punti inutili.
+- Manteniamo l'interattività: zoom, pan, slider temporale e tooltip.
+""")
 
 
 # 3) Polar bar: Pioggia totale per mese
