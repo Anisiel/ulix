@@ -31,10 +31,11 @@ st.title("📊 Grafici interattivi con Plotly utilizzando dati meteo inventati")
 
 st.markdown("""
 Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con workaround complicati tipo duplicare dati, formattazioni complesse, macro Vba),
-mettendo in evidenza l'**interattività** di Plotly. Nell'altra pagina [Grafici con Altair e Echarts](pages/2_Grafici_Altair_Echarts.py) riporto 2 grafici identici ma realizzati con altre librerie (Altair e Echarts).
+mettendo in evidenza l'**interattività** di Plotly. 
+Nell'altra pagina [Grafici con Altair e Echarts](pages/2_Grafici_Altair_Echarts.py) riporto 2 grafici identici ma realizzati con altre librerie (Altair e Echarts).
 
-Tutti grafici sono realizzati a partire da dati presenti su un file excel caricato in `repo/grafici_speciali.xlsx`. 
-            Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
+I grafici sono realizzati a partire dai dati di un file excel che è caricato in `repo/grafici_speciali.xlsx`. 
+Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
 """)
 
 # ======================================================
