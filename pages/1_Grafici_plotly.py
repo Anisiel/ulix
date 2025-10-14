@@ -1,4 +1,7 @@
-# ======================================================
+## pages/01_Grafici_plotly.py
+# ==================================
+# Prima pagina: tre grafici con la libreria Plotly
+#  ======================================================
 # STEP 0: IMPORT – cosa fanno
 # - streamlit as st: UI web reattiva per titoli, tabelle, grafici (API ref: https://docs.streamlit.io/develop/api-reference)  
 # - pandas as pd: gestione dati tabellari; read_excel per caricare xlsx (https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html) 
@@ -28,7 +31,7 @@ st.title("📊 Grafici interattivi con Plotly utilizzando dati meteo inventati")
 
 st.markdown("""
 Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con workaround complicati tipo duplicare dati, formattazioni complesse, macro Vba),
-mettendo in evidenza l'**interattività** di Plotly.
+mettendo in evidenza l'**interattività** di Plotly. Nell'altra pagina [Grafici con Altair e Echarts](pages/2_Grafici_Altair_Echarts.py) riporto 2 grafici identici ma realizzati con altre librerie (Altair e Echarts).
 
 Tutti grafici sono realizzati a partire da dati presenti su un file excel caricato in `repo/grafici_speciali.xlsx`. 
             Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
