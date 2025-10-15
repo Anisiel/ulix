@@ -111,10 +111,12 @@ st.markdown("---")
 st.markdown("### 🧭 Navigazione")
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.markdown("📊 [Grafici](pages/1_Grafici.py)")
+    st.markdown("📊 [Grafici avanzati con plotly](pages/1_Grafici_plotly.py)")
+    st.markdown("📈 [Grafici avanzati con Echarts](pages/2_Grafici_Altair_Echarts.py)")
+    st.markdown("📈 [Grafici avanzati con Altair](pages/3_Grafici_Altair_Meteo.py)")
 with col2:
-    st.markdown("📚 [Pubblicazioni](pages/2_Pubblicazioni.py)")
-    st.markdown("🎓 [Titoli & Certificazioni](pages/3_Titoli_Certificazioni.py)")
+    st.markdown("📚 [Pubblicazioni](pages/5_Pubblicazioni.py)")
+    st.markdown("🎓 [Titoli & Certificazioni](pages/6_Titoli_Certificazioni.py)")
 with col3:
     st.markdown("🖥️ [Programmini (in)utili](pages/4_Programmini.py)")
 
