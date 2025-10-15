@@ -5,11 +5,11 @@ REM =========================================================
 REM PULIZIA FILE VECCHI CON ALERT + LOG
 REM Cancella file più vecchi di N giorni (ricorsivo) e salva log.
 REM MODIFICA QUI:
-REM  - target = cartella da analizzare
+REM  - target = cartella da analizzare (ora è Downloads\cestino)
 REM  - days   = soglia in giorni
 REM  - log    = percorso file di log
 REM =========================================================
-set "target=C:\Users\ufabiani\Downloads\temp"
+set "target=C:\Users\ufabiani\Downloads\cestino"
 set "days=30"
 set "log=C:\Users\ufabiani\Downloads\temp\pulizia_log.txt"
 

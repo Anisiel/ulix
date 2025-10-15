@@ -28,6 +28,7 @@ st.markdown("""
     - Premi `Win + R`, digita `cmd` e premi Invio.
     - Usa `cd` per spostarti nella cartella dove hai salvato il file (es. `cd C:\\Users\\Nome\\Downloads`).
     - Lancia il file digitando il nome (es. `elenca_cartelle.bat`).
+- **Istruzioni per l'utilizzo dei singoli programmini:** Apri il file `.bat` con un editor di testo (es. Blocco Note) e leggi le istruzioni (all'interno di uno o più blocchi "REM").
 
 **🐍 Script Python (.py):**
 - Installa **Python**: [Scarica qui](👉 https://www.python.org/downloads/)
@@ -35,11 +36,13 @@ st.markdown("""
     ```bash
     pip install pymupdf
     ```
-- Apri il file .py,  modifica il percorso nel file (blocco `MODIFICA QUI`) e lancia uno dei due script:
+- Apri il file .py (puoi utlizzare anche blocco note),  modifica il percorso nel file (blocco `MODIFICA QUI`) e lancia uno dei due script:
     ```bash
+    python controlla_pdfs.py
     python controlla_pdfs_approfondito.py
     ```
 """)
+
 # =========================
 
 
@@ -178,6 +181,6 @@ for categoria in by_cat:
 
 st.markdown("---")
 st.caption(
-    "Suggerimenti: i .bat si eseguono con doppio clic o da `cmd`. Per lo script Python devi avere installato Python e le dipendenze (pymupdf) "
-    "e modifica il percorso di input nel file (blocco `MODIFICA QUI`)."
+    "Reminder rapido: gli script .bat si eseguono con doppio clic o da `cmd`. Per lo script Python devi avere installato Python e le dipendenze (pymupdf); "
+    "modifica il percorso di input nel file (blocco `MODIFICA QUI`)."
 )
