@@ -3,6 +3,12 @@ from pathlib import Path
 
 st.set_page_config(page_title="Pubblicazioni", page_icon="📚")
 st.title("Pubblicazioni")
+st.markdown(
+    """
+    In fondo alla pagina puoi scaricare l'elenco completo delle mie pubblicazioni oppure stampare la pagina.
+    """,
+    unsafe_allow_html=True
+)
 
 # Pulsante per il profilo generale
 ACADEMIA_URL = "https://independent.academia.edu/FabianiUlisse"
@@ -10,11 +16,32 @@ st.link_button("📚 Vai al mio profilo su Academia.edu", ACADEMIA_URL)
 
 st.divider()
 
-# Elenco con link diretti alle pubblicazioni
-st.markdown("Alcuni esempi di stile per linkare le pubblicazioni (con link esterni)")
+# Elenco con esempi di link diretti alle pubblicazioni
 st.markdown(
     """
-    - M. G. CRESPI, FABIANI U. [**Geomatic methodologies for referencing of archeological information. In Atlas of Ancient Rome. Biography and Portraits of the City a cura di A. Carandini**, The Atlas of Ancient Rome: Biography and Portraits of the City Princeton University Press, Princeton 2017.](https://www.academia.edu/3888891/Utilizzo_tecnologie_geomatiche_e_la_Forma_Urbis_un_nuovo_approccio). Atlante di Roma---> (https://atlasofancientrome.com/) <--- Esempio di link a pubblicazione esterna, grassetto il nome della pubblicazione, link al sito dell'atlante
+    Alcuni esempi di stile per linkare le pubblicazioni (con link esterni ed interni). 
+    Una breve spiegazione di come sono linkati i documenti si trova 'in coda' alla singola pubblicazione.
+            
+    - Possibili risorse per la formattazione del testo in Markdown:
+        - [Guida ufficiale di Markdown](https://www.markdownguide.org/)
+        - [Dillinger - Markdown Editor](https://dillinger.io/)
+        - [StackEdit - Markdown Editor](https://stackedit.io/)
+            """,
+    unsafe_allow_html=True
+)
+
+st.divider()
+
+st.markdown(
+    """
+    ## Elenco selezionato di pubblicazioni
+    """, 
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    - M. G. CRESPI, FABIANI U. [**Geomatic methodologies for referencing of archeological information. In Atlas of Ancient Rome. Biography and Portraits of the City a cura di A. Carandini**, The Atlas of Ancient Rome: Biography and Portraits of the City Princeton University Press, Princeton 2017.](https://www.academia.edu/144472794/Geomatic_methodologies_for_referencing_of_archeological_information_In_Atlas_of_Ancient_Rome_Biography_and_Portraits_of_the_City_a_cura_di_A_Carandini_The_Atlas_of_Ancient_Rome_Biography_and_Portraits_of_the_City_Princeton_University_Press_Princeton_2017). Atlante di Roma---> (https://atlasofancientrome.com/) <--- Esempio di link a pubblicazione esterna, grassetto il nome della pubblicazione, link al sito dell'atlante
     - P. CARAFA, M. G. CRESPI, M. T. D’ALESSIO, FABIANI U. [**L'utilizzo delle tecnologie geomatiche e la Forma Urbis: un nuovo approccio. In Bullettino della Commissione Archeologica Comunale di Roma, CXII 2011.**](https://www.academia.edu/5109115/Spatial_research_and_geomatic_resources_applied_to_the_archaeology_of_the_Farafra_Oasis) <--- Esempio di link a pubblicazione esterna, grassetto il nome della pubblicazione
     - **FABIANI U., G. LUCARINI** [Spatial research and geomatic resources applied to the archaeology of the Farafra Oasis(Western Desert, Egypt). In Rivista di Scienze Preistoriche, LX - 2010, 331-347, ISSN 0035-6514.](https://www.academia.edu/5109115/Spatial_research_and_geomatic_resources_applied_to_the_archaeology_of_the_Farafra_Oasis) <--- Esempio di link a pubblicazione esterna, grassetto i nomi degli autori
     - B. E. BARICH, M. G. CRESPI,   FABIANI U., G. LUCARINI. [Tecniche geomatiche applicate alla ricerca archeologica in ambienti desertici: il caso della Missione Archeologica Italiana nell'Oasi di Farafra (Egitto). 13º Conferenza ASITA (Federazione delle Associazioni Scientifiche per le Informazioni Territoriali e Ambientali). Bari (Italia), Dicembre 2009.)](/assets/Fabianietalii.pdf) <-- Esempio di link a file locale /assets/Fabianietalii.pdf 
@@ -54,3 +81,14 @@ if pubs_path.exists():
     )
 else:
     st.caption("Carica il file `assets/pubblicazioni.pdf` per attivare il download.")
+
+st.divider()
+
+st.markdown(
+    """
+    <button onclick="window.print()" style="padding:8px 16px; font-size:16px;">
+    🖨️ Stampa questa pagina
+    </button>
+    """,
+    unsafe_allow_html=True
+)
