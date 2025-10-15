@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 
 st.set_page_config(page_title="Organizzazione del sito", page_icon="📁")
 st.title("📁 Come è organizzato e costruito questo sito?")
@@ -18,7 +19,7 @@ Questo sito è stato progettato come portfolio interattivo e si compone delle se
 
 ### 📊 Dati e grafici
 - I grafici utilizzano dati contenuti nel file `grafici_speciali.xlsx` che si trova nella cartella `repo/` e riportano dati metereologici fittizi.
-
+            
 ### 💻 Codice sorgente
 - Il codice sorgente completo del sito è disponibile su GitHub:
     - [🔗 Github.com/Anisiel/ulix](https://github.com/Anisiel/ulix) 
@@ -26,12 +27,21 @@ Questo sito è stato progettato come portfolio interattivo e si compone delle se
     - [🔗 Streamlit.io](https://streamlit.io/)
     - Utilizza file statici (`.pdf`, `.xlsx`, `.py`) e stili personalizzati (`styles.css`).
 
-Se hai curiosità sul funzionamento interno o vuoi contribuire, visita il repository GitHub!
-""", unsafe_allow_html=True)
-
-# Mostra immagine illustrativa se presente
+""", unsafe_allow_html=True
+)
+st.divider()
+# Mostra immagine illustrativa sito
+st.markdown("### 📂 Struttura delle cartelle e dei file del sito")
 img_path = "assets/struttura_sito.png"
 if Path(img_path).exists():
-    st.image(img_path, caption="Struttura delle cartelle e dei file del sito", use_column_width=True)
+    st.image(img_path, caption="Struttura delle cartelle e dei file del sito",
+             width=400)
+    with open(img_path, "rb") as file:
+        st.download_button(
+            label="⬇️ Scarica immagine",
+            data=file,
+            file_name="struttura_sito.png",
+            mime="image/png"
+        )
 else:
     st.info("Puoi aggiungere un'immagine chiamata 'struttura_sito.png' nella cartella assets per visualizzare la struttura del sito.")
