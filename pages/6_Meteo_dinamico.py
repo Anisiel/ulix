@@ -20,11 +20,11 @@ file_path = "repo/Roma_weather.csv"
 # Carica il dataset
 df = pd.read_csv(file_path)
 
-# Estrai l'anno dalla colonna DATE
-df["YEAR"] = pd.to_datetime(df["DATE"], errors="coerce").dt.year
+# Estrai l'anno dalla colonna DATA
+df["YEAR"] = pd.to_datetime(df["DATA"], errors="coerce").dt.year
 
 # Variabili meteo disponibili
-variabili_meteo = ["TAVG", "TMAX", "TMIN", "PRCP"]
+variabili_meteo = ["TempMedia", "TempMAX", "TempMIN", "PRECIP"]
 
 # Filtri interattivi
 anni_disponibili = sorted(df["YEAR"].dropna().unique())
@@ -45,7 +45,7 @@ df_filtrato = df[(df["YEAR"] >= anno_inizio) & (df["YEAR"] <= anno_fine)]
 
 # Riorganizza i dati per Altair
 df_melted = df_filtrato.melt(
-    id_vars=["DATE"],
+    id_vars=["DATA"],
     value_vars=variabili_selezionate,
     var_name="Variabile",
     value_name="Valore"
@@ -54,7 +54,7 @@ df_melted.dropna(subset=["Valore"], inplace=True)
 
 # Grafico interattivo
 grafico = alt.Chart(df_melted).mark_line().encode(
-    x="DATE:T",
+    x="DATA:T",
     y="Valore:Q",
     color="Variabile:N"
 ).properties(
@@ -67,4 +67,4 @@ st.altair_chart(grafico, use_container_width=True)
 
 # Tabella dei dati filtrati
 with st.expander("📋 Visualizza dati tabellari"):
-    st.dataframe(df_filtrato[["DATE"] + variabili_selezionate].dropna())
+    st.dataframe(df_filtrato[["DATA"] + variabili_selezionate].dropna())
