@@ -37,14 +37,14 @@ if file_path.exists():
     st.dataframe(df_filtrato, use_container_width=True)
     
     # Mostra pubblicazioni in formato leggibile
-    st.markdown("### 📖 Elenco dettagliato")
+    st.markdown("# 📖 Elenco dettagliato")
     for _, row in df_filtrato.iterrows():
         st.markdown(f"""
         **{row['AUTORI']}**  
         *{row['TITOLO']}*  
         {row['ARTICOLO RIVISTA [AR] / ARTICOLO LIBRO [AL]']}  
         **Anno:** {row['ANNO']}  
-        🔗 Link  
+        🔗 [Link]({row['LINK']})
         ---
         """, unsafe_allow_html=True)
 else:
