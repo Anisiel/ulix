@@ -1,3 +1,12 @@
+REM =========================================================
+REM Qui la documentazione: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands
+REM risorse1: https://en.wikibooks.org/wiki/Windows_Batch_Scripting
+REM risorse2: https://www.robvanderwoude.com/batexamples.php
+REM risorse3: https://learn.openwaterfoundation.org/owf-learn-windows-shell/useful-batch-files/useful-batch-files/
+REM =========================================================
+
+
+
 @echo off
 setlocal
 
