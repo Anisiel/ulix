@@ -7,12 +7,12 @@ st.set_page_config(page_title="Excel - Progetti e VBA", page_icon="📊")
 st.title("📊 Progetti Excel & VBA")
 
 # ============================
-# Sezione: Progetto 1 - Database Excel
+# Sezione: Progetto 1 - Gestione F24 per crediti d'imposta  Excel
 # ============================
-with st.expander("🗂️ Progetto: Database Excel", expanded=True):
+with st.expander("🗂️ Progetto: Gestione F24 per crediti d'imposta Excel", expanded=True):
     st.markdown("""
     - 📅 Data: 15/03/2023  
-    - 📝 Descrizione: Creazione di un database Excel per la gestione di iscrizioni scolastiche, con fogli interconnessi, formule avanzate e protezione dati.  
+    - 📝 Descrizione: Creazione di una serie di query per la gestione **mensile** dei flussi F24 provenienti da Agenzia delle Entrate , con fogli interconnessi, formule avanzate, protezione dati.  
     - 🔗 [Visualizza progetto](assets/cert/Database_Iscrizioni.pdf)
     """)
 # ============================
@@ -35,3 +35,67 @@ st.markdown("""
 - 📊 **Trasformazioni**: pivot, raggruppamenti, colonne calcolate  
 - 🔗 [Esempio pratico](assets/cert/PowerQuery_Esempio.pdf)
             """)
+
+st.divider()
+
+def mostra_progetto(titolo, data, descrizione, tecnologie, link):
+    """
+    Visualizza un progetto.
+    Parametri:
+    - titolo: Titolo del progetto
+    - data: Data del progetto (stringa)
+    - descrizione: Descrizione del progetto (stringa)
+    - tecnologie: Lista di tecnologie utilizzate
+    - link: URL al documento o risorsa
+    """
+    with st.expander(f"🗂️ Progetto: {titolo}", expanded=True):
+        st.markdown(f"""
+        **📅 Data:** {data}  
+        **📝 Descrizione:**  
+        {descrizione}
+
+        **🛠️ Tecnologie utilizzate:**
+        """)
+        for tech in tecnologie:
+            st.markdown(f"- {tech}")
+
+        st.markdown(f"**🔗 Visualizza progetto**")
+
+
+mostra_progetto(
+    titolo="Gestione F24 per crediti d'imposta Excel",
+    data="15/06/2022 - in corso",
+    descrizione="Creazione di query per la gestione mensile dei flussi F24 da Agenzia delle Entrate, con fogli interconnessi, formule avanzate e protezione dati.",
+    tecnologie=["Excel avanzato", "Power Query", "Protezione con password"],
+    link="assets/cert/Database_Iscrizioni.pdf"
+    
+)
+
+with st.expander("📊 Descrizione del flusso operativo Gestione F24 per crediti d'imposta Excel", expanded=False):
+    st.markdown("""
+    #### 🎯 Premessa
+    Il Dipartimento provvede a finanziare crediti d’imposta per le imprese editrici.
+
+    ---
+    #### 🏁 1. Invio flussi all’Agenzia delle Entrate (AdE)
+    - Pubblicazione del decreto
+    - Generazione dei flussi da inviare ad AdE
+    - Programma in VBA per esportazione dati testuali secondo specifiche AdE
+    - Processo ripetuto nel tempo
+    - 🔗 Link al progetto VBA
+
+    ---
+    #### 📥 2. Ricezione flussi da AdE
+    - Cadenza mensile
+    - File testuali con crediti utilizzati
+    - Programma di decodifica e importazione automatica
+    - Directory separate per ogni tipo di credito
+
+    ---
+    #### 📊 3. Riepilogo e analisi con Power Query
+    - Aggiornamento automatico dei fogli di riepilogo
+    - Suddivisione per anno di concessione e utilizzo
+    - Visualizzazione aggregata delle imprese
+    """)
+
+st.image("assets/Flusso operativo gestione F24.png", caption="Flusso operativo gestione F24")
