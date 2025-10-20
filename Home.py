@@ -100,8 +100,10 @@ with col1:
 	st.markdown("📈 [Grafici avanzati con Altair](pages/3_Grafici_Altair_Meteo.py)", unsafe_allow_html=True)
 
 with col2:
-	st.markdown("🎓 [Titoli & Certificazioni](pages/6_Titoli_Certificazioni.py)", unsafe_allow_html=True)
+	st.markdown("🎓 [Titoli](pages/6_Titoli_Certificazioni.py)", unsafe_allow_html=True)
 	st.markdown("📚 [Pubblicazioni](pages/5_Pubblicazioni.py)", unsafe_allow_html=True)
+	st.markdown("📚 [Pubblicazioni](pages/5_Pubblicazioni.py)", unsafe_allow_html=True)
+
 	
 with col3:
 	st.markdown("💻 [Programmini (in)utili](pages/4_Programmini_(in)utili.py)", unsafe_allow_html=True)
