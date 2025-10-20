@@ -7,9 +7,9 @@ st.set_page_config(page_title="Titoli & Certificazioni", page_icon="🎓")
 st.title("🎓 Titoli & Certificazioni")
 
 # ============================
-# Sezione 1: Certificazioni ottenute
+# Sezione 1: Certificazioni recenti ottenute
 # ============================
-st.header("✅ Certificazioni ottenute")
+st.header("✅ Certificazioni **recenti** ottenute")
 
 # Layout a tre colonne per mostrare le certificazioni in modo ordinato
 col1, col2, col3 = st.columns(3)
