@@ -43,7 +43,7 @@ data = {
         "Laurea VO - Livello 7",
         "Triennale - livello 6",
         "Master I livello - Livello 7",
-        "Master I livello - Livello 7"
+        "Master I livello - Livello 7",
         "Esperto - Livello 6"
     ],
     "Badge": [
@@ -153,7 +153,7 @@ for titolo, data, file, emoji in zip(
     data["Titolo"],
     data["Data"],
     data["Badge"],
-    ["📘", "📕", "📗", "📒", "📙", 📘]
+    ["📘", "📕", "📗", "📒", "📙", "📘"]
 ):
     with st.expander(f"{emoji} {titolo}", expanded=False):
         st.markdown(f"""
