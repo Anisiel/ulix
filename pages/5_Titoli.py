@@ -25,16 +25,18 @@ data = {
         "Dottorato in Ingegneria delle Infrastrutture e dei Trasporti",
         "Laurea Vecchio Ordinamento in Lettere Classiche (indirizzo Topografico)",
         "Laurea Triennale in Scienze dei Servizi Giuridici in Informatica Giuridica",
-        "Master I livello in Sistemi Informativi Territoriali e Telerilevamento",
-        "Master I livello per insegnamento in istituti secondari"
+        "Master I livello in Sistemi Informativi Territoriali e Telerilevamento - 1650 ore",
+        "Master I livello per insegnamento in istituti secondari",
+        "Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore"
 
     ],
     "Data": [
         "20-02-2009",
         "12-07-2002",
-        "22/11/2004",
+        "22-11-2004",
         "05-07-2016",
-        "27-10-2022"
+        "27-10-2022",
+        "27-11-2014"
     ],
     "Nome e Livello europeo": [
         "Dottorato - Livello 8",
@@ -42,20 +44,23 @@ data = {
         "Triennale - livello 6",
         "Master I livello - Livello 7",
         "Master I livello - Livello 7"
+        "Esperto - Livello 6"
     ],
     "Badge": [
         "[PDF](assets/cert/dottorato_infrastrutture.pdf)",
         "[PDF](assets/cert/laurea_vecchio_ordinamento.pdf)",
         "[PDF](assets/cert/laurea_triennale.pdf)",
         "[PDF](assets/cert/master_sistemi_informativi.pdf)",
-        "[PDF](assets/cert/master_insegnamento.pdf)"
+        "[PDF](assets/cert/master_insegnamento.pdf)",
+        "[PDF](assets/cert/Esperto_Normativa.pdf)"
     ],
     "Tesi": [
         "[PDF](assets/cert/dottorato_infrastrutture_tesi.pdf)",
         "[PDF](assets/cert/laurea_vecchio_ordinamento_tesi.pdf)",
         "[PDF](assets/cert/laurea_triennale_tesi.pdf)",
         "[PDF](assets/cert/master_sistemi_informativi_tesi.pdf)",
-        "[PDF](assets/cert/master_insegnamento_tesi.pdf)"
+        "[PDF](assets/cert/master_insegnamento_tesi.pdf)",
+        "--"
     ]
 }
 
@@ -74,7 +79,8 @@ opzioni_titoli = [
     "📕 Laurea VO in Lettere Classiche (indirizzo Topografico)",
     "📗 Laurea Triennale in Scienze dei Servizi Giuridici (informatica giuridica)",
     "📒 Master I livello in Sistemi Informativi Territoriali e Telerilevamento",
-    "📙 Master I livello per insegnamento in istituti secondari"
+    "📙 Master I livello per insegnamento in istituti secondari",
+    "📘 Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore"
 ]
 
 scelta = st.selectbox("Scegli un titolo:", opzioni_titoli)
@@ -117,15 +123,26 @@ elif scelta == opzioni_titoli[3]:
         - 📄 [Visualizza tesi](assets/cert/master_sistemi_informativi_tesi.pdf)
         """)
 
-elif scelta == opzioni_titoli[3]:
-    with st.expander(opzioni_titoli[3], expanded=True):
+elif scelta == opzioni_titoli[4]:
+    with st.expander(opzioni_titoli[4], expanded=True):
                     
         st.markdown("""
         - Master I livello per insegnamento in istituti secondari 
-        - 📅 Data: 22-11-2004
+        - 📅 Data: 27-10-2022
         - 🔗 [Visualizza badge](assets/cert/master_insegnamento.pdf)
         - 📄 [Visualizza tesi](assets/cert/master_insegnamento_tesi.pdf)
         """)
+
+elif scelta == opzioni_titoli[5]:
+    with st.expander(opzioni_titoli[5], expanded=True):
+                    
+        st.markdown("""
+        - Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore 
+        - 📅 Data: 27-11-2014
+        - 🔗 [Visualizza badge](assets/cert/Esperto_Normativa.pdf)
+        - 📄 [Visualizza tesi](assets/cert/Esperto_Normativa_diploma.pdf)
+        """)
+
 st.divider()
 # ============================
 # Sezione dettagliata con expander
@@ -136,10 +153,13 @@ for titolo, data, file, emoji in zip(
     data["Titolo"],
     data["Data"],
     data["Badge"],
-    ["📘", "📕", "📗", "📒", "📙"]
+    ["📘", "📕", "📗", "📒", "📙", 📘]
 ):
     with st.expander(f"{emoji} {titolo}", expanded=False):
         st.markdown(f"""
         - 📅 Data: {data}  
         - 🔗 {file}
         """)
+
+
+        *Esperto nella Normativa e nella Contrattualistica del lavoro** - 27/11/2014 - [Visualizza cert.](assets/cert/Esperto_Normativa.pdf) - [Visualizza diploma](assets/cert/Esperto_Normativa_diploma.pdf)

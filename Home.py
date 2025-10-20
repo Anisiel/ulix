@@ -95,17 +95,28 @@ st.divider()
 col1, col2, col3 = st.columns(3)
 
 with col1:
-	st.markdown("📈 [Grafici avanzati con plotly](pages/1_Grafici_plotly.py)", unsafe_allow_html=True)
-	st.markdown("📈 [Grafici avanzati con Echarts](pages/2_Grafici_Altair_Echarts.py)", unsafe_allow_html=True)
-	st.markdown("📈 [Grafici avanzati con Altair](pages/3_Grafici_Altair_Meteo.py)", unsafe_allow_html=True)
+	st.markdown("### 📊 Grafici")
+	if st.button("📊 Grafici con Plotly"):
+		st.switch_page("pages/1_Grafici_plotly.py")
+	if st.button("🌐 Grafici con Echarts"):
+   		st.switch_page("pages/2_Grafici_Altair_Echarts.py")
+	if st.button("🌦️ Grafici Meteo con Altair"):
+   		st.switch_page("pages/3_Grafici_Altair_Meteo.py")
 
 with col2:
-	st.markdown("🎓 [Titoli](pages/6_Titoli_Certificazioni.py)", unsafe_allow_html=True)
-	st.markdown("📚 [Pubblicazioni](pages/5_Pubblicazioni.py)", unsafe_allow_html=True)
-	st.markdown("📚 [Pubblicazioni](pages/5_Pubblicazioni.py)", unsafe_allow_html=True)
+	st.markdown("### 🎓 Curriculum")
+	if st.button("🎓 Titoli di Studio"):
+   		st.switch_page("pages/5_Titoli.py")
+	if st.button("📜 Certificazioni"):
+		st.switch_page("pages/6_Certificazioni.py")
+	if st.button("📖 Pubblicazioni"):
+		st.switch_page("pages/7_Pubblicazioni.py")
 
-	
 with col3:
-	st.markdown("💻 [Programmini (in)utili](pages/4_Programmini_(in)utili.py)", unsafe_allow_html=True)
+	st.markdown("### 🧰 Utility & Excel")
+	if st.button("🧪 Programmini (in)utili"):
+		st.switch_page("pages/4_Programmini_(in)utili.py")
+	if st.button("📂 Excel & Progetti VBA"):
+		st.switch_page("pages/8_Excel_Progetti_VBA.py")
 
 st.divider()

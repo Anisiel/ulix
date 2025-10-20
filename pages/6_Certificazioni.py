@@ -48,7 +48,7 @@ st.header("🚀 Altri percorsi formativi")
 # Lista colorata e descrittiva delle competenze
 st.markdown("""
 - 🔵 **ECDL Full Standard Certificate** - 24/09/2016 - [Visualizza cert.](assets/cert/Ecdl_full.pdf) 
-- 🟢 **Esperto nella Normativa e nella Contrattualistica del lavoro** - 27/11/2014 - [Visualizza cert.](assets/cert/Esperto_Normativa.pdf) - [Visualizza diploma](assets/cert/Esperto_Normativa_diploma.pdf)
+- 🟢 **Percorso formativo docenti 600 ore 4 esami universitari** - 20/07/2022 - [Visualizza cert.](assets/cert/Esperto_NPercorsoformativodocenti600ore.pdf)
 - 🔴 **VBA** — Applicazioni evolute per Excel   
 - 🟣 **Python** — Applicazioni semplici per Analisi Dati
 - 🟡 **CMD e Power Shell** — Applicazioni semplici per Gestione PC
