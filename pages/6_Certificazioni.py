@@ -49,6 +49,13 @@ st.header("🚀 Altri percorsi formativi")
 st.markdown("""
 - 🔵 **ECDL Full Standard Certificate** - 24/09/2016 - [Visualizza cert.](assets/cert/Ecdl_full.pdf) 
 - 🟢 **Percorso formativo docenti 600 ore 4 esami universitari** - 20/07/2022 - [Visualizza cert.](assets/cert/Esperto_NPercorsoformativodocenti600ore.pdf)
+""")
+
+# ============================
+# Sezione 2: Autoformazione
+# ============================
+st.header("🚀 Autoformazione")
+st.markdown("""
 - 🔴 **VBA** — Applicazioni evolute per Excel   
 - 🟣 **Python** — Applicazioni semplici per Analisi Dati
 - 🟡 **CMD e Power Shell** — Applicazioni semplici per Gestione PC
