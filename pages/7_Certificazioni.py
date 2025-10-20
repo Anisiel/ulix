@@ -1,15 +1,15 @@
 import streamlit as st
 
 # Imposta la configurazione della pagina con titolo e icona
-st.set_page_config(page_title="Titoli & Certificazioni", page_icon="🎓")
+st.set_page_config(page_title="Certificazioni", page_icon="🎓")
 
 # Titolo principale della pagina
-st.title("🎓 Titoli & Certificazioni")
+st.title("🎓 Certificazioni")
 
 # ============================
 # Sezione 1: Certificazioni recenti ottenute
 # ============================
-st.header("✅ Certificazioni **recenti** ottenute")
+st.header("✅Certificazioni **recenti** ottenute")
 
 # Layout a tre colonne per mostrare le certificazioni in modo ordinato
 col1, col2, col3 = st.columns(3)
@@ -54,4 +54,7 @@ st.markdown("""
 - 🟡 **CMD e Power Shell** — Applicazioni semplici per Gestione PC
             🔜
 """)
+
+
+
 
