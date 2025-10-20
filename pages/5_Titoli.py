@@ -160,6 +160,3 @@ for titolo, data, file, emoji in zip(
         - 📅 Data: {data}  
         - 🔗 {file}
         """)
-
-
-        *Esperto nella Normativa e nella Contrattualistica del lavoro** - 27/11/2014 - [Visualizza cert.](assets/cert/Esperto_Normativa.pdf) - [Visualizza diploma](assets/cert/Esperto_Normativa_diploma.pdf)
