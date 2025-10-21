@@ -1,77 +1,65 @@
+
 import streamlit as st
 
 # Configurazione della pagina
 st.set_page_config(page_title="Excel - Progetti e VBA", page_icon="📊")
 
 # Titolo principale
-st.title("📊 Progetti Excel & VBA")
-
-# ============================
-# Sezione: Progetto 1 - Gestione F24 per crediti d'imposta  Excel
-# ============================
-with st.expander("🗂️ Progetto: Gestione F24 per crediti d'imposta Excel", expanded=True):
-    st.markdown("""
-    - 📅 Data: 15/03/2023  
-    - 📝 Descrizione: Creazione di una serie di query per la gestione **mensile** dei flussi F24 provenienti da Agenzia delle Entrate , con fogli interconnessi, formule avanzate, protezione dati.  
-    - 🔗 [Visualizza progetto](assets/cert/Database_Iscrizioni.pdf)
-    """)
-# ============================
-# Sezione: Progetto 2 - Automazione con VBA
-# ============================
-with st.expander("🤖 Progetto: Automazione con VBA", expanded=True):
-    st.markdown("""
-    - 📅 Data: 10/06/2024  
-    - 📝 Descrizione: Automazione di report mensili con macro VBA, generazione automatica di grafici e invio email con allegati.  
-    - 🔗 [Visualizza progetto](assets/cert/Report_VBA.pdf)
-    """)
-# ============================
-# Sezione: Competenze Power Query
-# ============================
-st.header("⚙️ Competenze Power Query")
-
+st.title("📊 Crediti d’imposta: gestione F24")
+st.header("✅Progetto con Excel, Power Query e VBA")
 st.markdown("""
-- 🔄 **Unione di tabelle** da fonti diverse (Excel, CSV, Web)  
-- 🧹 **Pulizia dati**: rimozione duplicati, gestione valori nulli  
-- 📊 **Trasformazioni**: pivot, raggruppamenti, colonne calcolate  
-- 🔗 [Esempio pratico](assets/cert/PowerQuery_Esempio.pdf)
-            """)
+In questa pagina presento un progetto ***reale e in corso*** per la gestione dei flussi F24 tra il Dipartimento per l'informazione e l'editoria (DIE) e l'Agenzia delle Entrate (AdE), utilizzando strumenti come Excel, Power Query e VBA per automatizzare l'esportazione e l'importazione dei dati relativi ai crediti d'imposta per le imprese editrici.
+""")
 
 st.divider()
+# ============================
+# Progetto principale
+# ============================
 
 def mostra_progetto(titolo, data, descrizione, tecnologie, link):
-    """
-    Visualizza un progetto.
-    Parametri:
-    - titolo: Titolo del progetto
-    - data: Data del progetto (stringa)
-    - descrizione: Descrizione del progetto (stringa)
-    - tecnologie: Lista di tecnologie utilizzate
-    - link: URL al documento o risorsa
-    """
     with st.expander(f"🗂️ Progetto: {titolo}", expanded=True):
         st.markdown(f"""
         **📅 Data:** {data}  
-        **📝 Descrizione:**  
-        {descrizione}
+        **📝 Descrizione:** {descrizione}
 
-        **🛠️ Tecnologie utilizzate:**
+        **🛠️ Tecnologie utilizzate:** 
         """)
         for tech in tecnologie:
             st.markdown(f"- {tech}")
 
-        st.markdown(f"**🔗 Visualizza progetto**")
-
+        st.markdown(f"🔗 {link}")
 
 mostra_progetto(
-    titolo="Gestione F24 per crediti d'imposta Excel",
+    titolo="Gestione F24 per crediti d’imposta con Excel, Power Query e VBA",
     data="15/06/2022 - in corso",
-    descrizione="Creazione di query per la gestione mensile dei flussi F24 da Agenzia delle Entrate, con fogli interconnessi, formule avanzate e protezione dati.",
-    tecnologie=["Excel avanzato", "Power Query", "Protezione con password"],
-    link="assets/cert/Database_Iscrizioni.pdf"
-    
+    descrizione="Progetto completo per la gestione dei flussi F24 tra Dipartimento e Agenzia delle Entrate, con strumenti Excel e VBA.",
+    tecnologie=["Excel avanzato", "Power Query", "VBA"],
+    link=("assets/EsportaCrediti/Esempio_report_progetto.pdf")
 )
 
-with st.expander("📊 Descrizione del flusso operativo Gestione F24 per crediti d'imposta Excel", expanded=False):
+# ============================
+# Sottoprogetti
+# ============================
+
+with st.expander("📤 Sottoprogetto: Esportazione crediti d’imposta", expanded=False):
+    st.markdown("""
+    - 📅 Data: 15/06/2022 - in corso  
+    - 📝 Mini software in VBA per esportare i dati secondo specifiche AdE  
+    - 🔗 assets/EsportaCrediti/Esempio_report_progetto.pdf
+    """)
+
+with st.expander("📥 Sottoprogetto: Importazione crediti d’imposta", expanded=False):
+    st.markdown("""
+    - 📅 Data: 15/06/2022 - in corso  
+    - 📝 Automazione per importare i flussi mensili da AdE e generare report  
+    - 🔗 assets/cert/Report_VBA.pdf
+    """)
+
+# ============================
+# Flusso operativo
+# ============================
+
+with st.expander("📊 Flusso operativo del progetto", expanded=False):
     st.markdown("""
     #### 🎯 Premessa
     Il Dipartimento provvede a finanziare crediti d’imposta per le imprese editrici.
@@ -81,10 +69,8 @@ with st.expander("📊 Descrizione del flusso operativo Gestione F24 per crediti
     - Pubblicazione del decreto
     - Generazione dei flussi da inviare ad AdE
     - Programma in VBA per esportazione dati testuali secondo specifiche AdE
-                with st.expander("📊 Esempio di istruzioni operative", expanded=False):
-                    st.image("assets/Esporta crediti.png", caption="istruzioni operative per l'esportazione dei crediti")
     - Processo ripetuto nel tempo
-    - 🔗 Link al progetto VBA
+    - 🔗 assets/EsportaCrediti/Esempio_report_progetto.pdf
 
     ---
     #### 📥 2. Ricezione flussi da AdE
@@ -100,4 +86,17 @@ with st.expander("📊 Descrizione del flusso operativo Gestione F24 per crediti
     - Visualizzazione aggregata delle imprese
     """)
 
-st.image("assets/Flusso operativo gestione F24.png", caption="Flusso operativo gestione F24")
+    st.image("assets/img/Flusso operativo gestione F24.png", caption="Flusso operativo gestione F24")
+
+# ============================
+# Competenze Power Query (opzionale: spostare in pagina separata)
+# ============================
+
+st.header("⚙️ Competenze Power Query")
+
+st.markdown("""
+- 🔄 **Unione di tabelle** da fonti diverse (Excel, CSV, Web)  
+- 🧹 **Pulizia dati**: rimozione duplicati, gestione valori nulli  
+- 📊 **Trasformazioni**: pivot, raggruppamenti, colonne calcolate  
+- 🔗 assets/cert/PowerQuery_Esempio.pdf
+""")

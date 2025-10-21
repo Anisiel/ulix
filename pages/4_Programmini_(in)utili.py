@@ -39,7 +39,6 @@ st.markdown("""
     ```bash
     vba LeggiTutteLeMacro
     ```
-
 **🐍 Script Python (.py):**
 - Installa **Python**: [Scarica qui](👉 https://www.python.org/downloads/)
 - Installa la dipendenza necessaria (pymupdf):
@@ -53,10 +52,9 @@ st.markdown("""
     ```
 """)
 
-
 # =========================
-
-
+#  FUNZIONI DI SUPPORTO
+# =========================
 # --- Percorso cartella assets (pagina si trova in pages/)
 ASSETS = Path(__file__).resolve().parents[1] / "assets"
 
@@ -184,7 +182,7 @@ for categoria in by_cat:
                     label="⬇️ Scarica",
                     data=data,
                     file_name=file_name,
-                    mime="text/plain" if p["lingua"] in ("bat", "python") else "application/octet-stream",
+                    mime="text/plain" if p["lingua"] in ("bat", "python", "VBA") else "application/octet-stream",
                     use_container_width=True
                 )
             except FileNotFoundError:
