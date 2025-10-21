@@ -1,0 +1,372 @@
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''ESPORTA CREDITO PUBBLICITA'''''''''''''''''''
+'''''''''''''''(caso particolare)''''''''''''''''''''''''''''
+'''''''''''''''''DUE MODULI''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+''''''''MODULO 1''''''''''
+
+Option Explicit
+Public annodiriferimentorecordditesta As String
+Public blStop As Boolean
+
+Sub pulsanteinzioprocedura()
+
+Dim xWs As Worksheet
+Dim xName As String
+    
+    xName = "istruzioni"
+    For Each xWs In Application.ActiveWorkbook.Worksheets
+        If xWs.Name <> xName Then
+            xWs.Visible = xlSheetHidden
+        End If
+    Next
+
+ThisWorkbook.Sheets("istruzioni").Activate
+    With ThisWorkbook.Sheets("istruzioni").Range("A1:A2").Interior
+        .ColorIndex = 0
+        .Pattern = xlSolid
+    End With
+
+ThisWorkbook.Sheets("record A da compilare").Visible = True
+ThisWorkbook.Sheets("record A da compilare").Activate
+ThisWorkbook.Sheets("record A da compilare").Range("a6:h6").ClearContents
+ThisWorkbook.Sheets("record A da compilare").Range("a6:h6").ClearContents
+
+End Sub
+
+Sub avvio()
+
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+Dim c As Range
+Dim rng As Range
+Dim risp As String
+Dim lastR As Integer
+Dim lastRR As Variant
+
+'''''''''''' record A da compilare inizio
+ThisWorkbook.Sheets("record A da compilare").Activate
+ThisWorkbook.Sheets("record A da compilare").Range("a6:h6").ClearContents
+'''''''''''' record A da compilare fine
+
+'''''''''''record C da compilare inizio
+ThisWorkbook.Sheets("record C da compilare").Activate
+lastR = ThisWorkbook.Sheets("record C da compilare").Cells(Rows.Count, "A").End(xlUp).Row
+lastRR = ThisWorkbook.Sheets("record C da compilare").Range("A4").CurrentRegion.Rows.Count
+Set rng = ThisWorkbook.Sheets("record C da compilare").Range("A4:I" & lastRR)
+rng.Clear
+Set rng = ThisWorkbook.Sheets("record C da compilare").Range("A4", Range("I4").End(xlDown)) ' selezioni tutte le righe fino all'ultima in basso
+rng.NumberFormat = "@"
+'''''''''''record C da compilare fine
+
+''''''''''''''''''' record C finale inzia
+ThisWorkbook.Sheets("record C finale").Activate
+lastR = ThisWorkbook.Sheets("record C finale").Cells(Rows.Count, "A").End(xlUp).Row
+Set rng = ThisWorkbook.Sheets("record C finale").Range("A1:I" & lastR)
+rng.Clear
+
+Set rng = ThisWorkbook.Sheets("record C finale").Range("A1")
+rng.FormulaLocal = "=SE('record C da compilare'!A4="""";"""";MAIUSC('record C da compilare'!A4))"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("b1")
+rng.FormulaLocal = "=SE('record C da compilare'!B4="""";"""";MAIUSC('record C da compilare'!B4))"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("c1")
+rng.FormulaLocal = "=SE('record C da compilare'!C4="""";"""";MAIUSC('record C da compilare'!C4))"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("d1")
+rng.FormulaLocal = "=SE('record C da compilare'!D4="""";"""";TESTO('record C da compilare'!D4;""aaaa-mm-gg""))"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("e1")
+rng.FormulaLocal = "=SE('record C da compilare'!E4="""";"""";TESTO('record C da compilare'!D4;""aaaa-mm-gg""))"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("f1")
+rng.FormulaLocal = "=SE('record C da compilare'!F4="""";"""";TESTO('record C da compilare'!F4;""0"")*1)"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("g1")
+rng.FormulaLocal = "=SE('record C da compilare'!G4="""";"""";TESTO('record C da compilare'!G4*100;""000000000000000""))"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("h1")
+rng.FormulaLocal = "=SE('record C da compilare'!H4="""";"""";MAIUSC('record C da compilare'!H4))"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("i1")
+rng.FormulaLocal = "=SE('record C da compilare'!I4="""";"""";MAIUSC('record C da compilare'!I4))"
+Set rng = ThisWorkbook.Sheets("record C finale").Range("a1:i1")
+
+rng.SpecialCells(xlCellTypeFormulas).Copy
+Set c = ThisWorkbook.Sheets("record C finale").Range("A2:I100")
+c.PasteSpecial '(xlPasteAll)
+c.Interior.Color = RGB(200, 160, 35)
+''''''''''''''''''' record C finale fine
+
+''''''''''' file da inviare inizio
+ThisWorkbook.Sheets("file da inviare").Activate
+
+Set rng = ThisWorkbook.Sheets("file da inviare").Range("A:A")
+rng.Clear
+
+
+Set rng = ThisWorkbook.Sheets("file da inviare").Range("A1")
+rng.FormulaLocal = "=CONCATENA('record A finale'!A1;'record A finale'!B1;'record A finale'!C1;'record A finale'!D1;'record A finale'!E1;'record A finale'!F1;'record A finale'!G1;'record A finale'!H1)"
+Set rng = ThisWorkbook.Sheets("file da inviare").Range("A2")
+rng.FormulaLocal = "=CONCATENA('record C finale'!A1;'record C finale'!B1;'record C finale'!C1;'record C finale'!D1;'record C finale'!E1;'record C finale'!F1;'record C finale'!G1;'record C finale'!H1;'record C finale'!I1)"
+Set rng = ThisWorkbook.Sheets("file da inviare").Range("A3")
+rng.FormulaLocal = "=SE('record C finale'!A2="""";CONCATENA('record Z finale'!$A$1;'record Z finale'!$B$1;'record Z finale'!$C$1;'record Z finale'!$D$1;'record Z finale'!$E$1;'record Z finale'!$F$1;'record Z finale'!$G$1;'record Z finale'!$H$1;'record Z finale'!$I$1);CONCATENA('record C finale'!A2;'record C finale'!B2;'record C finale'!C2;'record C finale'!D2;'record C finale'!E2;'record C finale'!F2;'record C finale'!G2;'record C finale'!H2;'record C finale'!I2))"
+Set rng = ThisWorkbook.Sheets("file da inviare").Range("A4:A1000") ' con questo comando prende fino alla 1000 righe
+rng.FormulaLocal = "=SE(O(A3 = """";SINISTRA(A3;1) = ""9"");"""";SE('record C finale'!A3="""";CONCATENA('record Z finale'!$A$1;'record Z finale'!$B$1;'record Z finale'!$C$1;'record Z finale'!$D$1;'record Z finale'!$E$1;'record Z finale'!$F$1;'record Z finale'!$G$1;'record Z finale'!$H$1;'record Z finale'!$I$1);CONCATENA('record C finale'!A3;'record C finale'!B3;'record C finale'!C3;'record C finale'!D3;'record C finale'!E3;'record C finale'!F3;'record C finale'!G3;'record C finale'!H3;'record C finale'!I3)))"
+
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+
+Call compilafile
+
+If blStop Then
+    Exit Sub
+Else
+    Call inseriscicof(annodiriferimentorecordditesta)
+End If
+
+End Sub
+
+Sub compilafile()
+Dim wb As Workbook
+Dim ws As Worksheets
+Dim annodiriferimento As String
+Dim progressivo As String
+Dim progressivo2 As String
+Dim data As String
+Dim messaggio As String
+Dim lunghezzaprogressivo As Integer
+Dim risposta As String
+Dim risp2 As String
+Dim rispinputbox As String
+
+ThisWorkbook.Sheets("record A da compilare").Activate
+
+messaggio = "Con una serie di passaggi verrà completato il file per l'esportazione DIEADE. Si vuole proseguire?"
+risposta = MsgBox(messaggio, vbYesNo)
+If risposta = vbNo Then
+    blStop = True
+    Exit Sub
+End If
+
+Set wb = ThisWorkbook
+
+With wb.Sheets("record A da compilare")
+    Range("A6").Select
+    ActiveCell.NumberFormat = "@"
+    ActiveCell.FormulaR1C1 = "0"
+    Range("B6").Select
+    ActiveCell.NumberFormat = "@"
+    ActiveCell.FormulaR1C1 = "80188230587     "
+    Range("C6").Select
+    ActiveCell.NumberFormat = "@"
+    ActiveCell.FormulaR1C1 = "DIEADE    "
+    
+    Range("D6").Select
+    ActiveCell.NumberFormat = "@"
+    Range("D6") = Format(Date, "yyyy")
+    
+    Range("E6").Select
+    Range("E6") = ActiveCell.NumberFormat = "@"
+    
+    Range("f6").NumberFormat = "@"
+    Range("f6") = Format(Date, "yyyymmdd")
+    
+    Range("g6").NumberFormat = "@"
+    Range("g6") = "                        "
+    Range("H6").NumberFormat = "@"
+    Range("H6") = "A"
+    
+inseriscidata:
+    annodiriferimento = Application.InputBox("inserisci l'anno di riferimento delle comunicazioni in formato AAAA", , "2022")
+        If annodiriferimento = False Then
+            MsgBox "Procedura annullata."
+            blStop = True
+            Exit Sub
+        End If
+        If Len(annodiriferimento) <> 4 Then
+            MsgBox "Formato anno errato errato. Riprova ad inserire una data in formato corretto."
+            GoTo inseriscidata
+        ElseIf annodiriferimento > 2022 Then
+            MsgBox "Formato anno errato errato. Riprova ad inserire una data in formato corretto."
+            GoTo inseriscidata
+        Else
+            Range("D6") = annodiriferimento
+            annodiriferimentorecordditesta = annodiriferimento
+        End If
+    
+    progressivo = Application.InputBox("inserisci il numero progressivo del file creato nella stessa data (da 1 a 999999)", , "1")
+        If progressivo = False Then
+            MsgBox "Procedura annullata."
+            blStop = True
+            Exit Sub
+        End If
+    
+    lunghezzaprogressivo = Len(progressivo)
+        Select Case lunghezzaprogressivo
+        Case Is = 1
+        progressivo = Application.WorksheetFunction.Concat("00000", progressivo)
+        Case Is = 2
+        progressivo = Application.WorksheetFunction.Concat("0000", progressivo)
+        Case Is = 3
+        progressivo = Application.WorksheetFunction.Concat("000", progressivo)
+        Case Is = 4
+        progressivo = Application.WorksheetFunction.Concat("00", progressivo)
+        Case Is = 5
+        progressivo = Application.WorksheetFunction.Concat("0", progressivo)
+        End Select
+    
+    Range("E6") = progressivo
+End With
+
+risp2 = MsgBox("Completata la riga di testa. Vuoi proseguire con l'inserimento dei dati delle imprese?", vbYesNo)
+    If risp2 = vbNo Then
+        blStop = True
+        Exit Sub
+    Else
+        blStop = False
+    End If
+End Sub
+
+'''''''''''''''''''''MODULO 2
+
+Option Explicit
+
+Sub inseriscicof(annodiriferimentorecordditesta As String)
+
+Dim tabella As ListObject
+Dim righe As ListRow
+Dim tuttelerighe As Integer
+Dim lastRTabella As Integer
+Dim spazi As String
+Dim lastR As Integer
+Dim colonnaA As Range
+Dim colonnaB As Range
+Dim colonnaF As Range
+Dim colonnaG As Range
+Dim colonnaH As Range
+Dim colonnaI As Range
+Dim cella As Range
+Dim ncodicifiscali As Integer
+Dim novariga As ListRow
+Dim formatocolonnaB As String
+Dim xx As Range
+Dim xxxx As Byte
+Dim d As String
+Dim colonneDE As Range
+Dim tiporecord As String
+Dim caratteredifinerecord As String
+Dim codicefiscale As String
+Dim controllocodicefiscalecolonnaC As Range
+Dim x As Range
+Dim lunghezzacodicefiscale As String
+Dim dd As Date
+Dim oggi As Date
+Dim ddd As Date
+Dim rang As Range
+Dim cc As Range
+Dim maschera As UserForm
+
+ThisWorkbook.Sheets("record C da compilare").Activate
+lastR = ThisWorkbook.Sheets("record C da compilare").Cells(Rows.Count, "B").End(xlUp).Row
+
+ncodicifiscali = Application.InputBox(Prompt:="quanti codici fiscali vuoi aggiungere?", Type:=1)
+    If ncodicifiscali = False Then
+        blStop = True
+        Exit Sub
+    End If
+
+For xxxx = 1 To ncodicifiscali
+inseriscicf:
+    MsgBox "inserisci il codice fiscale " & xxxx & " di " & ncodicifiscali
+    
+    Application.ScreenUpdating = True
+    Application.DisplayAlerts = True
+    
+    Load UserForm2
+        UserForm2.Show
+      
+    Dim uiresult As String
+    uiresult = UserForm2.valorecodicefiscale("scegli un codice fiscale", Default:="codice fiscale")
+        If uiresult = vbNullString Then
+            MsgBox "Procedura annullata."
+            Exit Sub
+        Else
+            MsgBox "hai inserito questo codice fiscale: " & uiresult
+        End If
+    codicefiscale = uiresult
+    
+    Application.ScreenUpdating = False
+    Application.DisplayAlerts = False
+    
+    If Len(codicefiscale) = 11 Or Len(codicefiscale) = 16 Then
+        lunghezzacodicefiscale = Len(codicefiscale)
+            Select Case lunghezzacodicefiscale
+            Case Is = 11
+            codicefiscale = codicefiscale & "     "
+            End Select
+    Else
+        MsgBox "il codice fiscale inserito ha un numero di caratteri diverso da 11 o 16. Verifica"
+    GoTo inseriscicf
+    End If
+
+    ThisWorkbook.Sheets("record C da compilare").Activate
+    Set x = ThisWorkbook.Sheets("record C da compilare").Cells(Rows.Count, "c").End(xlUp).Offset(1)
+    x.Activate
+    x = codicefiscale
+Next xxxx
+    
+lastR = ThisWorkbook.Sheets("record C da compilare").Cells(Rows.Count, "C").End(xlUp).Row
+    
+MsgBox "Bene. Passiamo ad inserire gli altri dati"
+    
+Set colonnaA = ThisWorkbook.Sheets("record C da compilare").Range("A4:A" & lastR)
+    colonnaA = "V"
+Set colonnaB = ThisWorkbook.Sheets("record C da compilare").Range("b4:b" & lastR)
+    colonnaB = annodiriferimentorecordditesta
+    
+    MsgBox "si tratta di uno sblocco?", vbOKCancel
+    
+Set colonnaF = ThisWorkbook.Sheets("record C da compilare").Range("F4:F" & lastR)
+Set colonnaG = ThisWorkbook.Sheets("record C da compilare").Range("G4:G" & lastR)
+    If vbOKCancel = 1 Then
+        colonnaF = "0"
+        colonnaG = "000000000000000"
+    Else
+        MsgBox ("Il programma è realizzato solo per gli sblocchi. Procedura annullata")
+        Exit Sub
+    End If
+    
+Set colonnaH = ThisWorkbook.Sheets("record C da compilare").Range("H4:H" & lastR)
+    colonnaH = "            "
+Set colonnaI = ThisWorkbook.Sheets("record C da compilare").Range("I4:I" & lastR)
+    colonnaI = "A"
+Set colonneDE = ThisWorkbook.Sheets("record C da compilare").Range("D4:E" & lastR)
+    colonneDE.NumberFormat = "@"
+
+Dim sdate As String
+inseriscisecondadata:
+    dd = Application.InputBox(Prompt:="inserisci il giorno di invio della comunicazione, scrivendo la data per esteso (30 luglio 2022) o nel formato gg/mm/anno", Default:=Format(Date, "dd/mm/yyyy"), Type:=1)
+    oggi = Date
+        If dd = False Then
+            MsgBox ("Procedura annullata.")
+            Exit Sub
+        End If
+        If dd > oggi Then
+            MsgBox "devi inserire una data uguale o minore della data odierna"
+            GoTo inseriscisecondadata
+        Else
+            sdate = Format(dd, "yyyy-mm-dd")
+            colonneDE = sdate
+        End If
+
+MsgBox "inserimenti andati a buon fine. Puoi verificarli nel foglio file da inviare. Se è tutto in ordine clicca sul pulsante per creare il file di testo"
+
+  ThisWorkbook.Sheets("file da inviare").Visible = True
+  ThisWorkbook.Sheets("file da inviare").Activate
+End Sub
+
+Sub definisceladata()
+Dim d As Date
+Dim sdate As String
+
+d = Application.InputBox(Prompt:="inserisci il giorno di invio della comunicazione, scrivendo la data per esteso (30 luglio 2022)", Type:=1)
+sdate = Format(d, "yyyy-mm-dd")
+
+End Sub
+
