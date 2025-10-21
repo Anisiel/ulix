@@ -18,9 +18,9 @@ st.markdown(
 
 # Galleria immagini in griglia centrale
 IMMAGINI = [
-    {"src": "assets/hero.jpg",  "note": "Mocking Face"},
-    {"src": "assets/hero2.jpg", "note": "Le Discret"},
-    {"src": "assets/hero3.jpg", "note": "San Govanni Battista"},
+    {"src": "assets/img/hero.jpg",  "note": "Mocking Face"},
+    {"src": "assets/img/hero2.jpg", "note": "Le Discret"},
+    {"src": "assets/img/hero3.jpg", "note": "San Govanni Battista"},
 ]
 
 def render_gallery(items):

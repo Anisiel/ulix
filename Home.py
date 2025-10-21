@@ -30,9 +30,9 @@ GRID_COLS   = 3           # quante immagini per riga
 # Elenco immagini (aggiungerne/rimuoverne senza rompere nulla).
 # "note" è una riga opzionale: se stringa vuota, NON viene mostrata.
 IMMAGINI = [
-	{"src": "assets/hero.jpg",  "note": "Mocking Face"},
-	{"src": "assets/hero2.jpg", "note": "Le Discret"},
-	{"src": "assets/hero3.jpg", "note": "San Govanni Battista"},
+	{"src": "assets/img/hero.jpg",  "note": "Mocking Face"},
+	{"src": "assets/img/hero2.jpg", "note": "Le Discret"},
+	{"src": "assets/img/hero3.jpg", "note": "San Govanni Battista"},
 ]
 
 # helper minimal per visualizzare le immagini come francobolli
@@ -99,14 +99,14 @@ with col1:
 	if st.button("📊 Grafici con Plotly"):
 		st.switch_page("pages/1_Grafici_plotly.py")
 	if st.button("🌐 Grafici con Echarts"):
-   		st.switch_page("pages/2_Grafici_Altair_Echarts.py")
+		st.switch_page("pages/2_Grafici_Altair_Echarts.py")
 	if st.button("🌦️ Grafici Meteo con Altair"):
    		st.switch_page("pages/3_Grafici_Altair_Meteo.py")
-
+		   
 with col2:
 	st.markdown("### 🎓 Curriculum")
 	if st.button("🎓 Titoli di Studio"):
-   		st.switch_page("pages/5_Titoli.py")
+		st.switch_page("pages/5_Titoli.py")
 	if st.button("📜 Certificazioni"):
 		st.switch_page("pages/6_Certificazioni.py")
 	if st.button("📖 Pubblicazioni"):

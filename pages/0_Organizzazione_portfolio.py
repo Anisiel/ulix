@@ -32,7 +32,7 @@ Questo sito è stato progettato come portfolio interattivo e si compone delle se
 st.divider()
 # Mostra immagine illustrativa sito
 st.markdown("### 📂 Struttura delle cartelle e dei file del sito")
-img_path = "assets/struttura_sito.png"
+img_path = "assets/img/struttura_sito.png"
 if Path(img_path).exists():
     st.image(img_path, caption="Struttura delle cartelle e dei file del sito",
              width=400)
