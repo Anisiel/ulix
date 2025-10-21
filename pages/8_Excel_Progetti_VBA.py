@@ -81,13 +81,15 @@ with st.expander("📊 Descrizione del flusso operativo Gestione F24 per crediti
     - Pubblicazione del decreto
     - Generazione dei flussi da inviare ad AdE
     - Programma in VBA per esportazione dati testuali secondo specifiche AdE
+                with st.expander("📊 Esempio di istruzioni operative", expanded=False):
+                    st.image("assets/Esporta crediti.png", caption="istruzioni operative per l'esportazione dei crediti")
     - Processo ripetuto nel tempo
     - 🔗 Link al progetto VBA
 
     ---
     #### 📥 2. Ricezione flussi da AdE
     - Cadenza mensile
-    - File testuali con crediti utilizzati
+    - File testuali con crediti utilizzati 
     - Programma di decodifica e importazione automatica
     - Directory separate per ogni tipo di credito
 

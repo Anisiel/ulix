@@ -11,7 +11,7 @@ Una raccolta di programmini (in)utili che ho scritto nel tempo, per esigenze d'u
 - Programmini **🖥️ .bat** per il Prompt dei comandi di Windows (cmd.exe).  
   Si possono eseguire da `cmd` oppure con doppio clic (da cmd si leggono i messaggi (consigliato). Con il doppio click no (sarebbe necessario inserire `pause` nel codice)).
 
-  - Uno script **🐍 Python (.py)** per il controllo di integrità dei file PDF, in versione base e avanzata (richiede Python + dipendenze).
+  - Uno script **💾 VBA** per esportare in un solo file **tutto** il codice sorgente di un progetto ed uno script **🐍 Python (.py)** per il controllo di integrità dei file PDF, in versione base e avanzata (richiede Python + dipendenze).
     """,
     unsafe_allow_html=True
 )
@@ -30,6 +30,16 @@ st.markdown("""
     - Lancia il file digitando il nome (es. `elenca_cartelle.bat`).
 - **Istruzioni per l'utilizzo dei singoli programmini:** Apri il file `.bat` con un editor di testo (es. Blocco Note) e leggi le istruzioni (all'interno di uno o più blocchi "REM").
 
+**💾 Script Vba (da usare all'interno di Word, Excel...):**
+- Apri l'editor VBA (`Alt + F11`), crea un nuovo modulo e incolla il codice al suo interno.
+- Ricorda di installare la libreria Microsoft Visual Basic For Applications Extensibility xx (dove xx è la versione, es. 5.3) da Strumenti → Riferimenti.
+- Errori possibili: all'avvio potresti ricevere un messaggio di errore 1004 (Accesso negato).
+    - Per risolvere, vai in Opzioni di Word/Excel → Centro protezione → Impostazioni Centro protezione → Impostazioni macro → seleziona "Attiva tutte le macro" e "Considera attendibili l'accesso al modello a oggetti del progetto VBA".
+- Apri il file .txt (puoi utlizzare anche blocco note),  copia e incolla il codice in un modulo VBA e lancia lo script (F5)
+    ```bash
+    vba LeggiTutteLeMacro
+    ```
+
 **🐍 Script Python (.py):**
 - Installa **Python**: [Scarica qui](👉 https://www.python.org/downloads/)
 - Installa la dipendenza necessaria (pymupdf):
@@ -42,6 +52,7 @@ st.markdown("""
     python controlla_pdfs_approfondito.py
     ```
 """)
+
 
 # =========================
 
@@ -125,16 +136,23 @@ PROGRAMS = [
         "lingua": "bat"
     },
     {
+        "categoria": "💾 Copia e Incollla tutte le macro (VBA)",
+        "titolo": "Copia tutte le macro VBA in un unico file di testo",
+        "file_rel": "python_vba/LeggiTutteLeMacro.txt",
+        "descr": "Copia tutte le macro VBA in un unico file di testo. Report su file .txt.",
+        "lingua": "VBA"
+    },
+    {
         "categoria": "📄 PDF Tools base (Python)",
         "titolo": "Controlla PDF non leggibili (PyMuPDF), controllo base",
-        "file_rel": "python/controlla_pdfs.py",
+        "file_rel": "python_vba/controlla_pdfs.py",
         "descr": "Controlla se i PDF si aprono o meno. Report su file .txt.",
         "lingua": "python"
     },
         {
         "categoria": "📄 PDF Tools avanzato (Python)",
         "titolo": "Controlla PDF non leggibili (PyMuPDF), controllo approfondito",
-        "file_rel": "python/controlla_pdfs_approfondito.py",
+        "file_rel": "python_vba/controlla_pdfs_approfondito.py",
         "descr": "Controlla: PDF cifrati (password vuota), 0 pagine, caricamento 1ª pagina. Report su file .txt.",
         "lingua": "python"
     },

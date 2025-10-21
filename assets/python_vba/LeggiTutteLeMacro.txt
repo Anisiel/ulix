@@ -1,0 +1,82 @@
+
+'########################################
+Sub LeggiTutteLeMacro()
+' Attivare Strumenti > Riferimenti: _
+  Microsoft Visual Basic For Applications Extensibility xx
+' NOTA: il numero di righe non è gestito e dipende dalla versione di excel
+' ESEGUIRE SU UN FOGLIO VUOTO
+'########################################
+    Dim VBProj As VBIDE.VBProject
+    Dim VBComp As VBIDE.VBComponent
+    Dim CodeMod As VBIDE.CodeModule
+    Dim r As Long
+    Dim righe As Double, i As Double
+   
+    Set VBProj = ActiveWorkbook.VBProject
+   
+    'crea nuovo foglio, ed è attivo
+    Sheets.Add(, Sheets(Sheets.Count)).Name = "Appoggio"
+   
+    r = 1
+    For Each VBComp In VBProj.VBComponents
+        Set CodeMod = VBComp.CodeModule
+        righe = CodeMod.CountOfLines
+        If righe > 0 Then
+            Cells(r, 1) = ">>>>>>>>> " & CodeMod.Name
+            Cells(r, 1).Font.Bold = True
+            r = r + 1
+            For i = 1 To righe
+                Cells(r, 1) = CodeMod.Lines(i, 1)
+                r = r + 1
+            Next i
+        End If
+        r = Range("A" & Rows.Count).End(xlUp).Row + 2
+    Next
+   
+    MsgBox "Righe processate " & r - 2
+   
+    Set VBProj = Nothing
+    Set VBComp = Nothing
+    Set CodeMod = Nothing
+   
+    Application.DisplayAlerts = False
+   
+    Call ExportRangetoFile          '====>>>>
+   
+    ActiveWindow.SelectedSheets.Delete
+   
+    Application.DisplayAlerts = True
+End Sub
+
+
+'########################################
+Sub ExportRangetoFile()
+'########################################
+    Dim wb As Workbook
+    Dim WorkRng As Range
+   
+    Dim Percorso As String
+    Dim Nome As String
+   
+    Nome = ActiveWorkbook.Name
+    Nome = Left(Nome, Len(Nome) - 5)
+    Percorso = ThisWorkbook.path & "\"
+   
+    On Error Resume Next
+ 
+    Set WorkRng = Range("$A:$A")
+   
+    Application.ScreenUpdating = False
+   
+    Set wb = Application.Workbooks.Add
+    WorkRng.Copy
+    wb.Worksheets(1).Paste
+   
+    wb.SaveAs Filename:=Percorso & "CodVBA-" & Nome, FileFormat:=xlText, CreateBackup:=False
+    wb.Close
+   
+    Set wb = Nothing
+    Application.CutCopyMode = False
+    Application.ScreenUpdating = True
+End Sub
+
