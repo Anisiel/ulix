@@ -1,0 +1,2762 @@
+'''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''IMPORTA E COPIA FILE PER GESTIONE F24'''''''''''
+''''''''''8 MODULI'''''''''''''''''''''''''''''''''''
+''''''''2760 righe di codice'''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+>>>>>>>>> Questa_cartella_di_lavoro
+Private Sub Workbook_Open()
+Call CancellaFoglisuapertura
+Call puliscireportsuapertura
+ThisWorkbook.Windows(1).Visible = True
+End Sub
+
+>>>>>>>>> Modulo1
+Option Explicit
+Public booleano As Boolean
+
+
+ richiama delle routines presenti nel modulo 2
+Sub avvia1()
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+Application.EnableEvents = False
+Application.Visible = False
+booleano = False
+Call ImportaF24
+If booleano = True Then
+Application.Visible = True
+Exit Sub
+End If
+Call Fogli
+Call CreaFogli
+
+
+End Sub
+
+>>>>>>>>> Modulo2
+In questo modulo si trovano le routine
+ ImportaF24 e funzioni figlie Controllo e AnnoMese
+ Fogli con la sub figlia CalcolaTotaleCrediti
+" CreaFogli con le sub figlie Calcola, ColoreCella, Riordina"
+
+Sub ImportaF24()
+
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+Application.Visible = False
+ThisWorkbook.Windows(1).Visible = False
+
+Dim FullFileName As String
+Dim FullFileName2 As String
+Dim nomedelfoglio As String
+Dim nomedelfile As String
+Dim numerorighe As Integer
+Dim UltimaRiga As Integer
+Dim Numerorighe2 As String
+Dim AnnoeMese As String
+Dim ApriDefault As String
+
+On Error GoTo ERRORE1
+
+"If Sheets(""Foglio1"").Range(""A4"").Value = ""Quadro di sintesi"" Or Sheets(""Foglio1"").Range(""A5"").Value = ""Numero complessivo dei record importati"" _"
+"Or Sheets(""Foglio1"").Range(""B4"").Value = ""Numero"" Or Sheets(""Foglio1"").Range(""C4"").Value = ""Note"" Then"
+"MsgBox ""Un report risulta gi  essere compilato. Cancella con la funzione apposita il report presente e poi prosegui con l'importazione del file."""
+booleano = True
+Exit Sub
+End If
+
+
+"ApriDefault = ""C:\F24DaImportare\file f24 import DIEF24"""
+
+With Application.FileDialog(msoFileDialogFilePicker)
+    .AllowMultiSelect = False
+    .Filters.Clear
+"    .Filters.Add ""CSV"", ""*.csv"""
+"    .Filters.Add ""All files"", ""*.*"""
+"    .Filters.Add ""text"", ""*.txt"", 1"
+    .InitialFileName = ApriDefault
+    .Show
+    If .SelectedItems.Count = 0 Then
+"        MsgBox (""Nessun File selezionato, procedura annullata"")"
+        booleano = True
+        Exit Sub
+    End If
+    FullFileName = .SelectedItems(1)
+    nomedelfoglio = ActiveSheet.Name
+End With
+
+FullFileName2 = FullFileName
+"FullFileName = ""TEXT;"" & FullFileName"
+nomedelfile = Dir(FullFileName2)
+   
+    Application.CutCopyMode = False
+    ActiveWorkbook.Worksheets.Add
+"    Range(""A1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Tipo record"""
+"    Range(""B1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Codice fiscale beneficiario"""
+"    Range(""C1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Codice tributo"""
+"    Range(""D1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Anno di riferimento"""
+"    Range(""E1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Totale importo a debito (centesimi di euro)"""
+"    Range(""F1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Totale importo a credito (centesimi di euro)"""
+"    Range(""G1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Totale importo a debito"""
+"    Range(""H1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Totale importo a credito"""
+"    Range(""I1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Anno/mese di acquisizione dei modelli F24"""
+"    Range(""J1"").Select"
+"    ActiveCell.FormulaR1C1 = ""File"""
+"    Range(""K1"").Select"
+"    ActiveCell.FormulaR1C1 = ""Note"""
+"    Range(""L1"").Select"
+"    ActiveCell.FormulaR1C1 = ""verifica lunghezza CF"""
+ 
+    With ActiveSheet.QueryTables.Add(Connection:= _
+"    FullFileName, Destination:=Range(""$A$2""))"
+"        .Name = ""FileName"""
+        .FieldNames = True
+        .RowNumbers = False
+        .FillAdjacentFormulas = False
+        .PreserveFormatting = True
+        .RefreshOnFileOpen = False
+        .RefreshStyle = xlInsertDeleteCells
+        .SavePassword = False
+        .SaveData = True
+        .AdjustColumnWidth = True
+        .RefreshPeriod = 0
+        .TextFilePromptOnRefresh = False
+        .TextFilePlatform = 850
+        .TextFileStartRow = 2
+        .TextFileParseType = xlFixedWidth
+        .TextFileTextQualifier = xlTextQualifierDoubleQuote
+        .TextFileConsecutiveDelimiter = False
+        .TextFileTabDelimiter = True
+        .TextFileSemicolonDelimiter = False
+        .TextFileCommaDelimiter = False
+        .TextFileSpaceDelimiter = False
+"        .TextFileColumnDataTypes = Array(2, 2, 1, 1, 1, 1, 5, 1, 2)"
+"        .TextFileFixedColumnWidths = Array(1, 16, 4, 4, 15, 15, 44, 1)"
+        .TextFileTrailingMinusNumbers = True
+        .Refresh BackgroundQuery:=False
+    End With
+    
+"numerorighe = Application.WorksheetFunction.CountA(Sheets(nomedelfoglio).Range(""A1:A"" & Rows.Count))"
+"UltimaRiga = Cells(Rows.Count, ""E"").End(xlUp).Row"
+"AnnoeMese = ""test"""
+
+"annomese nomedelfile, AnnoeMese"
+
+Rows(UltimaRiga).Select
+Selection.Delete Shift:=xlUp
+UltimaRiga = UltimaRiga - 1
+
+cancella colonna A
+"ActiveSheet.Range(Cells(2, 8), Cells(UltimaRiga, 8)).Select"
+Selection.Delete
+
+"inserisce la formula per il calcolo degli euro nella colonna ""Totale importa a credito"" e ""Totale importo a debito"""
+Colonna G Totale importo a debito
+Dim AreaFormulaG As String
+Dim AreaDoveIncolloFormulaG As Range
+"AreaFormulaG = ""G2"""
+
+"Range(AreaFormulaG).FormulaLocal = ""=(E2/100)"""
+If UltimaRiga > Range(AreaFormulaG).Row Then
+"    Set AreaDoveIncolloFormulaG = ActiveSheet.Range(Cells(2, 7), Cells(UltimaRiga, 7))"
+    nomedelfoglio = ActiveSheet.Name
+    Sheets(nomedelfoglio).Range(AreaFormulaG).Copy AreaDoveIncolloFormulaG
+End If
+
+Colonna H Totale importo a credito
+Dim AreaFormulaH As String
+Dim AreaDoveIncolloFormulaH As Range
+"AreaFormulaH = ""H2"""
+"Range(AreaFormulaH).FormulaLocal = ""=(F2/100)"""
+If UltimaRiga > Range(AreaFormulaH).Row Then
+"    Set AreaDoveIncolloFormulaH = ActiveSheet.Range(Cells(2, 8), Cells(UltimaRiga, 8))"
+    nomedelfoglio = ActiveSheet.Name
+    Sheets(nomedelfoglio).Range(AreaFormulaH).Copy AreaDoveIncolloFormulaH
+End If
+
+inserisce il valore del mese e dell'anno
+"ActiveSheet.Range(Cells(2, 9), Cells(UltimaRiga, 9)).Value = AnnoeMese"
+
+inserisce il nome del file
+"ActiveSheet.Range(Cells(2, 10), Cells(UltimaRiga, 10)).Value = nomedelfile"
+
+Dim nomefogliodati As String
+"ActiveSheet.Name = ""datiF24"""
+
+nomefogliodati = ActiveSheet.Name
+
+conta le righe del foglio datiF24
+Dim ultimaR As Long
+"ultimaR = Sheets(""datiF24"").Cells(Rows.Count, ""A"").End(xlUp).Row"
+
+report su Foglio1
+Dim data As Date
+data = Date
+"data = Format(data, ""dd mmmm yyyy"")"
+"Sheets(""Foglio1"").Range(""A1"").Value = ""Dipartimento per l'informazione e l'editoria"""
+"Sheets(""Foglio1"").Range(""C1"").Value = ""Report dell'importazione del file DIEADE F24 aggiornato al "" & data"
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:D1"").Font"
+"    .Name = ""Albertus Extra Bold"""
+    .Size = 16
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:D1"")"
+    .VerticalAlignment = xlCenter
+    .Interior.Pattern = xlSolid
+    .Interior.PatternColorIndex = xlAutomatic
+    .Interior.Color = 5296274
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:C1"").Borders(xlEdgeBottom)"
+    .LineStyle = xlContinuous
+    .Weight = xlThin
+    .ColorIndex = 51
+End With
+
+"If Sheets(""Foglio1"").Range(""A4"").Value = ""Quadro di sintesi"" Or Sheets(""Foglio1"").Range(""A5"").Value = ""Numero complessivo dei record importati"" _"
+"Or Sheets(""Foglio1"").Range(""B4"").Value = ""Numero"" Or Sheets(""Foglio1"").Range(""C4"").Value = ""Note"" Then"
+"    Sheets(""datiF24"").Delete"
+"    MsgBox ""Un report risulta gi  essere compilato. Cancella con la funzione apposita il report presente e poi prosegui con l'importazione del file."""
+    booleano = True
+    Exit Sub
+Else
+"    Sheets(""Foglio1"").Range(""A4"").Value = ""Quadro di sintesi"""
+"    Sheets(""Foglio1"").Range(""A5"").Value = ""Numero complessivo dei record importati"""
+"    Sheets(""Foglio1"").Range(""B4"").Value = ""Numero"""
+"    Sheets(""Foglio1"").Range(""C4"").Value = ""Note"""
+End If
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A4:C4"").Font"
+    .Bold = True
+    .ColorIndex = 50
+End With
+
+Dim path As String
+Dim dataacquisizione As String
+path = CurDir
+dataacquisizione = FileDateTime(path)
+
+"Sheets(""Foglio1"").Range(""B5"").Value = ultimaR - 1"
+"Sheets(""Foglio1"").Range(""C5"").Value = ""estratti dal file denominato "" & nomedelfile"
+"Sheets(""Foglio1"").Range(""C6"").Value = ""Il file originale   conservato nella cartella "" & path"
+
+"ThisWorkbook.Sheets(""Foglio1"").Activate"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A1"").Select"
+
+-----------------------ROUTINE NON FUNZIONANTE ----------------------------------------------
+a questo punto si chiama la funzione controllo che effettua un controllo sul numero e nome dei fogli
+assegna un valore TRUE alla funzione controllo() se si verificano le condizioni richieste
+quindi il valore della funzione controllo() TRUE o FALSE viene passato alla routine avvia in modulo1 che a sua volta lo utilizza
+per chiamare la routine successiva o per uscire dal programma.
+controllo (controllo)  ' ALLO STATO ATTUALE NON AVVIENE QUESTO CONTROLLO - 15 novembre 2023
+
+Exit Sub
+
+intercetta errori
+ERRORE1:
+Dim testomessaggioerrore As String
+Dim risposta As Integer
+"testomessaggioerrore = ""Interruzione della procedura. L'interruzione potrebbe essere dovuta al tentativo di importare dei fogli senza aver eliminato quelli gi  presenti. Eliminare gli eventuali fogli presenti (tranne Foglio1) e tentare di nuovo la procedura di importazione."""
+risposta = MsgBox(testomessaggioerrore) ' & Err.Number & vbNewLine & Err.Description)
+booleano = True
+
+"ThisWorkbook.Sheets(""Foglio1"").Activate"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A1"").Select"
+
+Exit Sub
+
+End Sub
+
+------------------------AL MOMENTO NON ATTIVA------------------------------------- 15 novembre 2023
+Function controllo(ByVal controllo)
+"esegui un controllo per vedere se esiste il foglio con i dati chiamato ""datiF24"""
+ cicla per tutti i fogli fino a quando non trova quello con il nome giusto.
+se non lo trova allora esce dal ciclo d  il messaggio che non ha trovato il foglio e esce dalla funzione
+Dim foglioexcel As Worksheet
+Dim controllonomefoglio As String
+
+For Each foglioexcel In ThisWorkbook.Worksheets
+controllonomefoglio = foglioexcel.Name
+    Select Case controllonomefoglio
+"    Case Is = ""datiF24"""
+    controllonomefoglio = foglioexcel.Name
+"    MsgBox ""il foglio "" & controllonomefoglio & ""   stato correttamente importato e la procedura pu  proseguire."" _"
+"    , vbOKOnly"
+    controllo = True
+    Exit Function
+ se non trova il foglio con il nome corretto da il messaggio seguente e poi esce dalla funzione
+"    Case Is <> ""datiF24"""
+    controllonomefoglio = foglioexcel.Name
+"    MsgBox ""il foglio "" & controllonomefoglio & ""   stato correttamente importato e la procedura pu  proseguire."" _"
+"    , vbOKOnly"
+    controllo = False
+    Exit Function
+    End Select
+
+Next foglioexcel
+
+End Function
+
+"Function annomese(ByVal nomedelfile As String, ByRef AnnoeMese As String)"
+
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+Dim annocorrente As Integer
+Dim annoegiornogiuliano As String
+Dim giorno As String
+Dim mese As String
+
+annocorrente = Year(Date)
+"annoegiornogiuliano = Mid(nomedelfile, 10, 7)"
+"annogiuliano = DateSerial(Left(annoegiornogiuliano, 4), 1, Right(annoegiornogiuliano, 3))"
+AnnoeMese = annogiuliano
+"AnnoeMese = Right(annogiuliano, 4) & Mid(annogiuliano, 4, 2)"
+
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+
+End Function
+
+Sub Fogli()
+Dim fogliodaridurreaicona As String
+
+'''''''''''''''''' Per evitare lo sfarfallio durante la creazione dei fogli e le successive operazioni di copia incolla dei dati
+'''''''''''''''''' si riduce ad icona il foglio e poi lo si ringrandisce al termine della routine CREA FOGLI''''''''''
+
+fogliodaridurreaicona = ActiveWorkbook.Name
+Windows(fogliodaridurreaicona).WindowState = xlMinimized
+ActiveWindow.WindowState = xlMainimized
+Windows(fogliodaridurreaicona).Activate
+
+''''''''''''termine riduzione a icona della finestra
+
+
+disattivazione avvisi e screen updating
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+"esegui un controllo per vedere se esiste il foglio con i dati chiamato ""datiF24"""
+Dim foglioexcel As Worksheet
+Dim controllonomefoglio As String
+
+For Each foglioexcel In ThisWorkbook.Worksheets
+
+"If foglioexcel.Name = ""datiF24"" Then"
+    controllonomefoglio = foglioexcel.Name
+  '  Application.Cursor = xlWait
+  '  Application.Cursor = xlDefault
+    GoTo Continua
+Else
+End If
+
+Next foglioexcel
+"    MsgBox ""il foglio datiF24 NON   stato correttamente importato e la procedura NON pu  proseguire."" _"
+"    , vbOKOnly"
+Exit Sub
+
+Continua:
+On Error GoTo ERROREF
+
+Dim x As Range
+Dim rng As Range
+Dim last As Long
+Dim sht As String
+Dim contarigheP As Integer
+Dim nomefogliocreato As String
+Dim lastP As Integer
+
+foglio nel quale sono immagazzinati i dati datiF24
+" Worksheets(""Foglio1"").Activate"
+" Worksheets(""datiF24"").Activate"
+ sht = ActiveSheet.Name
+
+conta le righe e imposta il range su cui applicare il filtro
+"last = Sheets(sht).Cells(Rows.Count, ""C"").End(xlUp).Row"
+"Set rng = Sheets(sht).Range(""A1:L"" & last)"
+
+"colonna sulla quale viene applicato il filtro e creazione di una lista univoca copiata in una colonna a parte (""P"")"
+"Sheets(sht).Range(""C1:C"" & last).AdvancedFilter Action:=xlFilterCopy, CopytoRange:=Range(""P1""), Unique:=True"
+
+"contarigheP = Sheets(sht).Cells(Rows.Count, ""P"").End(xlUp).Row - 1 ' il -1 leva la riga di intestazione"
+"per ciascun valore presente nella colonna ""P"" filtra il range ""rng"""
+e con quei dati crea un nuovo foglio assegnandogli il nome del codice con cui   stato filtrato
+"ad esempio crea il foglio ""6900"" se nella colonna da cui si filtra   presentequesto numero"
+"For Each x In Range([P2], Cells(Rows.Count, ""P"").End(xlUp))"
+
+With rng
+    .AutoFilter
+"    .AutoFilter Field:=3, Criteria1:=x.Value"
+    .SpecialCells(xlCellTypeVisible).Copy
+
+    Sheets.Add(After:=Sheets(Sheets.Count)).Name = x.Value
+    nomefogliocreato = x.Value
+    ActiveSheet.Paste
+End With
+
+Next x
+
+ Azzera il filtro
+Sheets(sht).AutoFilterMode = False
+
+With Application
+    .CutCopyMode = False
+    .ScreenUpdating = True
+End With
+
+completa report in Foglio1
+"Sheets(""Foglio1"").Range(""A6"").Value = ""numero complessivo dei crediti presenti nel file"""
+"Sheets(""Foglio1"").Range(""B6"").Value = contarigheP"
+
+"ThisWorkbook.Sheets(""Foglio1"").Activate"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A1"").Select"
+
+Call calcolatotalecrediti  ' chiama la relativa funzione
+    
+risattivazione avvisi e screen updating
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+        Exit Sub
+     
+ERROREF:
+Dim testomessaggioerrore As String
+Dim risposta As Integer
+
+"testomessaggioerrore = ""Errore """
+risposta = MsgBox(testomessaggioerrore & Err.Number & vbNewLine & Err.Description)
+  
+  ' viene intercettato vbOkonly il pulsante di risposta di defaul del messaggio di errore che d  sempre 1 come risposta.
+  ' e su quella risposta si fa eseguire del codice
+        If risposta = 1 Then
+            Call CancellaFogli
+"            ThisWorkbook.Sheets(""Foglio1"").Activate"
+"            ThisWorkbook.Sheets(""Foglio1"").Cells.ClearContents"
+        End If
+
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+End Sub
+
+Sub CreaFogli()
+
+Application.Visible = False
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+"esegui un controllo per vedere se esiste il foglio con i dati chiamato ""datiF24"""
+Dim foglioexcel As Worksheet
+Dim controllonomefoglio As String
+
+For Each foglioexcel In ThisWorkbook.Worksheets
+
+"    If foglioexcel.Name = ""datiF24"" Then"
+        controllonomefoglio = foglioexcel.Name
+        GoTo Continua
+    Else
+    End If
+
+Next foglioexcel
+
+"MsgBox ""si conferma che il foglio datiF24 NON   stato correttamente importato e la procedura NON pu  proseguire."" _"
+", vbOKOnly"
+Exit Sub
+
+Continua:
+Dim Cella As Range
+Dim Ws As Worksheet
+Dim intervalloP As Range
+Dim intervalloO As Range
+Dim lastP As Long
+Dim Nome As String
+Dim mierighe  As Range
+Dim report As Range
+Dim report2 As Range
+Dim lastR As Long
+Dim nuovonome As String
+Dim totale As String
+
+On Error GoTo ERRORECreaFogli
+
+"Worksheets(""Foglio1"").Activate"
+"Set Ws = Worksheets(""datiF24"")"
+Ws.Activate
+
+"Set intervalloP = Ws.Range([P2], Cells(Rows.Count, ""P"").End(xlUp))"
+
+primo For
+For Each Cella In intervalloP
+    Nome = Cella
+    Worksheets(Nome).Activate
+    'conta le righe e imposta il range su cui applicare il filtro
+"    lastP = Sheets(Nome).Cells(Rows.Count, ""D"").End(xlUp).Row"
+"    Set mierighe = Sheets(Nome).Range(""A1:L"" & lastP)"
+"    'colonna sulla quale viene applicato il filtro e creazione di una lista univoca copiata in una colonna a parte (""O"")"
+"    Sheets(Nome).Range(""D1:D"" & lastP).AdvancedFilter Action:=xlFilterCopy, CopytoRange:=Range(""O1""), Unique:=True"
+
+    'secondo ciclo For
+"    For Each x In Range([O2], Cells(Rows.Count, ""O"").End(xlUp))"
+        With mierighe
+            .AutoFilter
+"            .AutoFilter Field:=4, Criteria1:=x.Value"
+            .SpecialCells(xlCellTypeVisible).Copy
+"            Sheets.Add(After:=Sheets(Sheets.Count)).Name = Nome & "" "" & x.Value"
+            ActiveSheet.Paste
+"            nuovonome = Nome & "" "" & x.Value"
+"            lastR = Sheets(nuovonome).Cells(Rows.Count, ""A"").End(xlUp).Row"
+        End With
+
+"    Worksheets(""Foglio1"").Activate"
+"    ActiveSheet.Range(""A15"") = ""Dettaglio tipologia di credito suddivisi per anno"""
+"    ActiveSheet.Range(""B15"") = ""Numero"""
+
+"    Set report = ActiveSheet.Range(""A"" & Rows.Count).End(xlUp).Offset(1, 0)"
+"    report = ""Nome del foglio: "" & Sheets(nuovonome).Name"
+
+"    Set report2 = ActiveSheet.Range(""B"" & Rows.Count).End(xlUp).Offset(1, 0)"
+    report2 = lastR - 1
+
+    Next x ' fine secondo ciclo For
+
+ Leva il filtro
+Sheets(Nome).AutoFilterMode = False
+
+With Application
+    .CutCopyMode = False
+    .ScreenUpdating = True
+End With
+
+Next Cella ' Fine primo ciclo For
+
+Call calcola ' funzione che calcola il totale dei record importati
+"ThisWorkbook.Sheets(""Foglio1"").Activate"
+Call riordina
+Call ColoreCella
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A1"").Select"
+
+ThisWorkbook.RefreshAll
+
+Exit Sub
+
+ERRORECreaFogli:
+Dim testomessaggioerrore As String
+Dim risposta As Integer
+"testomessaggioerrore = ""Errore """
+risposta = MsgBox(testomessaggioerrore & Err.Number & vbNewLine & Err.Description)
+  ' Viene intercettato vbOkonly il pulsante di risposta di defaul del messaggio di errore che d  sempre 1 come risposta.
+  ' Su quella risposta si fa eseguire del codice
+    If risposta = 1 Then
+        Call CancellaFogli
+"        ThisWorkbook.Sheets(""Foglio1"").Activate"
+"        ThisWorkbook.Sheets(""Foglio1"").Cells.ClearContents"
+        Resume Next
+    End If
+    
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+Application.EnableEvents = True
+Application.Visible = True
+Application.Visible = False
+
+
+
+
+
+
+'''''''''''''''''' Per evitare lo sfarfallio durante la creazione dei fogli e le successive operazioni di copia incolla dei dati
+'''''''''''''''''' si riduce ad icona il foglio nella routine FOGLI e poi lo si ringrandisce al termine di quest routine ''''''''''
+Dim fogliodaingrandire As String
+fogliodaingrandire = ActiveWorkbook
+Windows(fogliodaingrandire).WindowState = xlMaximized
+ActiveWindow.WindowState = xlMainimized
+Windows(fogliodaingrandire).Activate
+
+
+Application.Visible = True
+
+
+End Sub
+
+funzione figlia di CreaFogli
+"questa funziona calcola il totale dei record importati (codice credito e anno) dagli F24 ed   richiamata alla fine del ciclo con cui vengono ""stampati"" i parziali degli F24"
+Sub calcola()
+
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+"Dim dovescrivo As Integer, i As Integer"
+Dim nrig As Range
+
+"Worksheets(""Foglio1"").Activate"
+"lastR = Sheets(""foglio1"").Cells(Rows.Count, ""B"").End(xlUp).Row"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""B"" & lastR + 1) = Application.WorksheetFunction.Sum(ThisWorkbook.Sheets(""Foglio1"").Range(""B14:B"" & lastR))"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1) = ""Totale"""
+
+ 'Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+
+End Sub
+
+funzione figlia di Fogli
+questa funzione serve per stampare il solo codice credito ed il numero delle righe di ciascuno ed   richiamata alla fine della funzione CreaFogli
+Sub calcolatotalecrediti()
+
+"Dim dovescrivo As Integer, i As Integer"
+Dim nrig As Range
+"Dim lastR As Integer, lastSomma As Integer, persommare As Integer, lastFoglio9000 As Integer, lastFoglio6913 As Integer, lastFoglio6974 As Integer, lastFoglio6919 As Integer"
+
+"Worksheets(""Foglio1"").Activate"
+"esegui un controllo per vedere se esiste il foglio con i dati chiamato ""datiF24"""
+Dim foglioexcel As Worksheet
+Dim controllonomefoglio As String
+Dim Foglio As String
+
+"lastR = Sheets(""foglio1"").Cells(Rows.Count, ""B"").End(xlUp).Row"
+
+For Each foglioexcel In ThisWorkbook.Worksheets ' serve ad evitare errori nel caso in cui nel foglio datiF24 non ci siano tutti i crediti
+Foglio = foglioexcel.Name
+
+Select Case Foglio
+"Case Is = ""6900"""
+"    lastFoglio9000 = Sheets(""6900"").Cells(Rows.Count, ""A"").End(xlUp).Row"
+"    lastR = Sheets(""foglio1"").Cells(Rows.Count, ""B"").End(xlUp).Row"
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1) = ""Credito 6900"""
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""B"" & lastR + 1) = lastFoglio9000 - 1"
+"Case Is = ""6913"""
+"    lastFoglio6913 = Sheets(""6913"").Cells(Rows.Count, ""A"").End(xlUp).Row"
+"    lastR = Sheets(""foglio1"").Cells(Rows.Count, ""B"").End(xlUp).Row"
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1) = ""Credito 6913"""
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""B"" & lastR + 1) = lastFoglio6913 - 1"
+"Case Is = ""6974"""
+"    lastFoglio6974 = Sheets(""6974"").Cells(Rows.Count, ""A"").End(xlUp).Row"
+"    lastR = Sheets(""foglio1"").Cells(Rows.Count, ""B"").End(xlUp).Row"
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1) = ""Credito 6974"""
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""B"" & lastR + 1) = lastFoglio6974 - 1"
+"Case Is = ""6919"""
+"    lastFoglio6919 = Sheets(""6919"").Cells(Rows.Count, ""A"").End(xlUp).Row"
+"    lastR = Sheets(""foglio1"").Cells(Rows.Count, ""B"").End(xlUp).Row"
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1) = ""Credito 6919"""
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""B"" & lastR + 1) = lastFoglio6919 - 1"
+"Case Is = ""6998"""
+"    lastFoglio6998 = Sheets(""6998"").Cells(Rows.Count, ""A"").End(xlUp).Row"
+"    lastR = Sheets(""foglio1"").Cells(Rows.Count, ""B"").End(xlUp).Row"
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1) = ""Credito 6998"""
+"    ThisWorkbook.Sheets(""Foglio1"").Range(""B"" & lastR + 1) = lastFoglio6998 - 1"
+End Select
+    Next foglioexcel
+
+"lastR = Sheets(""foglio1"").Cells(Rows.Count, ""B"").End(xlUp).Row"
+
+Dim rng As Range
+"Set rng = Range([A7], Cells(Rows.Count, ""A"").End(xlUp))"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A7:B"" & lastR).Sort key1:=Range(""A7""), Order1:=xlAscending, Header:=xlNo"
+
+"lastSomma = Cells.Find(what:=""Credito 6900"", After:=Range(""A1""), LookAt:=xlWhole, LookIn:=xlFormulas, SearchOrder:=xlByColumns, SearchDirection:=xlPrevious, MatchCase:=False).Row"
+"persommare = ThisWorkbook.Sheets(""Foglio1"").Range(""B"" & lastSomma).Row"
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastSomma).Offset(4, 1).ClearFormats"
+Dim rngB As Range
+"Set rngB = Application.Range(""$B$1"")"
+
+"With Range(""B:B"")"
+    .Select
+"    .NumberFormat = ""General"""
+    .Value = .Value
+End With
+
+Dim aRangestart As Range
+Dim brangearrivo As Range
+"Set aRangestart = Application.Range(""B"" & persommare)"
+"Set brangearrivo = Application.Range(""B"" & lastR)"
+
+somma di tutti i dati presenti nei fogli separati per il solo codice su report Foglio1
+"ThisWorkbook.Sheets(""Foglio1"").Range(""B"" & lastR + 1) = Application.WorksheetFunction.Sum(ThisWorkbook.Sheets(""Foglio1"").Range(aRangestart, brangearrivo))"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1).Value = ""Controllo (il valore deve coincidere con quello riportato nella riga numero complessivo record importati)"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1).WrapText = True"
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A"" & lastR + 1).Font"
+"    .Name = ""Calibri"""
+    .Size = 9
+End With
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A1"").Select"
+
+End Sub
+
+funzione figlia di CreaFogli
+riordina il dettaglio dei fogli al fine di paragonarli con i file accodati successivamente
+Sub riordina()
+
+"ThisWorkbook.Sheets(""Foglio1"").Activate"
+Dim rng As Range
+Dim lastR As Integer
+"lastR = Sheets(""foglio1"").Cells(Rows.Count, ""A"").End(xlUp).Row"
+"Set rng = Range([A14], Cells(Rows.Count, ""A"").End(xlUp))"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A14:B"" & lastR).Sort key1:=Range(""A14""), Order1:=xlAscending, Header:=xlYes"
+
+End Sub
+
+funzione figlia di CreaFogli
+Sub ColoreCella()
+
+Dim workbookcorrente As Workbook
+Dim Ws As Worksheet
+Dim NomeFoglio As String
+Dim Cella As Range
+Dim Valore As String
+Dim TuttelerighedelRange As Range
+Dim SololarigaAzzurra As Range
+Dim lastR As Integer
+Dim bol As Boolean
+
+Set workbookcorrente = ThisWorkbook
+NomeFoglio = ActiveSheet.Name
+
+"If NomeFoglio <> ""Foglio1"" Then"
+"    workbookcorrente.Sheets(""Foglio1"").Activate"
+    NomeFoglio = ActiveSheet.Name
+End If
+
+Set Ws = workbookcorrente.ActiveSheet
+"lastR = Ws.Cells(Ws.Rows.Count, ""A"").End(xlUp).Row"
+"Set TuttelerighedelRange = Ws.Range(""A13:A"" & lastR)"
+bol = False
+
+For Each Cella In TuttelerighedelRange
+    Valore = Cella.Value
+    Select Case True
+"    Case Valore Like ""Nome del foglio: 6900 200*"""
+"          Cella.Interior.Color = RGB(0, 255, 255)"
+"    Case Valore Like ""Nome del foglio: 6913 200*"""
+"         Cella.Interior.Color = RGB(255, 255, 0)"
+"    Case Valore Like ""Nome del foglio: 6919 200*"""
+"           Cella.Interior.Color = RGB(255, 0, 0)"
+"   Case Valore Like ""Nome del foglio: 6919 2010"""
+"          Cella.Interior.Color = RGB(0, 255, 255)"
+"   Case Valore Like ""Nome del foglio: 6974 200*"""
+"          Cella.Interior.Color = RGB(0, 255, 0)"
+"   Case Valore Like ""Nome del foglio: 6998 200*"""
+"          Cella.Interior.Color = RGB(0, 255, 0)"
+    End Select
+Next Cella
+
+For Each Cella In TuttelerighedelRange ' se nel range c'  una cella il cui valore   precedente il 2010 falla azzurra e assegna il valore 'True' alla variabile booleana
+"    If Cella.Interior.Color = RGB(0, 255, 255) Then"
+"        MsgBox (""Attenzione   necessario inserire le celle del foglio evidenziato nel foglio corretto prima di procedere all'esportazione. Poi elimina la riga"")"
+        bol = True
+        Cella.Select
+    End If
+Next Cella
+
+    If bol = True Then
+        ToolTip TuttelerighedelRange
+    End If
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A15:B15"").Font"
+    .Bold = True
+    .ColorIndex = 41
+End With
+
+End Sub
+
+funzione figlia di CreaFogli
+Function ToolTip(ByVal TuttelerighedelRange As Range)
+
+Dim x As Range
+For Each x In TuttelerighedelRange
+"    If x.Interior.Color = RGB(0, 255, 255) Then ' se la riga   azzurra"
+        With x.Validation
+            .Delete
+"            .Add Type:=xlValidateInputOnly, AlertStyle:=xlValidAlertStop, _"
+            Operator:=xlBetween
+            .IgnoreBlank = True
+            .InCellDropdown = True
+"            .InputMessage = ""Righe in celeste indicano che gli F24 importati si riferiscono ad anni precedenti il 2010. Questi dati devono essere copiarti/incollati nel foglio del 2018 relativo a quel credito e poi si deve eliminare l'evidenziazione della relativa riga dal report."""
+            .ShowError = True
+        End With
+    End If
+Next x
+
+End Function
+
+>>>>>>>>> Modulo3
+In questo modulo si trovano le routine
+AppendiF24 con le sub figlie CalcolaAppend e RiordinaDopoAppend.
+La funzione CopiaIncolla e CopiaIncolla 2 richiamate in AppendiF24 si trovano nel modulo 5
+
+Sub AppendiF24()
+
+disattivazione avvisi e screen updating
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+Application.Cursor = xlWait
+
+Open a workbook
+  'il metodo Open richiede il percorso completo come riferimento ad esempio quello qui sotto.
+" Workbooks.Open ""C:\Users\ufabiani\Downloads\file credito\01_pubblicit \dati da importare F24\F24\F24test.xlsx"""
+
+Troviamo l'ultima riga utilizzata in entrambi i file e poi copiamo i dati dell'uno nell'altro
+"Dim currentworkbook, destworkbook As Workbook"
+"Dim wsCopy, wsDest As Worksheet"
+"Dim lCopyLastRow, lDestLastRow As Long"
+"Dim report, report2 As Range"
+"Dim Foglio, NomeFoglio As String"
+Dim path As String
+
+Set currentworkbook = ThisWorkbook
+
+variabili per controllo del nome del file per verificare che non siano gi  stati fatti copia e incolla dallo stesso txt
+"    Dim nomedelfilex, nomedelfilexx As String"
+"    Dim rangenomedelfilex, rangenomedelfilexdafiltrare, x As Range"
+"    Dim rispostaennesima, risposta3 As Integer"
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ qui inizia il copia e incolla vero e proprio. A seconda del nome del foglio con i dati da copiare apre il corrispondente file su cui incollare
+effettua il controllo che non siano gi  stati incollati dati dallo stesso file .txt F24 (fa un controllo sul nome del file presente nella colonna J)
+ e quindi procede a copiare ed incollare i dati.
+
+inserisce le intestazioni e il formato in Foglio1
+"ThisWorkbook.Worksheets(""Foglio1"").Activate"
+"ActiveSheet.Range(""C15"") = ""Dettaglio accodamento"""
+"ActiveSheet.Range(""D15"") = ""Numero"""
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A15:D15"").Font"
+    .Bold = True
+    '.Italic = True
+    .ColorIndex = 41
+End With
+
+inizia il ciclo (verifica il nome di ogni foglio presente) ...
+" i passaggi sono un if e un select. Con l'if individua il credito (6900, 6913...), poi con il select individua l'anno"
+quindi li suddivide in fogli e li incolla nominandoli con il credito e con l'anno
+
+risposta3 = 0
+
+For Each wsCopy In ThisWorkbook.Worksheets
+"    If wsCopy.Name Like ""6900 2*"" Then"
+"    path = ""C:\F24DaImportareDatiReali\pubblicit \dati\F24 fruito"" ' ""C:\F24daimportare\F24Fruiti 6900"""
+"    NomeCredito = ""6900"""
+    Foglio = wsCopy.Name
+
+    Select Case Foglio
+    'inizio credito 6900
+"    Case Is = ""6900 2021"""
+"    Filename = ""F24 2021"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+     ' Application.Cursor = xlDefault
+      Exit Sub
+      End If
+      
+    Case 2
+"    Case Is = ""6900 2022"""
+"    Filename = ""F24 2022"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+    Case 3
+"    Case Is = ""6900 2020"""
+"    Filename = ""F24 2020"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+    Case 4
+"    Case Is = ""6900 2019"""
+"    Filename = ""F24 2019"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+    Case 5
+"    Case Is = ""6900 2018"", ""6900 2017"""
+"    Filename = ""F24 1718"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+    Case 6
+"    Case Is = ""6900 2016"", ""6900 2015"", ""6900 2014"", ""6900 2013"", ""6900 2012"", ""6900 2011"", ""6900 2010"""
+"    Filename = ""F24 1718"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla2 NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+    Case 7
+"    Case Is = ""6900 2023"""
+"    Filename = ""F24 2023"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+    Case 8
+"    Case Is = ""6900 2024"""
+"    Filename = ""F24 2024"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+        Case 9
+"    Case Is = ""6900 2025"""
+"    Filename = ""F24 2025"""
+    risposta3 = 0
+    '''''''''''''copia e incolla'''''''''''
+"    copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+    End Select 'fine credito 6900
+
+inizio credito 6913
+"ElseIf wsCopy.Name Like ""6913 2*"" Then"
+"path = ""C:\F24DaImportareDatiReali\edicole\dati\F24 fruito"" ' ""C:\F24daimportare\F24Fruiti 6913"""
+"path = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione edicole\Ulisse\dati\F24 fruito"" ' percorso degli F24 edicole tra le cartelle condivise"
+Foglio = wsCopy.Name
+"NomeCredito = ""6913"""
+
+Select Case Foglio
+
+"Case Is = ""6913 2021"""
+"Filename = ""F24 2021"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Application.Cursor = xlDefault
+      Exit Sub
+      End If
+      
+Case 2
+"Case Is = ""6913 2022"""
+"Filename = ""F24 2022"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 3
+"Case Is = ""6913 2020"""
+"Filename = ""F24 2020"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 4
+"Case Is = ""6913 2019"""
+"Filename = ""F24 2019"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 5
+"Case Is = ""6913 2018"""
+"Filename = ""F24 2018"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+
+Case 6
+"Case Is = ""6913 2017"", ""6913 2016"", ""6913 2015"", ""6913 2014"", ""6913 2013"", ""6913 2012"", ""6913 2011"", ""6913 2010"""
+"Filename = ""F24 2018"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla2 NomeCredito, Foglio, path, Filename, risposta3"
+
+Case 7
+"Case Is = ""6913 2023"""
+"Filename = ""F24 2023"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+
+Case 8
+"Case Is = ""6913 2024"""
+"Filename = ""F24 2024"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+
+Case 9
+"Case Is = ""6913 2025"""
+"Filename = ""F24 2025"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+
+End Select 'fine credito 6913
+
+inizio credito 6974
+"ElseIf wsCopy.Name Like ""6974 2*"" Then"
+"path = ""C:\F24DaImportareDatiReali\carta\dati\F24 fruito"""
+Foglio = wsCopy.Name
+"NomeCredito = ""6974"""
+
+Select Case Foglio
+
+Case 1
+"Case Is = ""6974 2021"""
+"Filename = ""F24 2021"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 2
+"Case Is = ""6974 2022"""
+"Filename = ""F24 2022"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 3
+"Case Is = ""6974 2020"""
+"Filename = ""F24 2020"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 4
+"Case Is = ""6974 2019"""
+"Filename = ""F24 2019"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 5
+"Case Is = ""6974 2018"", ""6974 2017"", ""6974 2016"", ""6974 2015"", ""6974 2014"", ""6974 2013"", ""6974 2012"", ""6974 2011"", ""6974 2010"""
+"Filename = ""F24 2019"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla2 NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+Case 6
+"Case Is = ""6974 2023"""
+"Filename = ""F24 2023"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+Case 7
+"Case Is = ""6974 2024"""
+"Filename = ""F24 2024"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+Case 8
+"Case Is = ""6974 2025"""
+"Filename = ""F24 2025"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+End Select 'fine credito 6974
+
+
+inizio credito 6919
+"ElseIf wsCopy.Name Like ""6919 2*"" Then"
+"path = ""C:\F24DaImportareDatiReali\digitale\dati\F24 fruito"" ' ""C:\F24daimportare\F24Fruiti 6919"""
+"path = ""\\pcm-utenti1.pcm.it\domain_condivise_quota\contributi diretti dall'anno 2014\CREDITI D'IMPOSTA VARI\CREDITO D'IMPOSTA SERVIZI DIGITALI\Ulisse\dati\F24 fruito"" ' percorso cartelle condivise credito servizi digitali"
+Foglio = wsCopy.Name
+"NomeCredito = ""6919"""
+
+Select Case Foglio
+
+Case 1
+"Case Is = ""6919 2021"""
+"Filename = ""F24 2021"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 2
+"Case Is = ""6919 2022"""
+"Filename = ""F24 2022"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 3
+"Case Is = ""6919 2020"""
+"Filename = ""F24 2020"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 4
+"Case Is = ""6919 2019"""
+"Filename = ""F24 2019"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 5
+"Case Is = ""6919 2018"", ""6919 2017"", ""6919 2016"", ""6919 2015"", ""6919 2014"", ""6919 2013"", ""6919 2012"", ""6919 2011"", ""6919 2010"""
+"Filename = ""F24 2019"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla2 NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 6
+"Case Is = ""6919 2023"""
+"Filename = ""F24 2023"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+Case 7
+"Case Is = ""6919 2024"""
+"Filename = ""F24 2024"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+Case 8
+"Case Is = ""6919 2025"""
+"Filename = ""F24 2025"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+End Select ' fine credito 6919
+
+
+inizio credito 6998
+"ElseIf wsCopy.Name Like ""6998 2*"" Then"
+"path = ""C:\F24DaImportareDatiReali\distribuzione\dati\F24 fruito"" ' ""C:\F24daimportare\F24Fruiti 6998"""
+"path = ""\\pcm-utenti1.pcm.it\domain_condivise_quota\contributi diretti dall'anno 2014\CREDITI D'IMPOSTA VARI\CREDITO D'IMPOSTA SERVIZI DIGITALI\Ulisse\dati\F24 fruito"" ' percorso cartelle condivise credito servizi digitali"
+Foglio = wsCopy.Name
+"NomeCredito = ""6998"""
+
+Select Case Foglio
+
+Case 1
+"Case Is = ""6998 2021"""
+"Filename = ""F24 2021"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 2
+"Case Is = ""6998 2022"""
+"Filename = ""F24 2022"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 3
+"Case Is = ""6998 2020"""
+"Filename = ""F24 2020"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 4
+"Case Is = ""6919 2019"", ""6919 2018"", ""6919 2017"", ""6919 2016"", ""6919 2015"", ""6919 2014"", ""6919 2013"", ""6919 2012"", ""6919 2011"", ""6919 2010"""
+"Filename = ""F24 2019"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla2 NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+Case 5
+"Case Is = ""6919 2023"""
+"Filename = ""F24 2023"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla2 NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+Case 6
+"Case Is = ""6998 2024"""
+"Filename = ""F24 2024"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+
+Case 7
+"Case Is = ""6998 2025"""
+"Filename = ""F24 2025"""
+risposta3 = 0
+''''''''''''copia e incolla'''''''''''
+"copiaincolla NomeCredito, Foglio, path, Filename, risposta3"
+      If risposta3 = 1 Then
+      Exit Sub
+      End If
+      
+End Select 'fine credito 6998
+
+End If ' fine dell' if iniziale
+Next wsCopy ' fine del ciclo iniziale
+
+ quando ha finito il ciclo chiama due routines per calcolare i totali e ordinare i valori
+Call calcolaappend
+Call riordinadopoappend
+
+questo controllo avviene al termine degli altri passaggi su Foglio1 e serve a fare in modo che l'utente inserisca i dati degli F24 antecedenti il 2018 nel foglio del 2018
+in quanto il sistema non prevede che vi siano fogli F24 antecedenti il 2018. Tutti i dati vengono messi nel foglio relativo agli F24 del 2018
+controlla che non ci siano celle evidenziate
+Dim Cella As Range
+Dim Valore As String
+Dim TuttelerighedelRange As Range
+Dim nomefoglio2 As String
+Dim Ws As Worksheet
+Dim risposta As Integer
+
+"If nomefoglio2 <> ""Foglio1"" Then"
+"    currentworkbook.Sheets(""Foglio1"").Activate"
+    nomefoglio2 = ActiveSheet.Name
+End If
+
+Set Ws = currentworkbook.ActiveSheet
+"lastR = Ws.Cells(Ws.Rows.Count, ""A"").End(xlUp).Row"
+"Set TuttelerighedelRange = Ws.Range(""A15:A"" & lastR)"
+
+For Each Cella In TuttelerighedelRange
+"    If Cella.Interior.Color = RGB(0, 255, 255) Then"
+"        risposta = MsgBox(""Attenzione   necessario inserire le celle del foglio evidenziato nel foglio corretto prima di procedere all'esportazione. Poi elimina la riga"")"
+            If risposta = 1 Then
+"            ThisWorkbook.Sheets(""Foglio1"").Activate"
+            Exit Sub
+            End If
+    End If
+Next Cella ' fine del controllo
+
+riattivazione avvisi e screen updating
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+ End Sub
+
+Sub calcolaappend() 'calcola il totale delle righe che sono state accodate ai file
+
+"Dim dovescrivo As Integer, i As Integer"
+Dim nrig As Range
+
+"Worksheets(""Foglio1"").Activate"
+"lastR = Sheets(""foglio1"").Cells(Rows.Count, ""D"").End(xlUp).Row"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""D"" & lastR + 1) = Application.WorksheetFunction.Sum(ThisWorkbook.Sheets(""Foglio1"").Range(""D14:D"" & lastR))"
+End Sub
+
+Sub riordinadopoappend() ' riordina il report per un confronto pi  agevole con i fogli derivati dall'F24
+
+"ThisWorkbook.Sheets(""Foglio1"").Activate"
+Dim aa As Range
+Dim aaa As Integer
+"aaa = Sheets(""foglio1"").Cells(Rows.Count, ""C"").End(xlUp).Row"
+"Set aa = Range([C15], Cells(Rows.Count, ""C"").End(xlUp))"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""C15:D"" & aaa).Sort key1:=Range(""C14""), Order1:=xlAscending, Header:=xlYes"
+End Sub
+
+>>>>>>>>> Modulo4
+Option Explicit
+
+ Presente la sub CopiaDir che copia le cartelle e
+ la sub Scrivi che scrive il nome del file
+ presente anche la function MeseMenoUno utilizzata da CopiaDir
+ presente la function AggiornaQuery per aggiornare il nome del file
+
+"Function MeseMenoUno(ByVal strmesecorrente As String, ByRef strnome As String, ByRef strmese As String)"
+"strmese = DateAdd(""m"", -1, strmesecorrente)"
+"strnome = Format(strmese, ""mmmm yyyy"")"
+Debug.Print strnome
+End Function
+
+Sub copiadir()
+"Dim FSO, FSO1 As Object"
+"Dim sorgente, sorgente1, sorgente2 As String"
+"Dim destinazione, destinazione1, destinazione2 As String"
+Dim strnome As String
+Dim strmesecorrente As String
+Dim strmese As String
+Dim annocorrente As String
+Dim messaggio As String
+Dim rispostamsgbox As String
+Dim mex As String
+Dim mystamp As String
+Dim NomeCredito As String
+
+
+"Set FSO = VBA.CreateObject(""Scripting.FileSystemObject"")"
+"Set FSO1 = VBA.CreateObject(""Scripting.FileSystemObject"")"
+
+1. Trova il mese corrente imponendogli il formato mese e anno
+2. Chiama la funzione MeseMenoUno e leva un mese (DateAdd) perch  i dati si riferiscono all'aggiornamento _
+ fatto con gli F24 del mese precedente (attenzione qui si cambia il formato della data in giorno/mese/anno)
+3. Cambia il formato tornando ad imporgli il formato mese e anno
+4. Assegna alla variabile strnome il nome corretto composto da datitest e il nome del mese passato
+
+"strmesecorrente = Format(Date, ""mmmm yyyy"")"
+ fine modifica nome della cartella con il mese
+
+"MeseMenoUno strmesecorrente, strnome, strmese ' chiama la funzione MeseMenoUno. Attenzione l'ordine delle variabili deve essere lo stesso che nella function nelle parentesi in alto"
+
+"strnome = ""dati - "" & strnome"
+
+annocorrente = Date
+annocorrente = Year(annocorrente)
+
+"messaggio = ""Stai per aggiornare i dati attraverso una routine che svolge due operazioni."" & vbNewLine"
+"messaggio = messaggio + ""La prima prevede la copia di backup dei file presenti nelle """"cartelle condivise"""" pubblicit , edicole, carta, digitale e distribuzione."" & vbNewLine"
+"messaggio = messaggio + ""I dati vengono copiati nella cartella """"C:\F24DaImportareDatiReali\"""" + il nome del credito (pubblicit , edicole...) aggiungendovi il nome del mese corrente."" & vbNewLine"
+"messaggio = messaggio + ""La seconda operazione prevede di copiare nelle cartelle condivise la sola cartella """"F24 fruito"""" di ogni credito."" & vbNewLine"
+"messaggio = messaggio + ""La cartella """"F24 fruito"""" contiene gli F24 che sono stati aggiornati nel passaggio precedente."" & vbNewLine"
+"messaggio = messaggio + ""Vuoi proseguire?"""
+"rispostamsgbox = MsgBox(messaggio, vbYesNo)"
+
+If rispostamsgbox = vbNo Then ' se rispondi no esci
+Exit Sub
+Else ' altrimenti.... inizia la copia delle cartelle dei vari crediti
+
+prima copia PUBBLICITA'
+"    sorgente = ""https://governoit.sharepoint.com/sites/DIE-Documentale/Documenti condivisi/agevolazioni e investimenti/Ulisse/dati"" ' copia tutto quello che c'  dentro la cartella dati percorso condiviso"
+"    destinazione = ""C:\F24DaImportareDatiReali\pubblicit \backup\dati"" & annocorrente & ""\"" & strnome ' lo copia nella cartella percorso locale aggiungendovi il nome del mese corrente"
+           
+           Debug.Print sorgente
+           Debug.Print destinazione
+           
+    If FSO.FolderExists(destinazione) = True Then
+"    mex = MsgBox(""CREDITO PUBBLICITA'. La copia di backup esiste gi  nel percorso "" & destinazione & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+        If mex = 7 Then
+       GoTo secondacopia
+       ElseIf mex = 2 Then
+       Exit Sub
+       Else
+ per effettuare la sovrascrittura di una cartella   necessario che gli attributi della cartella non siano impostati su sola lettura.
+ quindi si pu  o cancellare la cartella o modificare i suoi attributi.
+ Per cancellare la cartella usare il comando kill + percorso
+ Per modificare gli attributi dei file della cartella (attenzione non   possibile modificare gli attributi della cartella!!!!!)
+" si imposta un ciclo che per ogni file della cartella verifica gli attributi e se li trova ""read-only"" li resetta utlizzando il comando settAttr"
+ qui le propriet  delle cartelle e dei file https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/attributes-property
+
+    FSO.deletefolder (destinazione) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+    End If
+  End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+    End If
+
+ seconda copia PUBBLICITA'
+secondacopia:
+"sorgente1 = ""C:\F24DaImportareDatiReali\pubblicit \dati\F24 fruito"" ' copia la cartella F24 fruito aggiornata dall'append F24 percorso locale"
+"destinazione1 = ""\\pcm-utenti1.pcm.it\domain_condivise_quota\agevolazioni e investimenti\Ulisse\dati\F24 fruito"" 'incolla la cartella F24 fruito dentro al percorso condiviso"
+"destinazione1 = ""https://governoit.sharepoint.com/:f:/r/sites/DIE-Documentale/Documenti%20condivisi/agevolazioni%20e%20investimenti/Ulisse/dati/F24%20fruito?csf=1&web=1&e=5QE16i"""
+
+mystamp = FileDateTime(destinazione1)
+
+If FSO.FolderExists(destinazione1) = True Then
+"    mex = MsgBox(""CREDITO PUBBLICITA'. La cartella esiste gi  nel percorso "" & destinazione1 & "". ATTENZIONE:   stata copiata l'ultima volta il "" & mystamp & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+    If mex = 7 Then
+        GoTo Edicol
+    Else
+        FSO.deletefolder (destinazione1) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"        Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+    End If
+End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"   Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+ End If
+
+aggiorna query interna al file fruizioni''''''''''''''''''''''''''''''''''''''''''
+ pippo: inserito per fare il test di funzionamento dell'aggiornamento della query dei file fruizione + credito
+" Passa alla funzione AggiornaQuery. Gli passa il nome del credito, il mese corrente (vuoto) ed il percorso"
+"NomeCredito = ""Pubblicit """
+"AggiornaQuery NomeCredito, strmesecorrente, sorgente"
+
+'''''''''''''''''''''''''''''''FINE PUBBLICITA'
+Edicol:
+
+prima copia EDICOLE
+"sorgente = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione edicole\Ulisse\dati"" ' copia tutto quello che c'  dentro la cartella dati percorso condiviso"
+"destinazione = ""C:\F24DaImportareDatiReali\edicole\backup\dati 2023"" & ""\"" & strnome ' lo copia nella cartella percorso locale aggiungendovi il nome del mese corrente"
+
+If FSO.FolderExists(destinazione) = True Then
+"mex = MsgBox(""CREDITO EDICOLE. La copia di backup esiste gi  nel percorso "" & destinazione & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+ If mex = 7 Then
+    GoTo secondacopia1
+        ElseIf mex = 2 Then
+        Exit Sub
+    Else
+    FSO.deletefolder (destinazione) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+    End If
+End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+ End If
+
+ seconda copia EDICOLE
+secondacopia1:
+"sorgente1 = ""C:\F24DaImportareDatiReali\edicole\dati\F24 fruito"" ' copia la cartella F24 fruito aggiornata dall'append F24 percorso locale"
+"destinazione1 = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione edicole\Ulisse\dati\F24 fruito"" 'incolla la cartella F24 fruito dentro al percorso condiviso"
+mystamp = FileDateTime(destinazione1)
+
+If FSO.FolderExists(destinazione1) = True Then
+"mex = MsgBox(""CREDITO EDICOLE.La cartella esiste gi  nel percorso "" & destinazione1 & "". ATTENZIONE:   stata copiata l'ultima volta il "" & mystamp & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+    If mex = 7 Then
+    GoTo Cart
+      ElseIf mex = 2 Then
+        Exit Sub
+    Else
+   FSO.deletefolder (destinazione1) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"   Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+   End If
+End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"   Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+ End If
+
+''''''''''''''''''aggiorna query interna al file fruizioni''''''''''''''''''''''''''''''''''''''
+"NomeCredito = ""Edicole"""
+"AggiornaQuery NomeCredito, strmesecorrente, sorgente"
+
+''''''''''''''''''''''''''''''''''FINE EDICOLE
+Cart:
+prima copia CARTA
+"sorgente = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito carta\Ulisse\dati"" ' copia tutto quello che c'  dentro la cartella dati percorso condiviso"
+"destinazione = ""C:\F24DaImportareDatiReali\carta\backup\dati 2023"" & ""\"" & strnome ' lo copia nella cartella percorso locale aggiungendovi il nome del mese corrente"
+
+If FSO.FolderExists(destinazione) = True Then
+"mex = MsgBox(""CREDITO CARTA.  La copia di backup esiste gi  nel percorso "" & destinazione & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+ If mex = 7 Then
+  GoTo secondacopia2
+        ElseIf mex = 2 Then
+        Exit Sub
+ Else
+    FSO.deletefolder (destinazione) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+ End If
+End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+ End If
+
+ seconda copia CARTA
+secondacopia2:
+"sorgente1 = ""C:\F24DaImportareDatiReali\carta\dati\F24 fruito"" ' copia la cartella F24 fruito aggiornata dall'append F24 percorso locale"
+"destinazione1 = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito carta\Ulisse\dati\F24 fruito"" 'incolla la cartella F24 fruito dentro aa percorso condiviso"
+mystamp = FileDateTime(destinazione1)
+
+If FSO.FolderExists(destinazione1) = True Then
+"mex = MsgBox(""CREDITO CARTA. La cartella esiste gi  nel percorso "" & destinazione1 & "". ATTENZIONE:   stata copiata l'ultima volta il "" & mystamp & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+If mex = 7 Then
+   GoTo Digital
+      ElseIf mex = 2 Then
+        Exit Sub
+  Else
+    FSO.deletefolder (destinazione1) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"    Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+  End If
+End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"   Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+ End If
+
+ aggiorna query interna al file fruizioni''''''''''''''''''''''''''''
+"NomeCredito = ""Carta"""
+"AggiornaQuery NomeCredito, strmesecorrente, sorgente"
+
+'''''''''''''''''''''''''''''''''''''''FINE CARTA
+
+Digital:
+prima copia DIGITALE
+"sorgente = ""\\pcm-utenti1.pcm.it\domain_condivise_quota\contributi diretti dall'anno 2014\CREDITI D'IMPOSTA VARI\CREDITO D'IMPOSTA SERVIZI DIGITALI\Ulisse\dati"" ' copia tutto quello che c'  dentro la cartella dati percorso condiviso"
+"destinazione = ""C:\F24DaImportareDatiReali\digitale\backup\dati 2023"" & ""\"" & strnome ' lo copia nella cartella percorso locale aggiungendovi il nome del mese corrente"
+
+If FSO.FolderExists(destinazione) = True Then
+"mex = MsgBox(""CREDITO DIGITALE.  La copia di backup esiste gi  nel percorso "" & destinazione & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+ If mex = 7 Then
+  GoTo secondacopia3
+    ElseIf mex = 2 Then
+    Exit Sub
+ Else
+    FSO.deletefolder (destinazione) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+ End If
+End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+ End If
+
+ seconda copia DIGITALE
+secondacopia3:
+"sorgente1 = ""C:\F24DaImportareDatiReali\digitale\dati\F24 fruito"" ' copia la cartella F24 fruito aggiornata dall'append F24 percorso locale"
+"destinazione1 = ""\\pcm-utenti1.pcm.it\domain_condivise_quota\contributi diretti dall'anno 2014\CREDITI D'IMPOSTA VARI\CREDITO D'IMPOSTA SERVIZI DIGITALI\Ulisse\dati\F24 fruito"" 'incolla la cartella F24 fruito dentro al percorso condiviso"
+mystamp = FileDateTime(destinazione1)
+
+If FSO.FolderExists(destinazione1) = True Then
+"mex = MsgBox(""CREDITO DIGITALE. La cartella esiste gi  nel percorso "" & destinazione1 & "". ATTENZIONE:   stata copiata l'ultima volta il "" & mystamp & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+    If mex = 7 Then
+        GoTo Distri
+        ElseIf mex = 2 Then
+        Exit Sub
+    Else
+        FSO.deletefolder (destinazione1) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"        Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+    End If
+End If
+
+If FSO.FolderExists(destinazione) = False Then
+"   Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+End If
+
+''''' Aggiorna query interna al file fruizioni '''''''''''''''''''''''''''''''''''''''
+"NomeCredito = ""Servizi Digitali"""
+"AggiornaQuery NomeCredito, strmesecorrente, sorgente"
+
+'''''''''''''''''''''''''''''''''''''''''''''''FINE DIGITALE
+
+Distri:
+prima copia DISTRIBUZIONE
+"sorgente = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito distribuzione\Ulisse\dati"" ' copia tutto quello che c'  dentro la cartella dati percorso condiviso"
+"destinazione = ""C:\F24DaImportareDatiReali\distribuzione\backup\dati 2023"" & ""\"" & strnome ' lo copia nella cartella percorso locale aggiungendovi il nome del mese corrente"
+
+If FSO.FolderExists(destinazione) = True Then
+"mex = MsgBox(""CREDITO DISTRIBUZIONE.  La copia di backup esiste gi  nel percorso "" & destinazione & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+ If mex = 7 Then
+  GoTo secondacopia4
+    ElseIf mex = 2 Then
+    Exit Sub
+ Else
+    FSO.deletefolder (destinazione) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+ End If
+End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"    Call FSO.CopyFolder(sorgente, destinazione, True)"
+ End If
+
+ seconda copia DISTRIBUZIONE
+secondacopia4:
+"sorgente1 = ""C:\F24DaImportareDatiReali\distribuzione\dati\F24 fruito"" ' copia la cartella F24 fruito aggiornata dall'append F24 percorso locale"
+"destinazione1 = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito distribuzione\Ulisse\dati\F24 fruito"" 'incolla la cartella F24 fruito dentro al percorso condiviso"
+mystamp = FileDateTime(destinazione1)
+
+If FSO.FolderExists(destinazione1) = True Then
+"mex = MsgBox(""CREDITO DISTRIBUZIONE. La cartella esiste gi  nel percorso "" & destinazione1 & "". ATTENZIONE:   stata copiata l'ultima volta il "" & mystamp & ""; se vuoi sovrascrivere il file clicca """"si"""", se vuoi passare oltre clicca """"no"""", se vuoi uscire clicca """"Annulla"""" "", vbYesNoCancel)"
+    If mex = 7 Then
+    Exit Sub
+    Else
+    FSO.deletefolder (destinazione1) ' cancella la cartella (  necessario altrimenti la cartella che ha attributi read-only non si pu  copiare)
+"    Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+    End If
+End If
+
+ If FSO.FolderExists(destinazione) = False Then
+"   Call FSO.CopyFolder(sorgente1, destinazione1, True)"
+    End If
+    
+''''''''''' Aggiorna la query interna al file delle fruzioni '''''''''''''''''''''''
+"NomeCredito = ""Distribuzione"""
+"AggiornaQuery NomeCredito, strmesecorrente, sorgente"
+
+    
+'''''''''''''''''''''''''''''''''''''''''''''''FINE DISTRIBUZIONE
+
+End If  ' fine delle copie
+End Sub
+
+"Function AggiornaQuery(ByVal NomeCredito As String, ByVal strmesecorrente As String, ByVal sorgente As String)"
+
+Dim wb As Workbook
+Dim Ws As Worksheet
+Dim tabella As ListObject
+"Dim urtabella, uctabella As Long"
+"Dim objConnection, bBackground ' objConnection   una ADO Connection e serve per creare una connessione con una sorgente di dati (ad esempio _"
+una tabella). In questo modo si possono manipolare i dati
+
+Dim miofile As String
+Dim strnomefile As String
+Dim strnomefilevecchio As String
+
+Dim recuperovalorecella1 As Variant
+Dim recuperovalorecella2 As Variant
+Dim recuperovalorecella3 As Variant
+Dim recuperovalorecella4 As Variant
+Dim recuperovalorecella5 As Variant
+
+Dim j As Long
+Dim i As Long
+Dim c As Long
+Dim x As Long
+Dim y As Long
+Dim z As Long
+
+Dim pippo As String
+Dim bln As Boolean
+
+Dim Rng1Nonvaria As Range
+Dim Rng1Varia As Range
+Dim ur As Long
+Dim uc As Long
+Dim array1NOvariaz() As Variant
+Dim array1SIvariaz() As Variant
+Dim array2NOvariaz() As Variant
+Dim array2SIvariaz() As Variant
+
+Application.ScreenUpdating = False ' Questo codice disabiler  lo Application.ScreenUpdating per far svolgere i processi in background.
+
+"------------- calcolo i nomi del file, vecchio e nuovo ------------"
+"strnomefile = ""Fruizioni "" & NomeCredito & "" "" & strmesecorrente & "".xlsm"" ' nuovo nome"
+"strnomefile = sorgente & ""\"" & strnomefile ' vecchio nome"
+
+"strnomefilevecchio = DateAdd(""m"", -1, strmesecorrente)"
+"strnomefilevecchio = Format(strnomefilevecchio, ""mmmm yyyy"")"
+
+"miofile = sorgente & ""\"" & ""Fruizioni "" & NomeCredito & "" "" & strnomefilevecchio & "".xlsm"""
+
+--------------- calcolo i valori per verificare che il file sia stato aggiornato prima di modificare il nome
+--------------- per farlo prendo dei valori che non variano e dei valori che variano e li confronto (prima e dopo l'applicazione della query di aggiornamento
+
+Set wb = Workbooks.Open(Filename:=miofile)
+"Set Ws = wb.Sheets(""Unione Concesso e Fruito"")"
+"Set tabella = Ws.ListObjects(""Unione_Concesso_e_Fruito"")"
+ trova l'ultima riga della tabella
+urtabella = tabella.ListRows.Count
+ trova l'ultima colonna a destra della tabella
+uctabella = tabella.ListColumns.Count
+
+----------------popolo l'array in due passaggi. Prima creo un range e poi lo scorro con un ciclo che ad ogni passaggio popola l'array
+" 1. passaggio, creo i due range, uno con i valori che non cambiano e uno con i valori che cambiano"
+
+Select Case NomeCredito
+"Case Is = ""Pubblicit "", ""Carta"", ""Edicole"", ""Servizi Digitali"""
+"Set Rng1Nonvaria = Ws.Range(Cells(3, 3), Cells(3, 6)) ' concesso2020, concesso2021, concesso2022, totale concesso ------------- questi valori NON cambiano"
+
+"Case Is = ""Distribuzione"""
+"Set Rng1Nonvaria = Ws.Range(Cells(3, 3), Cells(3, 4)) ' concesso2020, concesso2021, concesso2022, totale concesso ------------- questi valori NON cambiano"
+
+End Select
+
+
+"Set Rng1Varia = Ws.Range(Cells(3, uctabella - 1), Cells(3, uctabella)) ' concesso - fruito ------------------- questi valori cambiano"
+
+x = 1
+ur = Rng1Nonvaria.Cells.Count
+ For i = 1 To ur
+    ReDim Preserve array1NOvariaz(1 To x)
+"    array1NOvariaz(x) = Rng1Nonvaria.Cells(1, i).Value ' in questo caso lo scorrimento   orizzontale; se .cells(i, 1) lo scorrimento   verticale"
+    x = x + 1
+    Debug.Print array1NOvariaz(i)
+Next
+
+x = 1
+ur = Rng1Varia.Cells.Count
+ For i = 1 To ur
+    ReDim Preserve array1SIvariaz(1 To x)
+"    array1SIvariaz(x) = Rng1Varia.Cells(1, i).Value ' in questo caso lo scorrimento   orizzontale; se .cells(i, 1) lo scorrimento   verticale"
+    x = x + 1
+    Debug.Print array1SIvariaz(i)
+ Next
+
+---------------popolati i due array passo a:
+" 1. aggiornare la tabella,"
+" 2. recuperare i valori,"
+ 3. confronatarli con quelli dei due array sopra
+ 4. rinomino il file
+ 5. salvo il file
+
+Aggiornamento delle query. Sono proposti due metodi. _
+1. Il primo veloce identifica la tabella e aggiorna tutte le query collegate _
+disabilitando l'aggiornamento in background. L'aggiornamento in background NON prevede l'interruzione delle istruzioni VBA che _
+quindi procederebbero senza attendere la fine dell'aggiornamento (refresh).
+tabella.QueryTable.Refresh BackgroundQuery:=False
+
+"2. Il secondo metodo invece prevede l'aggiornamento di tutte le query nel foglio, sempre sospendendo l'aggiornamento in background"
+ 'For Each objConnection In ThisWorkbook.Connections
+        'Get current background-refresh value
+  '      bBackground = objConnection.OLEDBConnection.BackgroundQuery
+        'Temporarily disable background-refresh
+   '     objConnection.OLEDBConnection.BackgroundQuery = False
+        'Refresh this connection
+    '    objConnection.Refresh
+        'Set background-refresh value back to original value
+     '   objConnection.OLEDBConnection.BackgroundQuery = bBackground
+    'Next
+    'DoEvents
+
+ Confronta il valore nuovo con quello del vecchio file
+1. inserisce i valori in due range
+2. li inserisce in due array
+
+
+Select Case NomeCredito
+"Case Is = ""Pubblicit "", ""Carta"", ""Edicole"", ""Servizi Digitali"""
+"Set Rng1Nonvaria = Ws.Range(Cells(3, 3), Cells(3, 6)) ' 'posso usare identici parametri perch  adesso il file   stato aggiornato e i valori modificati"
+
+"Case Is = ""Distribuzione"""
+"Set Rng1Nonvaria = Ws.Range(Cells(3, 3), Cells(3, 4)) ' 'posso usare identici parametri perch  adesso il file   stato aggiornato e i valori modificati"
+
+End Select
+
+
+"Set Rng1Varia = Ws.Range(Cells(3, uctabella - 1), Cells(3, uctabella))"
+
+x = 1
+ur = Rng1Nonvaria.Cells.Count
+ For i = 1 To ur
+    ReDim Preserve array2NOvariaz(1 To x)
+"    array2NOvariaz(x) = Rng1Nonvaria.Cells(1, i).Value ' in questo caso lo scorrimento   orizzontale; se .cells(i, 1) lo scorrimento   verticale"
+    x = x + 1
+    Debug.Print array2NOvariaz(i)
+Next
+
+x = 1
+ur = Rng1Varia.Cells.Count
+ For i = 1 To ur
+    ReDim Preserve array2SIvariaz(1 To x)
+"    array2SIvariaz(x) = Rng1Varia.Cells(1, i).Value ' in questo caso lo scorrimento   orizzontale; se .cells(i, 1) lo scorrimento   verticale"
+    x = x + 1
+    Debug.Print array2SIvariaz(i)
+Next
+
+ 2 controlli: confronto i valori dei due array --------------
+j = LBound(array1NOvariaz)
+While j < UBound(array1NOvariaz) ' dall'indice pi  alto dell'array a scendere
+    If array1NOvariaz(j) <> array2NOvariaz(j) Then ' se sono uguali esci
+"         MsgBox "" Aggiornamento query non riuscito. ci sono valori diversi che dovrebbero essere uguali"" & _"
+"         "" Controlla l'aggiornamento della query e se i valori da confrontare (concesso2020, concesso2021, concesso2022, totale concesso) restano identici"""
+         bln = False
+         wb.Close savechanges:=False
+         Name strnomefile As miofile
+         Exit Function
+    Else
+         bln = True
+    End If
+j = j + 1
+Wend
+
+j = LBound(array1SIvariaz)
+While j < UBound(array1SIvariaz) ' dall'indice pi  alto dell'array a scendere
+    If array1SIvariaz(j) = array2SIvariaz(j) Then ' se sono uguali esci
+"MsgBox "" Aggiornamento query non riuscito. ci sono valori uguali che dovrebbero essere diversi"" & _"
+"         "" Controlla l'aggiornamento della query e se i valori da confrontare (totale fruito e concesso - fruito) cambino o meno"""
+         bln = False
+          wb.Close savechanges:=False
+          Name strnomefile As miofile
+         Exit Function
+    Else
+         bln = True
+    End If
+j = j + 1
+Wend
+
+If uctabella <> tabella.ListColumns.Count Or urtabella <> tabella.ListRows.Count Then
+        bln = False
+        wb.Close savechanges:=False
+        Name strnomefile As miofile
+        Exit Function
+Else
+        bln = True
+salva il file
+wb.Close savechanges:=True
+ rinomina il file
+Name miofile As strnomefile ' rinomina
+End If
+
+Application.ScreenUpdating = True
+
+End Function
+
+Sub scrivi()
+
+variabili generali
+Dim destworkbook As Workbook
+Dim currentworkbook As Workbook
+Dim wsCopy As Worksheet
+Dim wsDest As Worksheet
+Dim lCopyLastRow As Long
+Dim lDestLastRow As Long
+Dim nomedelfoglio As String
+Dim nomedelfilex As String
+Dim path As String
+Dim strmese As String
+Dim copia As String
+Dim intervallodiricerca As Range
+Dim xdiricerca As Range
+Dim icol As Long
+
+"nomedelfilex = ""recapF24test"" ''''ATTENZIONE AL NOME DEL FILE"
+"path = ""C:\F24DaImportare"""
+
+Dim FSO As Object
+Dim mex As String
+"    Set FSO = CreateObject(""Scripting.FileSystemObject"")"
+"If FSO.FileExists(path & ""\"" & nomedelfilex & "" copiaautomatica"" & "".xlsx"") Then"
+"mex = MsgBox(""Attenzione !! Operazione non riuscita: il file esiste gi . Vuoi andare avanti, sovrascrivere la copia del file in questo percorso: "" & path & ""e aggiornare il file denominato "" & nomedelfilex, vbYesNo)"
+    If mex = vbNo Then
+    Exit Sub
+    Else
+"    Call FSO.CopyFile(path & ""\"" & nomedelfilex & "".xlsx"", path & ""\"" & nomedelfilex & "" copiaautomatica"" & "".xlsx"", False)"
+    End If
+End If
+
+ Trova il mese corrente
+"strmese = Format(Date, ""mmmm, yyyy"")"
+
+Setta le variabili per i fogli da cui copiare ed in cui incollare
+"Set wsCopy = ThisWorkbook.Sheets(""Foglio1"") ' currentworkbook.Worksheets(foglio)"
+"Set destworkbook = Workbooks.Open(Filename:=path & ""\"" & nomedelfilex)"
+"Set wsDest = destworkbook.Worksheets(""Pubblicit "")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+
+"If wsDest.Range(""A"" & lDestLastRow) = ""totale"" Then"
+"    wsDest.Range(""A"" & lDestLastRow).EntireRow.Delete"
+End If
+
+"Set wsDest = destworkbook.Worksheets(""Edicole"")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+
+"If wsDest.Range(""A"" & lDestLastRow) = ""totale"" Then"
+"    wsDest.Range(""A"" & lDestLastRow).EntireRow.Delete"
+End If
+
+"Set wsDest = destworkbook.Worksheets(""Digitale"")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+
+"If wsDest.Range(""A"" & lDestLastRow) = ""totale"" Then"
+"    wsDest.Range(""A"" & lDestLastRow).EntireRow.Delete"
+End If
+
+"Set wsDest = destworkbook.Worksheets(""Carta"")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+"If wsDest.Range(""A"" & lDestLastRow) = ""totale"" Then"
+"    wsDest.Range(""A"" & lDestLastRow).EntireRow.Delete"
+End If
+ 
+controlla se ci sono gi  dati per quel mese (solo per il foglio pubblicit  supponendo che se non ce ne sono per il credito pubblicit  non ce ne siano per gli altri crediti
+
+"Set wsDest = destworkbook.Worksheets(""Pubblicit "")"
+"Set intervallodiricerca = wsDest.Range(""A1:A"" & lDestLastRow)"
+
+For Each xdiricerca In intervallodiricerca
+    If xdiricerca = strmese Then
+"    MsgBox ""Dati del mese corrente gi  presenti"", vbOKOnly"
+    Exit Sub
+    End If
+Next
+ 
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+"wsDest.Range(""A"" & lDestLastRow + 1) = strmese"
+
+"Set wsDest = destworkbook.Worksheets(""Edicole"")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+"wsDest.Range(""A"" & lDestLastRow + 1) = strmese"
+
+"Set wsDest = destworkbook.Worksheets(""Digitale"")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+"wsDest.Range(""A"" & lDestLastRow + 1) = strmese"
+
+"Set wsDest = destworkbook.Worksheets(""Carta"")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+"wsDest.Range(""A"" & lDestLastRow + 1) = strmese"
+
+wsCopy.Activate
+"wsCopy.Range(""A16"").Select"
+
+"Do Until ActiveCell.Value = ""Totale"""
+    nomedelfoglio = ActiveCell.Value
+"    copia = Range(ActiveCell.Offset(0, 1), ActiveCell.Offset(0, 1)).Copy ' copia solo la cella a destra di quella attiva"
+    Select Case True
+"        Case nomedelfoglio Like ""Nome del foglio: 6900 2*"""
+"        Set wsDest = destworkbook.Worksheets(""Pubblicit "")"
+"        lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+    Select Case nomedelfoglio
+        Case 1
+"        Case Is = ""Nome del foglio: 6900 2016"", ""Nome del foglio: 6900 2017"", ""Nome del foglio: 6900 2018"", ""Nome del foglio: 6900 2015"", ""Nome del foglio: 6900 2014"", ""Nome del foglio: 6900 2013"", ""Nome del foglio: 6900 2012"", ""Nome del foglio: 6900 2011"", ""Nome del foglio: 6900 2010"", ""Nome del foglio: 6900 200*"""
+        wsDest.Activate
+"        wsDest.Range(""B"" & lDestLastRow).Offset(, 5).PasteSpecial"
+"        wsDest.Range(""B"" & lDestLastRow).Offset(, 5).Select"
+"        ActiveCell.Offset(, -1).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(, -1)))"
+        ActiveCell.Activate
+        ActiveCell.Delete
+"        ActiveCell.Offset(1, -1).Value = 0"
+
+Dim zonadasommare As Range
+Dim Riga As Integer
+"    Riga = wsDest.Cells(wsDest.Rows.Count, ""F"").End(xlUp).Row - 1"
+"    Set zonadasommare = wsDest.Range(Cells(2, 6), Cells(Riga, 6))"
+"    ActiveCell.Offset(1, -1).Value = Application.WorksheetFunction.Sum(zonadasommare)"
+    Case 2
+"    Case Is = ""Nome del foglio: 6900 2019"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).Offset(, 3).PasteSpecial"
+    icol = ActiveCell.Column
+"    ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol))"
+    Case 3
+"    Case Is = ""Nome del foglio: 6900 2020"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).Offset(, 2).PasteSpecial"
+    icol = ActiveCell.Column
+"    ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol)) 'ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(-1, 0)))"
+    Case 4
+"    Case Is = ""Nome del foglio: 6900 2021"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).Offset(, 1).PasteSpecial"
+    icol = ActiveCell.Column
+"    ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol))"
+    Case 5
+"    Case Is = ""Nome del foglio: 6900 2022"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).PasteSpecial"
+    icol = ActiveCell.Column
+"    ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol))"
+    End Select
+
+"    Case nomedelfoglio Like ""Nome del foglio: 6913 2*"""
+"    Set wsDest = destworkbook.Worksheets(""Edicole"")"
+"    lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+    Select Case nomedelfoglio
+    Case 1
+"    Case Is = ""Nome del foglio: 6913 2016"", ""Nome del foglio: 6913 2017"", ""Nome del foglio: 6913 2018"", ""Nome del foglio: 6913 2015"", ""Nome del foglio: 6913 2014"", ""Nome del foglio: 6913 2013"", ""Nome del foglio: 6913 2012"", ""Nome del foglio: 6913 2011"", ""Nome del foglio: 6913 2010"", ""Nome del foglio: 6913 200*"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).Offset(, 5).PasteSpecial"
+"    wsDest.Range(""B"" & lDestLastRow).Offset(, 5).Select"
+"    ActiveCell.Offset(, -1).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(, -1)))"
+    ActiveCell.Activate
+    ActiveCell.Delete
+"    ActiveCell.Offset(1, -1).Value = 0"
+"    Riga = wsDest.Cells(wsDest.Rows.Count, ""F"").End(xlUp).Row - 1"
+"    Set zonadasommare = wsDest.Range(Cells(2, 6), Cells(Riga, 6))"
+"    ActiveCell.Offset(1, -1).Value = Application.WorksheetFunction.Sum(zonadasommare)"
+    Case 2
+"    Case Is = ""Nome del foglio: 6913 2019"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).Offset(, 3).PasteSpecial"
+    icol = ActiveCell.Column
+"    ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol))"
+    Case 3
+"    Case Is = ""Nome del foglio: 6913 2020"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).Offset(, 2).PasteSpecial"
+    icol = ActiveCell.Column
+"    ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol))"
+    Case 4
+"    Case Is = ""Nome del foglio: 6913 2021"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).Offset(, 1).PasteSpecial"
+    icol = ActiveCell.Column
+"    ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol))"
+    Case 5
+"    Case Is = ""Nome del foglio: 6913 2022"""
+    wsDest.Activate
+"    wsDest.Range(""B"" & lDestLastRow).PasteSpecial"
+    icol = ActiveCell.Column
+"    ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol))"
+End Select
+ 
+"Case nomedelfoglio Like ""Nome del foglio: 6974 2*"""
+"Set wsDest = destworkbook.Worksheets(""Digitale"")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+
+Select Case nomedelfoglio
+Case 1
+"Case Is = ""Nome del foglio: 6974 2019"", ""Nome del foglio: 6974 2016"", ""Nome del foglio: 6974 2017"", ""Nome del foglio: 6974 2018"", ""Nome del foglio: 6974 2015"", ""Nome del foglio: 6974 2014"", ""Nome del foglio: 6974 2013"", ""Nome del foglio: 6974 2012"", ""Nome del foglio: 6974 2011"", ""Nome del foglio: 6974 2010"", ""Nome del foglio: 6974 200*"""
+wsDest.Activate
+"wsDest.Range(""B"" & lDestLastRow).Offset(, 5).PasteSpecial"
+"wsDest.Range(""B"" & lDestLastRow).Offset(, 5).Select"
+"ActiveCell.Offset(, -1).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(, -1)))"
+ActiveCell.Activate
+ActiveCell.Delete
+"ActiveCell.Offset(1, -1).Value = 0"
+"Riga = wsDest.Cells(wsDest.Rows.Count, ""F"").End(xlUp).Row - 1"
+"Set zonadasommare = wsDest.Range(Cells(2, 6), Cells(Riga, 6))"
+"ActiveCell.Offset(1, -1).Value = Application.WorksheetFunction.Sum(zonadasommare)"
+
+Case 2
+"Case Is = ""Nome del foglio: 6974 2020"""
+wsDest.Activate
+"wsDest.Range(""B"" & lDestLastRow).Offset(, 2).PasteSpecial"
+icol = ActiveCell.Column
+"ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol))"
+
+Case 3
+"Case Is = ""Nome del foglio: 6974 2021"""
+wsDest.Activate
+"wsDest.Range(""B"" & lDestLastRow).Offset(, 1).PasteSpecial"
+icol = ActiveCell.Column
+"ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol)) 'ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(-1, 0)))"
+
+Case 4
+"Case Is = ""Nome del foglio: 6974 2022"""
+wsDest.Activate
+"wsDest.Range(""B"" & lDestLastRow).PasteSpecial"
+icol = ActiveCell.Column
+"ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol)) 'ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(-1, 0)))"
+End Select
+
+"Case nomedelfoglio Like ""Nome del foglio: 6919 2*"""
+"Set wsDest = destworkbook.Worksheets(""Carta"")"
+"lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+
+ Select Case nomedelfoglio
+Case 1
+"Case Is = ""Nome del foglio: 6919 2019"", ""Nome del foglio: 6919 2016"", ""Nome del foglio: 6919 2017"", ""Nome del foglio: 6919 2018"", ""Nome del foglio: 6974 2015"", ""Nome del foglio: 6919 2014"", ""Nome del foglio: 6919 2013"", ""Nome del foglio: 6919 2012"", ""Nome del foglio: 6919 2011"", ""Nome del foglio: 6919 2010"", ""Nome del foglio: 6919 200*"""
+wsDest.Activate
+"wsDest.Range(""B"" & lDestLastRow).Offset(, 5).PasteSpecial"
+"wsDest.Range(""B"" & lDestLastRow).Offset(, 5).Select"
+"ActiveCell.Offset(, -1).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(, -1)))"
+ActiveCell.Activate
+ActiveCell.Delete
+"ActiveCell.Offset(1, -1).Value = 0"
+"Riga = wsDest.Cells(wsDest.Rows.Count, ""F"").End(xlUp).Row - 1"
+"Set zonadasommare = wsDest.Range(Cells(2, 6), Cells(Riga, 6))"
+"ActiveCell.Offset(1, -1).Value = Application.WorksheetFunction.Sum(zonadasommare)"
+
+Case 2
+"Case Is = ""Nome del foglio: 6919 2020"""
+wsDest.Activate
+"wsDest.Range(""B"" & lDestLastRow).Offset(, 2).PasteSpecial"
+icol = ActiveCell.Column
+"ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol)) 'ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(-1, 0)))"
+Case 3
+"Case Is = ""Nome del foglio: 6919 2021"""
+wsDest.Activate
+"wsDest.Range(""B"" & lDestLastRow).Offset(, 1).PasteSpecial"
+icol = ActiveCell.Column
+"ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol)) 'ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(-1, 0)))"
+Case 4
+"Case Is = ""Nome del foglio: 6919 2022"""
+wsDest.Activate
+"wsDest.Range(""B"" & lDestLastRow).PasteSpecial"
+icol = ActiveCell.Column
+"ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(Columns(icol)) 'ActiveCell.Offset(1, 0).Value = Application.WorksheetFunction.Sum(wsDest.Range(ActiveCell, ActiveCell.Offset(-1, 0)))"
+Exit Sub
+End Select
+
+End Select
+
+wsCopy.Activate
+"ActiveCell.Offset(1, 0).Select"
+Loop
+
+"  Set wsDest = destworkbook.Worksheets(""Pubblicit "")"
+" lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+" wsDest.Range(""A"" & lDestLastRow + 1) = ""totale"""
+"  Set wsDest = destworkbook.Worksheets(""Edicole"")"
+" lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+" wsDest.Range(""A"" & lDestLastRow + 1) = ""totale"""
+"  Set wsDest = destworkbook.Worksheets(""Digitale"")"
+" lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+" wsDest.Range(""A"" & lDestLastRow + 1) = ""totale"""
+"  Set wsDest = destworkbook.Worksheets(""Carta"")"
+" lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+" wsDest.Range(""A"" & lDestLastRow + 1) = ""totale"""
+
+End Sub
+
+>>>>>>>>> Modulo5
+
+ qui si trovano le funzioni CopiaIncolla e CopiaIncolla2 chiamate dalla sub AppendiF24 del modulo 3
+la function CopiaIncolla richiama a sua volta la function figlia LeggiConFiltro
+
+"Function copiaincolla(ByVal NomeCredito As String, ByVal Foglio As String, ByVal path As String, ByVal Filename As String, ByRef risposta3 As Integer)"
+Application.Visible = True
+
+variabili generali
+Dim destworkbook As Workbook
+Dim currentworkbook As Workbook
+Dim wsCopy As Worksheet
+Dim wsDest As Worksheet
+
+variabili per il copia e incolla
+Dim lCopyLastRow As Long
+Dim lDestLastRow As Long
+Dim nomedelfilex As String
+Dim rangenomedelfilex As Range
+Dim rangenomedelfilexdafiltrare As Range
+Dim x As Range
+Dim nomedelfilexx As String
+Dim rispost1 As Integer
+
+variabili per stampare i risultati sul foglio1 che funge da report
+Dim report As Range
+Dim report2 As Range
+
+Setta le variabili per i fogli da cui copiare ed in cui incollare
+Set wsCopy = ThisWorkbook.Sheets(Foglio) ' currentworkbook.Worksheets(foglio)
+"Set destworkbook = Workbooks.Open(Filename:=path & ""\"" & Filename)"
+Set wsDest = destworkbook.Worksheets(Filename)
+    wsCopy.Cells.ClearFormats
+ 
+ '1. Trova l'ultima riga basandoti sui dati nella colonna A
+"  lCopyLastRow = wsCopy.Cells(wsCopy.Rows.Count, ""A"").End(xlUp).Row"
+    
+2. Trova la prima riga vuota nel file di destinazione basandoti sui dati nella colonna A tramite la propriet  Offset
+"  lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Offset(1).Row"
+
+3. recupera il nome del file e confrontalo con quello del file di destinazione
+"   nomedelfilex = wsCopy.Cells(2, 10).Value"
+  
+3bis. estrai dalla colonna del file di destinazione la selezione unique dei nomi in essa contenuti ed incollala nella colonna P
+"  Set rangenomedelfilex = wsDest.Range(""J1"", Cells(Rows.Count, ""J"").End(xlUp))"
+"  rangenomedelfilex.AdvancedFilter xlFilterCopy, , CopytoRange:=Range(""P1""), Unique:=True"
+"  Set rangenomedelfilexdafiltrare = wsDest.Range(""P1"", Cells(Rows.Count, ""P"").End(xlUp))"
+
+3tris. confronta il nome del file e se gi  presente esci senza salvare
+  For Each x In rangenomedelfilexdafiltrare
+  nomedelfilexx = x.Value
+  If nomedelfilexx = nomedelfilex Then
+" ' risposta1 = MsgBox(""sono gi  presenti record relativi al file "" & Filename & "". Non   possibile proseguire con l'accodamento."", vbOKOnly)"
+
+3quater. esci senza salvare e scrivi nel report l'esito dell'operazione
+"leggiconfiltro Filename, path ' vedi punto 5 bis"
+  Workbooks(Filename).Close savechanges:=False
+
+3quinques. Scrivi sul report in Foglio1 il risultato dell'operazione non andata buon fine
+"ThisWorkbook.Sheets(""Foglio1"").Activate 'currentworkbook.Worksheets(""Foglio1"").Activate"
+"Set report = ThisWorkbook.Sheets(""Foglio1"").Range(""C"" & Rows.Count).End(xlUp).Offset(1, 0)"
+"report = Foglio & "": "" & ""procedura abortita. zero record accodati nel foglio F24 del file"" & Filename '& "" nella cartella "" & path"
+report.Interior.ColorIndex = 38
+"Set report2 = ThisWorkbook.Sheets(""Foglio1"").Range(""D"" & Rows.Count).End(xlUp).Offset(1, 0)"
+"report2 = ""0"""
+"risposta3 = MsgBox(""la procedura   stata abortita per il foglio "" & Foglio & "". Se si vuole proseguire con gli altri fogli, cancellare quelli per cui l'operazione   stata completata o abortita (verificare dal report) e rilanciare il comando."")"
+
+"leggiconfiltro Filename, path ' vedi punto 5 bis"
+  Workbooks(Filename).Close savechanges:=False
+
+
+Exit Function
+  End If
+
+  Next x
+  
+  '4. se l'operazione si pu  fare e quindi si pu  accodare i dati ripulisci le celle della colonna P utilizzate per cercare il nome del file
+rangenomedelfilexdafiltrare.ClearContents
+rangenomedelfilexdafiltrare.ClearFormats
+  
+5. Copia e incolla i dati
+" wsCopy.Range(""A2:L"" & lCopyLastRow).Copy _"
+"    wsDest.Range(""A"" & lDestLastRow)"
+   
+5 bis dato che ci possono essere problemi con l'estensione del file (che pu  essere visbile o meno) e che
+ cambia il nome del file   necessario gestirla
+"leggiconfiltro Filename, path"
+
+   
+6. Chiudi il file in cui hai incollato e salvalo
+  Workbooks(Filename).Close savechanges:=True
+
+7. inserisci i dati nel foglio di report in Foglio1
+"ThisWorkbook.Worksheets(""Foglio1"").Activate 'currentworkbook.Worksheets(""Foglio1"").Activate"
+"Set report = ActiveSheet.Range(""C"" & Rows.Count).End(xlUp).Offset(1, 0)"
+"report = Foglio & "": "" & ""Accodati nel foglio F24 del file "" & Filename & "". Percorso: "" & path"
+"Set report2 = ActiveSheet.Range(""D"" & Rows.Count).End(xlUp).Offset(1, 0)"
+report2 = lCopyLastRow - 1
+Application.Visible = True
+End Function
+
+
+"Function copiaincolla2(ByVal NomeCredito As String, ByVal Foglio As String, ByVal path As String, ByVal Filename As String, ByRef risposta3 As Integer)"
+Application.Visible = False
+variabili generali
+Dim destworkbook As Workbook
+Dim currentworkbook As Workbook
+Dim wsCopy As Worksheet
+Dim wsDest As Worksheet
+
+variabili per il copia e incolla
+Dim lCopyLastRow As Long
+Dim lDestLastRow As Long
+Dim nomedelfilex As String
+Dim rangenomedelfilex As Range
+Dim rangenomedelfilexdafiltrare As Range
+Dim x As Range
+Dim nomedelfilexx As String
+Dim rispost1 As Integer
+
+
+variabili per stampare i risultati sul foglio1 che funge da report
+Dim report As Range
+Dim report2 As Range
+
+
+Setta le variabili per i fogli da cui copiare ed in cui incollare
+Set wsCopy = ThisWorkbook.Sheets(Foglio) ' currentworkbook.Worksheets(foglio)
+"Set destworkbook = Workbooks.Open(Filename:=path & ""\"" & Filename)"
+Set wsDest = destworkbook.Worksheets(Filename)
+
+    wsCopy.Cells.ClearFormats
+ 
+ '1. Trova l'ultima riga basandoti sui dati nella colonna A
+"  lCopyLastRow = wsCopy.Cells(wsCopy.Rows.Count, ""A"").End(xlUp).Row"
+    
+2. Trova la prima riga vuota nel file di destinazione basandoti sui dati nella colonna A tramite la propriet  Offset
+"  lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Offset(1).Row"
+
+3. recupera il nome del file e confrontalo con quello del file di destinazione
+" '  nomedelfilex = wsCopy.Cells(2, 10).Value"
+  
+3bis. estrai dalla colonna del file di destinazione la selezione unique dei nomi in essa contenuti ed incollala nella colonna P
+" ' Set rangenomedelfilex = wsDest.Range(""J2"", Cells(Rows.Count, ""J"").End(xlUp))"
+" ' rangenomedelfilex.AdvancedFilter xlFilterCopy, , CopytoRange:=Range(""P1""), Unique:=True"
+" ' Set rangenomedelfilexdafiltrare = wsDest.Range(""P1"", Cells(Rows.Count, ""P"").End(xlUp))"
+
+3tris. confronta il nome del file e se gi  presente esci senza salvare
+ ' For Each x In rangenomedelfilexdafiltrare
+ ' nomedelfilexx = x.Value
+ ' If nomedelfilexx = nomedelfilex Then
+" ' risposta1 = MsgBox(""sono gi  presenti record relativi al file "" & Filename & "". Non   possibile proseguire con l'accodamento."", vbOKOnly)"
+
+3quater. esci senza salvare e scrivi nel report l'esito dell'operazione
+ Workbooks(Filename).Close SaveChanges:=False
+
+3quinques. Scrivi sul report in Foglio1 il risultato dell'operazione non andata buon fine
+" ThisWorkbook.Sheets(""Foglio1"").Activate 'currentworkbook.Worksheets(""Foglio1"").Activate"
+" Set report = ActiveSheet.Range(""C"" & Rows.Count).End(xlUp).Offset(1, 0)"
+" report = foglio & "": "" & ""procedura abortita. zero record accodati nel foglio F24 del file"" & Filename '& "" nella cartella "" & path"
+" Set report2 = ActiveSheet.Range(""D"" & Rows.Count).End(xlUp).Offset(1, 0)"
+" report2 = ""0"""
+" risposta3 = MsgBox(""la procedura   stata abortita per il foglio "" & foglio & "". Se si vuole proseguire con gli altri fogli, cancellare quelli per cui l'operazione   stata completata o abortita (verificare dal report) e rilanciare il comando."")"
+ Exit Function
+  End If
+
+  Next x
+  
+  '4. se l'operazione si pu  fare e quindi si pu  accodare i dati ripulisci le celle della colonna P utilizzate per cercare il nome del file
+rangenomedelfilexdafiltrare.ClearContents
+rangenomedelfilexdafiltrare.ClearFormats
+  
+5. Copia e incolla i dati
+" wsCopy.Range(""A2:L"" & lCopyLastRow).Copy _"
+"    wsDest.Range(""A"" & lDestLastRow)"
+    
+5bis.'variabili per verificare il numero dei caratteri del CF
+Dim lDestLastRowLunghCF As Long
+Dim lDestLastRowLunghCFOffset As Long
+ ' Trova l'ultima riga piena della colonna L(verifica lunghezza cf)
+ ' e poi trova la prima riga vuota della medesima colonna tramite la propriet  Offset
+"  lDestLastRowLunghCF = wsDest.Cells(wsDest.Rows.Count, ""L"").End(xlUp).Row '.Offset(1).Row"
+"  lDestLastRowLunghCFOffset = wsDest.Cells(wsDest.Rows.Count, ""L"").End(xlUp).Offset(1).Row"
+ ' RiTrova l'ultima riga basandoti sui dati nella colonna A (che sono diventati di pi  perch    avvenuto il copia/incolla)
+"  lDestLastRow = wsDest.Cells(wsDest.Rows.Count, ""A"").End(xlUp).Row"
+ ' copia la formula dall'ultima riga utile della colonna L e incollalo nel range compreso tra la prima riga
+ ' vuota di L e l'ultima riga incollata (calcolata sulla colonna A)
+"  wsDest.Range(""L"" & lDestLastRowLunghCF).Copy"
+"  wsDest.Range(""L"" & lDestLastRowLunghCFOffset, ""L"" & lDestLastRow).PasteSpecial xlPasteFormulas"
+
+5 tris dato che ci possono essere problemi con l'estensione del file (che pu  essere visbile o meno) e che
+ cambia il nome del file   necessario gestirla
+"leggiconfiltro Filename, path"
+
+6. Chiudi il file in cui hai incollato e salvalo
+  Workbooks(Filename).Close savechanges:=True
+
+7. inserisci i dati nel foglio di report in Foglio1
+"ThisWorkbook.Worksheets(""Foglio1"").Activate 'currentworkbook.Worksheets(""Foglio1"").Activate"
+"Set report = ActiveSheet.Range(""C"" & Rows.Count).End(xlUp).Offset(1, 0)"
+"report = Foglio & "": "" & ""Accodati nel foglio F24 del file "" & Filename & "". Percorso: "" & path"
+"Set report2 = ActiveSheet.Range(""D"" & Rows.Count).End(xlUp).Offset(1, 0)"
+report2 = lCopyLastRow - 1
+Application.Visible = True
+End Function
+
+ richiamata da CopiaIncolla
+"Function leggiconfiltro(ByRef Filename As String, ByVal path As String)"
+
+"Ext = "".xls"""
+"Ext1 = "".xlsx"""
+"miofile = Dir(path & ""\*"" & Ext)"
+
+"Do While miofile <> """""
+    DoEvents
+            Select Case miofile
+            Case Is = Filename
+            Filename = Filename
+    Exit Do
+            Case 2
+            Case Is = Filename & Ext
+            Filename = Filename & Ext
+    Exit Do
+         Case 3
+         Case Is = Filename & Ext1
+          Filename = Filename & Ext1
+    Exit Do
+        End Select
+
+    miofile = Dir()
+Loop
+
+End Function
+
+"Function leggiconfiltro2(ByRef Filename As String, ByVal path As String)"
+
+Dim miofile As String
+miofile = Dir(path)
+ 
+miofile
+"FSO.GetExtensionName (""C:\Src\Hello.txt"") 'Result: ""txt"""
+ 
+"FSO.GetExtensionName (""C:\Src"") 'Result: """" (null string)"
+End Function
+
+>>>>>>>>> Modulo6
+Option Explicit
+
+" Presenti le routine CancellaFogli, PulisciReport, CancellaFoglisuApertura, PulisciFoglisuApertura"
+
+Sub CancellaFogli()
+    
+    Application.ScreenUpdating = False
+    Application.DisplayAlerts = False
+    
+    Dim xWs As Worksheet
+    Dim risposta As Integer
+    
+"risposta = MsgBox(""Vuoi eliminare i fogli?"", vbYesNo)"
+
+      If risposta = 6 Then
+    For Each xWs In Application.ActiveWorkbook.Worksheets
+"        If xWs.Name <> ""Foglio1"" Then 'And xWs.Name <> ""Sheet2"" Then"
+            xWs.Delete
+        End If
+    Next
+        Else
+"        ThisWorkbook.Sheets(""Foglio1"").Activate"
+        Exit Sub
+      End If
+           
+    Application.DisplayAlerts = True
+    Application.ScreenUpdating = True
+End Sub
+
+Sub puliscireport() ' questa routine cancella il report e ripristina il foglio pulito impostando formati e carattere
+    
+    Application.ScreenUpdating = False
+    Application.DisplayAlerts = False
+  
+    Dim risposta As Integer
+"    risposta = MsgBox(""Vuoi eliminare i dati nel report?"", vbYesNo)"
+ 
+ ' cancella i dati dal report
+   If risposta = 6 Then
+"         ThisWorkbook.Sheets(""Foglio1"").Activate"
+"      With ThisWorkbook.Sheets(""Foglio1"").Cells"
+         .ClearContents
+         .ClearFormats
+      End With
+   Else
+"         ThisWorkbook.Sheets(""Foglio1"").Activate"
+         Exit Sub
+   End If
+    
+inizia ad impostare formati e caratteri
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""h3"").Font"
+"    .Name = ""Calibri"""
+    .Size = 16
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""h3:h50"").Font"
+"    .Name = ""Calibri"""
+    .Size = 13
+End With
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h3"").Value = ""Istruzioni"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h4"").Value = ""1. Clicca sul numero 1 per importare un file e suddividerlo per tipologia di credito e anno."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h5"").Value = ""Verifica che non vi siano righe evidenziate. Le righe evidenziate indicano che il file importato"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h6"").Value = ""riporta F24 che fanno riferimento ad anni precedenti il 2010."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h7"").Value = ""Per proseguire, i dati presenti nei fogli con anni precedenti il 2010 (che devono poi essere eliminati)"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h8"").Value = ""devono essere copiati ed incollati nel foglio dell'anno 2018 relativo a quel credito."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h9"").Value = ""Poi deve essere eliminata la evidenziazione della relativa riga dal report."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h10"").Value = "" A questo punto il sistema permetter  di procedere."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h11"").Value = ""Ad esempio se il report reca una riga come questa: """"Nome del foglio: 6900 2000"""" i dati presenti"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h12"").Value = ""in questo foglio devono essere tagliati e incollati nel foglio 6900 2018."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h13"").Value = ""Poi il foglio 6900 2000 deve essere eliminato."""
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h15"").Value = ""2. Clicca sul numero 2 per avviare la procedura di esportazione dei dati nei rispettivi fogli F24."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h16"").Value = ""Un secondo report (colonne """"C"""" e """"D"""") riporter  il risultato dell'istruzione."""
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h18"").Value = ""3. Clicca sul numero 3 per copiare i file aggiornati nelle cartelle condivise pubblicit , edicole, carta, digitale e distribuzione."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h19"").Value = ""Si eseguono due operazioni: la prima prevede la copia di backup della cartella 'dati' presente nelle cartelle condivise"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h20"").Value = ""pubblicit , edicole, carta, digitale e distribuzione."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h21"").Value = ""I dati vengono copiati nella cartella 'C:\F24DaImportareDatiReali\' + il nome del credito (pubblicit , edicole...)"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h22"").Value = ""aggiungendovi il nome del mese corrente."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h23"").Value = ""La seconda operazione prevede di copiare nelle cartelle condivise la sola cartella 'F24 fruito' di ogni credito, in quanto."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h24"").Value = ""la cartella 'F24 fruito' contiene gli F24 aggiornati nel passaggio precedente (numero 2)."""
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h28"").Value = ""4. Clicca sul numero 4 per la procedura di cancellazione dei fogli."""
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""h32"").Value = ""5. Clicca sul numero 5 per la procedura di cancellazione del report."""
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A42"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A44"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A46"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A48"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A50"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A52"").RowHeight = 7"
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A42:e42"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A44:e44"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A46:e46"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A48:e48"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A50:e50"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A52:e52"").Interior.ColorIndex = 34"
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""F1:F40"").Interior.ColorIndex = 35"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""E1:E40"").Interior.ColorIndex = 40"
+
+imposta l'intestazione
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A1"").Value = ""Dipartimento per l'informazione e l'editoria"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""C1"").Value = ""Report dell'importazione del file DIEADE F24"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A40"").Value = ""Dipartimento per l'informazione e l'editoria"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""C40"").Value = ""Report dell'importazione del file DIEADE F24"""
+
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:C1"").Font"
+"    .Name = ""Albertus Extra Bold"""
+    .Size = 16
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:D1"")"
+    .RowHeight = 75
+    .VerticalAlignment = xlCenter
+    .Interior.Pattern = xlSolid
+    .Interior.PatternColorIndex = xlAutomatic
+    .Interior.Color = 5296274
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:D1"").Borders(xlEdgeBottom)"
+    .LineStyle = xlContinuous
+    .Weight = xlThin
+    .ColorIndex = 51
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A40:C40"").Font"
+"    .Name = ""Albertus Extra Bold"""
+    .Size = 16
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A40:D40"")"
+    .RowHeight = 75
+    .VerticalAlignment = xlCenter
+    .Interior.Pattern = xlSolid
+    .Interior.PatternColorIndex = xlAutomatic
+    .Interior.ColorIndex = 34
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A40:D40"").Borders(xlEdgeBottom)"
+    .LineStyle = xlContinuous
+    .Weight = xlThin
+    .ColorIndex = 51
+End With
+
+
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+
+End Sub
+
+Sub CancellaFoglisuapertura() ' se c'  qualche altro foglio oltre a Foglio1 eliminalo
+    Dim xWs As Worksheet
+    Application.ScreenUpdating = False
+    Application.DisplayAlerts = False
+         
+    For Each xWs In Application.ActiveWorkbook.Worksheets
+"        If xWs.Name <> ""Foglio1"" Then 'And xWs.Name <> ""Sheet2"" Then"
+            xWs.Delete
+        End If
+    Next
+"    ThisWorkbook.Sheets(""Foglio1"").Activate"
+    Application.DisplayAlerts = True
+    Application.ScreenUpdating = True
+End Sub
+
+Sub puliscireportsuapertura()
+     Application.ScreenUpdating = False
+     Application.DisplayAlerts = False
+  
+"         ThisWorkbook.Sheets(""Foglio1"").Activate"
+         
+"         With ThisWorkbook.Sheets(""Foglio1"").Cells"
+         .ClearContents
+         .ClearFormats
+         End With
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i3"").Value = ""Istruzioni"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i4"").Value = ""1. Clicca sul numero 1 per importare un file e suddividerlo per tipologia di credito e anno. Un report riporter  il risultato dell'istruzione."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i6"").Value = ""2. Nel report verifica che non vi siano righe evidenziate. Le righe evidenziate indicano che il file caricato riporta F24 che fanno riferimento ad anni precedenti il 2018."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i7"").Value = ""In questo caso i dati presenti nei fogli con anni precedenti il 2018 devono essere copiati ed incollati nel foglio dell'anno 2018 di quel credito."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i8"").Value = ""Ad esempio se il report reca una riga come questa: Nome del foglio: 6900 2000 i dati presenti in questo foglio devono essere tagliati e incollati nel foglio"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i9"").Value = ""Nome del foglio: 6900 2018. Poi il foglio 6900 2000 deve essere eliminato."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i10"").Value = ""Deve essere eliminata la evidenziazione della relativa riga dal report per procedere al successivo passaggio."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i12"").Value = ""3. Clicca sul numero 2 per avviare la procedura di esportazione dei dati nei rispettivi fogli F24. Un report riporter  il risultato dell'istruzione."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i14"").Value = ""4. Clicca sul numero 3 per avviare la procedura di cancellazione dei fogli"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i15"").Value = ""5. Si consiglia di stampare il report. Clicca sul numero 4 per cancellare il report."""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""i16"").Value = ""5. Repetita Iuvant: STAMPA il report e conservalo. Quando il foglio viene riaperto elimina tutti i fogli e qualsiasi testo presente su Foglio1."""
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A42"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A44"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A46"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A48"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A50"").RowHeight = 7"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A52"").RowHeight = 7"
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A42:e42"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A44:e44"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A46:e46"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A48:e48"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A50:e50"").Interior.ColorIndex = 34"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A52:e52"").Interior.ColorIndex = 34"
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""F1:F54"").Interior.ColorIndex = 35"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""E1:E54"").Interior.ColorIndex = 40"
+"ThisWorkbook.Sheets(""Foglio1"").Range(""D1:D54"").Interior.ColorIndex = 38"
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A1"").Value = ""Dipartimento per l'informazione e l'editoria"""
+"ThisWorkbook.Sheets(""Foglio1"").Range(""C1"").Value = ""report dell'importazione del file DIEADE F24"""
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:C1"").Font"
+".Name = ""Calibri"""
+.Size = 16
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:C1"")"
+.VerticalAlignment = xlCenter
+.Interior.Pattern = xlSolid
+.Interior.PatternColorIndex = xlAutomatic
+.Interior.Color = 5296274
+End With
+
+"With ThisWorkbook.Sheets(""Foglio1"").Range(""A1:C1"").Borders(xlEdgeBottom)"
+.LineStyle = xlContinuous
+ .Weight = xlThin
+ .ColorIndex = 51
+End With
+
+"ThisWorkbook.Sheets(""Foglio1"").Range(""A2"").Select"
+
+   Application.ScreenUpdating = True
+   Application.DisplayAlerts = True
+End Sub
+
+>>>>>>>>> Modulo8
+Option Explicit
+
+ Presente la sub AggiornaFruizioni per aggiornare le statistiche (che adesso non funziona)
+
+Sub aggiornafruizioni()
+ Dim ExcFile As Workbook
+ Dim Foglio As Worksheet
+    Dim tabella As ListObject
+    Dim Start As Double
+    Dim objConnection As WorkbookConnection
+    Dim bBackground
+
+
+"Dim MioPercorso, NomeFile, MioFileVecchio, MioFileNuovoNome, NomeFoglio, OpenFile, MeseCorrente, annocorrente As String"
+Dim DataOggi As Date
+    
+Dim Percorsi(1 To 5) As String
+    
+    'popoliamo l'array
+"Percorsi(1) = ""\\pcm-utenti1.pcm.it\domain_condivise_quota\agevolazioni e investimenti\Ulisse\dati\"" ' Pubblicit "
+"Percorsi(2) = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito carta\Ulisse\dati\"" ' Carta"
+"Percorsi(3) = ""\\pcm-utenti1.pcm.it\domain_condivise_quota\contributi diretti dall'anno 2014\CREDITI D'IMPOSTA VARI\CREDITO D'IMPOSTA SERVIZI DIGITALI\Ulisse\dati\"" ' Digitale"
+"Percorsi(4) = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione edicole\Ulisse\dati\"" ' Edicole"
+"Percorsi(5) = ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito distribuzione\Ulisse\dati\"" ' Distribuzione"
+
+Dim item As Variant ' serve per poter selezionare gli elementi dell'array
+Dim i As Integer
+
+ For i = LBound(Percorsi) To UBound(Percorsi)
+    
+    
+"    NomeFile = Dir(Percorsi(i) & ""Fruizioni*.xlsm"")"
+    MioFileVecchio = Percorsi(i) & NomeFile
+"    NomeFoglio = ""Unione Concesso e Fruito"""
+     
+  ' Application.ScreenUpdating = False
+   Set ExcFile = Application.Workbooks.Open(Filename:=MioFileVecchio)
+   'ActiveWindow.Visible = False
+   
+   Set Foglio = ExcFile.Worksheets(NomeFoglio)
+"   Set tabella = Foglio.ListObjects(""Unione_concesso_e_fruito"")"
+    
+    For Each objConnection In ExcFile.Connections
+        'Get current background-refresh value
+        bBackground = objConnection.OLEDBConnection.BackgroundQuery
+        'Temporarily disable background-refresh
+        objConnection.OLEDBConnection.BackgroundQuery = False
+        'Refresh this connection
+        objConnection.Refresh
+        'Set background-refresh value back to original value
+        objConnection.OLEDBConnection.BackgroundQuery = bBackground
+    Next
+    DoEvents
+   
+   ExcFile.Close savechanges:=True
+   Application.ScreenUpdating = True
+  '-----------------
+  
+  ' rinomina il file con il mese corrente
+    DataOggi = Date
+    MeseCorrente = MonthName(Month(DataOggi))
+    annocorrente = Year(Date)
+  
+    Dim NomiCrediti As String
+    
+    Select Case Percorsi(i)
+  
+"    Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota\agevolazioni e investimenti\Ulisse\dati\"""
+"    NomiCrediti = ""Pubblicit """
+    
+"    Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito carta\Ulisse\dati\"""
+"    NomiCrediti = ""Carta"""
+    
+"    Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota\contributi diretti dall'anno 2014\CREDITI D'IMPOSTA VARI\CREDITO D'IMPOSTA SERVIZI DIGITALI\Ulisse\dati\"""
+"    NomiCrediti = ""Servizi Digitali"""
+ 
+"    Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione edicole\Ulisse\dati\"""
+"    NomiCrediti = ""Edicole"""
+ 
+"     Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito distribuzione\Ulisse\dati\"""
+"    NomiCrediti = ""Distribuzione"""
+    
+    End Select
+    
+"     MioFileNuovoNome = Percorsi(i) & ""Fruizioni "" & NomiCrediti & "" "" & MeseCorrente & "" "" & annocorrente & "".xlsm"""
+     Name MioFileVecchio As MioFileNuovoNome
+     
+     
+     Dim PercorsoDiPartenza As String
+     Dim PercorsoDiArrivo As String
+     
+     PercorsoDiPartenza = MioFileNuovoNome
+     
+     Select Case PercorsoDiPartenza
+"     Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota\agevolazioni e investimenti\Ulisse\dati\"" & Dir(MioFileNuovoNome)"
+"    PercorsoDiArrivo = ""C:\F24DaImportareDatiReali\pubblicit \dati\"""
+    
+"    Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito carta\Ulisse\dati\"" & Dir(MioFileNuovoNome)"
+"    PercorsoDiArrivo = ""C:\F24DaImportareDatiReali\carta\dati\"""
+    
+"    Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota\contributi diretti dall'anno 2014\CREDITI D'IMPOSTA VARI\CREDITO D'IMPOSTA SERVIZI DIGITALI\Ulisse\dati\"" & Dir(MioFileNuovoNome)"
+"    PercorsoDiArrivo = ""C:\F24DaImportareDatiReali\digitale\dati\"""
+ 
+"    Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione edicole\Ulisse\dati\"" & Dir(MioFileNuovoNome)"
+"    PercorsoDiArrivo = ""C:\F24DaImportareDatiReali\edicole\dati\"""
+ 
+"     Case ""\\pcm-utenti1.pcm.it\domain_condivise_quota2\die gestione credito distribuzione\Ulisse\dati\"" & Dir(MioFileNuovoNome)"
+"    PercorsoDiArrivo = ""C:\F24DaImportareDatiReali\distribuzione\dati\"""
+    
+    End Select
+    
+"    Kill PercorsoDiArrivo & ""\"" & ""*.xl*"""
+        
+"    FileCopy PercorsoDiPartenza, PercorsoDiArrivo & Dir(MioFileNuovoNome)"
+     
+ Next i   
+End Sub
