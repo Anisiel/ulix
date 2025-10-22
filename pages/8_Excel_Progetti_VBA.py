@@ -171,7 +171,8 @@ def mostra_progetto(titolo, data, descrizione, percorso_file=None, percorso_imma
             "assets/Crediti/Esporta_Crediti.txt"
         ],
         livello="Media difficoltà, progettazione sintetica",
-        caption_immagine="Flusso operativo gestione F24"
+        percorso_immagine="assets/Crediti/Esporta_crediti_istruzioni.png",
+        caption_immagine="Istruzioni per l'esportazione del file"
     )
 
     mostra_sottoprogetto(
@@ -215,7 +216,8 @@ mostra_progetto(
     data="15/06/2022 - in corso",
     descrizione= "Progetto completo per la gestione dei flussi F24 tra Dipartimento e Agenzia delle Entrate, con strumenti Excel, programmazione VBA, Power Query.",
     percorso_file="assets/Crediti/Esempio_report_progetto.pdf",
-    percorso_immagine="assets/Crediti/Flusso operativo gestione.png"
+    percorso_immagine="assets/Crediti/Flusso operativo gestione.png",
+    caption_immagine="Flusso operativo gestione F24"
 )
 
 st.divider()
