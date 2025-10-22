@@ -3,6 +3,23 @@ import streamlit as st
 from pathlib import Path
 import base64
 
+# =============================================================================
+# STRUTTURA DELLA PAGINA — Home_altera.py (Versione Ricca)
+# -----------------------------------------------------------------------------
+# Questa pagina mostra una versione più elaborata del portfolio.
+# Include una galleria immagini, link estesi e navigazione avanzata.
+#
+# Comandi principali:
+# - `st.set_page_config(layout="wide")`: layout ampio e coerente
+# - `st.columns(...)`: griglia per organizzare contenuti e link
+# - `base64` + `data URI`: visualizzazione immagini senza richieste esterne
+# - `st.download_button(...)`: pulsante per scaricare il CV
+#
+# Anche qui viene caricato `styles.css` per garantire coerenza visiva
+# e mantenere il contenuto vicino alla sidebar.
+# =============================================================================
+
+
 st.set_page_config(page_title="Ulisse Fabiani — Portfolio", page_icon="🌿", layout="wide")
 
 # Intestazione colorata e centrale

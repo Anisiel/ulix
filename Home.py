@@ -1,6 +1,25 @@
 import streamlit as st
 from pathlib import Path  # servirà per CV e per check immagini
 
+# =============================================================================
+# STRUTTURA DELLA PAGINA — Home.py (Versione Minimal)
+# -----------------------------------------------------------------------------
+# Questa pagina mostra una versione semplice e "zen" del portfolio.
+# Il layout è diviso in due colonne:
+# - A sinistra: immagini in formato "francobollo"
+# - A destra: contenuto testuale, link e navigazione
+#
+# Comandi principali:
+# - `st.set_page_config(layout="wide")`: layout allineato a sinistra
+# - `st.columns(...)`: struttura a due colonne
+# - `st.markdown(...)`: titoli, link e testo
+# - `st.download_button(...)`: pulsante per scaricare il CV
+#
+# Il file `styles.css` viene caricato per mantenere il layout stabile
+# e vicino alla sidebar, evitando centrature automatiche.
+# =============================================================================
+
+
 st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
 
 # Titolo principale: mostrato una sola volta, indipendentemente dal layout in modo da stare in alto

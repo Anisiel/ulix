@@ -1,28 +1,37 @@
+# =============================================================================
+# STRUTTURA DELLA PAGINA — Portfolio.py (Selettore)
+# -----------------------------------------------------------------------------
+# Questa pagina Streamlit funge da selettore iniziale per il portfolio.
+# Mostra una sidebar con due opzioni:
+# - "Minimal" → carica Home.py
+# - "Ricca" → carica Home_altera.py
+#
+# Il caricamento dinamico avviene tramite `importlib`, che esegue il file
+# selezionato come modulo, evitando problemi di layout e compatibilità.
+#
+# Comandi principali:
+# - `st.set_page_config(...)`: imposta layout e titolo della pagina.
+# - `st.sidebar.radio(...)`: selettore visivo per scegliere la Home.
+# - `importlib.util`: carica il file scelto in modo sicuro.
+#
+# ⚠️ La patch a `set_page_config` è stata rimossa per permettere alle Home
+# di gestire autonomamente il layout.
+# =============================================================================
+
 # selettore.py
 import streamlit as st
 from pathlib import Path
-import runpy
-#import streamlit as _st_mod  # per la patch di set_page_config nelle Home
-import importlib.util
-
+import importlib.util  # ✅ Nuovo: usiamo importlib invece di runpy
 
 # 0) Config base del selettore (sidebar visibile)
 st.set_page_config(
     page_title="Selettore — Portfolio Ulisse",
     page_icon="🔀",
     layout="wide",
-    initial_sidebar_state="expanded"   # sidebar aperta per mostrare il selettore
+    initial_sidebar_state="expanded"  # sidebar aperta per mostrare il selettore
 )
 
-# 1) Forza il "primo run" per evitare che la sidebar sparisca al cambio Home
-#import time  # modifica
-#if "_first_run" not in st.session_state:                 # modifica
-#    st.session_state["_first_run"] = True                # modifica
-#    st.experimental_set_query_params(v=str(time.time())) # modifica
-#    st.rerun()                                           # modifica
-
-
-# 2) Selettore nella SIDEBAR
+# 1) Selettore nella SIDEBAR
 with st.sidebar:
     st.markdown("#### 🧭 Seleziona la Home")
     labels = ["Minimal", "Ricca"]
@@ -30,20 +39,21 @@ with st.sidebar:
     choice = st.radio(" ", labels, index=default_index)
     st.session_state["home_idx"] = labels.index(choice)
 
-# 3) Mappa scelta -> file (entrambi nel root)
+# 2) Mappa scelta -> file (entrambi nel root)
 label_to_file = {
     "Minimal": "Home.py",
-    "Ricca":   "Home_altera.py",
+    "Ricca": "Home_altera.py",
 }
 target = label_to_file[choice]
 target_path = str((Path(__file__).resolve().parent / target).resolve())
 
-# 4) Evita l'errore "set_page_config chiamato più volte" dentro le Home
-#    (patch DOPO la nostra set_page_config qui sopra)
-_st_mod.set_page_config = lambda *args, **kwargs: None
+# 3) Esegui la Home scelta con importlib (invece di runpy)
+def run_home(path):
+    spec = importlib.util.spec_from_file_location("home_module", path)
+    home = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(home)
 
-# 5) Esegui la Home scelta
-runpy.run_path(target_path, run_name="__main__")
+run_home(target_path)
 
-# 6) Non aggiungere altro sotto
+# 4) Stop Streamlit dopo l'esecuzione
 st.stop()
