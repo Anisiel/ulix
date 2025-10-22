@@ -52,9 +52,30 @@ st.markdown("""
     ```
 """)
 
-# =========================
-#  FUNZIONI DI SUPPORTO
-# =========================
+# =============================================================================
+# FUNZIONI DI SUPPORTO: load_bytes e load_text
+# -----------------------------------------------------------------------------
+# Queste due funzioni servono per caricare file dalla cartella "assets"
+# in modo semplice e sicuro, usando la libreria `pathlib`.
+
+# 🔹 load_bytes(rel_path: str) → bytes
+# - Serve per leggere un file in modalità binaria (es. PDF, immagini, script).
+# - Restituisce il contenuto del file come `bytes`, utile per il download.
+# - Il parametro `rel_path` è il percorso relativo del file dentro "assets".
+# - Esempio: se il file è in "assets/bat/script.bat", basta passare "bat/script.bat".
+
+# 🔹 load_text(rel_path: str) → str
+# - Serve per leggere un file di testo (es. .txt, .py, .bat).
+# - Restituisce il contenuto del file come stringa (`str`), utile per visualizzarlo.
+# - Usa la codifica UTF-8 per evitare problemi con caratteri speciali.
+
+# Entrambe le funzioni costruiscono il percorso assoluto del file
+# partendo dalla posizione del file corrente (__file__), risalendo di una cartella
+# e aggiungendo "assets" come cartella base.
+# Questo garantisce che il file venga trovato correttamente anche se il file .py
+# si trova in una sottocartella (es. /pages/).
+
+# =============================================================================
 # --- Percorso cartella assets (pagina si trova in pages/)
 ASSETS = Path(__file__).resolve().parents[1] / "assets"
 

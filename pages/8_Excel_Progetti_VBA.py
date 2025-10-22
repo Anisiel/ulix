@@ -2,14 +2,6 @@
 import streamlit as st
 from pathlib import Path
 
-# =========================
-#  FUNZIONE DI SUPPORTO
-# =========================
-
-# Percorso assoluto della cartella 'assets', partendo dal file corrente (che è in 'pages/')
-ASSETS = Path(__file__).resolve().parents[1] / "assets"
-
-
 # Configurazione della pagina
 st.set_page_config(page_title="Excel - Progetti e VBA", page_icon="📊")
 
@@ -25,87 +17,101 @@ st.divider()
 # Progetto principale e funzione relativa
 # ============================
 
-def mostra_progetto(titolo, data, descrizione, link):
+def mostra_progetto(titolo, data, descrizione, percorso_file):
     with st.expander(f"🗂️ Progetto: {titolo}", expanded=True):
         st.markdown(f"""
         **📅 Data:** {data}
         
         **📝 Descrizione:** {descrizione}
-        
-        **📥 Link al report del progetto:** [Scarica il report]({link})
     """)
-       
+        try:
+            with open(percorso_file, "rb") as file:
+                st.download_button(
+                    label="📥 Scarica il report del progetto",
+                    data=file,
+                    file_name=percorso_file.split("/")[-1],
+                    mime="application/pdf"
+                )
+        except FileNotFoundError:
+            st.error("❌ Il file del report non è stato trovato. Verifica il percorso.")
+
+# Chiamata alla funzione per mostrare il progetto principale
 mostra_progetto(
     titolo="Gestione F24 per crediti d’imposta con Excel, Power Query e VBA",
     data="15/06/2022 - in corso",
     descrizione="Progetto completo per la gestione dei flussi F24 tra Dipartimento e Agenzia delle Entrate, con strumenti Excel e VBA.",
-    link="assets/EsportaCrediti/Esempio_report_progetto.pdf"
+    percorso_file="assets/EsportaCrediti/Esempio_report_progetto.pdf"
 )
 
 # ============================
-# Sottoprogetti e funzioni per mostrare un sottoprogetto con file scaricabile
-# ============================
-
-
-
-
-# Funzione per leggere un file come testo (stringa)
-def load_text(path):
-    # Apre il file in modalità lettura testuale con codifica UTF-8
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
-
-# Funzione per leggere un file come bytes (necessario per il download)
-def load_bytes(path):
-    # Apre il file in modalità binaria, utile per download_button
-    with open(path, "rb") as f:
-        return f.read()
-
+# Sottoprogetti
+# =============================================================================
+# FUNZIONE: mostra_sottoprogetto
+# Questa funzione mostra un sottoprogetto con:
+# - titolo, data, descrizione, tecnologie
+# - eventuali file scaricabili (PDF, TXT, immagini, ecc.)
+# -----------------------------------------------------------------------------
+# Questa funzione serve per visualizzare un "sottoprogetto".
+# Ogni sottoprogetto può contenere:
+# - un titolo
+# - una data
+# - una descrizione
+# - una lista di tecnologie utilizzate
+# - una lista di file associati (es. script, immagini, PDF, ecc.)
+#
+# Per ogni file associato, la funzione:
+# 1. Controlla se il file esiste.
+# 2. Se esiste, mostra un pulsante per scaricarlo.
+# 3. Se il file è di testo o codice (.txt, .py, .bat, .bas), mostra anche il contenuto.
+#
+# Il pulsante di download usa `st.download_button`, che permette all'utente
+# di scaricare il file direttamente dal browser.
+#
+# La funzione è pensata per essere semplice, compatibile con tutti i tipi di file,
+# e facilmente estendibile per altri tipi di contenuti (es. immagini, PDF, ecc.).
+# =============================================================================
 def mostra_sottoprogetto(titolo, data, descrizione, tecnologie, file_paths=None):
-    # Crea un espansore con il titolo del sottoprogetto
-    with st.expander(f"📁 & 📥 Sottoprogetto: {titolo}", expanded=False):
-    
-    # Mostra la data e la descrizione del sottoprogetto
+    # Crea un espansore cliccabile con il titolo del sottoprogetto
+    with st.expander(f"📁 Sottoprogetto: {titolo}", expanded=False):
+        
+        # Mostra le informazioni principali del sottoprogetto
         st.markdown(f"""
         - 📅 **Data:** {data}  
-        - 📝 **Descrizione:** {descrizione}
+        - 📝 **Descrizione:** {descrizione}  
         - 🛠️ **Tecnologie utilizzate:** {", ".join(tecnologie)}
-        """)  
+        """)
 
-    # Se c'è una lista di file associata al sottoprogetto, mostrali insieme a un pulsante di download
+
+        # Se ci sono file associati al sottoprogetto, li mostra uno per uno
         if file_paths:
             for file_path in file_paths:
-                try:
-                    full_path = ASSETS / Path(file_path).relative_to("assets") # Percorso completo del file per accedervi da /pages
-                   
-                   
-                    # Carica il file in modalità binaria per il download
-                    data = load_bytes(full_path)
+                file = Path(file_path)  # Converte la stringa in oggetto Path per gestire meglio il percorso
 
-                    # Estrae solo il nome del file dal percorso
-                    file_name = Path(file_path).name
+                if file.exists():  # Controlla se il file esiste
+                    try:
+                        data = file.read_bytes()  # Legge il contenuto del file in modalità binaria
+                        file_name = file.name     # Estrae solo il nome del file (senza percorso)
 
-                    # Determina il tipo MIME in base all'estensione del file
-                    # text/plain per file leggibili (codice), generico altrimenti
-                    mime = "text/plain" if file_name.endswith((".txt", ".py", ".bat", ".bas")) else "application/octet-stream" # MIME (identificatore generico): dice al browser che tipo di file si sta servendo
+                        # Mostra il pulsante per scaricare il file
+                        # Questo pulsante è visibile e cliccabile se il file è stato letto correttamente
+                        st.download_button(
+                            label=f"⬇️ Scarica: {file_name}",  # Etichetta del pulsante
+                            data=data,                         # Contenuto del file da scaricare
+                            file_name=file_name,               # Nome del file che verrà salvato
+                            mime="application/octet-stream",   # Tipo MIME generico, va bene per quasi tutti i file
+                            use_container_width=True           # Fa occupare al pulsante tutta la larghezza disponibile
+                        )
 
-                    # Mostra un pulsante per scaricare il file
-                    st.download_button(
-                        label=f"📄 Scarica: {file_name}",
-                        data=data,
-                        file_name=file_name,
-                        mime=mime,
-                        use_container_width=True
-                    )
-                    # Espansore per visualizzare il contenuto del file come codice
-                    with st.expander(f"📄 Mostra codice: {file_name}"):
-                        code = load_text(full_path)
-                        st.code(code)
-
-                except FileNotFoundError:
-                    # Mostra errore se il file non esiste
-                    st.error(f"❌ File non trovato. Verifica il percorso.: {file_path}")
-
+                        # Se il file è di testo o codice, mostra anche il contenuto in un espansore
+                        if file.suffix in [".txt", ".py", ".bat", ".bas"]:
+                            with st.expander(f"📄 Mostra contenuto: {file_name}"):
+                                st.code(file.read_text(), language="text")  # Visualizza il contenuto come codice
+                    except Exception as e:
+                        # Mostra un messaggio di errore se qualcosa va storto nella lettura del file
+                        st.error(f"❌ Errore nel caricamento del file: {file_path}\n{e}")
+                else:
+                    # Mostra un messaggio di errore se il file non esiste
+                    st.error(f"❌ File non trovato: {file_path}")
 
 # ============================
 # Sottoprogetti specifici
@@ -117,7 +123,7 @@ mostra_sottoprogetto(
     descrizione="Mini software in VBA per esportare i dati secondo specifiche AdE.",
     tecnologie=["VBA", "Excel"],
     file_paths=[
-        "assets/EsportaCrediti/Esporta crediti.png",
+        "assets/EsportaCrediti/Esporta_Credito_Pubblicita.txt",
         "assets/EsportaCrediti/Esporta_Crediti.txt"
     ]
 )
