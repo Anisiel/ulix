@@ -13,11 +13,11 @@ st.set_page_config(
 )
 
 # 1) Forza il "primo run" per evitare che la sidebar sparisca al cambio Home
-import time  # modifica
-if "_first_run" not in st.session_state:                 # modifica
-    st.session_state["_first_run"] = True                # modifica
-    st.experimental_set_query_params(v=str(time.time())) # modifica
-    st.rerun()                                           # modifica
+#import time  # modifica
+#if "_first_run" not in st.session_state:                 # modifica
+#    st.session_state["_first_run"] = True                # modifica
+#    st.experimental_set_query_params(v=str(time.time())) # modifica
+#    st.rerun()                                           # modifica
 
 
 # 2) Selettore nella SIDEBAR
