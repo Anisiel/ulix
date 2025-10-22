@@ -10,13 +10,24 @@ Questo sito è stato progettato come portfolio interattivo e si compone delle se
 ### 🏠 Homepages
 - Due versioni della homepage sono disponibili: una **minimal** e una **più ricca**, selezionabili tramite un selettore.
 
+### 🧭 Selettore iniziale
+All'avvio del sito, viene mostrata una **sidebar** con un selettore che permette di scegliere tra due versioni della homepage:
+
+- **Minimal**: layout semplice, immagini a sinistra e contenuti essenziali.
+- **Ricca**: layout più elaborato, con galleria immagini, link estesi e navigazione avanzata.
+
+Il selettore è gestito dal file `Portfolio.py`, che utilizza `importlib` per caricare dinamicamente la pagina selezionata, evitando problemi di layout e mantenendo il sito stabile.
+
+Questa struttura consente di esplorare il portfolio in due modalità diverse, a seconda delle preferenze dell’utente.
+
 ### 📄 Pagine interne
 - Le pagine sono organizzate nella cartella `pages/` e includono:
     - **Grafici avanzati**: visualizzazioni interattive basate sul file `grafici_speciali.xlsx`.
     - **Programmini (in)utili**: script `.bat` e `.py` creati per lavoro.
     - **Pubblicazioni**: elenco delle pubblicazioni scientifiche.
     - **Titoli & Certificazioni**: elenco dei titoli accademici e certificazioni professionali.
-
+    - **Progetto in VBA/Excel**: esempio di grande progetto reale concreto ed in corso elaborato per l'Ufficio.
+            
 ### 📊 Dati e grafici
 - I grafici utilizzano dati contenuti nel file `grafici_speciali.xlsx` che si trova nella cartella `repo/` e riportano dati metereologici fittizi.
             

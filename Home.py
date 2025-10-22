@@ -19,6 +19,15 @@ from pathlib import Path  # servirà per CV e per check immagini
 # e vicino alla sidebar, evitando centrature automatiche.
 # =============================================================================
 
+# 🔗 Rimando alla pagina di organizzazione del sito
+# Mostra la descrizione del progetto in alto a destra
+col_left, col_right = st.columns([2, 3])  # proporzioni: sinistra più stretta
+with col_right:
+    with st.expander("📘 Info sul sito"):
+        st.markdown("""
+        Vuoi sapere come è strutturato il sito e come funziona il selettore?  
+        👉 [Vai alla pagina Organizzazione]("pages/0_Organizzazione_portfolio.py")
+                """)
 
 st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
 
