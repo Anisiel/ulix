@@ -2,7 +2,9 @@
 import streamlit as st
 from pathlib import Path
 import runpy
-import streamlit as _st_mod  # per la patch di set_page_config nelle Home
+#import streamlit as _st_mod  # per la patch di set_page_config nelle Home
+import importlib.util
+
 
 # 0) Config base del selettore (sidebar visibile)
 st.set_page_config(
