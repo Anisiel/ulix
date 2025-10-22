@@ -15,13 +15,13 @@ st.markdown(
 )
 
 # --- Stili CSS per migliorare la responsiveness ---------------------------------
-try:
-	css_path = Path("assets/styles.css")
-	if css_path.exists():
-		st.markdown(f"<style>{css_path.read_text()}</style>", unsafe_allow_html=True)
-except Exception:
-	# fall back: niente CSS esterno se qualcosa va storto
-	pass
+#try:
+#	css_path = Path("assets/styles.css")
+#	if css_path.exists():
+#		st.markdown(f"<style>{css_path.read_text()}</style>", unsafe_allow_html=True)
+#except Exception:
+#	# fall back: niente CSS esterno se qualcosa va storto
+#	pass
 
 # —— Parametri modificabili facilmente ——————————————————————————
 STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
