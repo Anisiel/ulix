@@ -51,7 +51,7 @@ except Exception:
 	pass
 
 # —— Parametri modificabili facilmente ——————————————————————————
-STAMP_WIDTH = 180          # “francobollo” (px). Provare anche 80, 96, 120...
+STAMP_WIDTH = 300          # “francobollo” (px). Provare anche 80, 96, 120...
 GRID_COLS   = 3           # quante immagini per riga
 
 # Elenco immagini (aggiungerne/rimuoverne senza rompere nulla).
@@ -61,7 +61,6 @@ IMMAGINI = [
 	{"src": "assets/img/hero2.jpg", "note":"[Le Discret](https://spencerart.ku.edu/art/collections-online/object/9141)"},
 	{"src": "assets/img/hero3.jpg", "note":"[San Govanni Battista](https://it.wikipedia.org/wiki/San_Giovanni_Battista_(Leonardo))"},
 ]
-
 
 # helper minimal per visualizzare le immagini come francobolli
 def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
