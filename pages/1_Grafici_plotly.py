@@ -32,12 +32,15 @@ st.title("📊 Grafici interattivi con Plotly utilizzando dati meteo inventati")
 st.markdown("""
 Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con workaround complicati tipo duplicare dati, formattazioni complesse, macro Vba),
 mettendo in evidenza l'**interattività** di Plotly. 
-Nell'altra pagina [Grafici con Altair e Echarts](pages/2_Grafici_Altair_Echarts.py) riporto 2 grafici identici ma realizzati con altre librerie (Altair e Echarts).
+
+Nella pagina [Grafici con Altair e Echarts](pages/2_Grafici_Altair_Echarts.py) riporto 2 grafici identici ma realizzati con altre librerie (Altair e Echarts).
 
 I grafici sono realizzati a partire dai dati di un file excel che è caricato in `repo/grafici_speciali.xlsx`. 
 Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
-""")
 
+            
+Usa ***il selettore e i comandi in alto a destra*** di ciascun grafico per vedere le potenzialità delle librerie python
+""")
 # ======================================================
 # STEP B: Caricamento dati da Excel e preparazione
 # - Legge il file Excel
@@ -125,9 +128,9 @@ st.markdown("""
 """)
 st.divider()
 # ===========================
-# 2) Scatter plot: Temperatura + Pioggia (punti) nel tempo
+# 1ter) Scatter plot: Temperatura + Pioggia (punti) nel tempo
 # ===========================
-st.subheader("2) Temperatura (linea) + Pioggia (punti) nel tempo")
+st.subheader("1ter) Temperatura (linea) + Pioggia (punti) nel tempo")
 
 # STEP 1: Ordino i dati per Data (evita "zig-zag" della linea)
 df = df.sort_values("Data").reset_index(drop=True)
