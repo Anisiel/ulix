@@ -7,13 +7,17 @@ st.title("📁 Come è organizzato e costruito questo sito?")
 st.markdown("""
 Questo sito è stato progettato come portfolio interattivo e lo scopo è far valutare per quanto possibile le competenze di python
             e il curriculum.
+            
             Per realizzarlo è stata necessaria una fase di progettazione e una di realizzazione.
             La velocità realizzativa (pochi giorni) è stata di molto supportata dall'intelligenza artificiale.
             Il codice sorgente è disponibile su Github (vedi la sezione dedicata più avanti in questa pagina).
             Il sito è realizzato in Streamlit (gratuiti e open source motivo dei ritardi di visualizzazione).
             
-            Ad ogni modo il porfolio si compone delle seguenti sezioni:
+""")
 
+st.markdown("""
+Ad ogni modo il porfolio si compone delle seguenti sezioni:
+            
 ### 🏠 Homepages
 - Due versioni della homepage sono disponibili: una **minimal** e una **più ricca**, selezionabili tramite un selettore.
 
@@ -32,8 +36,8 @@ Questa struttura consente di esplorare il portfolio in due modalità diverse, a 
     - **Grafici avanzati**: visualizzazioni interattive basate sul file `grafici_speciali.xlsx`.
     - **Programmini (in)utili**: script `.bat` e `.py` creati per lavoro.
     - **Pubblicazioni**: elenco delle pubblicazioni scientifiche.
-    - **Titoli & Certificazioni**: elenco dei titoli accademici e certificazioni professionali.
-    - **Progetto in VBA/Excel**: esempio di grande progetto reale concreto ed in corso elaborato per l'Ufficio.
+    - **Titoli & Certificazioni**:in pagine distinte l'elenco dei titoli accademici e delle certificazioni professionali.
+    - **Progetto in VBA/Excel/Query**: esempio di grande progetto ***reale concreto ed in corso*** elaborato per l'Ufficio.
             
 ### 📊 Dati e grafici
 - I grafici utilizzano dati contenuti nel file `grafici_speciali.xlsx` che si trova nella cartella `repo/` e riportano dati metereologici fittizi.
