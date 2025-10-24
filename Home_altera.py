@@ -43,10 +43,14 @@ st.markdown(
 
 # Galleria immagini in griglia centrale
 IMMAGINI = [
-    {"src": "assets/img/hero.jpg",  "note": "Mocking Face"},
-    {"src": "assets/img/hero2.jpg", "note": "Le Discret"},
-    {"src": "assets/img/hero3.jpg", "note": "San Govanni Battista"},
+    {"src": "assets/img/hero.jpg", "note": "[Mocking Face](https://en.wikipedia.org/wiki/Joseph_Ducreux)"},
+    {"src": "assets/img/hero2.jpg", "note": "[Le Discret](https://spencerart.ku.edu/art/collections-online/object/9141)"},
+    {"src": "assets/img/hero3.jpg", "note": "[San Govanni Battista](https://it.wikipedia.org/wiki/San_Giovanni_Battista_(Leonardo))"},
 ]
+
+
+
+
 
 def render_gallery(items):
     safe_items = [it for it in items if Path(it["src"]).exists()]

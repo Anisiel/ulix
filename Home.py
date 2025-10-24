@@ -91,10 +91,7 @@ with col_main: # testi in colonna centrale
 	#### ...A destra un ritratto "personale" che mi accompagna da sempre😄
 	""")
 
-	
 	st.caption("Portfolio interamente programmato in python no wordpress")
-
-
 
 with col_extra:
     # 🔧 MODIFICA: aggiunta immagine extra a destra del testo
