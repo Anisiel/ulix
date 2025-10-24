@@ -6,9 +6,6 @@
 # ----------------------------------
 # Dipendenze: streamlit, pandas, altair, pyecharts, streamlit-echarts5, openpyxl
 
-
-
-
 import os
 import streamlit as st
 import pandas as pd
@@ -20,12 +17,17 @@ from streamlit_echarts5 import st_pyecharts  # componente Streamlit ↔ ECharts
 st.markdown("""
 Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con workaround complicati tipo duplicare dati, formattazioni complesse, macro Vba),
 mettendo in evidenza due librerie che permettono di creare grafici dinamici (Altair e ECharts).
-I grafici sono identici a quelli realizzati con Plotly, permettendo cosi di confrontare le librerie.
-Clicca qui per visualizzare la prima pagina: [Grafici di Plotly](pages/1_Grafici_plotly.py).
+
+I grafici sono uguali a quelli realizzati con Plotly, cosi si possono confrontare le librerie.
+Clicca qui per visualizzare la pagina: [Grafici di Plotly](pages/1_Grafici_plotly.py).
 
 Tutti grafici sono realizzati a partire da dati presenti su un file excel caricato in `repo/grafici_speciali.xlsx`. 
             Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
+
+            
+Ricorda che puoi utilizzare il ***selettore e i comandi in alto a destra*** per interagire con i grafici.                        
 """)
+
 
 # ---------- [STEP 1] Config pagina ----------
 st.set_page_config(page_title="Altair + ECharts", page_icon="📊", layout="wide")
@@ -44,7 +46,7 @@ st.dataframe(df.head(), use_container_width=True)
 st.divider()
 
 # =========================================================
-# GRAFICO A) ALTair — Linea Temperatura + Punti Pioggia
+# GRAFICO 1) ALTair — Linea Temperatura + Punti Pioggia
 #  - Obiettivo: mostrare Temperatura nel tempo (linea) e i giorni di pioggia (punti)
 #  - Extra: doppio asse Y (indipendente) e selezione intervallo con riquadro di overview
 #  - Altair: layering + resolve_scale(y='independent') + selection interval
@@ -53,7 +55,7 @@ st.divider()
 #       - Selezioni/brush: Altair selections notebook                ➜ vedi cite
 # =========================================================
 
-st.subheader("A) Altair — Linea (Temperatura) + Punti (Pioggia)")
+st.subheader("1) Altair — Linea (Temperatura) + Punti (Pioggia)")
 # [A1] Prepara subset per i soli giorni con pioggia > 0 (punti verdi)
 rain = df[df["Pioggia_mm"] > 0].copy()
 
@@ -94,21 +96,20 @@ altair_chart = alt.vconcat(upper, lower).resolve_scale(x='shared')
 st.altair_chart(altair_chart, use_container_width=True)
 
 st.caption(
-    "Altair consente assi indipendenti in grafici sovrapposti e selezioni (brush) "
+    "Altair consente assi indipendenti in grafici sovrapposti e selezioni"
     "per filtrare dinamicamente il pannello principale. "
-    "Vedi doc su `resolve_scale` e selezioni Altair."
 )
 
 st.divider()
 
 # =========================================================
-# GRAFICO B) pyecharts — Calendar Heatmap dei mm/giorno
+# GRAFICO 2) pyecharts — Calendar Heatmap dei mm/giorno
 #  - Obiettivo: visualizzare i mm di pioggia per ogni giorno su un calendario annuale
 #  - pyecharts ha un tipo 'Calendar' pronto all'uso; Streamlit ↔ ECharts con streamlit-echarts5
 #    Riferimenti: galleria pyecharts e componente Streamlit             ➜ vedi cite
 # =========================================================
 
-st.subheader("B) ECharts (pyecharts) — Calendar heatmap della pioggia")
+st.subheader("2) ECharts (pyecharts) — Calendar heatmap della pioggia")
 
 # [B1] Seleziona l'anno da mostrare (se i dati coprono più anni)
 years = sorted(df["Data"].dt.year.unique())
@@ -136,6 +137,7 @@ cal = (
 st_pyecharts(cal, height="340px")
 
 st.caption(
-    "Il calendario heatmap di ECharts/pyecharts è un grafico non nativo in Excel; "
-    "il componente `streamlit-echarts5` lo integra in Streamlit."
+    "Il calendario heatmap di ECharts/pyecharts è un grafico che non esiste in Excel; "
+    "E' uno dei grafici che preferisco perchè molto immediato e colorato"
+    "Usa il selettore per visualizzare i giorni di pioggia"
 )
