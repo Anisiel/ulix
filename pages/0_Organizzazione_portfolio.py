@@ -5,7 +5,14 @@ st.set_page_config(page_title="Organizzazione del sito", page_icon="📁")
 st.title("📁 Come è organizzato e costruito questo sito?")
 
 st.markdown("""
-Questo sito è stato progettato come portfolio interattivo e si compone delle seguenti sezioni:
+Questo sito è stato progettato come portfolio interattivo e lo scopo è far valutare per quanto possibile le competenze di python
+            e il curriculum.
+            Per realizzarlo è stata necessaria una fase di progettazione e una di realizzazione.
+            La velocità realizzativa (pochi giorni) è stata di molto supportata dall'intelligenza artificiale.
+            Il codice sorgente è disponibile su Github (vedi la sezione dedicata più avanti in questa pagina).
+            Il sito è realizzato in Streamlit (gratuiti e open source motivo dei ritardi di visualizzazione).
+            
+            Ad ogni modo il porfolio si compone delle seguenti sezioni:
 
 ### 🏠 Homepages
 - Due versioni della homepage sono disponibili: una **minimal** e una **più ricca**, selezionabili tramite un selettore.
