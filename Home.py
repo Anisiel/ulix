@@ -57,10 +57,11 @@ GRID_COLS   = 3           # quante immagini per riga
 # Elenco immagini (aggiungerne/rimuoverne senza rompere nulla).
 # "note" è una riga opzionale: se stringa vuota, NON viene mostrata.
 IMMAGINI = [
-	{"src": "assets/img/hero.jpg",  "note": "Mocking Face"},
-	{"src": "assets/img/hero2.jpg", "note": "Le Discret"},
-	{"src": "assets/img/hero3.jpg", "note": "San Govanni Battista"},
+	{"src": "assets/img/hero.jpg","note":  "[Mocking Face](https://en.wikipedia.org/wiki/Joseph_Ducreux)"},
+	{"src": "assets/img/hero2.jpg", "note":"[Le Discret](https://spencerart.ku.edu/art/collections-online/object/9141)"},
+	{"src": "assets/img/hero3.jpg", "note":"[San Govanni Battista](https://it.wikipedia.org/wiki/San_Giovanni_Battista_(Leonardo))"},
 ]
+
 
 # helper minimal per visualizzare le immagini come francobolli
 def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
