@@ -24,10 +24,9 @@ from pathlib import Path  # servirà per CV e per check immagini
 col_left, col_right = st.columns([2, 3])  # proporzioni: sinistra più stretta
 with col_right:
     with st.expander("📘 Info sul selettore e sul portfolio"):
-        st.markdown("""
-        Vuoi sapere come è strutturato il sito e come funziona il selettore?  
-        👉 [***Organizzazione portfolio***]("pages/0_Organizzazione_portfolio.py")
-                """)
+        st.markdown("Vuoi sapere come è strutturato il sito e come funziona il selettore?")
+        if st.button("👉 ***Organizzazione portfolio***"):
+            st.switch_page("pages/0_Organizzazione_portfolio.py")                
 
 st.set_page_config(page_title="Ulisse Fabiani", page_icon="🌱", layout="wide")  #  wide = allineamento a sinistra
 
