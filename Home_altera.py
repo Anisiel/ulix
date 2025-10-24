@@ -23,10 +23,10 @@ import base64
 # Mostra la descrizione del progetto in alto a destra
 col_left, col_right = st.columns([2, 3])  # proporzioni: sinistra più stretta
 with col_right:
-    with st.expander("📘 Info sul sito"):
+    with st.expander("📘 Info sul selettore e sul portfolio"):
         st.markdown("""
         Vuoi sapere come è strutturato il sito e come funziona il selettore?  
-        👉 [Vai alla pagina Organizzazione]("pages/0_Organizzazione_portfolio.py")
+        👉 [***Organizzazione portfolio***]("pages/0_Organizzazione_portfolio.py")
                 """)
 
 st.set_page_config(page_title="Ulisse Fabiani — Portfolio", page_icon="🌿", layout="wide")
@@ -36,7 +36,7 @@ st.markdown(
     """
     <div style='text-align:center;padding:2rem;background-color:#f0f2f6;border-radius:10px'>
         <h1 style='margin-bottom:0.2em'>🌟 Ulisse Fabiani</h1>
-        <p style='font-size:1.2em'>Benvenuto nel mio portfolio interattivo — versione ricca</p>
+        <p style='font-size:1.2em'>Benvenuto nel mio portfolio interattivo — Home page versione ricca</p>
     </div>
     """,
     unsafe_allow_html=True
