@@ -51,7 +51,7 @@ except Exception:
 	pass
 
 # —— Parametri modificabili facilmente ——————————————————————————
-STAMP_WIDTH = 120          # “francobollo” (px). Provare anche 80, 96, 120...
+STAMP_WIDTH = 180          # “francobollo” (px). Provare anche 80, 96, 120...
 GRID_COLS   = 3           # quante immagini per riga
 
 # Elenco immagini (aggiungerne/rimuoverne senza rompere nulla).
@@ -81,17 +81,29 @@ def render_thumbs(items, width=STAMP_WIDTH, cols=GRID_COLS):
 # Single active layout (keep only this)
 st.divider()
 
-col_img, col_main = st.columns([1, 3], gap="large")
+col_img, col_main, col_extra = st.columns([1, 3, 1], gap="large")
 with col_img:
-	render_thumbs(IMMAGINI)  # immagini a sinistra
-	# (left column only contains images)
-with col_main:
-	#  st.header("Ulisse Fabiani — Portfolio")
-	st.title("Hello, lettore! 👋")
-	st.subheader("Dammi una buona valutazione! 😄")
+	render_thumbs(IMMAGINI)  # immagini in colonna sinistra	
+with col_main: # testi in colonna centrale
+	st.subheader("Hello, lettore! 👋")
+	st.markdown("""
+	#### A sinistra tre immagini ironiche che raccontano la mia personalità...
+	#### ...A destra un ritratto "personale" che mi accompagna da sempre😄
+	""")
+
+	
 	st.caption("Portfolio interamente programmato in python no wordpress")
 
-# Dopo le due colonne  ci sono i link esterni, interni e poi il link al CV
+
+
+with col_extra:
+    # 🔧 MODIFICA: aggiunta immagine extra a destra del testo
+    extra_img_path = "assets/img/hero1.jpg"
+    if Path(extra_img_path).exists():
+        st.image(extra_img_path, caption="[Ulisse su Wikipedia](https://it.wikipedia.org/wiki/Ulisse)", use_container_width=True)
+
+
+# Dopo le immagini  ci sono i link esterni, interni e poi il link al CV
 st.divider()
 # Link esterni in colonna e non affiancati
 st.markdown(

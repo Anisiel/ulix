@@ -53,6 +53,7 @@ def render_gallery(items):
     if not safe_items:
         return
     st.markdown("### 🎨 Galleria")
+    st.caption ("##### qui mostro solo le tre immagini in un box che ne uniformano le dimensioni")
     cols = st.columns(3)
     for col, it in zip(cols, safe_items):
 

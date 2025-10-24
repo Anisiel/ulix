@@ -10,7 +10,7 @@ Questo sito è  progettato come portfolio interattivo con lo scopo di far valuta
             
             Per realizzarlo è stata necessaria una fase di progettazione e una di realizzazione.
             La velocità realizzativa (pochi giorni) è stata resa possibile dal supporto dell'intelligenza artificiale,
-            che nella programmazione ha il suo ***"core"***.
+            che nel supporto alla programmazione ha il suo punto di forza più grande.
             Il codice sorgente è disponibile su Github (vedi la sezione dedicata più avanti in questa pagina).
             Il sito è realizzato in Streamlit (open source e gratuito, motivo dei ritardi di visualizzazione).
             
@@ -23,7 +23,7 @@ Ad ogni modo il porfolio si compone delle seguenti sezioni:
 - Due versioni della homepage sono disponibili: una **minimal** e una **più ricca**, selezionabili tramite un selettore.
 
 ### 🧭 Selettore iniziale
-All'avvio del sito, viene mostrata una **sidebar** con un selettore che permette di scegliere tra due versioni della homepage:
+All'avvio del sito, viene mostrata, in basso nel frame di sinistra, una **sidebar** con un selettore che permette di scegliere tra due versioni della homepage:
 
 - **Minimal**: layout semplice, immagini a sinistra e contenuti essenziali.
 - **Ricca**: layout più elaborato, con galleria immagini, link estesi e navigazione avanzata.
