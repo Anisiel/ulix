@@ -61,7 +61,7 @@ Grazie all'integrazione con Streamlit tramite `streamlit-folium`, possiamo visua
 
 # --------------------------- CARICAMENTO DATI ---------------------------
 # Costruisce il percorso al file JSON contenente le sedi PCM
-json_path = os.path.join("repo", "sedi_pcm.json")
+json_path = os.path.join("repo", "sedi_pcm_con_distanze.json")
 
 # Apre e carica il file JSON
 with open(json_path, "r", encoding="utf-8") as f:

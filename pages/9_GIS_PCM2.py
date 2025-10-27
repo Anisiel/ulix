@@ -8,31 +8,15 @@
 # - streamlit-folium: per integrare le mappe Folium direttamente in Streamlit
 # - json: per leggere dati strutturati con coordinate e attributi associati
 #
-# Il dataset contiene 10 sedi istituzionali legate alla Presidenza del Consiglio dei Ministri (PCM),
-# con informazioni geografiche e fittizie (rischio sismico, distanza da Palazzo Chigi,
+# Il dataset contiene "x" sedi istituzionali fittizie legate alla Presidenza del Consiglio dei Ministri (PCM),
+# con informazioni geografiche e non reali (rischio sismico, distanza da Palazzo Chigi,
 # tempo di percorrenza). I dati sono visualizzati su mappa con:
-# - una **Heatmap** che rappresenta il rischio sismico in modo continuo (effetto raster)
+# - una Heatmap che rappresenta il rischio sismico in modo continuo (effetto raster)
 # - marker puntuali opzionali per popup informativi
 #
 # Questo modulo dimostra come Python possa essere usato per unire visualizzazione,
 # analisi e narrazione spaziale in modo semplice e immediato.
 # ------------------------------------------------------------------------------
-
-
-
-# =============================================================================
-# 📌 Streamlit + Folium Heatmap (raster-like) sulle sedi PCM
-# Fix: rimosso "Stamen Terrain" (causava "Custom tiles must have an attribution")
-#      e sostituito con basemap sicure (OSM, CartoDB Positron, Esri World Imagery)
-#
-# Dipendenze:
-#   pip install streamlit folium streamlit-folium
-# Esecuzione:
-#   streamlit run questo_file.py
-# Dati:
-#   repo/sedi_pcm.json con chiavi minime: nome, lat, lon
-#   e campo numerico: rischio_sismico (1..5) per la Heatmap.
-# =============================================================================
 
 import os
 import json
@@ -44,34 +28,47 @@ from streamlit_folium import st_folium
 # --------------------------- PAGE CONFIG ---------------------------
 st.set_page_config(page_title="PCM - Mappa raster-like (Heatmap)", layout="wide")
 
-st.title("🗺️ PCM — Mappa raster‑like (Heatmap) da dati JSON")
-st.markdown(
-    """
-Questa pagina mostra una **mappa con effetto raster** (Heatmap) creata a partire dai punti nel JSON.
-- Il **calore** deriva da **`rischio_sismico`** (scala 1–5).
-- Sotto c’è una **basemap raster** (tile XYZ) con **attribuzioni corrette**.
-- I **marker** (opzionali) mostrano popup/tooltip informativi.
-"""
-)
+st.title("🗺️ Esempio di GIS:  Mappa da dati JSON")
 
 st.markdown("""
-### 📍 Mappa delle sedi PCM
+### 📍 Mappa delle sedi PCM (reali e fittizie) con dati vari 
 
 Questa pagina mostra un esempio di **GIS (Geographic Information System)** realizzato in Python.  
 Un GIS consente di raccogliere, visualizzare e analizzare dati geolocalizzati—cioè legati a coordinate geografiche.  
 
-In questo caso, utilizziamo Python per costruire una mappa interattiva delle sedi della **Presidenza del Consiglio dei Ministri (PCM)**, associando a ciascuna sede informazioni descrittive e un indice fittizio di **rischio sismico**.  
+In questo caso, utilizziamo Python per costruire una mappa interattiva delle sedi della **Presidenza del Consiglio dei Ministri (PCM)**, associando a ciascuna sede informazioni descrittive e un indice **fittizio** di **rischio sismico**.  
 
 La mappa è composta da:
 - una **Heatmap** che visualizza il rischio sismico come superficie continua (effetto raster);
+    - cos'è una Heatmap?        
+        - Una Heatmap è una rappresentazione grafica che mostra la distribuzione di un fenomeno continuo usando colori.
+        - Nel nostro caso ogni sede ha un valore di rischio sismico (da 1 a 5). La Heatmap prende questi punti e li “sfuma”, creando macchie colorate proporzionali al rischio.
+        Il risultato è simile a una mappa raster, perché vedi una superficie continua con gradiente cromatico (verde → giallo → rosso).
+    - Perchè serve?
+        - E' utile perchè permette di percepire immediatamente le zone più critiche (rosse) e quelle più sicure (verdi), senza dover leggere ogni singolo marker.
+
+e da:
+
 - una **basemap raster** (OpenStreetMap, CartoDB, Esri) per il contesto cartografico;
-- marker puntuali opzionali con popup informativi.
+    - cos'è una basemap raster?
+        - Una basemap raster è una mappa di sfondo composta da tasselli (tiles) già renderizzati, che forniscono il contesto geografico.
+            Esempi:
+            - OpenStreetMap: stradale, dettagliata.
+            - CartoDB Positron: chiara, ideale per sovrapporre dati.
+            - Esri World Imagery: satellitare.
+    - Perché serve? 
+        - La Heatmap da sola non basta: senza una ***basemap*** non sapresti collocare spazialmente i punti di maggiore interesse. 
+            La basemap permette di individuare il contesto geografico e di evidenziare eventuali punti di interesse ("marker).
+""")
+
+st.markdown("""
+### 🧭 La struttura dei dati
 
 I dati sono strutturati in formato **JSON**, un linguaggio leggibile e flessibile.  
 Se si parte da un file Excel o CSV, è possibile convertirlo in JSON usando strumenti online come:
-- [ConvertCSV](https://www.convertcsvson.htm
-- https://tableconvert.com/excel-to-json
+- https://tableconvert.com/csv-to-json (csv) oppure https://tableconvert.com/excel-to-json (xlsx)
 - https://csvjson.com/csv2json
+
 
 Il dataset include anche:
 - `rischio_sismico`: indice fittizio di pericolosità (da 1 a 5);
@@ -96,16 +93,14 @@ Folium si basa su Leaflet.js e permette di aggiungere:
 Grazie all'integrazione con Streamlit tramite `streamlit-folium`, possiamo visualizzare direttamente le mappe nel sito, rendendo l'esperienza fluida e dinamica.
 """)
 
-
 # --------------------------- CARICAMENTO DATI ---------------------------
-json_path = os.path.join("repo", "sedi_pcm.json")
+json_path = os.path.join("repo", "sedi_pcm_con_distanze.json")
 if not os.path.exists(json_path):
     st.error(
         f"❌ File non trovato: `{json_path}`.\n"
-        "Crea la cartella `repo` accanto a questo script e inserisci `sedi_pcm.json`."
+        "Crea la cartella `repo` accanto a questo script e inserisci `sedi_pcm_con_distanze.json`."
     )
     st.stop()
-
 try:
     with open(json_path, "r", encoding="utf-8") as f:
         sedi = json.load(f)
@@ -129,8 +124,7 @@ with st.expander("🎚️ Regolazioni visive (opzionali)"):
 # Centro iniziale su Lazio/Centro Italia
 m = folium.Map(location=[41.9, 12.5], zoom_start=7, control_scale=True)
 
-# ✅ Basemap con attribuzioni corrette
-
+# Basemap con attribuzioni corrette
 # 1) OpenStreetMap (built-in): ha già attribution interna
 folium.TileLayer('OpenStreetMap', name='OpenStreetMap').add_to(m)
 
@@ -149,10 +143,6 @@ folium.TileLayer(
     attr='Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community',
     control=True
 ).add_to(m)
-
-# ⛔️ RIMOSSO:
-# folium.TileLayer('Stamen Terrain', name='Terreno').add_to(m)
-# Motivo: in molte installazioni non è un provider riconosciuto e viene trattato come "custom" senza attr → ValueError.
 
 # --------------------------- PREPARAZIONE HEATMAP ---------------------------
 heat_data = []
