@@ -1,11 +1,12 @@
+# Importa le librerie necessarie
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
 import json
 import os
 
+# Imposta il titolo della pagina e il layout largo
 st.set_page_config(page_title="Esempio GIS PCM", layout="wide")
-
 
 # ------------------------------------------------------------------------------
 # 📍 Esempio GIS PCM 
@@ -21,7 +22,6 @@ st.set_page_config(page_title="Esempio GIS PCM", layout="wide")
 #
 # Questo modulo dimostra come Python possa essere usato per unire visualizzazione, analisi e narrazione spaziale.
 # ------------------------------------------------------------------------------
-
 
 st.markdown("""
 ### 📍 Mappa delle sedi PCM
@@ -58,22 +58,42 @@ Folium si basa su Leaflet.js e permette di aggiungere marker, popup, layer temat
 Grazie all'integrazione con Streamlit tramite `streamlit-folium`, possiamo visualizzare direttamente le mappe nel sito, rendendo l'esperienza fluida e dinamica.
 """)
 
-# Percorso al file JSON
+
+# --------------------------- CARICAMENTO DATI ---------------------------
+# Costruisce il percorso al file JSON contenente le sedi PCM
 json_path = os.path.join("repo", "sedi_pcm.json")
 
-# Carica dati
+# Apre e carica il file JSON
 with open(json_path, "r", encoding="utf-8") as f:
     sedi = json.load(f)
 
+# --------------------------- MENU A TENDINA ---------------------------
+# ✅ MODIFICA: aggiunta menu per selezionare una sede specifica
+nomi_sedi = [s["nome"] for s in sedi]  # Estrae i nomi delle sedi
+sede_selezionata = st.selectbox("Seleziona una sede da visualizzare sulla mappa:", nomi_sedi)
+
+# Pulsanti per visualizzare mappe tematiche
+tema_distanza = st.button("Visualizza mappa per distanza da Palazzo Chigi")
+tema_allerta = st.button("Visualizza mappa per livello di allerta")
+
+# Colori per livello allerta
+colori_allerta = {
+    1: "#2ECC71",  # verde
+    2: "#A9DFBF",  # verde chiaro
+    3: "#F7DC6F",  # giallo
+    4: "#F39C12",  # arancione
+    5: "#E74C3C"   # rosso
+}
+
+# --------------------------- CREAZIONE MAPPA ---------------------------
 # Crea mappa
 mappa = folium.Map(location=[41.5000, 13.0000], zoom_start=8)
 
-# Colori per livello allerta
-colori = {1: "verde", 2: "verde chiaro", 3: "giallo", 4: "arancione", 5: "rosso"}
-
-# Aggiungi marker
+# --------------------------- AGGIUNTA MARKER ---------------------------
+# Cicla su tutte le sedi per aggiungere marker tematici
 for sede in sedi:
-    popup = f"""
+   # Costruisce il contenuto del popup con informazioni dettagliate
+    popup = folium.Popup (f"""
     <b>{sede['nome']}</b><br>
     {sede['funzione']}<br>
     Accessibilità: {sede['accessibilita']}<br>
@@ -81,19 +101,44 @@ for sede in sedi:
     Distanza: {sede['distanza_da_palazzo_chigi_km']} km<br>
     Tempo: {sede['tempo_percorrenza_min']} min<br>
     Note: {sede['note']}
-    """
-    folium.CircleMarker(
-        location=[sede["lat"], sede["lon"]],
-        radius=6,
-        color=colori.get(sede["livello_allerta"], "gray"),
-        fill=True,
-        fill_opacity=0.7,
-        popup=popup
+    """, max_width=300)
+
+   # Determina il colore del marker in base al tema selezionato
+    colore = colori_allerta.get(sede["livello_allerta"], "gray")
+
+    if tema_distanza:
+        # colore in base alla distanza
+        distanza = sede["distanza_da_palazzo_chigi_km"]
+        if distanza < 5:
+            colore = "#3498DB"  # blu
+        elif distanza < 15:
+            colore = "#1ABC9C"  # verde acqua
+        else:
+            colore = "#9B59B6"  # viola
+
+    elif tema_allerta:
+        # colore in base al livello di allerta
+        colore = colori_allerta.get(sede["livello_allerta"], "gray")
+
+# --------------------------- MARKER SEDE SELEZIONATA ---------------------------
+# aggiunta marker blu per la sede selezionata
+sede_info = next((s for s in sedi if s["nome"] == sede_selezionata), None)
+if sede_info:
+    folium.Marker(
+        location=[sede_info["lat"], sede_info["lon"]],
+        popup=f"<b>{sede_info['nome']}</b>",
+        icon=folium.Icon(color="blue", icon="info-sign")
     ).add_to(mappa)
 
-# Mostra mappa
-st_folium(mappa, width=900)
+# --------------------------- VISUALIZZAZIONE MAPPA ---------------------------
+# Mostra la mappa interattiva
+st.markdown("### 🗺️ Mappa interattiva delle sedi PCM")
+st_folium(mappa, width=1000, height=600)
 
-
-
-
+# --------------------------- VISUALIZZAZIONE TABELLA ---------------------------
+# aggiunta tabella interattiva con i dati delle sedi
+st.markdown("""
+            ### 📋 Tabella delle sedi PCM
+            ###### ***scorrere verso destra per visualizzare tutte le colonne***
+             """)
+st.dataframe(sedi)

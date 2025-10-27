@@ -8,7 +8,8 @@
     "note": "Ingresso da Piazza Colonna",
     "livello_allerta": 5,
     "distanza_da_palazzo_chigi_km": 0.0,
-    "tempo_percorrenza_min": 0
+    "tempo_percorrenza_min": 0,
+    "rischio_sismico": 3
   },
   {
     "nome": "Villa Doria Pamphilj",
@@ -19,7 +20,8 @@
     "note": "Sede di incontri internazionali",
     "livello_allerta": 4,
     "distanza_da_palazzo_chigi_km": 3.2,
-    "tempo_percorrenza_min": 12
+    "tempo_percorrenza_min": 12,
+    "rischio_sismico": 2
   },
   {
     "nome": "Dipartimento della Protezione Civile",
@@ -30,7 +32,8 @@
     "note": "Sede operativa in Via Vitorchiano",
     "livello_allerta": 5,
     "distanza_da_palazzo_chigi_km": 8.5,
-    "tempo_percorrenza_min": 20
+    "tempo_percorrenza_min": 20,
+    "rischio_sismico": 5
   },
   {
     "nome": "Dipartimento Funzione Pubblica",
@@ -41,7 +44,8 @@
     "note": "Ingresso da Via della Mercede",
     "livello_allerta": 3,
     "distanza_da_palazzo_chigi_km": 1.5,
-    "tempo_percorrenza_min": 6
+    "tempo_percorrenza_min": 6,
+    "rischio_sismico": 5
   },
   {
     "nome": "Palazzo Vidoni",
@@ -52,7 +56,8 @@
     "note": "Edificio storico",
     "livello_allerta": 3,
     "distanza_da_palazzo_chigi_km": 0.3,
-    "tempo_percorrenza_min": 2
+    "tempo_percorrenza_min": 2,
+    "rischio_sismico": 3
   },
   {
     "nome": "Palazzo Valentini",
@@ -63,7 +68,8 @@
     "note": "Presenza di vincoli architettonici",
     "livello_allerta": 2,
     "distanza_da_palazzo_chigi_km": 0.6,
-    "tempo_percorrenza_min": 3
+    "tempo_percorrenza_min": 3,
+    "rischio_sismico": 4
   },
   {
     "nome": "Palazzo Montecitorio",
@@ -74,7 +80,8 @@
     "note": "Sede parlamentare",
     "livello_allerta": 4,
     "distanza_da_palazzo_chigi_km": 0.3,
-    "tempo_percorrenza_min": 2
+    "tempo_percorrenza_min": 2,
+    "rischio_sismico": 6
   },
   {
     "nome": "Palazzo Madama",
@@ -85,7 +92,8 @@
     "note": "Sede parlamentare",
     "livello_allerta": 4,
     "distanza_da_palazzo_chigi_km": 0.7,
-    "tempo_percorrenza_min": 3
+    "tempo_percorrenza_min": 3,
+    "rischio_sismico": 5
   },
   {
     "nome": "Palazzo Spada",
@@ -96,7 +104,8 @@
     "note": "Edificio storico",
     "livello_allerta": 2,
     "distanza_da_palazzo_chigi_km": 1.0,
-    "tempo_percorrenza_min": 5
+    "tempo_percorrenza_min": 5,
+    "rischio_sismico": 2
   },
   {
     "nome": "Scuola Nazionale dell'Amministrazione (Caserta)",
@@ -107,6 +116,33 @@
     "note": "Sede distaccata",
     "livello_allerta": 2,
     "distanza_da_palazzo_chigi_km": 180.0,
-    "tempo_percorrenza_min": 120
+    "tempo_percorrenza_min": 120,
+    "rischio_sismico": 7
+  },
+  {
+    "nome": "PCM - Sede Perugia",
+    "lat": 43.1107,
+    "lon": 12.3908,
+    "funzione": "Uffici",
+    "accessibilita": "Alta",
+    "livello_allerta": 2,
+    "distanza_da_palazzo_chigi_km": 175.0,
+    "tempo_percorrenza_min": 120,
+    "note": "-",
+    "rischio_sismico": 3
+  },
+  {
+    "nome": "PCM - Sede Viterbo",
+    "lat": 42.4207,
+    "lon": 12.1077,
+    "funzione": "Uffici",
+    "accessibilita": "Alta",
+    "livello_allerta": 2,
+    "distanza_da_palazzo_chigi_km": 82.0,
+    "tempo_percorrenza_min": 80,
+    "note": "-",
+    "rischio_sismico": 5
   }
+
+
 ]
