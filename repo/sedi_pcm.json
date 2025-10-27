@@ -1,0 +1,112 @@
+[
+  {
+    "nome": "Palazzo Chigi",
+    "lat": 41.8991,
+    "lon": 12.4808,
+    "funzione": "Sede del Presidente del Consiglio",
+    "accessibilita": "Accessibile",
+    "note": "Ingresso da Piazza Colonna",
+    "livello_allerta": 5,
+    "distanza_da_palazzo_chigi_km": 0.0,
+    "tempo_percorrenza_min": 0
+  },
+  {
+    "nome": "Villa Doria Pamphilj",
+    "lat": 41.8885,
+    "lon": 12.4456,
+    "funzione": "Residenza istituzionale",
+    "accessibilita": "Limitata",
+    "note": "Sede di incontri internazionali",
+    "livello_allerta": 4,
+    "distanza_da_palazzo_chigi_km": 3.2,
+    "tempo_percorrenza_min": 12
+  },
+  {
+    "nome": "Dipartimento della Protezione Civile",
+    "lat": 41.9721,
+    "lon": 12.4712,
+    "funzione": "Coordinamento emergenze nazionali",
+    "accessibilita": "Accessibile",
+    "note": "Sede operativa in Via Vitorchiano",
+    "livello_allerta": 5,
+    "distanza_da_palazzo_chigi_km": 8.5,
+    "tempo_percorrenza_min": 20
+  },
+  {
+    "nome": "Dipartimento Funzione Pubblica",
+    "lat": 41.9102,
+    "lon": 12.4922,
+    "funzione": "Gestione della PA",
+    "accessibilita": "Accessibile",
+    "note": "Ingresso da Via della Mercede",
+    "livello_allerta": 3,
+    "distanza_da_palazzo_chigi_km": 1.5,
+    "tempo_percorrenza_min": 6
+  },
+  {
+    "nome": "Palazzo Vidoni",
+    "lat": 41.8975,
+    "lon": 12.4789,
+    "funzione": "Sede del Ministero della PA",
+    "accessibilita": "Accessibile",
+    "note": "Edificio storico",
+    "livello_allerta": 3,
+    "distanza_da_palazzo_chigi_km": 0.3,
+    "tempo_percorrenza_min": 2
+  },
+  {
+    "nome": "Palazzo Valentini",
+    "lat": 41.8964,
+    "lon": 12.4846,
+    "funzione": "Sede della Città Metropolitana",
+    "accessibilita": "Limitata",
+    "note": "Presenza di vincoli architettonici",
+    "livello_allerta": 2,
+    "distanza_da_palazzo_chigi_km": 0.6,
+    "tempo_percorrenza_min": 3
+  },
+  {
+    "nome": "Palazzo Montecitorio",
+    "lat": 41.9011,
+    "lon": 12.4789,
+    "funzione": "Camera dei Deputati",
+    "accessibilita": "Accessibile",
+    "note": "Sede parlamentare",
+    "livello_allerta": 4,
+    "distanza_da_palazzo_chigi_km": 0.3,
+    "tempo_percorrenza_min": 2
+  },
+  {
+    "nome": "Palazzo Madama",
+    "lat": 41.8999,
+    "lon": 12.4726,
+    "funzione": "Senato della Repubblica",
+    "accessibilita": "Accessibile",
+    "note": "Sede parlamentare",
+    "livello_allerta": 4,
+    "distanza_da_palazzo_chigi_km": 0.7,
+    "tempo_percorrenza_min": 3
+  },
+  {
+    "nome": "Palazzo Spada",
+    "lat": 41.8946,
+    "lon": 12.4721,
+    "funzione": "Consiglio di Stato",
+    "accessibilita": "Limitata",
+    "note": "Edificio storico",
+    "livello_allerta": 2,
+    "distanza_da_palazzo_chigi_km": 1.0,
+    "tempo_percorrenza_min": 5
+  },
+  {
+    "nome": "Scuola Nazionale dell'Amministrazione (Caserta)",
+    "lat": 41.0731,
+    "lon": 14.3306,
+    "funzione": "Formazione dirigenti pubblici",
+    "accessibilita": "Accessibile",
+    "note": "Sede distaccata",
+    "livello_allerta": 2,
+    "distanza_da_palazzo_chigi_km": 180.0,
+    "tempo_percorrenza_min": 120
+  }
+]
