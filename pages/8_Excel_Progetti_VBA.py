@@ -215,11 +215,11 @@ def mostra_progetto(titolo, data, descrizione, percorso_file=None, percorso_imma
             
             -  Una serie di query semiautomatiche aggiornano i dati di concessione e quelli di fruizione
         """,
-        tecnologie=["Excel Avanzato", "Power Query"],
-        #percorso_file=[""]#["assets/Crediti/Report_Carta.txt"],
+        tecnologie=["Excel Avanzato", "Power Query", "Unione di tabelle da fonti diverse (Excel, CSV, Web), rimozione duplicati, gestione valori nulli, pivot, raggruppamenti, colonne calcolate"],
+        percorso_file=["assets/Crediti/Query_SQL.txt"],
         livello="Alta difficoltà, Query complesse di alto profilo",
-        percorso_immagine="assets/Crediti/ImportaF24.png",
-        caption_immagine="Report_Carta.png"
+        percorso_immagine="assets/Crediti/Report_Carta.png",
+        caption_immagine="Immagine del report aggiornato mensilmente. Sulla destra parte delle tabelle e delle relative query"
     )
 
 
@@ -231,19 +231,5 @@ mostra_progetto(
     percorso_immagine="assets/Crediti/Flusso operativo gestione.png",
     caption_immagine="Flusso operativo gestione F24"
 )
-
-st.divider()
-
-# ============================
-# Competenze Power Query (opzionale: spostare in pagina separata)
-# ============================
-
-st.header("⚙️ Competenze Power Query")
-st.markdown("""
-- 🔄 **Unione di tabelle** da fonti diverse (Excel, CSV, Web)  
-- 🧹 **Pulizia dati**: rimozione duplicati, gestione valori nulli  
-- 📊 **Trasformazioni**: pivot, raggruppamenti, colonne calcolate  
-- 🔗 assets/cert/PowerQuery_Esempio.pdf
-""")
 
 

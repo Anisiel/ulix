@@ -1,0 +1,48 @@
+*****************************
+Query 1
+*****************************
+let
+    Origine = #"TAB credito concesso",
+    #"Rimosse colonne" = Table.RemoveColumns(Origine,{"Indice", "Saldo Progressivo", "Verifica CF", "cronologico attribuito univocamente dall'Amministrazione nell’ambito dell’anno di accoglimento delle istanze"}),
+    #"Colonna trasformata tramite Pivot" = Table.Pivot(Table.TransformColumnTypes(#"Rimosse colonne", {{"Periodo di riferimento", type text}}, "it-IT"), List.Distinct(Table.TransformColumnTypes(#"Rimosse colonne", {{"Periodo di riferimento", type text}}, "it-IT")[#"Periodo di riferimento"]), "Periodo di riferimento", "Importo concesso ", List.Sum),
+    #"Sostituito valore" = Table.ReplaceValue(#"Colonna trasformata tramite Pivot",null,0,Replacer.ReplaceValue,{"2020", "2021", "2022"}),
+    #"Inserita aggiunta" = Table.AddColumn(#"Sostituito valore", "Totale concesso", each [2020] + [2021]+[2022], type number),
+    #"Aggiunta colonna indice" = Table.AddIndexColumn(#"Inserita aggiunta", "Indice", 1, 1, Int64.Type),
+    #"Raggruppate righe2" = Table.Group(#"Aggiunta colonna indice", {"Codice fiscale "}, {{"Duplicati", each Table.RowCount(_), Int64.Type}, {"Dettaglio Impresa", each _, type table [#"Codice fiscale "=nullable text, IMPRESA=nullable text, 2020=nullable number, 2021=nullable number, 2022=nullable number, Totale concesso=number, Indice=number]}, {"Nome Impresa", each Text.Combine(([IMPRESA]),", "), type nullable text}}),
+    #"Sottratto da colonna" = Table.TransformColumns(#"Raggruppate righe2", {{"Duplicati", each _ - 1, type number}}),
+    #"Colonne Dettaglio Impresa aggregate" = Table.AggregateTableColumn(#"Sottratto da colonna", "Dettaglio Impresa", {{"2020", List.Sum, "Somma di 2020"}, {"2021", List.Sum, "Somma di 2021"},{"2022", List.Sum, "Somma di 2022"}, {"Totale concesso", List.Sum, "Somma di Totale concesso"}}),
+    #"Suddividi colonna in base al delimitatore" = Table.SplitColumn(#"Colonne Dettaglio Impresa aggregate", "Nome Impresa", Splitter.SplitTextByEachDelimiter({","}, QuoteStyle.Csv, false), {"Nome Impresa.1", "Nome Impresa.2"}),
+    #"Sostituito valore1" = Table.ReplaceValue(#"Suddividi colonna in base al delimitatore","EDIZIONI L'INFORMATORE AGRARIO S.R.L. IN BREVE EDIA - INIBITA IN DATA 23/01/2023 ERA 24013","EDIZIONI L'INFORMATORE AGRARIO S.R.L. IN BREVE EDIA - INIBITA IN DATA 23/01/2023 ERA 24013,54 PER 2020 E 22029,65 PER 2021",Replacer.ReplaceText,{"Nome Impresa.1"}),
+    #"Rimosse colonne1" = Table.RemoveColumns(#"Sostituito valore1",{"Nome Impresa.2"}),
+    #"Rinominate colonne" = Table.RenameColumns(#"Rimosse colonne1",{{"Nome Impresa.1", "IMPRESA corretto"}}),
+    #"Riordinate colonne" = Table.ReorderColumns(#"Rinominate colonne",{"Codice fiscale ", "IMPRESA corretto", "Duplicati", "Somma di 2020", "Somma di 2021", "Somma di 2022", "Somma di Totale concesso"}),
+    #"Rimosse colonne2" = Table.RemoveColumns(#"Riordinate colonne",{"Duplicati"}),
+    #"Rinominate colonne1" = Table.RenameColumns(#"Rimosse colonne2",{{"IMPRESA corretto", "IMPRESA"}, {"Somma di 2020", "2020"}, {"Somma di 2021", "2021" },{"Somma di 2022", "2022" }, {"Somma di Totale concesso", "Totale concesso"}})
+in
+    #"Rinominate colonne1"
+
+
+*****************************
+Query 2
+*****************************
+let
+    Origine = #"TAB F24 importo fruito",
+    #"Rimosse colonne" = Table.RemoveColumns(Origine,{"Codice tributo"}),
+    #"Colonna trasformata tramite Pivot" = Table.Pivot(Table.TransformColumnTypes(#"Rimosse colonne", {{"Anno di riferimento", type text}}, "it-IT"), List.Distinct(Table.TransformColumnTypes(#"Rimosse colonne", {{"Anno di riferimento", type text}}, "it-IT")[#"Anno di riferimento"]), "Anno di riferimento", "Totale importo (credito - debito)", List.Sum),
+    #"Sostituito valore" = Table.ReplaceValue(#"Colonna trasformata tramite Pivot",null,0,Replacer.ReplaceValue,{"2020", "2021", "2022"}),
+    #"Inserita aggiunta" = Table.AddColumn(#"Sostituito valore", "Totale fruito", each [2020] + [2021]+ [2022], type number)
+in
+    #"Inserita aggiunta"
+
+
+*****************************
+Query 3
+*****************************
+let
+    Origine = Table.NestedJoin(#"REF TAB credito concesso", {"Codice fiscale "}, #"REF TAB F24 importo fruito", {"Codice fiscale"}, "REF TAB F24 importo fruito", JoinKind.LeftOuter),
+    #"Tabella REF TAB F24 importo fruito espansa1" = Table.ExpandTableColumn(Origine, "REF TAB F24 importo fruito", {"Codice fiscale", "2020", "2021", "2022", "Totale fruito"}, {"REF TAB F24 importo fruito.Codice fiscale", "REF TAB F24 importo fruito.2020", "REF TAB F24 importo fruito.2021", "REF TAB F24 importo fruito.2022", "REF TAB F24 importo fruito.Totale fruito"}),
+    #"Sostituito valore" = Table.ReplaceValue(#"Tabella REF TAB F24 importo fruito espansa1",null,0,Replacer.ReplaceValue,{"REF TAB F24 importo fruito.2020", "REF TAB F24 importo fruito.2021", "REF TAB F24 importo fruito.2022"}),
+    #"Riordinate colonne" = Table.ReorderColumns(#"Sostituito valore",{"Codice fiscale ", "IMPRESA", "2020", "2021", "2022", "Totale concesso", "REF TAB F24 importo fruito.Codice fiscale", "REF TAB F24 importo fruito.2020", "REF TAB F24 importo fruito.2021", "REF TAB F24 importo fruito.2022", "REF TAB F24 importo fruito.Totale fruito"}),
+    #"Rinominate colonne" = Table.RenameColumns(#"Riordinate colonne",{{"REF TAB F24 importo fruito.Codice fiscale", "F24.Codice fiscale"}, {"REF TAB F24 importo fruito.2020", "F24 fruito.2020"}, {"REF TAB F24 importo fruito.2021", "F24 fruito.2021"},{"REF TAB F24 importo fruito.2022", "F24 fruito.2022"}, {"REF TAB F24 importo fruito.Totale fruito", "F24.Totale fruito"}, {"2020", "Concesso.2020"}, {"2021", "Concesso.2021"},{"2022", "Concesso.2022"}, {"Codice fiscale ", "Concesso.Codice fiscale"}})
+in
+    #"Rinominate colonne"
