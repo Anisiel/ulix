@@ -8,11 +8,11 @@ st.markdown("""
 Questo sito è  progettato come portfolio interattivo con lo scopo di far valutare ***per quanto possibile*** le competenze di python
             e il curriculum.
             
-            Per realizzarlo è stata necessaria una fase di progettazione e una di realizzazione.
-            La velocità realizzativa (pochi giorni) è stata resa possibile dal supporto dell'intelligenza artificiale,
-            che nel supporto alla programmazione ha il suo punto di forza più grande.
-            Il codice sorgente è disponibile su Github (vedi la sezione dedicata più avanti in questa pagina).
-            Il sito è realizzato in Streamlit (open source e gratuito, motivo dei ritardi di visualizzazione).
+Per realizzarlo è stata necessaria una fase di progettazione e una di realizzazione.
+La velocità realizzativa (pochi giorni) è stata resa possibile dal supporto dell'intelligenza artificiale,
+che nel supporto alla programmazione ha il suo punto di forza più grande.
+Il codice sorgente è disponibile su Github (vedi la sezione dedicata più avanti in questa pagina).
+Il sito è realizzato in Streamlit (open source e gratuito, motivo dei ritardi di visualizzazione).
             
 """)
 
