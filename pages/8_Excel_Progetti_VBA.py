@@ -176,7 +176,7 @@ def mostra_progetto(titolo, data, descrizione, percorso_file=None, percorso_imma
     )
 
     mostra_sottoprogetto(
-        titolo="Importazione *mensile* dei crediti d’imposta verso Agenzia delle Entrate e sviluppo di **report mensili**",
+        titolo="Importazione **mensile** dei crediti d’imposta da Agenzia delle Entrate",
         data="15/06/2022 - in corso",
         descrizione= """
             Software in VBA articolato in più step (>2000 righe di codice).
