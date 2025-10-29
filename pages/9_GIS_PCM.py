@@ -31,7 +31,7 @@ st.title("🗺️ Esempio di GIS con dati fittizi relativi alle sedi PCM")
 
 
 st.markdown("""
-### 📍 Lo spiegone...
+### 📍 Lo spiegone... le mappe stanno in fondo alla pagina
 
 Questa pagina mostra un esempio di **GIS (Geographic Information System)** realizzato in Python.  
 Un GIS consente di raccogliere, visualizzare e analizzare dati geolocalizzati—cioè legati a coordinate geografiche.  
@@ -116,7 +116,7 @@ with st.expander("🎛️ Regolazioni visive Heatmap"):
 
 # --------------------------- MAPPA BASE ---------------------------
 # Centro iniziale su Lazio/Centro Italia
-m1 = folium.Map(location=[41.9, 12.5], zoom_start=10, control_scale=True)
+m1 = folium.Map(location=[41.9, 12.5], zoom_start=12, control_scale=True)
 
 # Basemap con attribuzioni corrette
 # 1) OpenStreetMap (built-in): ha già attribution interna
