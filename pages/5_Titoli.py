@@ -66,7 +66,7 @@ data = {
 
 # Mostra la tabella con link
 df = pd.DataFrame(data)
-st.markdown(df.to_markdown(index=False), unsafe_allow_html=True)
+st.markdown(df, unsafe_allow_html=True)
 
 st.divider()
 # ============================
