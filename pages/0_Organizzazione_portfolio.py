@@ -39,6 +39,7 @@ Questa struttura consente di esplorare il portfolio in due modalità diverse, a 
     - **Pubblicazioni**: elenco delle pubblicazioni scientifiche.
     - **Titoli & Certificazioni**:in pagine distinte l'elenco dei titoli accademici e delle certificazioni professionali.
     - **Progetto in VBA/Excel/Query**: esempio di grande progetto ***reale concreto ed in corso*** elaborato per l'Ufficio.
+    - ** GIS PCM**: esempio di mappe e dati spaziali con dati fittizi relativi al rischio sismico e alla distanza tra le sedi della PCM
             
 ### 📊 Dati e grafici
 - I grafici utilizzano dati contenuti nel file `grafici_speciali.xlsx` che si trova nella cartella `repo/` e riportano dati metereologici fittizi.
