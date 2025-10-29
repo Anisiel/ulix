@@ -7,3 +7,5 @@ plotly
 pyecharts
 streamlit-echarts5
 folium
+streamlit_folium
+json
