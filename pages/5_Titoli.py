@@ -100,7 +100,7 @@ elif scelta == opzioni_titoli[1]:
         - Laurea vecchio ordinamento con indirizzo topografico  
         - 📅 Data: 12-07-2002  
         - 🔗 [Visualizza badge](assets/cert/laurea_vecchio_ordinamento.pdf)
-        - 📄 [Visualizza tesi](assets/cert/laurea_vecchio_ordinamento_tesi.pdf
+        - 📄 [Visualizza tesi](assets/cert/laurea_vecchio_ordinamento_tesi.pdf)
         """)
 
 elif scelta == opzioni_titoli[2]:
