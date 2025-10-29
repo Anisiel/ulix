@@ -176,9 +176,44 @@ def mostra_progetto(titolo, data, descrizione, percorso_file=None, percorso_imma
     )
 
     mostra_sottoprogetto(
-        titolo="Importazione dei crediti d’imposta verso Agenzia delle Entrate e sviluppo di **report mensili**",
+        titolo="Importazione *mensile* dei crediti d’imposta verso Agenzia delle Entrate e sviluppo di **report mensili**",
         data="15/06/2022 - in corso",
         descrizione= """
+            Software in VBA articolato in più step (>2000 righe di codice).
+                Ecco gli step con cui si aggiornano mensilmente i dati:
+                - Step 1:
+                    1. import dei file testuali
+                    2. decodifica dei file importati
+                    3. suddivisione per tipo di credito in base al codice identificativo
+                    4. stampa a video di un primo report recante informazioni sui dati (numero, tipo, nome file...)
+                - Step 2:
+                    1. copia (in locale) dei dati (query di accodamento) nei file F24 di ciascun credito
+                    2. operazioni di aggiornamento nei singoli file F24 (Totali, controllo, identità, lunghezza...)
+                    3. realizzazione di una copia di backup (in locale) dei file del mese precedente (F24 e file .xlsx) 
+                - Step 3:    
+                    1. copia (sulla nuvola) dei dati aggiornati e sostituzione dei precedenti  
+                - Step 4 (operazioni interne al file .xlsx generale):
+                    1. query di aggiornamento pre rendere coerenti i dati di concessione e quelli di fruizione
+        """,
+        tecnologie=["VBA", "Excel Avanzato", "Power Query"],
+        percorso_file=["assets/Crediti/Importa_file_F24.txt"],
+        livello="Alta difficoltà, progettazione di alto profilo",
+        percorso_immagine="assets/Crediti/ImportaF24.png",
+        caption_immagine="Report per importazione file F24"
+    )
+
+    mostra_sottoprogetto(
+        titolo="A conclusione dell'importazione dei dati, si creano dei report in xlsx aggiornati **mensilmente** tramite Power Query",
+        data="15/06/2022 - in corso",
+        descrizione= """
+            - Premessa:
+                    Il progetto è articolato in un file padre "Credito_xxxx(carta, pubblicità...)_meseanno.xlsx" ed in una serie di file figli aggiornati mensilmente, suddivisi in concessione e fruizione del credito.
+                    Ad esempio: Il file "Credito_carta_settembre2025.xlsx" ha i file figli con i dati suddivisi in:
+                            
+                            - Concesso anno1, Concesso anno2, Concesso annon
+                            - Fruito anno1, Fruito anno2, Fruito annon
+                I file relativi alle **concessioni** sono aggiornati aperiodicamente in base a quando avvengono le concessioni di credito [vedi sottoprogetto 1];
+                i file relativi alle **fruizioni** vengono aggiornati mensilmente.
             Software in VBA articolato in più step (>2000 righe di codice).
                 - Premessa:
                     Il progetto è articolato in un file padre "Credito_xxxx(carta, pubblicità...)_meseanno.xlsx" ed in una serie di file figli aggiornati mensilmente, suddivisi in concessione e fruizione del credito.
@@ -204,12 +239,13 @@ def mostra_progetto(titolo, data, descrizione, percorso_file=None, percorso_imma
                 - Step 4 (operazioni interne al file .xlsx generale):
                     1. query di aggiornamento pre rendere coerenti i dati di concessione e quelli di fruizione
         """,
-        tecnologie=["VBA", "Excel Avanzato", "Power Query"],
-        percorso_file=["assets/Crediti/Importa_file_F24.txt"],
-        livello="Alta difficoltà, progettazione di alto profilo",
+        tecnologie=["Excel Avanzato", "Power Query"],
+        #percorso_file=[""]#["assets/Crediti/Report_Carta.txt"],
+        livello="Alta difficoltà, Query complesse di alto profilo",
         percorso_immagine="assets/Crediti/ImportaF24.png",
-        caption_immagine="Report per importazione file F24"
+        caption_immagine="Report_Carta.png"
     )
+
 
 mostra_progetto(
     titolo="Progetto per la gestione dei flussi dati con Agenzia delle entrate",
@@ -227,10 +263,11 @@ st.divider()
 # ============================
 
 st.header("⚙️ Competenze Power Query")
-
 st.markdown("""
 - 🔄 **Unione di tabelle** da fonti diverse (Excel, CSV, Web)  
 - 🧹 **Pulizia dati**: rimozione duplicati, gestione valori nulli  
 - 📊 **Trasformazioni**: pivot, raggruppamenti, colonne calcolate  
 - 🔗 assets/cert/PowerQuery_Esempio.pdf
 """)
+
+
