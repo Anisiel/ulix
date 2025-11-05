@@ -1,18 +1,27 @@
-/* styles.css - stili per i layout
+/* styles.css - Foglio di stile per layout
+   ------------------------------------------------------------
+   Questo file contiene le regole CSS che definiscono l'aspetto visivo.
+   - Qui posso modificare lo stile degli elementi (titoli, padding, immagini, layout responsive)
+   - Posso adattare il design per desktop e dispositivi mobili (breakpoints, font-size, ecc.)
+
+   Cos'è un file CSS?
+   CSS (Cascading Style Sheets) è un linguaggio usato per descrivere la presentazione di un documento HTML.
+   Permette di controllare colori, spaziature, dimensioni, posizionamento e comportamento degli elementi
+   su diversi dispositivi. In questo file, le regole vengono applicate all'interfaccia generata da Streamlit.
+
    ------------------------------------------------------------
    Questo file contiene le regole CSS usate dall'app Streamlit.
    - Qui tutte le modifiche di stile (titoli, padding, responsive)
    - Qui posso modificare i valori (font-size, breakpoints) per adattarli al design
-*/
 
-/* ----- Immagini responsive -----
+ ----- Immagini responsive -----
    Garantisce che le immagini non escano dal contenitore e siano
    ridimensionate automaticamente alla larghezza disponibile.
    Si applica a tutte le immagini presenti nella pagina.
-*/
-img { max-width: 100% !important; height: auto !important; }
 
-/* ----- Galleria: altezza uniforme per le miniature -----
+   img { max-width: 100% !important; height: auto !important; }
+
+ ----- Galleria: altezza uniforme per le miniature -----
     Mantengo tutte le immagini della galleria con la stessa altezza
     e uso object-fit come cover per ritagliare centralmente le immagini
     preservando l'aspetto e mantenendo la griglia armonica.
@@ -54,14 +63,24 @@ h1 { font-size: 36px; margin: 0; }
 */
 .stApp { padding: 8px 12px; }
 
-/* ----- Colonne su schermi piccoli -----
-   Streamlit gestisce le colonne internamente, ma qui forzo le colonne a
-   impilarsi verticalmente su dispositivi stretti (es. mobile).
+/* ----- Colonne responsive (fallback generico) -----
+   Su schermi piccoli, le colonne Streamlit vengono impilate verticalmente.
+   Uso un selettore più generico per evitare dipendenza da classi dinamiche.
 */
-
 @media (max-width: 640px) {
-  .css-1l02zno .stColumns, .css-1l02zno .stColumns > div { width: 100% !important; display: block !important; }
+  .stColumns > div {
+    width: 100% !important;
+    display: block !important;
+  }
 }
+
+/* ----- Contenitori flessibili -----
+   Impedisce lo scroll orizzontale su dispositivi mobili.
+*/
+body, .stApp {
+  overflow-x: hidden;
+}
+
 
 /* --- Fine file styles.css --- */
 

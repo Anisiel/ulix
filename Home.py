@@ -85,9 +85,9 @@ col_img, col_main, col_extra = st.columns([1, 3, 1], gap="large")
 with col_img:
 	render_thumbs(IMMAGINI)  # immagini in colonna sinistra	
 with col_main: # testi in colonna centrale
-	st.subheader("Hello, lettore! 👋")
+	st.subheader("Hello, lettore!👋 Questo sito è interamente programmato con python e IA e serve per mostrarti le mie competenze")
 	st.markdown("""
-	#### A sinistra tre immagini ironiche che raccontano la mia personalità...
+	#### A sinistra tre immagini ironiche...
 	#### ...A destra un ritratto "personale" che mi accompagna da sempre😄
 	""")
 
