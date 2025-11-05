@@ -6,7 +6,7 @@ import base64
 # =============================================================================
 # STRUTTURA DELLA PAGINA — Home_altera.py (Versione Ricca)
 # -----------------------------------------------------------------------------
-# Questa pagina mostra una versione più elaborata del portfolio.
+# Questa pagina mostra una versione più elaborata del portfolio per la gestione delle immagini, ma più povera in relazione ai testi.
 # Include una galleria immagini, link estesi e navigazione avanzata.
 #
 # Comandi principali:
@@ -35,7 +35,7 @@ st.markdown(
     """
     <div style='text-align:center;padding:2rem;background-color:#f0f2f6;border-radius:10px'>
         <h1 style='margin-bottom:0.2em'>🌟 Ulisse Fabiani</h1>
-        <p style='font-size:1.2em'>Benvenuto nel mio portfolio interattivo — Home page versione ricca</p>
+        <p style='font-size:1.2em'>Benvenuto nel mio portfolio interattivo — Home page versione ricca per la gestione delle immagini, ma più povera per la gestione dei testi</p>
     </div>
     """,
     unsafe_allow_html=True
@@ -49,9 +49,6 @@ IMMAGINI = [
 ]
 
 
-
-
-
 def render_gallery(items):
     safe_items = [it for it in items if Path(it["src"]).exists()]
     if not safe_items:
@@ -62,15 +59,15 @@ def render_gallery(items):
     for col, it in zip(cols, safe_items):
 
         with col:
-    # modifica: costruisco un data URI così il browser non chiede /assets
-            p = Path(it["src"])  # modifica
-            ext = p.suffix.lower()  # modifica
-            mime = "image/png" if ext == ".png" else "image/jpeg"  # modifica
-            b64 = base64.b64encode(p.read_bytes()).decode()  # modifica
-            uri = f"data:{mime};base64,{b64}"  # modifica
+    # costruisco un data URI così il browser non chiede /assets
+            p = Path(it["src"])  
+            ext = p.suffix.lower()  
+            mime = "image/png" if ext == ".png" else "image/jpeg"  
+            b64 = base64.b64encode(p.read_bytes()).decode() 
+            uri = f"data:{mime};base64,{b64}" 
 
             st.markdown(
-                f"<div class='thumb-box'><img src=\"{uri}\" class='gallery-thumb' /></div>",  # modifica
+                f"<div class='thumb-box'><img src=\"{uri}\" class='gallery-thumb' /></div>",  
             unsafe_allow_html=True
             )
             if it.get("note"):
@@ -116,13 +113,13 @@ st.markdown("""
 # Box informativi con link esterni
 st.markdown("---")
 st.markdown("### 🔗 Link utili")
-st.markdown("Ecco alcuni link utili per saperne di più sulla mia attività all'Università e sullle risorse utilizzate per questo sito.")
+st.markdown("Ecco alcuni link utili per saperne di più sulla mia attività all'Università e sulle risorse utilizzate per questo sito.")
 col1, col2 = st.columns(2) 
 with col1:
     st.markdown("📘 [Academia.edu](https://independent.academia.edu/FabianiUlisse)")
 with col2:
     st.markdown("💻 [GitHub](https://github.com/Anisiel/ulix)") 
-    st.markdown("💻 [Streamlit](https://streamlit.io/)") 
+  #  st.markdown("💻 [Streamlit](https://streamlit.io/)") 
 
 # Download CV
 cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
@@ -144,6 +141,7 @@ with col1:
     st.markdown("📊 [Grafici avanzati con plotly](pages/1_Grafici_plotly.py)")
     st.markdown("📈 [Grafici avanzati con Echarts](pages/2_Grafici_Altair_Echarts.py)")
     st.markdown("📈 [Grafici avanzati con Altair](pages/3_Grafici_Altair_Meteo.py)")
+    st.markdown("📈 [Mappe avanzate per l'analisi spaziale](pages/9_GIS_PCM.py)")
 with col2:
     st.markdown("📚 [Pubblicazioni](pages/5_Pubblicazioni.py)")
     st.markdown("🎓 [Titoli & Certificazioni](pages/6_Titoli_Certificazioni.py)")
