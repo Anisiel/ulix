@@ -104,28 +104,43 @@ with col_extra:
 # Dopo le immagini  ci sono i link esterni, interni e poi il link al CV
 st.divider()
 # Link esterni in colonna e non affiancati
-st.markdown(
-	"""
-	<div style='display:flex;gap:1.2rem;align-items:center;'>
-	<div style='display:flex;gap:.5rem;align-items:center;'>🎓<a href='https://independent.academia.edu/FabianiUlisse' target='_blank' rel='noreferrer'>Academia.edu</a></div>
-	Qui trovi i miei articoli scientifici pubblicati a più riprese durante il mio lavoro presso l'Universita "La Sapienza" facoltà di Ingegneria.
-	Sono <stong>strettamente<stong> correlati con le mie competenze attuali ampiamente sfruttate in PCM in quanto senza l'attività svolta per pubblicarle non sarei in grado di	
-	</p>
-        <ul>
-            <li>fare analisi statistica</li>
-            <li>programmare</li>
-            <li>organizzare un report secondo modalità scientifiche</li>
-            <li>coordinare le attività di un gruppo finalizzandole ad un obiettivo</li>
-        </ul>
-	<div style='display:flex;gap:.5rem;align-items:center;'>💻<a href='https://github.com/Anisiel/ulix' target='_blank' rel='noreferrer'>GitHub</a></div> 
-	Qui trovi il codice di questo portale. GitHub è un portale che permette di prendere visione dei progetti di programmazione "free"
 
-	</div>
-	""",
-	unsafe_allow_html=True,
-)
+
+#  creo due colonne per separare le informazioni
+col_sx, col_dx = st.columns(2)
+
+with col_sx:
+    # titolo + link in Markdown (niente HTML)
+	st.subheader("[🎓 Ulisse su Academia.edu](https://independent.academia.edu/FabianiUlisselinkedin.com/in/ulissefabiani)")
+
+    #  testo e lista in puro Markdown
+	st.markdown("""
+		Qui trovi i miei articoli scientifici e contributi in volume pubblicati a più riprese durante il mio lavoro presso **l'Università "La Sapienza" facoltà di Ingegneria**.
+		Alcuni sono ancora di attualità e citati (anche su Wikipedia), altri sono superati.  
+		Tuttavia sono tutti **strettamente** correlati con le mie competenze attuali ampiamente sfruttate in PCM, in quanto senza l'attività svolta per pubblicarle non sarei in grado di:
+			- fare analisi statistica; 
+			- programmare;
+			- organizzare un report secondo modalità scientifiche;
+			- coordinare le attività di un gruppo finalizzandole ad un obiettivo.
+		""")
+
+with col_dx:
+    # titolo + link in Markdown (niente HTML)
+    st.subheader("[💻 Ulisse su Academia.edu](https://github.com/Anisiel/ulix)")
+    # descrizione in Markdown
+    st.markdown("""
+		Qui trovi il codice di questo portale. Puoi visionarlo. Puoi leggere i commenti. Puoi apprezzarne la logica.  
+		GitHub è un portale che permette di distribuire (caricare, scaricare, prendere visione) i progetti di programmazione *free*.
+    """)
+
+st.divider()
 
 # Download CV
+# descrizione in Markdown
+st.markdown("""
+		Qui puoi scaricare il mio curriculum in formato pdf da cui però non si evincono queste competenze. Per "validarle" il più possibile, ho conseguito
+			delle certificazioni informatiche riconosciute al più alto livello possibile. Tuttavia non ci sono certificazioni riconosciute per questo tipo di competenze. 
+    """)
 cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
 if cv_path.exists():
 	st.markdown("<div style='margin-top:0.6rem'></div>", unsafe_allow_html=True)
@@ -138,18 +153,25 @@ if cv_path.exists():
 	)
 
 st.divider()
+# descrizione in Markdown
+st.markdown("""
+		Qui trovi le sezioni principali in cui è stato pensato questo portfolio:  Grafici & Mappe, Curriculum, Utility & Excel.
+    """)
+
 # Link interni alle pagine affiancati e non in colonna
 col1, col2, col3 = st.columns(3)
 
 with col1:
-	st.markdown("### 📊 Grafici")
-	if st.button("📊 Grafici con Plotly"):
-		st.switch_page("pages/1_Grafici_plotly.py")
-	if st.button("🌐 Grafici con Echarts"):
-		st.switch_page("pages/2_Grafici_Altair_Echarts.py")
-	if st.button("🌦️ Grafici Meteo con Altair"):
-   		st.switch_page("pages/3_Grafici_Altair_Meteo.py")
-		   
+    st.markdown("### 📊 Grafici & Mappe")
+    if st.button("📊 Grafici con Plotly"):
+        st.switch_page("pages/1_Grafici_plotly.py")
+    if st.button("🌐 Grafici con Echarts"):
+        st.switch_page("pages/2_Grafici_Altair_Echarts.py")
+    if st.button("🌦️ Grafici Meteo con Altair"):
+        st.switch_page("pages/3_Grafici_Altair_Meteo.py")
+    if st.button("🌐 Mappe e dati spaziali"):
+        st.switch_page("pages/9_GIS_PCM.py")
+
 with col2:
 	st.markdown("### 🎓 Curriculum")
 	if st.button("🎓 Titoli di Studio"):
@@ -161,7 +183,7 @@ with col2:
 
 with col3:
 	st.markdown("### 🧰 Utility & Excel")
-	if st.button("🧪 Programmini (in)utili"):
+	if st.button("🧪 Programmini (in)utili in dos, pyhton e VBA"):
 		st.switch_page("pages/4_Programmini_(in)utili.py")
 	if st.button("📂 Excel & Progetti VBA"):
 		st.switch_page("pages/8_Excel_Progetti_VBA.py")
