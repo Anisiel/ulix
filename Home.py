@@ -85,13 +85,14 @@ col_img, col_main, col_extra = st.columns([1, 3, 1], gap="large")
 with col_img:
 	render_thumbs(IMMAGINI)  # immagini in colonna sinistra	
 with col_main: # testi in colonna centrale
-	st.subheader("Hello, lettore!👋 Questo sito è interamente programmato con python e IA e serve per mostrarti le mie competenze")
+	st.subheader("Hello, lettore!👋")
 	st.markdown("""
-	#### A sinistra tre immagini ironiche...
-	#### ...A destra un ritratto "personale" che mi accompagna da sempre😄
+	#### Questo sito è interamente programmato con **python e IA** e serve per mostrarti le mie competenze"
+	##### Di qua tre immagini ironiche...
+	##### ...Di là un ritratto "personale" che mi accompagna da sempre😄
 	""")
 
-	st.caption("Portfolio interamente programmato in python no wordpress")
+	st.caption("Portfolio  no wordpress")
 
 with col_extra:
     # 🔧 MODIFICA: aggiunta immagine extra a destra del testo
@@ -106,8 +107,17 @@ st.divider()
 st.markdown(
 	"""
 	<div style='display:flex;gap:1.2rem;align-items:center;'>
-	  <div style='display:flex;gap:.5rem;align-items:center;'>🎓<a href='https://independent.academia.edu/FabianiUlisse' target='_blank' rel='noreferrer'>Academia.edu</a></div>
-	  <div style='display:flex;gap:.5rem;align-items:center;'>💻<a href='https://github.com/Anisiel/ulix' target='_blank' rel='noreferrer'>GitHub</a></div>
+	<div style='display:flex;gap:.5rem;align-items:center;'>🎓<a href='https://independent.academia.edu/FabianiUlisse' target='_blank' rel='noreferrer'>Academia.edu</a></div>
+	Qui trovi i miei articoli scientifici pubblicati a più riprese durante il mio lavoro presso l'Universita "La Sapienza" facoltà di Ingegneria.
+	Sono **strettamente** correlati con le mie competenze attuali ampiamente sfruttate in PCM in quanto senza l'attività svolta per pubblicarle non sarei in grado di
+					-	fare analisi statistica;
+					- 	programmare;
+				-	organizzare un report secondo modalità scientifiche;
+				-	coordinare le attività di un gruppo finalizzandole ad un obiettivo
+
+	<div style='display:flex;gap:.5rem;align-items:center;'>💻<a href='https://github.com/Anisiel/ulix' target='_blank' rel='noreferrer'>GitHub</a></div> 
+	Qui trovi il codice di questo portale. GitHub è un portale che permette di prendere visione dei progetti di programmazione "free"
+
 	</div>
 	""",
 	unsafe_allow_html=True,
