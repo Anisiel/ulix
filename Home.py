@@ -109,12 +109,14 @@ st.markdown(
 	<div style='display:flex;gap:1.2rem;align-items:center;'>
 	<div style='display:flex;gap:.5rem;align-items:center;'>🎓<a href='https://independent.academia.edu/FabianiUlisse' target='_blank' rel='noreferrer'>Academia.edu</a></div>
 	Qui trovi i miei articoli scientifici pubblicati a più riprese durante il mio lavoro presso l'Universita "La Sapienza" facoltà di Ingegneria.
-	Sono **strettamente** correlati con le mie competenze attuali ampiamente sfruttate in PCM in quanto senza l'attività svolta per pubblicarle non sarei in grado di
-					-	fare analisi statistica;
-					- 	programmare;
-				-	organizzare un report secondo modalità scientifiche;
-				-	coordinare le attività di un gruppo finalizzandole ad un obiettivo
-
+	Sono <stong>strettamente<stong> correlati con le mie competenze attuali ampiamente sfruttate in PCM in quanto senza l'attività svolta per pubblicarle non sarei in grado di	
+	</p>
+        <ul>
+            <li>fare analisi statistica</li>
+            <li>programmare</li>
+            <li>organizzare un report secondo modalità scientifiche</li>
+            <li>coordinare le attività di un gruppo finalizzandole ad un obiettivo</li>
+        </ul>
 	<div style='display:flex;gap:.5rem;align-items:center;'>💻<a href='https://github.com/Anisiel/ulix' target='_blank' rel='noreferrer'>GitHub</a></div> 
 	Qui trovi il codice di questo portale. GitHub è un portale che permette di prendere visione dei progetti di programmazione "free"
 
