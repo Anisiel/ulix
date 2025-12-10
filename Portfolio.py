@@ -32,8 +32,10 @@ with st.sidebar:
 
 # 2) Mappa scelta -> file (entrambi nel root)
 label_to_file = {
-    "Minimal": "Home.py",
+    #"Minimal": "Home.py",
+    "Minimal": "Home_ora.py",
     "Ricca": "Home_altera.py",
+
 }
 
 # 3) Costruisci path assoluto
