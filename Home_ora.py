@@ -159,7 +159,7 @@ cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
 links_html = f"""
 <div class="link-row">
   https://github.com/ulissefabianiGitHub</a>
-  <a href="https://independent.academia.edu/UlisseFabiani" target="_blank"s/Ulisse_Fabiani_CV.pdfScarica il mio CV</a>" if cv_path.exists() else "<span style='color:#6b7280;'>CV non trovato</span>"}
+  <a href="https://independent.academia.edu/UlisseFabiani" target="_blank"s/Ulisse_Fabiani_CV.pdfScarica il mio CV</a>" if cv_path.exists() else "<span style='color:#6b7280;'>CV non trovato</span>"
 </div>
 """
 st.markdown(links_html, unsafe_allow_html=True)
