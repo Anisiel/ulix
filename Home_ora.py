@@ -146,17 +146,16 @@ links_html = f"""
 </div>
 """
 
-st.markdown(links_html, unsafe_allow_html=True
-
-"""
 st.markdown(links_html, unsafe_allow_html=True)
+
+
 
 # ---------- Footer ----------
 st.markdown(
     """
-<div style="text-align:center;color:#6b7280;padding: 1rem 0 2rem 0;">
-   © Ulisse Fabiani · Portfolio in Python/Streamlit · Railway hosting
-</div>
-""",
+    <div style="text-align:center;color:#6b7280;padding: 1rem 0 2rem 0;">
+      © Ulisse Fabiani · Portfolio in Python/Streamlit · Railway hosting
+    </div>
+       """,
     unsafe_allow_html=True,
 )
