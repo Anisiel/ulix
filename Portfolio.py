@@ -21,7 +21,7 @@
 # selettore.py
 import streamlit as st
 from pathlib import Path
-import importlib.util  # ✅ Nuovo: usiamo importlib invece di runpy
+import importlib.util  # importlib invece di runpy
 
 # 0) Config base del selettore (sidebar visibile)
 st.set_page_config(
