@@ -1,82 +1,26 @@
+
 # =============================================================================
 # STRUTTURA DELLA PAGINA — Portfolio.py (Selettore)
 # -----------------------------------------------------------------------------
-# Questa pagina Streamlit funge da selettore iniziale per il portfolio.
-# Mostra una sidebar con due opzioni:
+# Selettore iniziale per il portfolio:
 # - "Minimal" → carica Home.py
-# - "Ricca" → carica Home_altera.py
-#
-# Il caricamento dinamico avviene tramite `importlib`, che esegue il file
-# selezionato come modulo, evitando problemi di layout e compatibilità.
-#
-# Comandi principali:
-# - `st.set_page_config(...)`: imposta layout e titolo della pagina.
-# - `st.sidebar.radio(...)`: selettore visivo per scegliere la Home.
-# - `importlib.util`: carica il file scelto in modo sicuro.
-#
-# ⚠️ La patch a `set_page_config` è stata rimossa per permettere alle Home
-# di gestire autonomamente il layout.
+# - "Ricca"   → carica Home_altera.py
+# Uso di importlib per eseguire il file scelto come modulo.
 # =============================================================================
 
-# selettore.py
 import streamlit as st
 from pathlib import Path
-import importlib.util  # importlib invece di runpy
+import importlib.util
 
-
-
-# --- INIZIO Gate di accesso con variabile d'ambiente ---
-def check_password():
-    app_pwd = os.environ.get("APP_PASSWORD")
-
-    # Se la password non è configurata, avvisa ma non bloccare (utile in locale)
-    if not app_pwd:
-        st.warning("⚠️ Password non configurata (APP_PASSWORD). Accesso temporaneamente aperto.")
-        return
-
-    # Stato della sessione
-    if "authenticated" not in st.session_state:
-        st.session_state["authenticated"] = False
-
-    # Se già autenticato, mostra Logout e prosegui
-    if st.session_state["authenticated"]:
-        with st.sidebar:
-            if st.button("🔓 Logout"):
-                st.session_state.clear()
-                st.rerun()
-        return
-
-    # Form di login nella sidebar
-    with st.sidebar:
-        st.markdown("#### 🔑 Accesso")
-        pwd = st.text_input("Password", type="password", placeholder="Inserisci password")
-        login = st.button("Entra")
-
-    # Gestione login
-    if login:
-        if pwd == app_pwd:
-            st.session_state["authenticated"] = True
-            st.success("Accesso consentito.")
-            st.rerun()
-        else:
-            st.error("Password errata.")
-            st.stop()
-    else:
-               # Blocca la pagina finché non si autentica
-        st.title("Portfolio Ulisse  Accesso")
-        st.info("Inserisci la password nella **sidebar** per continuare.")
-        st.stop()
-
-# --- FINE Gate di accesso  ---
-
-
-# 0) Config base del selettore (sidebar visibile)
-st.set_page_config(
-    page_title="Selettore — Portfolio Ulisse",
-    page_icon="🔀",
-    layout="wide",
-    initial_sidebar_state="expanded"  # sidebar aperta per mostrare il selettore
-)
+# 0) Config base del selettore (chiamata unica in tutta l'app)
+if not st.session_state.get("_page_config_done"):
+    st.set_page_config(
+        page_title="Selettore — Portfolio Ulisse",
+        page_icon="🔀",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+    st.session_state["_page_config_done"] = True
 
 # 1) Selettore nella SIDEBAR
 with st.sidebar:
@@ -91,16 +35,26 @@ label_to_file = {
     "Minimal": "Home.py",
     "Ricca": "Home_altera.py",
 }
-target = label_to_file[choice]
-target_path = str((Path(__file__).resolve().parent / target).resolve())
 
-# 3) Esegui la Home scelta con importlib (invece di runpy)
-def run_home(path):
-    spec = importlib.util.spec_from_file_location("home_module", path)
-    home = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(home)
+# 3) Costruisci path assoluto
+root = Path(__file__).resolve().parent
+target = label_to_file[choice]
+target_path = str((root / target).resolve())
+
+st.caption(f"Carico: {target_path}")
+
+# 4) Esegui la Home scelta con importlib (robusto, con try/except)
+def run_home(path: str):
+    try:
+        spec = importlib.util.spec_from_file_location("home_module", path)
+        if spec is None or spec.loader is None:
+            raise ImportError(f"Impossibile caricare il modulo da: {path}")
+        home = importlib.util.module_from        home = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(home)
+    except Exception as e:
+        st.error(f"Errore durante il caricamento di `{path}`:\n\n{e}")
+        st.stop()
 
 run_home(target_path)
 
-# 4) Stop Streamlit dopo l'esecuzione
-st.stop()
+# 5) (Facoltativo) stop esplicito
