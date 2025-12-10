@@ -49,7 +49,7 @@ def run_home(path: str):
         spec = importlib.util.spec_from_file_location("home_module", path)
         if spec is None or spec.loader is None:
             raise ImportError(f"Impossibile caricare il modulo da: {path}")
-        home = importlib.util.module_from        home = importlib.util.module_from_spec(spec)
+        home = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(home)
     except Exception as e:
         st.error(f"Errore durante il caricamento di `{path}`:\n\n{e}")
