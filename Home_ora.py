@@ -2,17 +2,14 @@
 # =============================================================================
 # HOME_ORA — Pagina Home in stile "minimal landing"
 # -----------------------------------------------------------------------------
-# Obiettivo: una home essenziale con hero centrale, messaggio chiaro e 1-2 CTA.
-# - Tipografia grande, tanto spazio bianco, pochi link (principale + secondario)
-# - Evita distrazioni: niente gallerie, niente menu complessi
-# - CTA porta alle sezioni principali del portfolio
+# Essenziale, chiara: hero con illustrazione, headline, 1–2 CTA,
+# tre sezioni (Visualizzazioni · Automazione · Pubblicazioni) con link alle pagine.
 # =============================================================================
 
-import os
 from pathlib import Path
 import streamlit as st
 
-# Evita doppie set_page_config: chiamala solo se non già impostata dal selettore
+# Evita doppie set_page_config (se il selettore l'ha già chiamata)
 if not st.session_state.get("_page_config_done"):
     st.set_page_config(
         page_title="Ulisse Fabiani — Portfolio (Ora)",
@@ -22,96 +19,94 @@ if not st.session_state.get("_page_config_done"):
     )
     st.session_state["_page_config_done"] = True
 
-# --- Piccolo stamp di versione per capire cosa è online ---
-commit = os.getenv("RAILWAY_GIT_COMMIT_SHA", "local")
-branch = os.getenv("RAILWAY_GIT_BRANCH", "unknown")
-st.caption(f"Build: {commit[:7]} · Branch: {branch}")
-
-# --- CSS minimale per hero centrato, palette neutra con accento ---
-ACCENT = "#f59e0b"  # ambra / ocra
+# ---------- CSS minimale ----------
+ACCENT = "#f59e0b"  # ambra/ocra
 CSS = f"""
 <style>
-/* restringe il container per un look più "landing" */
 .main .block-container {{
   max-width: 860px;
 }}
-
-/* Hero centrale */
 .hero {{
   text-align: center;
-  padding: 6rem 1rem 3rem 1rem;
+  padding: 2rem 1rem 1rem 1rem;
+}}
+.hero svg {{
+  width: 100%;
+  max-width: 640px;
+  height: auto;
 }}
 .hero h1 {{
   font-size: 3rem;
   line-height: 1.1;
-  margin: 0 0 1rem 0;
+  margin: 1rem 0 0.5rem 0;
 }}
 .hero p.lead {{
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: #4b5563; /* gray-600 */
-  margin: 0 auto 2rem auto;
-  max-width: 48ch;
+  margin: 0 auto 1.5rem auto;
+  max-width: 60ch;
 }}
-
-/* CTA (se usata in HTML) */
-.btn {{
-  display: inline-block;
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-}}
-.btn-primary {{
-  background: {ACCENT};
-  color: white;
-}}
-.btn-secondary {{
-  background: transparent;
-  color: #374151; /* gray-700 */
-  border: 2px solid #d1d5db; /* gray-300 */
-}}
-
-/* Sezione features */
-.features h3 {{
-  margin-bottom: 0.5rem;
-}}
-.features p {{
-  color: #6b7280; /* gray-500 */
-}}
-
-/* Footer minimale */
-.footer {{
-  text-align: center;
-  color: #6b7280;
-  padding: 2rem 0 4rem 0;
+.btn-row {{
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 0.5rem 0 2rem 0;
 }}
 </style>
 """
 st.markdown(CSS, unsafe_allow_html=True)
 
-# --- HERO ---
+# ---------- HERO con illustrazione (SVG semplice tipo “sunrise”) ----------
+hero_svg = """
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sunrise illustration">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <!-- cielo -->
+  <rect x="0" y="0" width="800" height="300" fill="url(#sky)"/>
+  <!-- sole -->
+  <circle cx="400" cy="180" r="50" fill="url(#sun)"/>
+  <!-- raggi -->
+  <g stroke="#f59e0b" stroke-width="4" stroke-linecap="round">
+    <line x1="400" y1="90"  x2="400" y2="140"/>
+    <line x1="330" y1="110" x2="370" y2="150"/>
+    <line x1="470" y1="110" x2="430" y2="150"/>
+    <line x1="310" y1="160" x2="360" y2="170"/>
+    <line x1="490" y1="160" x2="440" y2="170"/>
+  </g>
+  <!-- orizzonte stilizzato -->
+  <path d="M0 210 C 150 230, 250 220, 400 210 C 550 200, 650 220, 800 210 L 800 300 L 0 300 Z"
+        fill="#fef3c7"/>
+</svg>
+"""
+
+st.markdown(f'<div class="hero">{hero_svg}</div>', unsafe_allow_html=True)
 st.markdown(
     """
-    <div class="hero">
-      <h1>Portfolio di Ulisse Fabiani</h1>
-      <p class="lead">Soluzioni di analisi dati, visualizzazione interattiva e automazione in Python.
-      Una home essenziale, chiara e veloce da consultare.</p>
-    </div>
-    """,
+<div class="hero">
+  <h1>Portfolio di Ulisse Fabiani</h1>
+  <p class="lead">Analisi dati, visualizzazioni interattive e automazione in Python.
+  Una home essenziale, chiara e veloce da consultare.</p>
+</div>
+""",
     unsafe_allow_html=True,
 )
 
-# --- CTA (centrate) ---
-cta_col1, cta_col2, cta_col3 = st.columns([1, 1, 1])
-with cta_col2:
-    c1, csp, c2 = st.columns([1, 0.1, 1])
-
-    with c1:
-        if st.button("Apri Grafici & Mappe", use_container_width=True):
+# ---------- CTA centrali ----------
+c1, c2, c3 = st.columns([1, 1, 1])
+with c2:
+    col_a, _, col_b = st.columns([1, 0.1, 1])
+    with col_a:
+        if st.button("Apri Grafici & Mappe", use_container_width=True, key="cta_grafici"):
             st.switch_page("pages/1_Grafici_plotly.py")
-
-    with c2:
-        # Se presente, mostra subito il download del CV; altrimenti un toast
+    with col_b:
         cv = Path("assets/Ulisse_Fabiani_CV.pdf")
         if cv.exists():
             st.download_button(
@@ -120,37 +115,62 @@ with cta_col2:
                 file_name=cv.name,
                 mime="application/pdf",
                 use_container_width=True,
+                key="cta_cv",
             )
         else:
-            if st.button("Scarica CV", use_container_width=True):
-                st.toast("CV non trovato in assets/Ulisse_Fabiani_CV.pdf", icon="⚠️")
-
-# --- Features sintetiche (3 card) ---
-st.write("")
-colA, colB, colC = st.columns(3)
-with colA:
-    st.markdown("### Visualizzazioni")
-    st.markdown("Grafici interattivi con Plotly, Altair ed ECharts. Focus su insight chiari.")
-with colB:
-    st.markdown("### Automazione")
-    st.markdown("Script Python per ETL, pulizia dati e integrazione con Excel/VBA.")
-with colC:
-    st.markdown("### Pubblicazioni")
-    st.markdown("Selezione di lavori accademici e progetti reali (link alle pagine dedicate).")
+            if st.button("Scarica CV", use_container_width=True, key="cta_cv_missing"):
+                st.toast("CV non trovato: assets/Ulisse_Fabiani_CV.pdf", icon="⚠️")
 
 st.divider()
 
-# --- Link secondari minimali ---
+# ---------- Sezioni con link alle pagine ----------
+colA, colB, colC = st.columns(3)
+
+with colA:
+    st.subheader("Visualizzazioni")
+    st.caption("Grafici interattivi con Plotly, Altair ed ECharts.")
+    if st.button("Plotly", use_container_width=True, key="v_plotly"):
+        st.switch_page("pages/1_Grafici_plotly.py")
+    if st.button("Echarts & Altair", use_container_width=True, key="v_echarts_altair"):
+        st.switch_page("pages/2_Grafici_Altair_Echarts.py")
+    if st.button("Meteo con Altair", use_container_width=True, key="v_meteo"):
+        st.switch_page("pages/3_Grafici_Altair_Meteo.py")
+    if st.button("Mappe GIS/PCM", use_container_width=True, key="v_gis"):
+        st.switch_page("pages/9_GIS_PCM.py")
+
+with colB:
+    st.subheader("Automazione")
+    st.caption("Script Python, utility e integrazione con Excel/VBA.")
+    if st.button("Programmini (in)utili", use_container_width=True, key="a_prog"):
+        st.switch_page("pages/4_Programmini_(in)utili.py")
+    if st.button("Excel & Progetti VBA", use_container_width=True, key="a_excel_vba"):
+        st.switch_page("pages/8_Excel_Progetti_VBA.py")
+
+with colC:
+    st.subheader("Pubblicazioni")
+    st.caption("Selezione di lavori e attività accademiche.")
+    if st.button("Pubblicazioni", use_container_width=True, key="p_pubblicazioni"):
+        st.switch_page("pages/7_Pubblicazioni.py")
+    if st.button("Titoli di Studio", use_container_width=True, key="p_titoli"):
+        st.switch_page("pages/5_Titoli.py")
+    if st.button("Certificazioni", use_container_width=True, key="p_certificazioni"):
+        st.switch_page("pages/6_Certificazioni.py")
+
+st.divider()
+
+# ---------- Link secondari ----------
 col1, col2 = st.columns(2)
 with col1:
     st.markdown("GitHub")
 with col2:
     st.markdown("Academia.edu")
 
-## --- Footer ---
+## ---------- Footer ----------
 st.markdown(
     """
-    <div class="footer">© Ulisse Fabiani · Portfolio in Python/Streamlit · Railway hosting</div>
+    <div style="text-align:center;color:#6b7280;padding: 1rem 0 2rem 0;">
+      © Ulisse Fabiani · Portfolio in Python/Streamlit · Railway hosting
+    </div>
     """,
     unsafe_allow_html=True,
 )
