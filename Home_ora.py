@@ -25,17 +25,18 @@ CSS = f"""
 }}
 .hero {{
   text-align: center;
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 2rem 1rem 0.75rem 1rem;
 }}
-.hero img {{
-  width: 120px; /* logo piccolo */
+/* Logo molto piccolo, sopra al titolo */
+.hero img.logo {{
+  width: 72px;     /* ridotto ulteriormente */
   height: auto;
   border-radius: 8px;
 }}
 .hero h1 {{
-  font-size: 2.5rem;
-  line-height: 1.1;
-  margin: 1rem 0 0.5rem 0;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin: 0.75rem 0 0.5rem 0;
 }}
 .hero p.lead {{
   font-size: 1.125rem;
@@ -43,30 +44,38 @@ CSS = f"""
   margin: 0 auto 1.5rem auto;
   max-width: 60ch;
 }}
+
+/* Row immagini piccole affiancate, minimal */
 .img-row {{
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   justify-content: center;
-  margin: 1rem 0 2rem 0;
+  align-items: center;
+  margin: 0.75rem 0 1.5rem 0;
+  flex-wrap: wrap; /* per mobile va sotto */
 }}
-.img-row img {{
-  width: 180px; /* immagini piccole affiancate */
+img-row img {{
+  width: 140px;    /* piccole */
   height: auto;
   border-radius: 8px;
+  object-fit: contain;
 }}
+
 .link-row {{
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   justify-content: center;
   margin: 1rem 0 1.5rem 0;
+  flex-wrap: wrap;
 }}
 .link-row a {{
-  padding: 0.625rem 1rem;
+  padding: 0.5rem 0.9rem;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   text-decoration: none;
   color: #111827;
   background: #fff;
+  font-size: 0.95rem;
 }}
 .link-row a:hover {{
   border-color: {ACCENT};
