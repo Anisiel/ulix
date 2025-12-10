@@ -21,74 +21,7 @@
 # selettore.py
 import streamlit as st
 from pathlib import Path
-import importlib.util  # importlib invece di runpy
-
-
-import os
-
-
-# --- 🔐 Gate di accesso con variabile d'ambiente ---
-def check_password():
-    app_pwd = os.environ.get("APP_PASSWORD")
-
-    # Se la password non è configurata, avvisa ma non bloccare (utile in locale)
-    if not app_pwd:
-        st.warning("⚠️ Password non configurata (APP_PASSWORD). Accesso temporaneamente aperto.")
-        return
-
-    # Stato della sessione
-    if "authenticated" not in st.session_state:
-        st.session_state["authenticated"] = False
-
-    # Se già autenticato, mostra Logout e prosegui
-    if st.session_state["authenticated"]:
-        with st.sidebar:
-            if st.button("🔓 Logout"):
-                st.session_state.clear()
-                st.rerun()
-        return
-
-    # Form di login nella sidebar
-    with st.sidebar:
-        st.markdown("#### 🔑 Accesso")
-        pwd = st.text_input("Password", type="password", placeholder="Inserisci password")
-        login = st.button("Entra")
-
-    # Gestione login
-    if login:
-        if pwd == app_pwd:
-            st.session_state["authenticated"] = True
-            st.success("Accesso consentito.")
-            st.rerun()
-        else:
-            st.error("Password errata.")
-            st.stop()
-    else:
-        # Blocca la pagina finché non si autentica
-        st.title("Portfolio Ulisse        st.title("Portfolio Ulisse — Accesso")
-        st.info("Inserisci la password nella **sidebar** per continuare.")
-        st.stop()
-
-# 👇 Chiama questa funzione PRIMA del selettore Minimal/Ricca
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# import importlib.util  # ✅ Nuovo: usiamo importlib invece di runpy
 
 # 0) Config base del selettore (sidebar visibile)
 st.set_page_config(
