@@ -90,7 +90,7 @@ st.markdown('<div class="hero">', unsafe_allow_html=True)
 if hero_img.exists():
     st.image(str(hero_img), caption=None, use_container_width=False)
 else:
-    st.info("Immagine hero non trovata: assets/img/hero5.jpg")
+    st.info("Immagine hero non trovata: assets/img/hero4.jpg")
 
 st.markdown(
     """
@@ -103,18 +103,18 @@ st.markdown(
 st.markdown("</div>", unsafe_allow_html=True)
 
 # ---------- Al posto della CTA: due immagini ----------
-img1 = Path("assets/img/imma1.jpg")
-img2 = Path("assets/img/imma2.jpg")
+img1 = Path("assets/img/hero4.jpg")
+img2 = Path("assets/img/hero5.jpg")
 row_html = '<div class="img-row">'
 st.markdown(row_html, unsafe_allow_html=True)
 if img1.exists():
     st.image(str(img1), use_container_width=False)
 else:
-    st.warning("Immagine non trovata: assets/img/imma1.jpg")
+    st.warning("Immagine non trovata: assets/img/hero4.jpg")
 if img2.exists():
     st.image(str(img2), use_container_width=False)
 else:
-    st.warning("Immagine non trovata: assets/img/imma2.jpg")
+    st.warning("Immagine non trovata: assets/img/hero5.jpg")
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.divider()
