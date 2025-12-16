@@ -12,11 +12,8 @@ if not st.session_state.get("_page_config_done"):
     )
     st.session_state["_page_config_done"] = True
 
-# ---------- HERO ----------
+# ---------- HERO LOGO ----------
 logo_img = Path("assets/img/logo.jpg")
-st.write("## Portfolio di Ulisse Fabiani")
-st.caption("Analisi dati, visualizzazioni interattive e automazione in Python.")
-
 # Logo piccolo
 if logo_img.exists():
     st.image(str(logo_img), width=72)
@@ -24,6 +21,10 @@ else:
     st.warning("Logo non trovato")
 
 st.divider()
+st.write("## Portfolio di Ulisse Fabiani")
+st.caption("Analisi dati, visualizzazioni interattive e automazione in Python.")
+
+
 
 # ---------- Due immagini affiancate ----------
 img1 = Path("assets/img/hero4.jpg")
