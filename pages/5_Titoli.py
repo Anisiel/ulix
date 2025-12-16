@@ -93,8 +93,8 @@ if scelta == opzioni_titoli[0]:
         st.markdown("- 📅 Data: 20-02-2009")
         with open("assets/titoli/dottorato_infrastrutture.pdf", "rb") as f:
             st.download_button("🔗 Scarica Badge", f, file_name="dottorato_infrastrutture.pdf")
-        with open("assets/titoli/dottorato_infrastrutture_tesi.pdf", "rb") as f:
-            st.download_button("📄 Scarica Tesi", f, file_name="dottorato_infrastrutture_tesi.pdf")
+#        with open("assets/titoli/dottorato_infrastrutture_tesi.pdf", "rb") as f:
+#            st.download_button("📄 Scarica Tesi", f, file_name="dottorato_infrastrutture_tesi.pdf")
 
 elif scelta == opzioni_titoli[1]:
     with st.expander(opzioni_titoli[1], expanded=True):
@@ -102,8 +102,8 @@ elif scelta == opzioni_titoli[1]:
         st.markdown("- 📅 Data: 12-07-2002")
         with open("assets/titoli/laurea_vecchio_ordinamento.pdf", "rb") as f:
             st.download_button("🔗 Scarica Badge", f, file_name="laurea_vecchio_ordinamento.pdf")
-        with open("assets/titoli/laurea_vecchio_ordinamento_tesi.pdf", "rb") as f:
-            st.download_button("📄 Scarica Tesi", f, file_name="laurea_vecchio_ordinamento_tesi.pdf")
+#        with open("assets/titoli/laurea_vecchio_ordinamento_tesi.pdf", "rb") as f:
+#            st.download_button("📄 Scarica Tesi", f, file_name="laurea_vecchio_ordinamento_tesi.pdf")
 
 elif scelta == opzioni_titoli[2]:
     with st.expander(opzioni_titoli[2], expanded=True):
@@ -111,8 +111,8 @@ elif scelta == opzioni_titoli[2]:
         st.markdown("- 📅 Data: 05-07-2016")
         with open("assets/titoli/laurea_triennale.pdf", "rb") as f:
             st.download_button("🔗 Scarica Badge", f, file_name="laurea_triennale.pdf")
-        with open("assets/titoli/laurea_triennale_tesi.pdf", "rb") as f:
-            st.download_button("📄 Scarica Tesi", f, file_name="laurea_triennale_tesi.pdf")
+#        with open("assets/titoli/laurea_triennale_tesi.pdf", "rb") as f:
+#           st.download_button("📄 Scarica Tesi", f, file_name="laurea_triennale_tesi.pdf")
 
 elif scelta == opzioni_titoli[3]:
     with st.expander(opzioni_titoli[3], expanded=True):
@@ -120,8 +120,8 @@ elif scelta == opzioni_titoli[3]:
         st.markdown("- 📅 Data: 22-11-2004")
         with open("assets/titoli/master_sistemi_informativi.pdf", "rb") as f:
             st.download_button("🔗 Scarica Badge", f, file_name="master_sistemi_informativi.pdf")
-        with open("assets/titoli/master_sistemi_informativi_tesi.pdf", "rb") as f:
-            st.download_button("📄 Scarica Tesi", f, file_name="master_sistemi_informativi_tesi.pdf")
+ #       with open("assets/titoli/master_sistemi_informativi_tesi.pdf", "rb") as f:
+ #           st.download_button("📄 Scarica Tesi", f, file_name="master_sistemi_informativi_tesi.pdf")
 
 elif scelta == opzioni_titoli[4]:
     with st.expander(opzioni_titoli[4], expanded=True):
@@ -129,8 +129,8 @@ elif scelta == opzioni_titoli[4]:
         st.markdown("- 📅 Data: 27-10-2022")
         with open("assets/titoli/master_insegnamento.pdf", "rb") as f:
             st.download_button("🔗 Scarica Badge", f, file_name="master_insegnamento.pdf")
-        with open("assets/titoli/master_insegnamento_tesi.pdf", "rb") as f:
-            st.download_button("📄 Scarica Tesi", f, file_name="master_insegnamento_tesi.pdf")
+#        with open("assets/titoli/master_insegnamento_tesi.pdf", "rb") as f:
+#           st.download_button("📄 Scarica Tesi", f, file_name="master_insegnamento_tesi.pdf")
 
 elif scelta == opzioni_titoli[5]:
     with st.expander(opzioni_titoli[5], expanded=True):
