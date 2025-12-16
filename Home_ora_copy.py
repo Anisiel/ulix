@@ -13,7 +13,7 @@ if not st.session_state.get("_page_config_done"):
     st.session_state["_page_config_done"] = True
 
 # ---------- HERO LOGO ----------
-logo_img = Path("assets/img/logo1.jpg")
+logo_img = Path("assets/img/logo1.png")
 # Logo piccolo
 if logo_img.exists():
     st.image(str(logo_img), width=72)
