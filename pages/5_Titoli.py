@@ -73,6 +73,7 @@ st.divider()
 # ============================
 # Sezione interattiva con selectbox
 # ============================
+
 st.subheader("📚 Seleziona un titolo per visualizzare i dettagli")
 
 opzioni_titoli = [
@@ -90,43 +91,56 @@ if scelta == opzioni_titoli[0]:
     with st.expander(opzioni_titoli[0], expanded=True):
         st.markdown("- Titolo accademico di terzo livello conseguito presso istituto universitario")
         st.markdown("- 📅 Data: 20-02-2009")
-        st.page_link("assets/cert/dottorato_infrastrutture.pdf", label="🔗 Visualizza badge")
-        st.page_link("assets/cert/dottorato_infrastrutture_tesi.pdf", label="📄 Visualizza tesi")
+        with open("assets/cert/dottorato_infrastrutture.pdf", "rb") as f:
+            st.download_button("🔗 Scarica Badge", f, file_name="dottorato_infrastrutture.pdf")
+        with open("assets/cert/dottorato_infrastrutture_tesi.pdf", "rb") as f:
+            st.download_button("📄 Scarica Tesi", f, file_name="dottorato_infrastrutture_tesi.pdf")
 
 elif scelta == opzioni_titoli[1]:
     with st.expander(opzioni_titoli[1], expanded=True):
         st.markdown("- Laurea vecchio ordinamento con indirizzo topografico")
         st.markdown("- 📅 Data: 12-07-2002")
-        st.page_link("assets/cert/laurea_vecchio_ordinamento.pdf", label="🔗 Visualizza badge")
-        st.page_link("assets/cert/laurea_vecchio_ordinamento_tesi.pdf", label="📄 Visualizza tesi")
+        with open("assets/cert/laurea_vecchio_ordinamento.pdf", "rb") as f:
+            st.download_button("🔗 Scarica Badge", f, file_name="laurea_vecchio_ordinamento.pdf")
+        with open("assets/cert/laurea_vecchio_ordinamento_tesi.pdf", "rb") as f:
+            st.download_button("📄 Scarica Tesi", f, file_name="laurea_vecchio_ordinamento_tesi.pdf")
 
 elif scelta == opzioni_titoli[2]:
     with st.expander(opzioni_titoli[2], expanded=True):
         st.markdown("- Laurea triennale in ambito informatico-giuridico")
         st.markdown("- 📅 Data: 05-07-2016")
-        st.page_link("assets/cert/laurea_triennale.pdf", label="🔗 Visualizza badge")
-        st.page_link("assets/cert/laurea_triennale_tesi.pdf", label="📄 Visualizza tesi")
+        with open("assets/cert/laurea_triennale.pdf", "rb") as f:
+            st.download_button("🔗 Scarica Badge", f, file_name="laurea_triennale.pdf")
+        with open("assets/cert/laurea_triennale_tesi.pdf", "rb") as f:
+            st.download_button("📄 Scarica Tesi", f, file_name="laurea_triennale_tesi.pdf")
 
 elif scelta == opzioni_titoli[3]:
     with st.expander(opzioni_titoli[3], expanded=True):
         st.markdown("- Master I livello in Sistemi Informativi Territoriali e Telerilevamento")
         st.markdown("- 📅 Data: 22-11-2004")
-        st.page_link("assets/cert/master_sistemi_informativi.pdf", label="🔗 Visualizza badge")
-        st.page_link("assets/cert/master_sistemi_informativi_tesi.pdf", label="📄 Visualizza tesi")
+        with open("assets/cert/master_sistemi_informativi.pdf", "rb") as f:
+            st.download_button("🔗 Scarica Badge", f, file_name="master_sistemi_informativi.pdf")
+        with open("assets/cert/master_sistemi_informativi_tesi.pdf", "rb") as f:
+            st.download_button("📄 Scarica Tesi", f, file_name="master_sistemi_informativi_tesi.pdf")
 
 elif scelta == opzioni_titoli[4]:
     with st.expander(opzioni_titoli[4], expanded=True):
         st.markdown("- Master I livello per insegnamento in istituti secondari")
         st.markdown("- 📅 Data: 27-10-2022")
-        st.page_link("assets/cert/master_insegnamento.pdf", label="🔗 Visualizza badge")
-        st.page_link("assets/cert/master_insegnamento_tesi.pdf", label="📄 Visualizza tesi")
+        with open("assets/cert/master_insegnamento.pdf", "rb") as f:
+            st.download_button("🔗 Scarica Badge", f, file_name="master_insegnamento.pdf")
+        with open("assets/cert/master_insegnamento_tesi.pdf", "rb") as f:
+            st.download_button("📄 Scarica Tesi", f, file_name="master_insegnamento_tesi.pdf")
 
 elif scelta == opzioni_titoli[5]:
     with st.expander(opzioni_titoli[5], expanded=True):
         st.markdown("- Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore")
         st.markdown("- 📅 Data: 27-11-2014")
-        st.page_link("assets/cert/Esperto_Normativa.pdf", label="🔗 Visualizza badge")
-        st.page_link("assets/cert/Esperto_Normativa_diploma.pdf", label="📄 Visualizza diploma")
+        with open("assets/cert/Esperto_Normativa.pdf", "rb") as f:
+            st.download_button("🔗 Scarica Badge", f, file_name="Esperto_Normativa.pdf")
+        # La tesi non è disponibile
+        st.caption("📄 Tesi: non disponibile")
+
 
 st.divider()
 
