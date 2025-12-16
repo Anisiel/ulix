@@ -87,61 +87,45 @@ scelta = st.selectbox("Scegli un titolo:", opzioni_titoli)
 
 if scelta == opzioni_titoli[0]:
     with st.expander(opzioni_titoli[0], expanded=True):
-        st.markdown("""
-        - Titolo accademico di terzo livello conseguito presso istituto universitario  
-        - 📅 Data: 20-02-2009  
-        - 🔗 [Visualizza badge](assets/cert/dottorato_infrastrutture.pdf)
-        - 📄 [Visualizza tesi](assets/cert/dottorato_infrastrutture_tesi.pdf)
-        """)
+        st.markdown("- Titolo accademico di terzo livello conseguito presso istituto universitario")
+        st.markdown("- 📅 Data: 20-02-2009")
+        st.page_link("assets/cert/dottorato_infrastrutture.pdf", label="🔗 Visualizza badge")
+        st.page_link("assets/cert/dottorato_infrastrutture_tesi.pdf", label="📄 Visualizza tesi")
 
 elif scelta == opzioni_titoli[1]:
     with st.expander(opzioni_titoli[1], expanded=True):
-        st.markdown("""
-        - Laurea vecchio ordinamento con indirizzo topografico  
-        - 📅 Data: 12-07-2002  
-        - 🔗 [Visualizza badge](assets/cert/laurea_vecchio_ordinamento.pdf)
-        - 📄 [Visualizza tesi](assets/cert/laurea_vecchio_ordinamento_tesi.pdf)
-        """)
+        st.markdown("- Laurea vecchio ordinamento con indirizzo topografico")
+        st.markdown("- 📅 Data: 12-07-2002")
+        st.page_link("assets/cert/laurea_vecchio_ordinamento.pdf", label="🔗 Visualizza badge")
+        st.page_link("assets/cert/laurea_vecchio_ordinamento_tesi.pdf", label="📄 Visualizza tesi")
 
 elif scelta == opzioni_titoli[2]:
     with st.expander(opzioni_titoli[2], expanded=True):
-                    
-        st.markdown("""
-        - Laurea triennale in ambito informatico-giuridico  
-        - 📅 Data: 05-07-2016  
-        - 🔗 [Visualizza badge](assets/cert/laurea_triennale.pdf)
-        - 📄 [Visualizza tesi](assets/cert/laurea_triennale_tesi.pdf)
-        """)
+        st.markdown("- Laurea triennale in ambito informatico-giuridico")
+        st.markdown("- 📅 Data: 05-07-2016")
+        st.page_link("assets/cert/laurea_triennale.pdf", label="🔗 Visualizza badge")
+        st.page_link("assets/cert/laurea_triennale_tesi.pdf", label="📄 Visualizza tesi")
 
 elif scelta == opzioni_titoli[3]:
     with st.expander(opzioni_titoli[3], expanded=True):
-                    
-        st.markdown("""
-        - Master I livello in Sistemi Informativi Territoriali e Telerilevamento 
-        - 📅 Data: 22-11-2004
-        - 🔗 [Visualizza badge](assets/cert/master_sistemi_informativi.pdf)
-        - 📄 [Visualizza tesi](assets/cert/master_sistemi_informativi_tesi.pdf)
-        """)
+        st.markdown("- Master I livello in Sistemi Informativi Territoriali e Telerilevamento")
+        st.markdown("- 📅 Data: 22-11-2004")
+        st.page_link("assets/cert/master_sistemi_informativi.pdf", label="🔗 Visualizza badge")
+        st.page_link("assets/cert/master_sistemi_informativi_tesi.pdf", label="📄 Visualizza tesi")
 
 elif scelta == opzioni_titoli[4]:
     with st.expander(opzioni_titoli[4], expanded=True):
-                    
-        st.markdown("""
-        - Master I livello per insegnamento in istituti secondari 
-        - 📅 Data: 27-10-2022
-        - 🔗 [Visualizza badge](assets/cert/master_insegnamento.pdf)
-        - 📄 [Visualizza tesi](assets/cert/master_insegnamento_tesi.pdf)
-        """)
+        st.markdown("- Master I livello per insegnamento in istituti secondari")
+        st.markdown("- 📅 Data: 27-10-2022")
+        st.page_link("assets/cert/master_insegnamento.pdf", label="🔗 Visualizza badge")
+        st.page_link("assets/cert/master_insegnamento_tesi.pdf", label="📄 Visualizza tesi")
 
 elif scelta == opzioni_titoli[5]:
     with st.expander(opzioni_titoli[5], expanded=True):
-                    
-        st.markdown("""
-        - Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore 
-        - 📅 Data: 27-11-2014
-        - 🔗 [Visualizza badge](assets/cert/Esperto_Normativa.pdf)
-        - 📄 [Visualizza tesi](assets/cert/Esperto_Normativa_diploma.pdf)
-        """)
+        st.markdown("- Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore")
+        st.markdown("- 📅 Data: 27-11-2014")
+        st.page_link("assets/cert/Esperto_Normativa.pdf", label="🔗 Visualizza badge")
+        st.page_link("assets/cert/Esperto_Normativa_diploma.pdf", label="📄 Visualizza diploma")
 
 st.divider()
 # ============================
