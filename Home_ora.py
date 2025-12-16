@@ -72,7 +72,7 @@ with colA:
 with colB:
     st.subheader("Automazione")
     st.caption("Script Python, utility e integrazione con Excel/VBA.")
-    if st.button    if st.button("Programmini (in)utili", use_container_width=True):
+    if st.button("Programmini (in)utili", use_container_width=True):
         st.switch_page("pages/4_Programmini_inutili.py")
     if st.button("Excel & Progetti VBA", use_container_width=True):
         st.switch_page("pages/8_Excel_Progetti_VBA.py")
