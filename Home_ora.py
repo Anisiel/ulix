@@ -98,16 +98,17 @@ with colC:
 st.divider()
 
 
+
 # ---------- Link secondari ----------
 cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
 
-links_html = f"""
-<div class="link-row">
-  https://github.com/ulissefabianiGitHub</a>
-  <a href="https://ulissefabiani.academia.edu" target="_blank" rel="noopenerarica il mio CV</a>' if cv_path.exists() else '<span style="color:#6b7280;">CV non trovato</span>'}
-</</div>
-"""
+stst.write("### Link utili")
+st.link_button("GitHub", "https://github.com/ulissefabiani")
 
+if cv_path.exists():
+    st.link_button("Scarica il mio CV", cv_path.as_posix())
+else:
+    st.caption("CV non trovato")
 
 st.markdown(links_html, unsafe_allow_html=True)
 
