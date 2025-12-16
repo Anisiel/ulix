@@ -19,7 +19,7 @@ st.caption("Analisi dati, visualizzazioni interattive e automazione in Python.")
 
 # Logo piccolo
 if logo_img.exists():
-    st.image(str(logo_img), width=24)
+    st.image(str(logo_img), width=72)
 else:
     st.warning("Logo non trovato")
 
@@ -32,13 +32,13 @@ img2 = Path("assets/img/hero5.jpg")
 col1, col2 = st.columns(2, gap="small")
 with col1:
     if img1.exists():
-        st.image(str(img1), width=80)
+        st.image(str(img1), width=140)
     else:
         st.warning("Immagine non trovata: hero4.jpg")
 
 with col2:
     if img2.exists():
-        st.image(str(img2), width=80)
+        st.image(str(img2), width=140)
     else:
         st.warning("Immagine non trovata: hero5.jpg")
 
