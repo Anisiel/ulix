@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import json
+from pathlib import Path
 
 # Imposta la configurazione della pagina con titolo e icona
 st.set_page_config(page_title="Titoli Universitari", page_icon="🎓")
@@ -19,54 +21,53 @@ st.subheader("📋 Tabella riepilogativa dei titoli")
 # Creazione di una tabella compatta
 
 
-# Dati dei titoli
-data = {
-    "Titolo": [
-        "Dottorato in Ingegneria delle Infrastrutture e dei Trasporti",
-        "Laurea Vecchio Ordinamento in Lettere Classiche (indirizzo Topografico)",
-        "Laurea Triennale in Scienze dei Servizi Giuridici in Informatica Giuridica",
-        "Master I livello in Sistemi Informativi Territoriali e Telerilevamento - 1650 ore",
-        "Master I livello per insegnamento in istituti secondari",
-        "Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore"
+# Percorso del file JSON
+json_path = "titoli/titoli.json"
 
-    ],
-    "Data": [
-        "20-02-2009",
-        "12-07-2002",
-        "22-11-2004",
-        "05-07-2016",
-        "27-10-2022",
-        "27-11-2014"
-    ],
-    "Nome e Livello europeo": [
-        "Dottorato - Livello 8",
-        "Laurea VO - Livello 7",
-        "Triennale - livello 6",
-        "Master I livello - Livello 7",
-        "Master I livello - Livello 7",
-        "Esperto - Livello 6"
-    ],
-    "Badge": [
-        "[PDF](assets/cert/dottorato_infrastrutture.pdf)",
-        "[PDF](assets/cert/laurea_vecchio_ordinamento.pdf)",
-        "[PDF](assets/cert/laurea_triennale.pdf)",
-        "[PDF](assets/cert/master_sistemi_informativi.pdf)",
-        "[PDF](assets/cert/master_insegnamento.pdf)",
-        "[PDF](assets/cert/Esperto_Normativa.pdf)"
-    ],
-    "Tesi": [
-        "[PDF](assets/cert/dottorato_infrastrutture_tesi.pdf)",
-        "[PDF](assets/cert/laurea_vecchio_ordinamento_tesi.pdf)",
-        "[PDF](assets/cert/laurea_triennale_tesi.pdf)",
-        "[PDF](assets/cert/master_sistemi_informativi_tesi.pdf)",
-        "[PDF](assets/cert/master_insegnamento_tesi.pdf)",
-        "--"
-    ]
-}
 
-# Mostra la tabella con link
-df = pd.DataFrame(data)
-st.markdown(df, unsafe_allow_html=True)
+
+try:
+    with open(json_path, "r", encoding="utf-8") as f:
+        titoli_data = json.load(f)
+except FileNotFoundError:
+    st.error(f"File JSON non trovato: {json_path}")
+    st.stop()
+
+# Loop sui titoli
+for i, titolo in enumerate(titoli_data):
+    st.markdown(f"**{titolo['Titolo']}** — 📅 {titolo['Data']}")
+    cols = st.columns(2)
+
+    # Bottone Badge
+    with cols[0]:
+        badge_path = titolo.get("Badge")
+        if badge_path and badge_path != "--" and Path(badge_path).exists():
+            with open(badge_path, "rb") as f:
+                st.download_button(
+                    label="🔗 Badge (PDF)",
+                    data=f,
+                    file_name=Path(badge_path).name,
+                    mime="application/pdf",
+                    key=f"badge_{i}",
+                    type="primary",
+                )
+        else:
+            st.caption("Badge: non disponibile")
+
+    # Bottone Tesi
+    with cols[1]:
+        tesi_path = titolo.get("Tesi")
+        if tesi_path and tesi_path != "--" and Path(tesi_path).exists():
+            with open(tesi_path, "rb") as f:
+                st.download_button(
+                    label="📄 Tesi (PDF)",
+                    data=f,
+                    file_name=Path(tesi_path).name,
+                    mime="application/pdf",
+                    key=f"tesi_{i}",
+                )
+        else:
+            st.caption("Tesi: non disponibile")
 
 st.divider()
 # ============================

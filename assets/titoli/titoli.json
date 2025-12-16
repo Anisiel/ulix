@@ -1,0 +1,44 @@
+
+[
+  {
+    "Titolo": "Dottorato in Ingegneria delle Infrastrutture e dei Trasporti",
+    "Data": "20-02-2009",
+    "Nome e Livello europeo": "Dottorato - Livello 8",
+    "Badge": "assets/cert/dottorato_infrastrutture.pdf",
+    "Tesi": "assets/cert/dottorato_infrastrutture_tesi.pdf"
+  },
+  {
+    "Titolo": "Laurea Vecchio Ordinamento in Lettere Classiche (indirizzo Topografico)",
+    "Data": "12-07-2002",
+    "Nome e Livello europeo": "Laurea VO - Livello 7",
+    "Badge": "assets/cert/laurea_vecchio_ordinamento.pdf",
+    "Tesi": "assets/cert/laurea_vecchio_ordinamento_tesi.pdf"
+  },
+  {
+    "Titolo": "Laurea Triennale in Scienze dei Servizi Giuridici in Informatica Giuridica",
+    "Data": "05-07-2016",
+    "Nome e Livello europeo": "Triennale - livello 6",
+    "Badge": "assets/cert/laurea_triennale.pdf",
+    "Tesi": "assets/cert/laurea_triennale_tesi.pdf"
+  },
+  {
+    "Titolo": "Master I livello in Sistemi Informativi Territoriali e Telerilevamento - 1650 ore",
+    "Data": "22-11-2004",
+    "Nome e Livello europeo": "Master I livello - Livello 7",
+    "Badge": "assets/cert/master_sistemi_informativi.pdf",
+    "Tesi": "assets/cert/master_sistemi_informativi_tesi.pdf"
+  },
+  {
+    "Titolo": "Master I livello per insegnamento in istituti secondari",
+    "Data": "27-10-2022",
+    "Nome e Livello europeo": "Master I livello - Livello 7",
+    "Badge": "assets/cert/master_insegnamento.pdf",
+    "Tesi": "assets/cert/master_insegnamento_tesi.pdf"
+  },
+  {
+    "Titolo": "Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore",
+    "Data": "27-11-2014",
+    "Nome e Livello europeo": "Esperto - Livello 6",
+    "Badge": "assets/cert/Esperto_Normativa.pdf",
+    "Tesi": "--"
+   }
