@@ -20,7 +20,7 @@ if logo_img.exists():
 else:
     st.warning("Logo non trovato")
 
-st.divider()
+#st.divider()
 st.write("## Portfolio di Ulisse Fabiani")
 st.caption("Analisi dati, visualizzazioni interattive e automazione in Python.")
 
