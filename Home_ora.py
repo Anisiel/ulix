@@ -16,85 +16,21 @@ if not st.session_state.get("_page_config_done"):
     )
     st.session_state["_page_config_done"] = True
 
-# ---------- CSS minimale ----------
-ACCENT = "#f59e0b"
-CSS = f"""
-<style>
-.main .block-container {{
-  max-width: 860px;
-}}
-.hero {{
-  text-align: center;
-  padding: 2rem 1rem 0.75rem 1rem;
-}}
-/* Logo molto piccolo, sopra al titolo */
-.hero img.logo {{
-  width: 24px;     /* ridotto ulteriormente */
-  height: auto;
-  border-radius: 8px;
-}}
-.hero h1 {{
-  font-size: 2.25rem;
-  line-height: 1.15;
-  margin: 0.75rem 0 0.5rem 0;
-}}
-.hero p.lead {{
-  font-size: 1.125rem;
-  color: #4b5563;
-  margin: 0 auto 1.5rem auto;
-  max-width: 60ch;
-}}
-
-/* Row immagini piccole affiancate, minimal */
-.img-row {{
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  align-items: center;
-  margin: 0.75rem 0 1.5rem 0;
-  flex-wrap: wrap; /* per mobile va sotto */
-}}
-.img-row img {{
-  width: 80px;    /* piccole */
-  height: auto;
-  border-radius: 8px;
-  object-fit: contain;
-}}
-
-.link-row {{
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  margin: 0.75rem 0 1.5rem 0;
-  flex-wrap: wrap;
-}}
-.link-row a {{
-  padding: 0.5rem 0.9rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #111827;
-  background: #fff;
-  font-size: 0.95rem;
-}}
-.link-row a:hover {{
-  border-color: {ACCENT};
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
-}}
-</style>
-"""
-st.markdown(CSS, unsafe_allow_html=True)
+# ---------- Carica CSS esterno ----------
+css_path = Path("assets/stylehora.css")
+if css_path.exists():
+    st.markdown(f"<style>{css_path.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
+else:
+    st.warning("File CSS non trovato: assets/stylehora.css")
 
 # ---------- HERO con logo sopra al titolo ----------
 logo_img = Path("assets/img/logo.jpg")
 st.markdown('<div class="hero">', unsafe_allow_html=True)
+
+# Mostra il logo come <img class="logo"> per applicare la regola CSS (24px)
 if logo_img.exists():
-    # Usa HTML con class="logo" per applicare il CSS
     st.markdown(
-        f'{logo_img.as_posix()}',
-        unsafe_allow_html=True
-    )
-else:
+        f'<img class="logo" src="{logo_img.as_posix()}" alt="logo piccolose:
     st.warning("Logo non trovato: assets/img/logo.jpg")
 
 st.markdown(
@@ -113,7 +49,7 @@ img2 = Path("assets/img/hero5.jpg")
 
 st.markdown('<div class="img-row">', unsafe_allow_html=True)
 if img1.exists():
-    st.markdown(f'{img1.as_posix()}', unsafe_allow_html=True)
+    st.markdown(f'<img src="{img1.as_posix()}" alt="img=True)
 else:
     st.warning("Immagine non trovata: hero4.jpg")
 if img2.exists():
@@ -153,7 +89,7 @@ st.divider()
 cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
 links_html = f"""
 <div class="link-row">
-  <a href="https://github.com/ulissefabiani" target="_blank" rel="noopenerani.academia.edu" target="_blank" rel_path.as_posix()" target="_blank" rel="noopener() else '<span style="color:#6b7280;">CV non trovato</span>'}
+<a href="https://github.com/ulissefabiani" target="_blank" rel="noopenerani.academia.edu" target="_blank" rel_path.as_posix()}" target="_blank" rel="noopener() else '<span style="color:#6b7280;">CV non trovato</span>'}
 </div>
 """
 st.markdown(links_html, unsafe_allow_html=True)
@@ -165,5 +101,5 @@ st.markdown(
       © Ulisse Fabiani · Portfolio in Python/Streamlit · Railway hosting
     </div>
     """,
-       unsafe_allow_html=True,
+    unsafe_allow_html=True,
 )
