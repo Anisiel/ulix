@@ -54,8 +54,8 @@ CSS = f"""
   margin: 0.75rem 0 1.5rem 0;
   flex-wrap: wrap; /* per mobile va sotto */
 }}
-img-row img {{
-  width: 140px;    /* piccole */
+.img-row img {{
+  width: 80px;    /* piccole */
   height: auto;
   border-radius: 8px;
   object-fit: contain;
@@ -65,8 +65,8 @@ img-row img {{
   display: flex;
   gap: 0.75rem;
   justify-content: center;
-  margin: 1rem 0 1.5rem 0;
-  flex-wrap: wrap;
+  margin: 0.75rem 0 1.5rem   margin: 0.75rem 0 1.5rem 0;
+  flex-wrap: wrap; /* per mobile */
 }}
 .link-row a {{
   padding: 0.5rem 0.9rem;
