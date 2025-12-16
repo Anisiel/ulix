@@ -22,7 +22,7 @@ st.subheader("📋 Tabella riepilogativa dei titoli")
 
 
 # Percorso del file JSON
-json_path = "titoli/titoli.json"
+json_path = "assets/titoli/titoli.json"
 
 
 
