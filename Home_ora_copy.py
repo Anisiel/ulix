@@ -32,13 +32,13 @@ img2 = Path("assets/img/hero5.jpg")
 col1, col2 = st.columns(2, gap="small")
 with col1:
     if img1.exists():
-        st.image(str(img1), width=140)
+        st.image(str(img1), width=260)
     else:
         st.warning("Immagine non trovata: hero4.jpg")
 
 with col2:
     if img2.exists():
-        st.image(str(img2), width=140)
+        st.image(str(img2), width=260)
     else:
         st.warning("Immagine non trovata: hero5.jpg")
 
