@@ -30,9 +30,12 @@ st.markdown('<div class="hero">', unsafe_allow_html=True)
 # Mostra il logo come <img class="logo"> per applicare la regola CSS (24px)
 if logo_img.exists():
     st.markdown(
-        f'<img class="logo" src="{logo_img.as_posix()}" alt="logo piccolose:
+        f'{logo_img.as_posix()}',
+        unsafe_allow_html=True
+    )
+else:
     st.warning("Logo non trovato: assets/img/logo.jpg")
-
+    
 st.markdown(
     """
 <h1>Portfolio di Ulisse Fabiani</h1>
@@ -43,19 +46,28 @@ Una home essenziale, chiara e veloce da consultare.</p>
 )
 st.markdown("</div>", unsafe_allow_html=True)
 
+
 # ---------- Due immagini affiancate sotto il titolo ----------
 img1 = Path("assets/img/hero4.jpg")
 img2 = Path("assets/img/hero5.jpg")
 
 st.markdown('<div class="img-row">', unsafe_allow_html=True)
+
 if img1.exists():
-    st.markdown(f'<img src="{img1.as_posix()}" alt="img=True)
+    st.markdown(
+        f'{img1.as_posix()}',
+        unsafe_allow_html=True
+    )
 else:
     st.warning("Immagine non trovata: hero4.jpg")
+
 if img2.exists():
-    st.markdown(f'{img2.as_posix()}', unsafe_allow_html=True)
+    st.markdown(
+        f'{img2.as_posix()}',
+        unsafe_allow_html=True
+    )
 else:
-    st.warning("Immagine non trovata: hero5.jpg")
+       st.warning("Immagine non trovata: hero5.jpg")
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.divider()
