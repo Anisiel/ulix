@@ -76,7 +76,7 @@ st.divider()
 cv_path = Path("assets/titoli/Ulisse_Fabiani_CV.pdf")
 st.write("### Link utili")
 
-col1, col2 = st.columns(2, gap="small")
+col1, col2, col3  = st.columns(1,2,1, gap="small")
 with col1:
     st.link_button("GitHub", "https://github.com/Anisiel/ulix")
     st.link_button("Academia.Edu", "https://independent.academia.edu/FabianiUlisse")
@@ -86,7 +86,6 @@ with col2:
         st.link_button("Scarica il mio CV", cv_path.as_posix())
     else:
         st.caption("CV non trovato")
-
 
 
 # ---------- Footer ----------
