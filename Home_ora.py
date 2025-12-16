@@ -19,7 +19,7 @@ with col_right:
     with st.expander("📘 Info sul selettore e sul portfolio"):
         st.markdown("Vuoi sapere come è strutturato il sito e come funziona il selettore?")
         if st.button("👉 ***Organizzazione portfolio***"):
-            st.switch_page("pages/0_Organizzazione_portfolio.py")                
+            st.switch_page("pages/0_Organizzazione_portfolio.py")
 
 # ---------- HERO LOGO ----------
 logo_img = Path("assets/img/logo1.png")
