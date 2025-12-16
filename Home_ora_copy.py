@@ -16,7 +16,9 @@ if not st.session_state.get("_page_config_done"):
 logo_img = Path("assets/img/logo1.png")
 # Logo piccolo
 if logo_img.exists():
-    st.image(str(logo_img), width=72)
+    col1, col2, col3 = st.columns([1, 2, 1])  # colonna centrale più larga
+    with col2:
+        st.image(str(logo_img), width=84)
 else:
     st.warning("Logo non trovato")
 
@@ -28,7 +30,7 @@ st.caption("Analisi dati, visualizzazioni interattive e automazione in Python.")
 
 # ---------- Due immagini affiancate ----------
 img1 = Path("assets/img/hero4.jpg")
-img2 = Path("assets/img/hero5.jpg")
+img2 = Path("assets/img/hero5.png")
 
 col1, col2 = st.columns(2, gap="small")
 with col1:
