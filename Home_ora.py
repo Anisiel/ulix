@@ -21,8 +21,6 @@ with col_right:
         if st.button("👉 ***Organizzazione portfolio***"):
             st.switch_page("pages/0_Organizzazione_portfolio.py")                
 
-
-
 # ---------- HERO LOGO ----------
 logo_img = Path("assets/img/logo1.png")
 # Logo piccolo
