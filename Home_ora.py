@@ -106,15 +106,24 @@ st.markdown("</div>", unsafe_allow_html=True)
 # ---------- Due immagini affiancate sotto il titolo ----------
 img1 = Path("assets/img/hero4.jpg")
 img2 = Path("assets/img/hero5.jpg")
+#st.markdown('<div class="img-row">', unsafe_allow_html=True)
+#if img1.exists():
+#    st.image(str(img1))
+#else:
+#    st.warning("Immagine non trovata: hero4.jpg")
+#if img2.exists():
+#    st.image(str(img2))
+#else:
+#    st.warning("Immagine non trovata: hero5.jpg")
+#st.markdown("</div>", unsafe_allow_html=True)
+
+
 st.markdown('<div class="img-row">', unsafe_allow_html=True)
-if img1.exists():
-    st.image(str(img1))
-else:
-    st.warning("Immagine non trovata: hero4.jpg")
-if img2.exists():
-    st.image(str(img2))
-else:
-    st.warning("Immagine non trovata: hero5.jpg")
+if img1.exists() and img2.exists():
+    st.markdown(f"""
+        {img1.as_posix()
+        <img2.as_posix()}
+    """, unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.divider()
