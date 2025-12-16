@@ -65,8 +65,8 @@ CSS = f"""
   display: flex;
   gap: 0.75rem;
   justify-content: center;
-  margin: 0.75rem 0 1.5rem   margin: 0.75rem 0 1.5rem 0;
-  flex-wrap: wrap; /* per mobile */
+  margin: 0.75rem 0 1.5rem 0;
+  flex-wrap: wrap;
 }}
 .link-row a {{
   padding: 0.5rem 0.9rem;
@@ -89,7 +89,11 @@ st.markdown(CSS, unsafe_allow_html=True)
 logo_img = Path("assets/img/logo.jpg")
 st.markdown('<div class="hero">', unsafe_allow_html=True)
 if logo_img.exists():
-    st.image(str(logo_img), caption=None)
+    # Usa HTML con class="logo" per applicare il CSS
+    st.markdown(
+        f'{logo_img.as_posix()}',
+        unsafe_allow_html=True
+    )
 else:
     st.warning("Logo non trovato: assets/img/logo.jpg")
 
@@ -106,24 +110,16 @@ st.markdown("</div>", unsafe_allow_html=True)
 # ---------- Due immagini affiancate sotto il titolo ----------
 img1 = Path("assets/img/hero4.jpg")
 img2 = Path("assets/img/hero5.jpg")
-#st.markdown('<div class="img-row">', unsafe_allow_html=True)
-#if img1.exists():
-#    st.image(str(img1))
-#else:
-#    st.warning("Immagine non trovata: hero4.jpg")
-#if img2.exists():
-#    st.image(str(img2))
-#else:
-#    st.warning("Immagine non trovata: hero5.jpg")
-#st.markdown("</div>", unsafe_allow_html=True)
-
 
 st.markdown('<div class="img-row">', unsafe_allow_html=True)
-if img1.exists() and img2.exists():
-    st.markdown(f"""
-        {img1.as_posix()
-        <img2.as_posix()}
-    """, unsafe_allow_html=True)
+if img1.exists():
+    st.markdown(f'{img1.as_posix()}', unsafe_allow_html=True)
+else:
+    st.warning("Immagine non trovata: hero4.jpg")
+if img2.exists():
+    st.markdown(f'{img2.as_posix()}', unsafe_allow_html=True)
+else:
+    st.warning("Immagine non trovata: hero5.jpg")
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.divider()
@@ -154,19 +150,13 @@ with colC:
 st.divider()
 
 # ---------- Link secondari ----------
-
 cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
-
 links_html = f"""
 <div class="link-row">
-  <a href="https://github.com/ulissefabiani" target="_blank" rel="noopenert.academia.edu/Ulisseademia.edu</a>
-  {f'<a href="assets/Ulisse_F.pdfScarica il mio CV</a>' if cv_path.exists() else '<span style="color:#6b7280;">CV non trovato</span>'}
+  <a href="https://github.com/ulissefabiani" target="_blank" rel="noopenerani.academia.edu" target="_blank" rel_path.as_posix()}" target="_blank" rel="noopener() else '<span style="color:#6b7280;">CV non trovato</span>'}
 </div>
 """
-
 st.markdown(links_html, unsafe_allow_html=True)
-
-
 
 # ---------- Footer ----------
 st.markdown(
@@ -174,6 +164,6 @@ st.markdown(
     <div style="text-align:center;color:#6b7280;padding: 1rem 0 2rem 0;">
       © Ulisse Fabiani · Portfolio in Python/Streamlit · Railway hosting
     </div>
-       """,
-    unsafe_allow_html=True,
+    """,
+       unsafe_allow_html=True,
 )
