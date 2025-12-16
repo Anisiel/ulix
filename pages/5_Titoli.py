@@ -129,19 +129,41 @@ elif scelta == opzioni_titoli[5]:
         st.page_link("assets/cert/Esperto_Normativa_diploma.pdf", label="📄 Visualizza diploma")
 
 st.divider()
+
 # ============================
 # Sezione dettagliata con expander
 # ============================
 st.subheader("📦 Dettagli completi dei titoli")
 
-for titolo, data, file, emoji in zip(
-    data["Titolo"],
-    data["Data"],
-    data["Badge"],
-    ["📘", "📕", "📗", "📒", "📙", "📘"]
-):
-    with st.expander(f"{emoji} {titolo}", expanded=False):
-        st.markdown(f"""
-        - 📅 Data: {data}  
-        - 🔗 {file}
-        """)
+for i, titolo in enumerate(titoli_data):
+    with st.expander(f"{titolo['Titolo']}", expanded=False):
+        st.markdown(f"- 📅 Data: {titolo['Data']}")
+
+        # Bottone Badge
+        badge_path = titolo.get("Badge")
+        if badge_path and badge_path != "--" and Path(badge_path).exists():
+            with open(badge_path, "rb") as f:
+                st.download_button(
+                    label="🔗 Scarica Badge (PDF)",
+                    data=f,
+                    file_name=Path(badge_path).name,
+                    mime="application/pdf",
+                    key=f"badge_exp_{i}",
+                    type="primary",
+                )
+        else:
+            st.caption("Badge: non disponibile")
+
+        # Bottone Tesi
+        tesi_path = titolo.get("Tesi")
+        if tesi_path and tesi_path != "--" and Path(tesi_path).exists():
+            with open(tesi_path, "rb") as f:
+                st.download_button(
+                    label="📄 Scarica Tesi (PDF)",
+                    data=f,
+                    file_name=Path(tesi_path).name,
+                    mime="application/pdf",
+                    key=f"tesi_exp_{i}",
+                )
+        else:
+            st.caption("Tesi: non disponibile")
