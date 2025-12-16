@@ -18,7 +18,7 @@ col_left, col_right = st.columns([2, 3])  # proporzioni: sinistra più stretta
 with col_right:
     with st.expander("📘 Info sul selettore e sul portfolio"):
         st.markdown("Vuoi sapere come è strutturato il sito e come funziona il selettore?")
-        if st.button("👉 ***Organizzazione portfolio***", use_container_width=True):
+        if st.button("***Organizzazione portfolio***", use_container_width=True):
             st.switch_page("pages/0_Organizzazione_portfolio.py")
 
 # ---------- HERO LOGO ----------
