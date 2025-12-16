@@ -17,7 +17,7 @@ if not st.session_state.get("_page_config_done"):
     st.session_state["_page_config_done"] = True
 
 # ---------- Carica CSS esterno ----------
-css_path = Path("assets/stylehora.css")
+css_path = Path("stylehora.css")
 if css_path.exists():
     st.markdown(f"<style>{css_path.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 else:
