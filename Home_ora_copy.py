@@ -30,7 +30,7 @@ st.caption("Analisi dati, visualizzazioni interattive e automazione in Python.")
 
 # ---------- Due immagini affiancate ----------
 img1 = Path("assets/img/hero4.jpg")
-img2 = Path("assets/img/hero5.png")
+img2 = Path("assets/img/hero5.jpg")
 
 col1, col2 = st.columns(2, gap="small")
 with col1:
