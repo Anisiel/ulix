@@ -37,8 +37,6 @@ st.divider()
 st.write("## Portfolio di Ulisse Fabiani")
 st.caption("Analisi dati, visualizzazioni interattive e automazione in Python.")
 
-
-
 # ---------- Due immagini affiancate ----------
 img1 = Path("assets/img/hero4.jpg")
 img2 = Path("assets/img/hero5.jpg")
@@ -60,7 +58,6 @@ st.divider()
 
 # ---------- Sezioni con link alle pagine ----------
 colA, colB, colC = st.columns(3)
-
 
 with colA:
     st.subheader("Visualizzazioni")

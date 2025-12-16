@@ -163,29 +163,28 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("### 📊 Grafici & Mappe")
-    if st.button("📊 Grafici con Plotly"):
+    if st.button("📊 Grafici con Plotly", use_container_width=True):
         st.switch_page("pages/1_Grafici_plotly.py")
-    if st.button("🌐 Grafici con Echarts"):
+    if st.button("🌐 Grafici con Echarts", use_container_width=True):
         st.switch_page("pages/2_Grafici_Altair_Echarts.py")
-    if st.button("🌦️ Grafici Meteo con Altair"):
+    if st.button("🌦️ Grafici Meteo con Altair", use_container_width=True):
         st.switch_page("pages/3_Grafici_Altair_Meteo.py")
-    if st.button("🌐 Mappe e dati spaziali"):
+    if st.button("🗺️ Mappe e dati spaziali", use_container_width=True):
         st.switch_page("pages/9_GIS_PCM.py")
 
 with col2:
-	st.markdown("### 🎓 Curriculum")
-	if st.button("🎓 Titoli di Studio"):
-		st.switch_page("pages/5_Titoli.py")
-	if st.button("📜 Certificazioni"):
-		st.switch_page("pages/6_Certificazioni.py")
-	if st.button("📖 Pubblicazioni"):
-		st.switch_page("pages/7_Pubblicazioni.py")
+    st.markdown("### 🎓 Curriculum")
+    if st.button("🎓 Titoli di Studio", use_container_width=True):
+        st.switch_page("pages/5_Titoli.py")
+    if st.button("📜 Certificazioni", use_container_width=True):
+        st.switch_page("pages/6_Certificazioni.py")
+    if st.button("📖 Pubblicazioni", use_container_width=True):
+        st.switch_page("pages/7_Pubblicazioni.py")
 
 with col3:
-	st.markdown("### 🧰 Utility & Excel")
-	if st.button("🧪 Programmini (in)utili in dos, pyhton e VBA"):
-		st.switch_page("pages/4_Programmini_(in)utili.py")
-	if st.button("📂 Excel & Progetti VBA"):
-		st.switch_page("pages/8_Excel_Progetti_VBA.py")
-
+    st.markdown("### 🧰 Utility & Excel")
+    if st.button("🧪 Programmini (in)utili in DOS, Python e VBA", use_container_width=True):
+        st.switch_page("pages/4_Programmini_inutili.py")
+    if st.button("📂 Excel & Progetti VBA", use_container_width=True):
+          st.switch_page("pages/8_Excel_Progetti_VBA.py")
 st.divider()
