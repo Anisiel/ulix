@@ -29,7 +29,7 @@ CSS = f"""
 }}
 /* Logo molto piccolo, sopra al titolo */
 .hero img.logo {{
-  width: 72px;     /* ridotto ulteriormente */
+  width: 24px;     /* ridotto ulteriormente */
   height: auto;
   border-radius: 8px;
 }}
