@@ -9,10 +9,11 @@ Questo sito è  progettato come portfolio interattivo con lo scopo di far valuta
             e il curriculum.
             
 Per realizzarlo è stata necessaria una fase di progettazione e una di realizzazione.
-La velocità realizzativa (pochi giorni) è stata resa possibile dal supporto dell'intelligenza artificiale,
+La velocità realizzativa è stata resa possibile dal supporto dell'intelligenza artificiale,
 che nel supporto alla programmazione ha il suo punto di forza più grande.
 Il codice sorgente è disponibile su Github (vedi la sezione dedicata più avanti in questa pagina).
-Il sito è realizzato in Streamlit (open source e gratuito, motivo dei ritardi di visualizzazione).
+Il sito è realizzato in Streamlit (open source e gratuito).
+Il deploy è effettuato su Railway, una piattaforma cloud per il deployment di applicazioni:
             
 """)
 
@@ -50,6 +51,8 @@ Questa struttura consente di esplorare il portfolio in due modalità diverse, a 
 - Il sito è costruito con un framework Python per applicazioni web interattive chiamato Streamlit:
     - [🔗 Streamlit.io](https://streamlit.io/)
     - Utilizza file statici (`.pdf`, `.xlsx`, `.py`) e stili personalizzati (`styles.css`).
+- Il deploy è effettuato su Railway, una piattaforma cloud per il deployment di applicazioni:
+      [🔗 railway.app] (https://railway.com/)
 
 """, unsafe_allow_html=True
 )
