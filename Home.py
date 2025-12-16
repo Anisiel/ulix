@@ -19,7 +19,7 @@ from pathlib import Path  # servirà per CV e per check immagini
 # e vicino alla sidebar, evitando centrature automatiche.
 # =============================================================================
 
-# 🔗 Rimando alla pagina di organizzazione del sito
+# Rimando alla pagina di organizzazione del sito
 # Mostra la descrizione del progetto in alto a destra
 col_left, col_right = st.columns([2, 3])  # proporzioni: sinistra più stretta
 with col_right:
@@ -95,7 +95,7 @@ with col_main: # testi in colonna centrale
 	st.caption("Portfolio  no wordpress")
 
 with col_extra:
-    # 🔧 MODIFICA: aggiunta immagine extra a destra del testo
+    # aggiunta immagine extra a destra del testo
     extra_img_path = "assets/img/hero1.jpg"
     if Path(extra_img_path).exists():
         st.image(extra_img_path, caption="[Ulisse su Wikipedia](https://it.wikipedia.org/wiki/Ulisse)", use_container_width=True)
@@ -141,7 +141,7 @@ st.markdown("""
 		Qui puoi scaricare il mio curriculum in formato pdf da cui però non si evincono queste competenze. Per "validarle" il più possibile, ho conseguito
 			delle certificazioni informatiche riconosciute al più alto livello possibile. Tuttavia non ci sono certificazioni riconosciute per questo tipo di competenze. 
     """)
-cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
+cv_path = Path("assets/titoli/Ulisse_Fabiani_CV.pdf")
 if cv_path.exists():
 	st.markdown("<div style='margin-top:0.6rem'></div>", unsafe_allow_html=True)
 	st.download_button(
