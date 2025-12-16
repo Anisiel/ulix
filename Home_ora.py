@@ -61,7 +61,6 @@ st.divider()
 # ---------- Sezioni con link alle pagine ----------
 colA, colB, colC = st.columns(3)
 
-colA, colB, colC = st.columns(3)
 
 with colA:
     st.subheader("Visualizzazioni")
