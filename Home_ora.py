@@ -153,7 +153,7 @@ st.divider()
 cv_path = Path("assets/Ulisse_Fabiani_CV.pdf")
 links_html = f"""
 <div class="link-row">
-  <a href="https://github.com/ulissefabiani" target="_blank" rel="noopenerani.academia.edu" target="_blank" rel_path.as_posix()}" target="_blank" rel="noopener() else '<span style="color:#6b7280;">CV non trovato</span>'}
+  <a href="https://github.com/ulissefabiani" target="_blank" rel="noopenerani.academia.edu" target="_blank" rel_path.as_posix()" target="_blank" rel="noopener() else '<span style="color:#6b7280;">CV non trovato</span>'}
 </div>
 """
 st.markdown(links_html, unsafe_allow_html=True)
