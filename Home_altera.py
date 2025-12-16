@@ -137,15 +137,23 @@ if cv_path.exists():
 st.markdown("---")
 st.markdown("### 🧭 Navigazione")
 col1, col2, col3 = st.columns(3)
+
 with col1:
-    st.markdown("📊 [Grafici avanzati con plotly](pages/1_Grafici_plotly.py)")
-    st.markdown("📈 [Grafici avanzati con Echarts](pages/2_Grafici_Altair_Echarts.py)")
-    st.markdown("📈 [Grafici avanzati con Altair](pages/3_Grafici_Altair_Meteo.py)")
-    st.markdown("📈 [Mappe avanzate per l'analisi spaziale](pages/9_GIS_PCM.py)")
+    st.markdown("### 📊 Grafici & Mappe")
+    st.page_link("pages/1_Grafici_plotly.py", label="📊 Grafici con Plotly")
+    st.page_link("pages/2_Grafici_Altair_ECharts.py", label="🌐 Grafici con Echarts")
+    st.page_link("pages/3_Grafici_Altair_Meteo.py", label="🌦️ Grafici Meteo con Altair")
+    st.page_link("pages/9_GIS_PCM.py", label="🗺️ Mappe e dati spaziali")
+
 with col2:
-    st.markdown("📚 [Pubblicazioni](pages/5_Pubblicazioni.py)")
-    st.markdown("🎓 [Titoli & Certificazioni](pages/6_Titoli_Certificazioni.py)")
+    st.markdown("### 🎓 Curriculum")
+    st.page_link("pages/5_Titoli.py", label="🎓 Titoli di Studio")
+    st.page_link("pages/6_Certificazioni.py", label="📜 Certificazioni")
+    st.page_link("pages/7_Pubblicazioni.py", label="📖 Pubblicazioni")
+
 with col3:
-    st.markdown("🖥️ [Programmini (in)utili](pages/4_Programmini.py)")
+    st.markdown("### 🧰 Utility & Excel")
+    st.page_link("pages/4_Programmini_(in)utili.py", label="🧪 Programmini (in)utili in DOS, Python e VBA")
+
 
 st.divider()

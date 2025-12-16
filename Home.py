@@ -166,7 +166,7 @@ with col1:
     if st.button("📊 Grafici con Plotly", use_container_width=True):
         st.switch_page("pages/1_Grafici_plotly.py")
     if st.button("🌐 Grafici con Echarts", use_container_width=True):
-        st.switch_page("pages/2_Grafici_Altair_Echarts.py")
+        st.switch_page("pages/2_Grafici_Altair_ECharts.py")
     if st.button("🌦️ Grafici Meteo con Altair", use_container_width=True):
         st.switch_page("pages/3_Grafici_Altair_Meteo.py")
     if st.button("🗺️ Mappe e dati spaziali", use_container_width=True):
@@ -184,7 +184,7 @@ with col2:
 with col3:
     st.markdown("### 🧰 Utility & Excel")
     if st.button("🧪 Programmini (in)utili in DOS, Python e VBA", use_container_width=True):
-        st.switch_page("pages/4_Programmini_inutili.py")
+        st.switch_page("pages/4_Programmini_(in)utili.py")
     if st.button("📂 Excel & Progetti VBA", use_container_width=True):
           st.switch_page("pages/8_Excel_Progetti_VBA.py")
 st.divider()
