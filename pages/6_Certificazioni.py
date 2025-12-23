@@ -19,16 +19,16 @@ with col1:
     with st.expander("📘 **EIRSAF Advanced Full**", expanded=True):    
         st.markdown("""
     - Certificazione Internazionale di Alfabetizzazione Digitale  
-    - 📅 Data: 25-09-2025  
-    - 🔗 [Visualizza badge](assets/cert/Eirsaf_full.pdf)
+    -  Data: 25-09-2025  
+    -  [Visualizza badge](assets/cert/Eirsaf_full.pdf)
      """)
 with col2:
     # Dettagli sulla certificazione EIPASS Progressive
     with st.expander("📕 **EIPASS Progressive Advanced**", expanded=True):
         st.markdown("""
     - Certificazione avanzata di competenze digitali  
-    - 📅 Data: 13/02/2025  
-    - 🔗 [Visualizza badge](assets/cert/Eipass_progressive.pdf)
+    -  Data: 13/02/2025  
+    -  [Visualizza badge](assets/cert/Eipass_progressive.pdf)
     """)
 with col3:
 
@@ -36,29 +36,29 @@ with col3:
     with st.expander("📗 **Certificato livello B2 Inglese**", expanded=True):
         st.markdown("""
     - Certificazione internazionale di competenze linguistiche
-    - 📅 Data: 24/09/2024  
-    - 🔗 [Visualizza badge](assets/cert/Inglese_B2.pdf)
+    -  Data: 24/09/2024  
+    -  [Visualizza badge](assets/cert/Inglese_B2.pdf)
     """)
 
 # ============================
 # Sezione 2: Altri percorsi formativi
 # ============================
-st.header("🚀 Altri percorsi formativi")
+st.header(" Altri percorsi formativi")
 
 # Lista colorata e descrittiva delle competenze
 st.markdown("""
-- 🔵 **ECDL Full Standard Certificate** - 24/09/2016 - [Visualizza cert.](assets/cert/Ecdl_full.pdf) 
-- 🟢 **Percorso formativo docenti 600 ore 4 esami universitari** - 20/07/2022 - [Visualizza cert.](assets/cert/Esperto_NPercorsoformativodocenti600ore.pdf)
+-  **ECDL Full Standard Certificate** - 24/09/2016 - [Visualizza cert.](assets/cert/Ecdl_full.pdf) 
+-  **Percorso formativo docenti 600 ore 4 esami universitari** - 20/07/2022 - [Visualizza cert.](assets/cert/Esperto_NPercorsoformativodocenti600ore.pdf)
 """)
 
 # ============================
 # Sezione 2: Autoformazione
 # ============================
-st.header("🚀 Autoformazione")
+st.header(" Autoformazione")
 st.markdown("""
-- 🔴 **VBA** — Applicazioni evolute per Excel   
-- 🟣 **Python** — Applicazioni semplici per Analisi Dati
-- 🟡 **CMD e Power Shell** — Applicazioni semplici per Gestione PC
+-  **VBA** — Applicazioni evolute per Excel   
+-  **Python** — Applicazioni semplici per Analisi Dati
+-  **CMD e Power Shell** — Applicazioni semplici per Gestione PC
             🔜
 """)
 
