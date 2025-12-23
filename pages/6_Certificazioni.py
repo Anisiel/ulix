@@ -61,7 +61,7 @@ with col3:
 st.header("Altri percorsi formativi")
 
 st.markdown("**ECDL Full Standard Certificate** — 24/09/2016")
-download_pdf("Visualizza certificato (PDF)", "Ecdl_Full.pdf", key="ecdl_full")
+download_pdf("Visualizza certificato (PDF)", "ECDL_Full.pdf", key="ecdl_full")
 
 st.markdown("**Percorso formativo docenti 600 ore (4 esami universitari)** — 20/07/2022")
 download_pdf("Visualizza certificato (PDF)", "Percorsoformativodocenti600ore.pdf", key="percorso_docenti")
