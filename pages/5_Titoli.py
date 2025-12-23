@@ -85,61 +85,71 @@ opzioni_titoli = [
     "📘 Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore"
 ]
 
+
+
+# metti a True quando vuoi mostrare il pulsante "Scarica Presentazione"
+mostra_presentazione_dottorato = False
+# percorso presentazione
+presentazione_dottorato_path = Path("assets/titoli/presentazione_dottorato.pptx")
+
 scelta = st.selectbox("Scegli un titolo:", opzioni_titoli)
 
 if scelta == opzioni_titoli[0]:
     with st.expander(opzioni_titoli[0], expanded=True):
         st.markdown("- Titolo accademico di terzo livello conseguito presso istituto universitario")
-        st.markdown("- 📅 Data: 20-02-2009")
+        st.markdown("- Data: 20-02-2009")
         with open("assets/titoli/dottorato_infrastrutture.pdf", "rb") as f:
-            st.download_button("🔗 Scarica Badge", f, file_name="dottorato_infrastrutture.pdf")
-#        with open("assets/titoli/dottorato_infrastrutture_tesi.pdf", "rb") as f:
-#            st.download_button("📄 Scarica Tesi", f, file_name="dottorato_infrastrutture_tesi.pdf")
+            st.download_button("Scarica Badge", f, file_name="dottorato_infrastrutture.pdf")
+        
+        # Mostra il bottone solo se il flag è True e il file esiste
+        # replicabile per gli latri titoli
+        if mostra_presentazione_dottorato and presentazione_dottorato_path.exists():
+            with open(presentazione_dottorato_path, "rb") as f:
+                st.download_button(
+                    "Scarica Presentazione",
+                    f,
+                    file_name=presentazione_dottorato_path.name,
+                    mime="application/pdf",
+                    key="presentazione_dottorato_top",
+                    type="primary"
+                )
 
 elif scelta == opzioni_titoli[1]:
     with st.expander(opzioni_titoli[1], expanded=True):
         st.markdown("- Laurea vecchio ordinamento con indirizzo topografico")
-        st.markdown("- 📅 Data: 12-07-2002")
+        st.markdown("-  Data: 12-07-2002")
         with open("assets/titoli/laurea_vecchio_ordinamento.pdf", "rb") as f:
-            st.download_button("🔗 Scarica Badge", f, file_name="laurea_vecchio_ordinamento.pdf")
-#        with open("assets/titoli/laurea_vecchio_ordinamento_tesi.pdf", "rb") as f:
-#            st.download_button("📄 Scarica Tesi", f, file_name="laurea_vecchio_ordinamento_tesi.pdf")
+            st.download_button(" Scarica Badge", f, file_name="laurea_vecchio_ordinamento.pdf")
 
 elif scelta == opzioni_titoli[2]:
     with st.expander(opzioni_titoli[2], expanded=True):
         st.markdown("- Laurea triennale in ambito informatico-giuridico")
-        st.markdown("- 📅 Data: 05-07-2016")
+        st.markdown("-  Data: 05-07-2016")
         with open("assets/titoli/laurea_triennale.pdf", "rb") as f:
-            st.download_button("🔗 Scarica Badge", f, file_name="laurea_triennale.pdf")
-#        with open("assets/titoli/laurea_triennale_tesi.pdf", "rb") as f:
-#           st.download_button("📄 Scarica Tesi", f, file_name="laurea_triennale_tesi.pdf")
+            st.download_button(" Scarica Badge", f, file_name="laurea_triennale.pdf")
 
 elif scelta == opzioni_titoli[3]:
     with st.expander(opzioni_titoli[3], expanded=True):
         st.markdown("- Master I livello in Sistemi Informativi Territoriali e Telerilevamento")
-        st.markdown("- 📅 Data: 22-11-2004")
+        st.markdown("-  Data: 22-11-2004")
         with open("assets/titoli/master_sistemi_informativi.pdf", "rb") as f:
-            st.download_button("🔗 Scarica Badge", f, file_name="master_sistemi_informativi.pdf")
- #       with open("assets/titoli/master_sistemi_informativi_tesi.pdf", "rb") as f:
- #           st.download_button("📄 Scarica Tesi", f, file_name="master_sistemi_informativi_tesi.pdf")
+            st.download_button(" Scarica Badge", f, file_name="master_sistemi_informativi.pdf")
 
 elif scelta == opzioni_titoli[4]:
     with st.expander(opzioni_titoli[4], expanded=True):
         st.markdown("- Master I livello per insegnamento in istituti secondari")
-        st.markdown("- 📅 Data: 27-10-2022")
+        st.markdown("-  Data: 27-10-2022")
         with open("assets/titoli/master_insegnamento.pdf", "rb") as f:
-            st.download_button("🔗 Scarica Badge", f, file_name="master_insegnamento.pdf")
-#        with open("assets/titoli/master_insegnamento_tesi.pdf", "rb") as f:
-#           st.download_button("📄 Scarica Tesi", f, file_name="master_insegnamento_tesi.pdf")
+            st.download_button(" Scarica Badge", f, file_name="master_insegnamento.pdf")
 
 elif scelta == opzioni_titoli[5]:
     with st.expander(opzioni_titoli[5], expanded=True):
         st.markdown("- Esperto nella Normativa e nella Contrattualistica del lavoro - 1500 ore")
-        st.markdown("- 📅 Data: 27-11-2014")
+        st.markdown("-  Data: 27-11-2014")
         with open("assets/titoli/Esperto_Normativa.pdf", "rb") as f:
-            st.download_button("🔗 Scarica Badge", f, file_name="Esperto_Normativa.pdf")
+            st.download_button(" Scarica Badge", f, file_name="Esperto_Normativa.pdf")
         # La tesi non è disponibile
-        st.caption("📄 Tesi: non disponibile")
+        st.caption(" Tesi: non disponibile")
 
 
 st.divider()
@@ -151,7 +161,7 @@ st.subheader("📦 Dettagli completi dei titoli")
 
 for i, titolo in enumerate(titoli_data):
     with st.expander(f"{titolo['Titolo']}", expanded=False):
-        st.markdown(f"- 📅 Data: {titolo['Data']}")
+        st.markdown(f"-  Data: {titolo['Data']}")
 
         # Bottone Badge
         badge_path = titolo.get("Badge")
@@ -173,7 +183,7 @@ for i, titolo in enumerate(titoli_data):
         if tesi_path and tesi_path != "--" and Path(tesi_path).exists():
             with open(tesi_path, "rb") as f:
                 st.download_button(
-                    label="📄 Scarica Tesi (PDF)",
+                    label=" Scarica Tesi (PDF)",
                     data=f,
                     file_name=Path(tesi_path).name,
                     mime="application/pdf",
