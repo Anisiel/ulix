@@ -44,12 +44,14 @@ col1, col2 = st.columns(2, gap="small")
 with col1:
     if img1.exists():
         st.image(str(img1), width=500)
+        st.write("#### Una delle verità della programmazione")
     else:
         st.warning("Immagine non trovata: hero4.jpg")
 
 with col2:
     if img2.exists():
         st.image(str(img2), width=500)
+        st.write("#### Una delle verità della vita")
     else:
         st.warning("Immagine non trovata: hero5.jpg")
 
