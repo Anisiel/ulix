@@ -87,7 +87,7 @@ for i, titolo in enumerate(titoli_data):
         with cols[2]:
             with open(presentazione_path, "rb") as f:
                 st.download_button(
-                    label=" Presentazione (PDF)",
+                    label=" Presentazione (PPT)",
                     data=f,
                     file_name=presentazione_path.name,
                     mime="application/pdf",
