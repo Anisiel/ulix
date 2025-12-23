@@ -8,7 +8,7 @@ from pathlib import Path
 st.set_page_config(page_title="Certificazioni", page_icon="🎓")
 st.title("✅ Certificazioni")
 
-# Base dir robusta (relativa a questo file)
+# Base dir
 BASE_DIR = Path(__file__).parent
 CERT_DIR = BASE_DIR / "assets" / "cert"
 
@@ -19,7 +19,7 @@ def download_pdf(label: str, rel_path: str, key: str, primary: bool = False):
     - rel_path: percorso relativo alla cartella 'assets/cert' oppure assoluto
     - key: chiave unica per il widget
     """
-    # Se rel_path è relativo (tipico), risolviamolo da CERT_DIR; altrimenti usa il path assoluto
+    # Se rel_path è relativo, si risolve con CERT_DIR; altrimenti usa il path assoluto
     path = CERT_DIR / rel_path if not rel_path.startswith("/") else Path(rel_path)
     if path.exists():
         try:
