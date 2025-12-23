@@ -12,7 +12,7 @@ st.title("Certificazioni")
 # Percorsi assoluti
 # ================
 # cartella 'cert' alla pari di 'pages' (radice del progetto)
-CERT_DIR = Path("cert").resolve()  # calcola il percorso assoluto a runtime
+CERT_DIR = Path("assets/cert").resolve()  # calcola il percorso assoluto a runtime
 
 def download_pdf(label: str, filename: str, key: str, primary: bool = False):
     """
