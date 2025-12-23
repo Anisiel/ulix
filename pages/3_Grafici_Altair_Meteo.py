@@ -9,7 +9,7 @@ st.title("🌦 Andamento Meteo Storico a Roma")
 
 st.write(
     """
-    Questa pagina visualizza i dati storici delle variabili meteo a Roma che sono stati scaricati da [Kaggle.com](https://www.kaggle.com/) che offre un [database gratuito di dati ambientali](https://www.kaggle.com/datasets/jarredpriester/rome-italy-weather-data?resource=download).
+    Questa pagina è diversa dalle precedenti due: visualizza i dati storici delle variabili meteo a Roma che sono stati scaricati da [Kaggle.com](https://www.kaggle.com/) che offre un [database gratuito di dati ambientali](https://www.kaggle.com/datasets/jarredpriester/rome-italy-weather-data?resource=download).
     I dati sono stati caricati in un file CSV nella cartella 'repo'.
     Il grafico mostra l'andamento meteo per la città di Roma, utilizzando temperatura media, massima, minima e precipitazioni (PRECIP).
     [Kaggle.com](https://www.kaggle.com/) è una piattaforma online molto popolare per data science e machine learning.
