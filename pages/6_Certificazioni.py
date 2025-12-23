@@ -41,7 +41,7 @@ def download_pdf(label: str, rel_path: str, key: str, primary: bool = False):
 # ============================
 # Sezione 1: Certificazioni recenti ottenute
 # ============================
-st.header(" Certificazioni **recenti** ottenute")
+st.header(" ✅ Certificazioni **recenti** ottenute")
 
 col1, col2, col3 = st.columns(3)
 
