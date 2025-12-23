@@ -100,9 +100,18 @@ with col1:
 
 with col2:
     if cv_path.exists():
-        st.link_button("Scarica il mio CV", cv_path.as_posix())
+        with open(cv_path, "rb") as f:
+            pdf_bytes = f.read()
+        st.download_button(
+            label="📄 Scarica il mio CV",
+            data=pdf_bytes,
+            file_name="Ulisse_Fabiani_CV.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
     else:
         st.caption("CV non trovato")
+
 
 st.divider()
 # ---------- Footer ----------
