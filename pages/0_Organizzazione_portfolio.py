@@ -46,14 +46,14 @@ Questa struttura serve solo a valorizzare una funzionalità interessante del pyt
 - I grafici utilizzano dati contenuti nel file `grafici_speciali.xlsx` che si trova nella cartella `repo/` e riportano dati metereologici fittizi.
             
 ###  Codice sorgente
-- Il codice sorgente completo del sito è disponibile su GitHub:
-    - [🔗 Github.com/Anisiel/ulix](https://github.com/Anisiel/ulix) 
-- Il sito è costruito con un framework Python per applicazioni web interattive chiamato Streamlit:
-    - [🔗 Streamlit.io](https://streamlit.io/)
-    - Utilizza file statici (`.pdf`, `.xlsx`, `.py`) e stili personalizzati (`styles.css`).
+- Il codice sorgente è disponibile su GitHub:
+    - [ Github.com/Anisiel/ulix](https://github.com/Anisiel/ulix) 
+- Il framework Python utilizzato è specifico per applicazioni web e si chiama Streamlit:
+    - [ Streamlit.io](https://streamlit.io/)
 - Il deploy è effettuato su Railway, una piattaforma cloud per il deployment di applicazioni:
-      [🔗 railway.app] (https://railway.com/)
-
+      [ railway.app] (https://railway.com/)
+- Il sito utilizza file statici ('.pdf', '.xlsx', '.py', '.json') e stili personalizzati ('styles.css') solo per la Home ricca.
+            
 """, unsafe_allow_html=True
 )
 st.divider()
