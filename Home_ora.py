@@ -27,6 +27,7 @@ logo_img = Path("assets/img/logo1.png")
 if logo_img.exists():
     col1, col2, col3 = st.columns([1, 3, 1])  # colonna centrale più larga
     with col2:
+        st.write("##### Il mio logo")
         st.image(str(logo_img), width=84)
 else:
     st.warning("Logo non trovato")
@@ -107,7 +108,7 @@ with col2:
             data=pdf_bytes,
             file_name="Ulisse_Fabiani_CV.pdf",
             mime="application/pdf",
-            use_container_width=True
+            use_container_width=Falsee
         )
     else:
         st.caption("CV non trovato")
