@@ -72,6 +72,6 @@ download_pdf(" Visualizza certificato (PDF)", "Esperto_NPercorsoformativodocenti
 st.header(" Autoformazione")
 st.markdown(
     "- **VBA** — Applicazioni evolute per Excel\n"
-    "- **Python** — Applicazioni semplici per Analisi Dati, le trovi nella pagina \n"
+    "- **Python** — Applicazioni semplici per Analisi Dati\n"
     "- **CMD e PowerShell** — Applicazioni semplici per Gestione PC\n"
 )
