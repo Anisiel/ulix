@@ -14,17 +14,19 @@ st.success(" Puoi cliccare sui link nella tabella per visualizzare i badge, oppu
 
 
 st.divider()
+
+# metti a True quando vuoi mostrare il pulsante "Scarica Presentazione" nella tabella o nella sezione di selezione titoli
+mostra_presentazione_dottorato = True
+# percorso presentazione
+presentazione_dottorato_path = Path("assets/titoli/presentazione_dottorato.pptx")
+
 # ============================
 # Sezione tabellare compatta
 # ============================
 st.subheader(" Tabella riepilogativa dei titoli")
-# Creazione di una tabella compatta
-
 
 # Percorso del file JSON
 json_path = "assets/titoli/titoli.json"
-
-
 
 try:
     with open(json_path, "r", encoding="utf-8") as f:
@@ -37,6 +39,17 @@ except FileNotFoundError:
 for i, titolo in enumerate(titoli_data):
     st.markdown(f"**{titolo['Titolo']}** —  {titolo['Data']}")
     cols = st.columns(2)
+
+
+# rilevo se è il Dottorato
+    is_dottorato = "Dottorato in Ingegneria delle Infrastrutture e dei Trasporti" in titolo.get("Titolo", "")
+# percorso presentazione: il JSON non lo fornisce
+    presentazione_path = Path(presentazione_dottorato_path)
+
+    # per il dottorato ho la presentazione in più, metto 3 colonne, poi sempre 2.
+    # Controlla "mostra_presentazione_dottorato" = True e che il file esista 
+    show_presentazione = is_dottorato and mostra_presentazione_dottorato and presentazione_path.exists()
+    cols = st.columns(3) if show_presentazione else st.columns(2)
 
     # Bottone Badge
     with cols[0]:
@@ -86,11 +99,6 @@ opzioni_titoli = [
 ]
 
 
-
-# metti a True quando vuoi mostrare il pulsante "Scarica Presentazione"
-mostra_presentazione_dottorato = True
-# percorso presentazione
-presentazione_dottorato_path = Path("assets/titoli/presentazione_dottorato.pptx")
 
 scelta = st.selectbox("Scegli un titolo:", opzioni_titoli)
 
