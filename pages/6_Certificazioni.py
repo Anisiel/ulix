@@ -11,9 +11,7 @@ st.title("✅ Certificazioni")
 # ================
 # Percorsi assoluti
 # ================
-# Se questo file è in 'pages/', PROJECT_ROOT è la cartella del progetto (ulix)
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-CERT_DIR = (PROJECT_ROOT / "cert").resolve()  # 'cert' è allo stesso livello di 'pages'
+CERT_DIR = ("ulix/cert").resolve()  # 'cert' è allo stesso livello di 'pages'
 
 def download_pdf(label: str, filename: str, key: str, primary: bool = False):
     """
