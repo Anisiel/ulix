@@ -30,13 +30,12 @@ st.set_page_config(page_title="Grafici Plotly", page_icon="📊", layout="wide")
 st.title("📊 Grafici interattivi con Plotly utilizzando dati meteo inventati")
 
 st.markdown("""
-Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con workaround complicati tipo duplicare dati, formattazioni complesse, macro Vba),
+Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con metodi complicati tipo duplicare dati, formattazioni complesse, macro Vba),
 mettendo in evidenza l'**interattività** di Plotly. 
 
 I grafici sono realizzati a partire dai dati di un file excel che è caricato in `repo/grafici_speciali.xlsx`. 
 Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
-
-            
+  
 Usa ***il selettore e i comandi in alto a destra*** di ciascun grafico per vedere le potenzialità delle librerie python
 """)
 # ======================================================
