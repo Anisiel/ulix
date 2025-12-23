@@ -2,16 +2,16 @@ import streamlit as st
 from pathlib import Path
 
 st.set_page_config(page_title="Programmini (in)utili", page_icon="💻")
-st.title("💻 Programmini (in)utili ⬇️")
+st.title("💻 Programmini (in)utili ⬇")
 
 st.markdown(
     """
 Una raccolta di programmini (in)utili che ho scritto nel tempo, per esigenze d'ufficio (elenco cartelle, controllo .pdf) e per la mia personale gestione dei file.
 
-- Programmini **🖥️ .bat** per il Prompt dei comandi di Windows (cmd.exe).  
+- Programmini **.bat** per il Prompt dei comandi di Windows (cmd.exe).  
   Si possono eseguire da `cmd` oppure con doppio clic (da cmd si leggono i messaggi (consigliato). Con il doppio click no (sarebbe necessario inserire `pause` nel codice)).
 
-  - Uno script **💾 VBA** per esportare in un solo file **tutto** il codice sorgente di un progetto ed uno script **🐍 Python (.py)** per il controllo di integrità dei file PDF, in versione base e avanzata (richiede Python + dipendenze).
+  - Uno script **VBA** per esportare in un solo file **tutto** il codice sorgente di un progetto ed uno script **🐍 Python (.py)** per il controllo di integrità dei file PDF, in versione base e avanzata (richiede Python + dipendenze).
     """,
     unsafe_allow_html=True
 )
@@ -19,10 +19,10 @@ Una raccolta di programmini (in)utili che ho scritto nel tempo, per esigenze d'u
 # =========================
 #  ISTRUZIONI PER L'USO
 # =========================
-st.markdown("## 🔍 Cosa serve per far funzionare i Programmini (in)utili? ➡️")
+st.markdown("## 🔍 Cosa serve per far funzionare i Programmini (in)utili? ")
 
 st.markdown("""
-**🖥️ Programmini da Prompt dei comandi (.bat):**
+**Programmini da Prompt dei comandi (.bat):**
 - **Opzione 1:** Doppio clic sul file `.bat` (consigliato aggiungere `pause` per vedere l’output).
 - **Opzione 2:** Apri il **Prompt dei comandi**:
     - Premi `Win + R`, digita `cmd` e premi Invio.
@@ -30,7 +30,7 @@ st.markdown("""
     - Lancia il file digitando il nome (es. `elenca_cartelle.bat`).
 - **Istruzioni per l'utilizzo dei singoli programmini:** Apri il file `.bat` con un editor di testo (es. Blocco Note) e leggi le istruzioni (all'interno di uno o più blocchi "REM").
 
-**💾 Script Vba (da usare all'interno di Word, Excel...):**
+**Script Vba (da usare all'interno di Word, Excel...):**
 - Apri l'editor VBA (`Alt + F11`), crea un nuovo modulo e incolla il codice al suo interno.
 - Ricorda di installare la libreria Microsoft Visual Basic For Applications Extensibility xx (dove xx è la versione, es. 5.3) da Strumenti → Riferimenti.
 - Errori possibili: all'avvio potresti ricevere un messaggio di errore 1004 (Accesso negato).
@@ -39,8 +39,8 @@ st.markdown("""
     ```bash
     vba LeggiTutteLeMacro
     ```
-**🐍 Script Python (.py):**
-- Installa **Python**: [Scarica qui](👉 https://www.python.org/downloads/)
+**Script Python (.py):**
+- Installa **Python**: [Scarica qui]( https://www.python.org/downloads/)
 - Installa la dipendenza necessaria (pymupdf):
     ```bash
     pip install pymupdf
