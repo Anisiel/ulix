@@ -40,7 +40,6 @@ for i, titolo in enumerate(titoli_data):
     st.markdown(f"**{titolo['Titolo']}** —  {titolo['Data']}")
     cols = st.columns(2)
 
-
 # rilevo se è il Dottorato
     is_dottorato = "Dottorato in Ingegneria delle Infrastrutture e dei Trasporti" in titolo.get("Titolo", "")
 # percorso presentazione: il JSON non lo fornisce
