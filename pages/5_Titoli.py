@@ -10,14 +10,14 @@ st.set_page_config(page_title="Titoli Universitari", page_icon="🎓")
 st.title("🎓 Titoli Universitari")
 
 # Messaggio finale
-st.success("📌 Puoi cliccare sui link nella tabella per visualizzare i badge, oppure usare il menu a tendina per navigare tra i titoli.")
+st.success(" Puoi cliccare sui link nella tabella per visualizzare i badge, oppure usare il menu a tendina per navigare tra i titoli.")
 
 
 st.divider()
 # ============================
 # Sezione tabellare compatta
 # ============================
-st.subheader("📋 Tabella riepilogativa dei titoli")
+st.subheader(" Tabella riepilogativa dei titoli")
 # Creazione di una tabella compatta
 
 
@@ -35,7 +35,7 @@ except FileNotFoundError:
 
 # Loop sui titoli
 for i, titolo in enumerate(titoli_data):
-    st.markdown(f"**{titolo['Titolo']}** — 📅 {titolo['Data']}")
+    st.markdown(f"**{titolo['Titolo']}** —  {titolo['Data']}")
     cols = st.columns(2)
 
     # Bottone Badge
@@ -44,7 +44,7 @@ for i, titolo in enumerate(titoli_data):
         if badge_path and badge_path != "--" and Path(badge_path).exists():
             with open(badge_path, "rb") as f:
                 st.download_button(
-                    label="🔗 Badge (PDF)",
+                    label=" Badge (PDF)",
                     data=f,
                     file_name=Path(badge_path).name,
                     mime="application/pdf",
@@ -60,7 +60,7 @@ for i, titolo in enumerate(titoli_data):
         if tesi_path and tesi_path != "--" and Path(tesi_path).exists():
             with open(tesi_path, "rb") as f:
                 st.download_button(
-                    label="📄 Tesi (PDF)",
+                    label=" Tesi (PDF)",
                     data=f,
                     file_name=Path(tesi_path).name,
                     mime="application/pdf",
