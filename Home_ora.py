@@ -110,7 +110,7 @@ with col2:
             data=pdf_bytes,
             file_name="Ulisse_Fabiani_CV.pdf",
             mime="application/pdf",
-            use_container_width=Falsee
+            use_container_width=False
         )
     else:
         st.caption("CV non trovato")
