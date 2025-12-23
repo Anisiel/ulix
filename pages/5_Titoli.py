@@ -82,6 +82,18 @@ for i, titolo in enumerate(titoli_data):
         else:
             st.caption("Tesi: non disponibile")
 
+# Bottone Presentazione (solo Dottorato, solo quando flag True, solo se file esiste)
+    if show_presentazione:
+        with cols[2]:
+            with open(presentazione_path, "rb") as f:
+                st.download_button(
+                    label=" Presentazione (PDF)",
+                    data=f,
+                    file_name=presentazione_path.name,
+                    mime="application/pdf",
+                    key=f"presentazione_{i}",
+                )
+
 st.divider()
 # ============================
 # Sezione interattiva con selectbox
