@@ -147,6 +147,8 @@ elif scelta == opzioni_titoli[2]:
         st.markdown("-  Data: 05-07-2016")
         with open("assets/titoli/laurea_triennale.pdf", "rb") as f:
             st.download_button(" Scarica Badge", f, file_name="laurea_triennale.pdf")
+        with open("assets/titoli/laurea_triennale_tesi.pdf", "rb") as f:
+            st.download_button(" Scarica tesi", f, file_name="laurea_triennale_tesi.pdf")
 
 elif scelta == opzioni_titoli[3]:
     with st.expander(opzioni_titoli[3], expanded=True):
