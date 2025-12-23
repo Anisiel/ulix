@@ -11,14 +11,14 @@ st.title("✅ Certificazioni")
 # ================
 # Percorsi assoluti
 # ================
-CERT_DIR = ("ulix/cert").resolve()  # 'cert' è allo stesso livello di 'pages'
+CERT_DIR = ("ulix/cert")  # 'cert' è allo stesso livello di 'pages'
 
 def download_pdf(label: str, filename: str, key: str, primary: bool = False):
     """
     Mostra un download_button usando PERCORSO ASSOLUTO in 'cert/'.
     - filename: nome file (es. 'Eirsaf_full.pdf')
     """
-    abs_path = (CERT_DIR / filename).resolve()
+    abs_path = CERT_DIR / filename
     if abs_path.exists():
         data = abs_path.read_bytes()
         st.download_button(
@@ -72,6 +72,6 @@ download_pdf(" Visualizza certificato (PDF)", "Esperto_NPercorsoformativodocenti
 st.header(" Autoformazione")
 st.markdown(
     "- **VBA** — Applicazioni evolute per Excel\n"
-    "- **Python** — Applicazioni semplici per Analisi Dati\n"
+    "- **Python** — Applicazioni semplici per Analisi Dati, le trovi nella pagina \n"
     "- **CMD e PowerShell** — Applicazioni semplici per Gestione PC\n"
 )
