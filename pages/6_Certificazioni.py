@@ -5,7 +5,7 @@ from pathlib import Path
 # ================
 # Config pagina
 # ================
-st.set_page_config(page_title="Certificazioni", page_icon="🎓")
+st.set_page_config(page_title="Certificazioni", page_icon="✅")
 st.title("✅ Certificazioni")
 
 # ================
