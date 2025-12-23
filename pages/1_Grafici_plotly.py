@@ -33,8 +33,6 @@ st.markdown("""
 Questa pagina mostra grafici che **Excel non realizza nativamente** (o solo con workaround complicati tipo duplicare dati, formattazioni complesse, macro Vba),
 mettendo in evidenza l'**interattività** di Plotly. 
 
-Nella pagina [Grafici con Altair e Echarts](pages/2_Grafici_Altair_Echarts.py) riporto 2 grafici identici ma realizzati con altre librerie (Altair e Echarts).
-
 I grafici sono realizzati a partire dai dati di un file excel che è caricato in `repo/grafici_speciali.xlsx`. 
 Colonne native: **Data**, **Temperatura**, **Pioggia_mm**. Colonne calcolate: **FasciaTemp** e **ClassePioggia**.
 
