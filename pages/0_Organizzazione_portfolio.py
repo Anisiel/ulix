@@ -9,43 +9,43 @@ Questo sito è  progettato come portfolio interattivo con lo scopo di far valuta
             e il curriculum.
             
 Per realizzarlo è stata necessaria una fase di progettazione e una di realizzazione.
-La velocità realizzativa è stata resa possibile dal supporto dell'intelligenza artificiale,
-che nel supporto alla programmazione ha il suo punto di forza più grande.
+La velocità realizzativa è stata resa possibile dall'integrazione con l'intelligenza artificiale,
+che ha il suo punto di forza più grande nel supporto alla programmazione.
 Il codice sorgente è disponibile su Github (vedi la sezione dedicata più avanti in questa pagina).
 Il sito è realizzato in Streamlit (open source e gratuito).
-Il deploy è effettuato su Railway, una piattaforma cloud per il deployment di applicazioni:
+Il deploy è effettuato su Railway, una piattaforma cloud per il deployment di applicazioni.
             
 """)
 
 st.markdown("""
-Ad ogni modo il porfolio si compone delle seguenti sezioni:
+Il porfolio si compone delle seguenti sezioni:
             
 ### 🏠 Homepages
-- Due versioni della homepage sono disponibili: una **minimal** e una **più ricca**, selezionabili tramite un selettore.
+- Due versioni della homepage sono disponibili: una **minimal** e una **ricca**, gestibili tramite un selettore.
 
-### 🧭 Selettore iniziale
-All'avvio del sito, viene mostrata, in basso nel frame di sinistra, una **sidebar** con un selettore che permette di scegliere tra due versioni della homepage:
+###  Selettore iniziale
+All'avvio del sito, viene mostrata, in basso nel frame di sinistra, una **sidebar** con un selettore che permette di scegliere tra le due versioni di Home:
 
-- **Minimal**: layout semplice, immagini a sinistra e contenuti essenziali.
-- **Ricca**: layout più elaborato, con galleria immagini, link estesi e navigazione avanzata.
+- **Minimal**: layout semplice e contenuti essenziali.
+- **Ricca**: layout più elaborato, con galleria immagini e link estesi.
 
-Il selettore è gestito dal file `Portfolio.py`, che utilizza `importlib` per caricare dinamicamente la pagina selezionata, evitando problemi di layout e mantenendo il sito stabile.
+Il selettore è gestito dal file `Portfolio.py`, che utilizza `importlib` per caricare dinamicamente la Home selezionata.
 
-Questa struttura consente di esplorare il portfolio in due modalità diverse, a seconda delle preferenze dell’utente.
+Questa struttura serve solo a valorizzare una funzionalità interessante del python.
 
 ### 📄 Pagine interne
 - Le pagine sono organizzate nella cartella `pages/` e includono:
     - **Grafici avanzati**: visualizzazioni interattive basate sul file `grafici_speciali.xlsx`.
     - **Programmini (in)utili**: script `.bat` e `.py` creati per lavoro.
-    - **Pubblicazioni**: elenco delle pubblicazioni scientifiche.
+    - **Pubblicazioni**: elenco di alcune delle pubblicazioni scientifiche.
     - **Titoli & Certificazioni**:in pagine distinte l'elenco dei titoli accademici e delle certificazioni professionali.
-    - **Progetto in VBA/Excel/Query**: esempio di grande progetto ***reale concreto ed in corso*** elaborato per l'Ufficio.
-    - **GIS PCM**: esempio di mappe e dati spaziali con dati fittizi relativi al rischio sismico e alla distanza tra le sedi della PCM
+    - **Progetto in VBA/Excel/Query**: esempio di progetto ***reale concreto ed in corso*** elaborato da me per l'Ufficio.
+    - **GIS PCM**: esempio di mappe con dati spaziali fittizi relativi al rischio sismico e alla distanza tra le sedi della PCM
             
-### 📊 Dati e grafici
+###  Dati e grafici
 - I grafici utilizzano dati contenuti nel file `grafici_speciali.xlsx` che si trova nella cartella `repo/` e riportano dati metereologici fittizi.
             
-### 💻 Codice sorgente
+###  Codice sorgente
 - Il codice sorgente completo del sito è disponibile su GitHub:
     - [🔗 Github.com/Anisiel/ulix](https://github.com/Anisiel/ulix) 
 - Il sito è costruito con un framework Python per applicazioni web interattive chiamato Streamlit:
