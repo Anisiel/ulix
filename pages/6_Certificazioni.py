@@ -8,45 +8,44 @@ from pathlib import Path
 st.set_page_config(page_title="Certificazioni", page_icon="🎓")
 st.title("✅ Certificazioni")
 
-# Base dir
-BASE_DIR = Path(__file__).parent
-CERT_DIR = BASE_DIR / "assets" / "cert"
+# ================
+# Base assoluta
+# ================
+BASE_DIR = Path(__file__).parent.resolve()          # directory del file corrente
+ASSETS_CERT_DIR = (BASE_DIR / "assets" / "cert").resolve()  # percorso assoluto a assets/cert
 
-def download_pdf(label: str, rel_path: str, key: str, primary: bool = False):
+def download_pdf(label: str, filename: str, key: str, primary: bool = False):
     """
-    Mostra un download_button che funziona in locale e in deploy.
-    - label: testo del bottone
-    - rel_path: percorso relativo alla cartella 'assets/cert' oppure assoluto
-    - key: chiave unica per il widget
+    Mostra un download_button usando un PERCORSO ASSOLUTO:
+    - filename: nome del file dentro 'assets/cert' (es. 'Eirsaf_full.pdf')
     """
-    # Se rel_path è relativo, si risolve con CERT_DIR; altrimenti usa il path assoluto
-    path = CERT_DIR / rel_path if not rel_path.startswith("/") else Path(rel_path)
-    if path.exists():
+    abs_path = (ASSETS_CERT_DIR / filename).resolve()
+    if abs_path.exists():
         try:
-            data = path.read_bytes()  # bytes certi
+            data = abs_path.read_bytes()  # bytes affidabili
             st.download_button(
                 label=label,
                 data=data,
-                file_name=path.name,
+                file_name=abs_path.name,
                 mime="application/pdf",
                 key=key,
                 type="primary" if primary else "secondary",
                 use_container_width=True,
             )
         except Exception as e:
-            st.error(f"Errore nel leggere il file '{path.name}': {e}")
+            st.error(f"Errore nel leggere il file '{abs_path}': {e}")
     else:
-        st.caption(f" File non trovato: {path}")
+        st.caption(f" File non trovato: {abs_path}")
 
 # ============================
 # Sezione 1: Certificazioni recenti ottenute
 # ============================
-st.header(" ✅ Certificazioni **recenti** ottenute")
+st.header(" Certificazioni **recenti** ottenute")
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    with st.expander(" **EIRSAF Advanced Full**", expanded=True):    
+    with st.expander(" **EIRSAF Advanced Full**", expanded=True):
         st.markdown(
             "- Certificazione Internazionale di Alfabetizzazione Digitale\n"
             "- Data: 25-09-2025"
@@ -78,11 +77,7 @@ st.markdown("**ECDL Full Standard Certificate** — 24/09/2016")
 download_pdf(" Visualizza certificato (PDF)", "Ecdl_full.pdf", key="ecdl_full")
 
 st.markdown("**Percorso formativo docenti 600 ore (4 esami universitari)** — 20/07/2022")
-download_pdf(
-    " Visualizza certificato (PDF)",
-    "Percorsoformativodocenti600ore.pdf",
-    key="percorso_docenti"
-)
+download_pdf(" Visualizza certificato (PDF)", "Esperto_NPercorsoformativodocenti600ore.pdf", key="percorso_docenti")
 
 # ============================
 # Sezione 3: Autoformazione
