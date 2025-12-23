@@ -88,7 +88,7 @@ opzioni_titoli = [
 
 
 # metti a True quando vuoi mostrare il pulsante "Scarica Presentazione"
-mostra_presentazione_dottorato = False
+mostra_presentazione_dottorato = True
 # percorso presentazione
 presentazione_dottorato_path = Path("assets/titoli/presentazione_dottorato.pptx")
 
