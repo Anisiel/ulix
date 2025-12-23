@@ -11,7 +11,7 @@ st.title("✅ Certificazioni")
 # ================
 # Percorsi assoluti
 # ================
-CERT_DIR = ("ulix/cert")  # 'cert' è allo stesso livello di 'pages'
+CERT_DIR = ("cert").resolve()  # solo resolve perchè calcola l'assoluto giusto (ulix in questo caso)
 
 def download_pdf(label: str, filename: str, key: str, primary: bool = False):
     """
