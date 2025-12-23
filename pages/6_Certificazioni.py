@@ -80,7 +80,7 @@ download_pdf(" Visualizza certificato (PDF)", "Ecdl_full.pdf", key="ecdl_full")
 st.markdown("**Percorso formativo docenti 600 ore (4 esami universitari)** — 20/07/2022")
 download_pdf(
     " Visualizza certificato (PDF)",
-    "Esperto_NPercorsoformativodocenti600ore.pdf",
+    "Percorsoformativodocenti600ore.pdf",
     key="percorso_docenti"
 )
 
