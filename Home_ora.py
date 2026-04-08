@@ -79,6 +79,8 @@ with colB:
         st.switch_page("pages/4_Programmini_(in)utili.py")
     if st.button("Excel & Progetti VBA", use_container_width=True):
         st.switch_page("pages/8_Excel_Progetti_VBA.py")
+    if st.button("Crediti & Contributi", use_container_width=True):
+        st.switch_page("pages/10_crediti_contributi_pipeline.py")
 
 with colC:
     st.subheader("Pubblicazioni")
