@@ -23,9 +23,9 @@ import base64
 # Mostra la descrizione del progetto in alto a destra
 col_left, col_right = st.columns([2, 3])  # proporzioni: sinistra più stretta
 with col_right:
-    with st.expander("📘 Info sul selettore e sul portfolio"):
+    with st.expander(" Info sul selettore e sul portfolio"):
         st.markdown("Vuoi sapere come è strutturato il sito e come funziona il selettore?")
-        if st.button("👉 ***Organizzazione portfolio***"):
+        if st.button(" ***Organizzazione portfolio***"):
             st.switch_page("pages/0_Organizzazione_portfolio.py")
 
 st.set_page_config(page_title="Ulisse Fabiani — Portfolio", page_icon="🌿", layout="wide")
@@ -53,7 +53,7 @@ def render_gallery(items):
     safe_items = [it for it in items if Path(it["src"]).exists()]
     if not safe_items:
         return
-    st.markdown("### 🎨 Galleria")
+    st.markdown("###  Galleria")
     st.caption ("##### qui mostro solo le tre immagini in box che ne uniformano le dimensioni")
     cols = st.columns(3)
     for col, it in zip(cols, safe_items):
@@ -156,6 +156,7 @@ with col2:
 with col3:
     st.markdown("### 🧰 Utility & Excel")
     st.page_link("pages/4_Programmini_(in)utili.py", label="🧪 Programmini (in)utili in DOS, Python e VBA")
+    st.page_link("pages/10_crediti_contributi_pipeline.py", label="🧪 Crediti & contributi, un approccio integrato in Python")
 
 
 st.divider()
