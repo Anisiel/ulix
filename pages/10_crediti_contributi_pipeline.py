@@ -288,9 +288,9 @@ I dati sono fittizi o assenti.
 )
 
 EXAMPLE_FILES = [
-    ("credito_esempio.xlsx", "Credito d’imposta – esempio"),
-    ("contributo_esempio.xlsx", "Contributo non diretto – esempio"),
-    ("contributi_diretti_esempio.xlsx", "Contributi diretti – esempio"),
+    ("credito Esempio.xlsx", "Credito d’imposta – esempio"),
+    ("contributo Esempio.xlsx", "Contributo non diretto – esempio"),
+    ("contributi Diretti Esempio.xlsx", "Contributi diretti – esempio"),
     ("imprese_crediti_contributi.xlsx", "Output analitico (strutturale)")
 ]
 
