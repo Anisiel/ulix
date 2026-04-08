@@ -148,7 +148,7 @@ L’attenzione non è sul singolo output, ma sull’intero **processo**.
 )
 
 # =========================================================
-# CODICE E DOCUMENTAZIONE
+# DOCUMENTAZIONE COMPLETA SU GITHUB
 # =========================================================
 
 st.markdown("## Codice e documentazione")
@@ -170,7 +170,149 @@ sono presenti solo codice, esempi strutturali e documentazione.
 
 st.markdown("---")
 
+# =========================================================
+# CODICE E DOCUMENTAZIONE INTERNA AL PORTFOLIO
+# =========================================================
+
+st.markdown("## 🔗 Codice e documentazione")
+
+st.markdown(
+    """
+Per evitare dispersione e facilitare la consultazione, di seguito sono
+disponibili **collegamenti diretti** ai principali materiali del progetto:
+codice sorgente, documentazione operativa ed esempi strutturali.
+
+Tutti i file sono consultabili direttamente da questa pagina.
+"""
+)
+
+# =============================================================================
+# PERCORSO ASSETS
+# =============================================================================
+from pathlib import Path
+
+ASSETS = Path(__file__).resolve().parents[1] / "assets" / "crediti-contributi-pipeline"
+
+def load_bytes(rel_path: str) -> bytes:
+    return (ASSETS / rel_path).read_bytes()
+
+def load_text(rel_path: str) -> str:
+    return (ASSETS / rel_path).read_text(encoding="utf-8")
+
+# =============================================================================
+# README
+# =============================================================================
+st.markdown("### README del progetto")
+
+cols = st.columns([0.75, 0.25])
+with cols[0]:
+    st.markdown(
+        """
+Il README descrive l’architettura generale della pipeline, le sue finalità
+e la struttura del repository.
+"""
+    )
+with cols[1]:
+    data = load_text("README.md")
+    st.download_button(
+        label="⬇Scarica README",
+        data=data,
+        file_name="README.md",
+        mime="text/plain",
+        use_container_width=True
+    )
+
+with st.expander("Apri README"):
+    st.code(data, language="markdown")
+
+# =============================================================================
+# MANUALE OPERATIVO PDF
+# =============================================================================
+st.markdown("### Manuale operativo")
+
+cols = st.columns([0.75, 0.25])
+with cols[0]:
+    st.markdown(
+        """
+Manuale completo del sistema, con descrizione dettagliata della pipeline,
+dei file Excel, dei log e degli output prodotti.
+"""
+    )
+with cols[1]:
+    pdf = load_bytes("documenti/Manuale_Pacchetto_Crediti_Contributi.pdf")
+    st.download_button(
+        label="⬇Scarica PDF",
+        data=pdf,
+        file_name="Manuale_Pacchetto_Crediti_Contributi.pdf",
+        mime="application/pdf",
+        use_container_width=True
+    )
+
+# =============================================================================
+# SORGENTI
+# =============================================================================
+st.markdown("### Codice sorgente")
+
+cols = st.columns([0.75, 0.25])
+with cols[0]:
+    st.markdown(
+        """
+Script Python che implementano la normalizzazione dei dati,
+la generazione dell’Excel di analisi e dei report.
+"""
+    )
+with cols[1]:
+    src_code = load_text("sorgenti/crea_excel_imprese_incroci.py")
+    st.download_button(
+        label="Scarica script",
+        data=src_code,
+        file_name="crea_excel_imprese_incroci.py",
+        mime="text/plain",
+        use_container_width=True
+    )
+
+with st.expander("Apri codice sorgente"):
+    st.code(src_code, language="python")
+
+# =============================================================================
+# ESEMPI
+# =============================================================================
+st.markdown("###File di esempio (input/output)")
+
+st.markdown(
+    """
+File Excel di esempio utilizzati per illustrare la struttura
+dei dati di input e dell’output analitico finale.
+I dati sono fittizi o assenti.
+"""
+)
+
+EXAMPLE_FILES = [
+    ("credito_esempio.xlsx", "Credito d’imposta – esempio"),
+    ("contributo_esempio.xlsx", "Contributo non diretto – esempio"),
+    ("contributi_diretti_esempio.xlsx", "Contributi diretti – esempio"),
+    ("imprese_crediti_contributi.xlsx", "Output analitico (strutturale)")
+]
+
+for fname, descr in EXAMPLE_FILES:
+    cols = st.columns([0.75, 0.25])
+    with cols[0]:
+        st.markdown(f"**{descr}**  \n`{fname}`")
+    with cols[1]:
+        data = load_bytes(f"esempio/{fname}")
+        st.download_button(
+            label="Scarica",
+            data=data,
+            file_name=fname,
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            use_container_width=True
+        )
+
+st.markdown("---")
+
 st.caption(
     "Case study tecnico sviluppato in Python per la gestione strutturata "
-    "di crediti, contributi e reportistica istituzionale."
+    "di crediti, contributi e reportistica istituzionale e"
+    "accesso diretto a codice, documentazione ed esempi per facilitare "
+    "la comprensione del progetto senza navigare manualmente il repository."
 )
