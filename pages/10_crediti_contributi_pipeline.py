@@ -239,11 +239,11 @@ dei file Excel, dei log e degli output prodotti.
 """
     )
 with cols[1]:
-    pdf = load_bytes("documenti/Manuale_Pacchetto_Crediti_Contributi.pdf")
+    pdf = load_bytes("documenti/MANUALE OPERATIVO.pdf")
     st.download_button(
-        label="⬇Scarica PDF",
+        label="Scarica PDF",
         data=pdf,
-        file_name="Manuale_Pacchetto_Crediti_Contributi.pdf",
+        file_name="MANUALE OPERATIVO.pdf",
         mime="application/pdf",
         use_container_width=True
     )
